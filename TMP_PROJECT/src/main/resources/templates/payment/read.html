@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- th:fragment     -->
+    <th:block th:insert="~{fragments/head :: headCdns}"   />
+
+    <!-- common.css    -->
+    <link rel="stylesheet" href="/css/common.css">
+
+    <!-- /imageboard/add.css -->
+    <link rel="stylesheet" href="/css/payment/read.css">
+
+</head>
+<body>
+
+
+<div class="wrapper">
+    <header>
+        <!--    header  -->
+        <th:block th:insert="~{fragments/header ::headerFragment}" />
+    </header>
+
+    <main class="container-xxl">
+
+        <section class="payment">
+
+            <div class="pay_left">
+                <div class="delivery_address_block">
+                    <div>
+                        <span style="font-weight:800;font-size:0.9rem;">배송지</span>
+                    </div>
+                    <div>    <span class="nickname" th:text="${list.get(0).user.nickname}"></span> </div>
+                    <div>   <span class="phone" th:text="${list.get(0).user.phone}"> </span>   </div>
+                    <div>
+                        <span  class="address" th:text="${list.get(0).user.addr1}+' '+${list.get(0).user.addr2}"></span>
+                    </div>
+                </div>
+                <div class="product_info_block">
+                    <div class="item" th:each="cart : ${list}">
+                        <div class="seller">
+                            <div>
+                                <span>판매자 : </span><span th:text="${cart.imageBoard.seller}"></span>
+                            </div>
+                        </div>
+                        <div class="buyer">
+                            <div class="image_block">
+                                <img th:src="@{ ${cart.imageBoardFileInfo.dir} + ${cart.imageBoardFileInfo.filename} }" />
+                            </div>
+                            <div class="item_info">
+                                <div>
+                                    <span class="productname" th:text="${cart.imageBoard.productname}"></span>
+                                </div>
+                                <div>
+                                    <span>COLOR : </span><span th:text="${cart.color}"></span>
+                                    <span>AMOUNT : </span><span th:text="${cart.amount}"></span>
+                                </div>
+                                <div>
+                                    <span th:text="${cart.imageBoard.price} * ${cart.amount}"></span>원
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--                -->
+                <div class="total_price_block">
+
+                        <div>
+                            <span>주문금액</span>
+                        </div>
+                        <div>
+                            <span class="totalPrice" th:text="${totalPrice}"></span>
+                            <span>원</span>
+                        </div>
+                </div>
+
+            </div>
+
+            <div class="pay_right">
+                <div class="pay_details">
+                    <div class="pay_details_title">
+                        <span>결제 상세</span>
+                    </div>
+                    <div class="pay_details_body">
+                        <div>
+                            <span>주문금액</span>
+                            <span> - </span>
+                        </div>
+                        <div>
+                            <div>
+                                <span>상품금액</span> <span th:text="${totalPrice}"></span><span>원</span>
+                            </div>
+                            <div>
+                                <span>배송비</span><span> - </span><span>원</span>
+                            </div>
+                            <div>
+                                <span>쿠폰할인</span><span> - </span><span>원</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="point">
+
+                    <div  class="point_title">
+                        <span>포인트 혜택</span>
+                        <span>최대 1,358원</span>
+                    </div>
+                    <div class="point_body">
+                        <div>
+                            <span>구매적립</span> <span>총 358원</span>
+                        </div>
+                        <div>
+                            <span>리뷰적립</span> <span>총 358원</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pay_btn_block">
+                    <div>
+                        <button class="btn btn-success w-100">신용카드 결제</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-success w-100 pay_phone_btn">휴대폰 결제</button>
+                    </div>
+                </div>
+            </div>
+
+            <input  class="cart_id_list" type="hidden" th:value="${cart_id_list}" />
+        </section>
+
+
+
+    </main>
+    <!--  footer fragment      -->
+    <!--    <div th:replace="fragments/footer :: footerFragment" />-->
+
+</div>
+
+
+
+
+<!-- axios -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- import -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
+<!-- common.js   -->
+<script src="/js/common.js"></script>
+<script src="/js/payment/read.js"></script>
+
+
+</body>
+</html>

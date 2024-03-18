@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- th:fragment     -->
+    <th:block th:insert="~{fragments/head :: headCdns}"   />
+
+</head>
+<body>
+<div class="wrapper">
+
+
+
+    <header>
+        <!-- th:fragment     -->
+        <div th:replace="fragments/header :: headerFragment" />
+    </header>
+
+
+
+    <main class="container-xxl">
+        <section class="sub-menu">
+
+        </section>
+        <section>
+
+            <div class="join_block" style="width:100%;">
+                <div class="header" style="text-align:center;">
+                    <!-- title -->
+                    <h3>나의 결제 내역</h3>
+                </div>
+
+                <div class="body">
+                    <div class="items">
+                        <div class="item" th:each="dto : ${list}" style="width:100%;height:150px;border:1px solid;margin:20px;overflow:auto;" >
+                            <div>
+                                <span  th:text="${dto}"></span>
+                            </div>
+                            <div style="width:100px;font-size:0.8rem;margin-left:5px;">
+                                <button class="btn btn-secondary" th:pid="${dto.pay_id}" th:uid="${dto.imp_uid}" th:onclick="cancelPayment(this)" >결제 취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- axios -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- common.js   -->
+<script src="/js/common.js"></script>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    //------------------------------
+    //결제 취소요청 함수
+    //------------------------------
+    const cancelPayment = (btn)=>{
+        const imp_uid =  btn.getAttribute('uid');
+        const pay_uid =  btn.getAttribute('pid');
+        alert("결제취소 pay_uid,imp_uid",pay_uid,imp_uid);
+        console.log(imp_uid,pay_uid);
+        axios.get("/payment/cancel/"+imp_uid+"/"+pay_uid)
+            .then(
+                response=>{
+                    console.log(response);
+                    //alert("결제취소가 완료되었습니다");
+                    location.reload();
+                })
+            .catch(error=>{console.log(error);})
+    };
+
+</script>
+
+
+</body>
+</html>
