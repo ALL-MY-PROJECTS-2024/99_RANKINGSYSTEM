@@ -157,9 +157,9 @@
                     <label>TITLE : </label>
                     <input name="title" class="form-control" placeholder="제품명" required>
                 </div>
-                <div class="sub_category">
+                <div class="">
                     <label>MAIN_CATEGORY : </label>
-                    <select name="main_category"  class="form-select">
+                    <select name="main_category"  class="form-select main_category">
                         <option value="image" selected>IMAGE</option>
                         <option value="music">MUSIC</option>
                     </select>
@@ -210,44 +210,7 @@
 </div>
 
 
-<script>
-    const uploadBoxEl = document.querySelector('.upload-box');
-    uploadBoxEl.addEventListener('dragover',function(event){
-        console.log('dragover')
-        event.preventDefault();
 
-    });
-    uploadBoxEl.addEventListener('dragleave',function(event){
-        console.log('dragleave')
-        event.preventDefault();
-
-    });
-    uploadBoxEl.addEventListener('drop',function(event){
-
-    console.log('uploadBoxEl drop..',event.dataTransfer.files[0]);
-    const files =event.dataTransfer.files;
-    if(files[0].type.startsWith("image/")){
-
-        const previewEl = document.querySelector('.preview_img_block #preview');
-        //
-        let imageEl = document.createElement('img');
-        imageEl.setAttribute('style','width:50px;height:50px;border:1px solid;')
-        imageEl.src=URL.createObjectURL(files[0]);
-        //
-        var reader = new FileReader();
-        reader.readAsDataURL(files[0]);
-        reader.onload = function(e){
-            imageEl =  e.target.result;
-        }
-        //
-        previewEl.appendChild(imageEl);
-        console.log("reader's result!", imageEl);
-    }
-    event.preventDefault();
-});
-
-
-</script>
 
 </body>
 </html>
