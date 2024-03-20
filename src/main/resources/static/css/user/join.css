@@ -1,0 +1,7 @@
+main>section>.join_block{
+    width : 400px;
+    margin:50px auto;
+}
+main>section>.join_block label{
+    font-size : .8rem;
+}

@@ -1,0 +1,96 @@
+
+.wrapper{
+    
+}
+.wrapper>main>section{}
+
+
+.wrapper>main>section>.show-block{
+    width : 100%;
+    
+   
+    /* background-color: orange; */
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.wrapper>main>section>.show-block>.controller{
+    margin:5px 0px;
+    width : 100%;
+    height : 40px;
+    display:flex;
+    justify-content: space-between;
+}
+
+.wrapper>main>section>.show-block>.controller>div{
+    margin :3px;
+   
+}
+.wrapper>main>section>.show-block>.controller>div:first-child{
+    height : 100%;
+    font-size : 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper>main>section>.show-block>.controller>div button{
+    border-radius: 0px;
+}
+
+.wrapper>main>section>.show-block>.items{
+    border : 1px solid;
+    width : 100%;
+    height : 100%;
+    text-align:center;
+   
+
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.wrapper>main>section>.show-block>.items>.item{
+    flex: 0 0 calc(20% - 10px); /* 한 행에 5개의 아이템을 표시 */
+    border : 1px solid;
+    margin : 10px;
+    padding : 5px;
+}
+.wrapper>main>section>.show-block>.items>.item>*{
+    margin-bottom : 2px;
+}
+.wrapper>main>section>.show-block>.items>.item>.title{
+    font-size : .8rem;
+    padding : 2px;
+    border : 1px solid;
+}
+
+.wrapper>main>section>.show-block>.items>.item>.image-block{
+    height : 150px;
+    width : 100%;
+    border : 1px solid;
+}
+.wrapper>main>section>.show-block>.items>.item>.image-block>img{
+    width :100%;
+    height : 100%;
+   
+    object-fit: cover;
+
+}
+
+.wrapper>main>section>.show-block>.items>.item>.contents{
+    display:flex;
+    justify-content: space-between;
+    align-items : center;
+    font-size : .8rem;
+}
+
+
+.wrapper>main>section>.show-block .footer-block{
+
+    margin-top:15px;
+}

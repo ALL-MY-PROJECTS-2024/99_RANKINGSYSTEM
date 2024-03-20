@@ -1,0 +1,68 @@
+*{
+    border : 0px;
+}
+
+main>section{
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main>section>div{
+
+
+    width:400px;
+   
+    /* border : 1px solid; */
+    margin:100px     auto;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding : 20px;
+
+    border : 1px solid lightgray;
+    border-radius: 5px;
+
+
+
+}
+
+main>section>div>form{
+    width:100%;
+}
+main>section>div .item.submenu{
+    display:flex;
+    font-size : .8rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height:10px;
+}
+/*
+main>section>div .item.image{
+    background-image: url("/assets/top-header-left.jpg");
+    background-repeat: no-repeat;
+    background-size:35px;
+    height:35px;
+    text-align: center;
+}
+*/
+main>section>div .item.title{
+    text-align: center;
+}
+main>section>div .item{
+    display:flex;
+    flex-direction: column;
+    margin : 10px;
+    padding : 5px;
+}
+main>section>div .item>label{
+    font-size : .8rem;
+    margin-bottom:3px;
+    color:black;
+}
+main>section>div .item>input{
+    width:100%;
+}

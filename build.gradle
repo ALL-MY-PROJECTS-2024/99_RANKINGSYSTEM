@@ -1,0 +1,75 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.3'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.creator'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '21'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//WEB
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//THYMELEAF
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	//LOMBOK
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	//SPRING_SECURITY
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	//SECURITY+THYMELEAF
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
+	//DBCONN BASIC
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	//ORM_JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+
+	//MAIL
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	//DEVTOOLS
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	//VALIDATOR
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	//OAUTH2-Client
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+	//JWT_TOKEN
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+
+
+	//FILE UPLOAD
+	implementation 'commons-fileupload:commons-fileupload:1.5'
+
+	//THUMNAILATOR
+	implementation 'net.coobird:thumbnailator:0.4.20'
+
+
+	//TEST
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
