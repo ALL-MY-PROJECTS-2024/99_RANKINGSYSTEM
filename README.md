@@ -56,23 +56,134 @@
   - 01
   
 
-### FILE TREE
+### FILE TREE 
 ---
+[CMD]tree /F | clip <br>
+C:.
+└─main
+    ├─generated
+    ├─java
+    │  └─com
+    │      └─creator
+    │          └─imageAndMusic
+    │              │  ImageAndMusicApplication.java
+    │              │
+    │              ├─config
+    │              │  │  DataSourceConfig.java
+    │              │  │  SecurityConfig.java
+    │              │  │  TxConfig.java
+    │              │  │  WebMvcConfig.java
+    │              │  │
+    │              │  └─auth
+    │              │      │  PrincipalDetails.java
+    │              │      │  PrincipalDetailsOAuth2Service.java
+    │              │      │  PrincipalDetailsService.java
+    │              │      │
+    │              │      ├─exceptionHandler
+    │              │      │      CustomAccessDeniedHandler.java
+    │              │      │      CustomAuthenticationEntryPoint.java
+    │              │      │
+    │              │      ├─jwt
+    │              │      │      JwtAuthenticationFilter.java
+    │              │      │      JwtAuthorizationFilter.java
+    │              │      │      JwtProperties.java
+    │              │      │      JwtTokenProvider.java
+    │              │      │      KeyGenerator.java
+    │              │      │      TokenInfo.java
+    │              │      │
+    │              │      ├─loginHandler
+    │              │      │      CustomAuthenticationFailureHandler.java
+    │              │      │      CustomLoginSuccessHandler.java
+    │              │      │      Oauth2JwtLoginSuccessHandler.java
+    │              │      │
+    │              │      ├─logoutHandler
+    │              │      │      CustomLogoutHandler.java
+    │              │      │      CustomLogoutSuccessHandler.java
+    │              │      │
+    │              │      └─provider
+    │              │              GoogleUserInfo.java
+    │              │              KakaoUserInfo.java
+    │              │              NaverUserInfo.java
+    │              │              OAuth2UserInfo.java
+    │              │
+    │              ├─controller
+    │              │      HomeController.java
+    │              │      UserController.java
+    │              │
+    │              ├─domain
+    │              │  ├─dto
+    │              │  │      ImageDto.java
+    │              │  │      UserDto.java
+    │              │  │
+    │              │  ├─entity
+    │              │  │      Images.java
+    │              │  │      Signature.java
+    │              │  │      User.java
+    │              │  │
+    │              │  ├─repository
+    │              │  │      ImagesRepository.java
+    │              │  │      UserRepository.java
+    │              │  │
+    │              │  └─service
+    │              │          UserService.java
+    │              │          UserServiceImpl.java
+    │              │
+    │              └─properties
+    │                      UPLOADPATH.java
+    │
+    └─resources
+        │  application.properties
+        │  data.sql
+        │
+        ├─static
+        │  ├─assets
+        │  │      top-header-left.jpg
+        │  │
+        │  ├─css
+        │  │  │  common.css
+        │  │  │  login.css
+        │  │  │
+        │  │  ├─mobile
+        │  │  │      album.css
+        │  │  │      common.css
+        │  │  │      login.css
+        │  │  │
+        │  │  └─user
+        │  │      │  join.css
+        │  │      │
+        │  │      ├─album
+        │  │      │      add.css
+        │  │      │      main.css
+        │  │      │
+        │  │      └─bookmark
+        │  │              main.css
+        │  │
+        │  └─js
+        │      │  common.js
+        │      │
+        │      └─user
+        │          ├─album
+        │          │      add.js
+        │          │      main.js
+        │          │
+        │          └─bookmark
+        │                  main.js
+        │
+        └─templates
+            │  index.html
+            │  login.html
+            │  README.md
+            │  template.html
+            │
+            └─user
+                │  join.html
+                │  myinfo.html
+                │
+                └─album
+                        add.html
+                        main.html
 
-#### CONTROLLER
-----
-
-#### CONFIG
----
-
-#### DOMAIN
----
-
-#### PROPERTIES
----
-
-#### TYPE
----
+                        
 
 
 
