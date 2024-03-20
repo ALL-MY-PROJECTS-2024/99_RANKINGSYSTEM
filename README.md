@@ -40,7 +40,7 @@
 ### DEPENDENCIES
 ---
 
-#### CSS LINK
+#### CSS CDN
   - 01
   - 01
   - 01
@@ -55,16 +55,6 @@
   - 01
   - 01
   
-
-
-
-
-### CDN LINK
----
--
--
--
-
 
 ### FILE TREE
 ---
