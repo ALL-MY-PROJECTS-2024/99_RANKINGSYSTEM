@@ -39,20 +39,21 @@
 
 ### DEPENDENCIES
 ---
-CSS LINK
-  -
-  -
-  -
-  
-JS CDN
-  -
-  -
-  -
 
-SPRING BOOT DEPENDENCIES
-  -
-  -
-  -
+#### CSS LINK
+  - 01
+  - 01
+  - 01
+  
+#### JS CDN
+  - 01
+  - 01
+  - 01
+
+#### SPRING BOOT DEPENDENCIES
+  - 01
+  - 01
+  - 01
   
 
 
