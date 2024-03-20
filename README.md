@@ -1,16 +1,90 @@
-# RANKING WEB SERVICE 
+# RANKINGSYSTEM_FN
+### RULE
 ---
+- GITHUB COMMIT MESSAGE
+  - git commit -m "[VERSION] [NAME] [DESCRIPTION]"
+    - EX ] git commit -m "V1.2.3 JUNGWOOGYUN ADDED STYLE" 
+      - 1 : Major Version(ex.페이지 추가/구조/기본스타일링) 
+      - 2 : Miner Version(ex.기능추가)
+      - 3 : Patch(ex.기존기능/스타일 수정
+
 ### HISTORY
 ---
-- 2024-04-01
-  - 유저 인증 기능(Spring Security)
-  - 이미지 업로드 기능
-  - 랭킹 시스템
-  - 게시판 기능
+|VERSION|DATE|CATEGORY|DESCRIPTION|
+|------|---|---|---|
+|V0.0.0|2024-03-19|INIT|기본 HTML/CSS/JS 파일생성/연결/코드구현|
+|V0.0.1|-|-|-|
 
 
+
+### PLAN
 ---
-### 기존코드자료
+|DATE|CATEGORY|PATH|CONTENT|LEVEL|ISSUCCEED|
+|----------|--|----|-----|---|---|
+|2024-04-01|BE|/user/join|회원가입|**IMPORTANT**| FASLE
+|2024-04-01|BE|/login,/logout|로그인/로그아웃|**IMPORTANT**| FASLE
+|2024-04-01|BE|/login|REMEMBER_ME|OPTIONAL| FASLE
+|2024-04-01|BE|/user/reid,/user/repassword|아이디/패스워드 복구|OPTIONAL| FASLE
+|2024-04-01|BE|/user/album/upload|이미지 파일 업로드|**IMPORTANT**| FASLE
+|2024-04-01|BE|/user/album/main|이미지 전체 조회|**IMPORTANT**| FASLE
+|2024-04-01|BE|/user/album/main?keyfield=?&keyword=?|이미지 키워드(좋아요/조회순) 조회|**IMPORTANT**| FASLE
+|2024-04-01|BE|미정|이미지 랭킹 조회|**IMPORTANT**| FASLE
+
+### TEAM
 ---
-http://naver.me/GWJBkrzC
+|NAME|ROLE|GITHUBLINK|
+|------|---|---|
+|홍길동|조장-BACKEND/CONTROLLER | github://~~~
+|강지영|조원-FRONTEND|테스트3|
+|조은파|조원-FRONTEND|테스트3|
+
+
+### USE SKILLS
+---
+
+CSS LINK
+  -
+  -
+  -
+  
+JS CDN
+  -
+  -
+  -
+
+SPRING BOOT DEPENDENCIES
+  -
+  -
+  -
+  
+
+
+
+
+### CDN LINK
+---
+-
+-
+-
+
+
+### FILE TREE
+---
+
+#### CONTROLLER
+----
+
+#### CONFIG
+---
+
+#### DOMAIN
+---
+
+#### PROPERTIES
+---
+
+#### TYPE
+---
+
+  
 
