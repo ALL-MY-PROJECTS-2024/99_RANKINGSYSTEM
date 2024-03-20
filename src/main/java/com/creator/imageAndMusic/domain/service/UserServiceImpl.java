@@ -3,6 +3,7 @@ package com.creator.imageAndMusic.domain.service;
 import com.creator.imageAndMusic.config.auth.jwt.JwtTokenProvider;
 import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.User;
+import com.creator.imageAndMusic.domain.repository.ImagesRepository;
 import com.creator.imageAndMusic.domain.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
@@ -22,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ImagesRepository imagesRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -93,6 +97,15 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.existsById(user.getUsername());
     }
+
+
+    @Transactional(rollbackFor = Exception.class)
+    public void uploadImage(){
+        //참고
+        //https://github.com/TMP-SPRINGBOOT/SPRINBBOOT_PROJECTS/blob/main/07%20IMAGEBOARD/src/main/java/com/example/demo/domain/service/ImageBoardService.java
+
+    }
+
 
 
 }

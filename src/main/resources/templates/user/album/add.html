@@ -41,7 +41,10 @@
 
     <!-- common.js   -->
     <script src="/js/common.js" defer></script>
-    
+
+    <!--    -->
+    <script src="/js/user/album/add.js" defer></script>
+
     <!-- /js/imageboard/add.js   -->
     <!-- <script src="/js/imageboard/add.js" defer></script> -->
  
@@ -154,15 +157,29 @@
                     <label>TITLE : </label>
                     <input name="title" class="form-control" placeholder="제품명" required>
                 </div>
-                <div>
+                <div class="sub_category">
                     <label>MAIN_CATEGORY : </label>
                     <select name="main_category"  class="form-select">
                         <option value="image" selected>IMAGE</option>
                         <option value="music">MUSIC</option>
                     </select>
                 </div>
-                <div>
-                    <label>SUB_CATEGORY : </label>
+                <div class="sub_category image-cat">
+                    <label>SUB_CATEGORY(IMAGE) : </label>
+                    <select name="sub_category"  class="form-select">
+                        <option value="Character" selected>Character</option>
+                        <option value="City">City</option>
+                        <option value="Map">Map</option>
+                        <option value="Icon">Icon</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Car">Car</option>
+                        <option value="Place">Place</option>
+                        <option value="Others">Others</option>
+
+                    </select>
+                </div>
+                <div class="sub_category music-cat hidden">
+                    <label>SUB_CATEGORY(MUSIC) : </label>
                     <select name="sub_category"  class="form-select">
                         <option value="01" selected>01</option>
                         <option value="02">02</option>

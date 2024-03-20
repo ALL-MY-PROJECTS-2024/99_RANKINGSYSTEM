@@ -1,6 +1,7 @@
 package com.creator.imageAndMusic.controller;
 
 
+import com.creator.imageAndMusic.domain.dto.ImageDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
 
 import com.creator.imageAndMusic.domain.service.UserService;
@@ -80,6 +81,15 @@ public class UserController {
 
     @GetMapping("/album/add")
     public void func3(){}
+
+    @PostMapping("/album/add_image")
+    public  @ResponseBody void add_image(ImageDto dto){
+        log.info("POST /album/add_image : " + dto);
+        //
+        //
+        //
+        //
+    }
 
 
 }

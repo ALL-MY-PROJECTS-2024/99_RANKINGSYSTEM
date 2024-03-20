@@ -91,3 +91,7 @@ img {
 .product_info_block label{
     margin:5px 0px;
 }
+
+.hidden{
+    display:none;
+}
