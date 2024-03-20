@@ -12,8 +12,8 @@
 ---
 |VERSION|DATE|CATEGORY|DESCRIPTION|
 |------|---|---|---|
-|V0.0.0|2024-03-20|AUTH|로그인/로그아웃/회원가입/REMEMBERME 구현|
-|V0.0.1|2024-03-20|ALBUM|/user/album/add html/css/js 구현중-|
+|V0.0.0|2024-03-20|AUTH|로그인/로그아웃/회원가입/REMEMBERME 구현 완료 |
+|V0.0.1|2024-03-20|ALBUM|/USER/ALBUM/ADD 구현 진행중 |
 
 
 
