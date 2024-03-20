@@ -7,7 +7,13 @@
 |V0.0.0|2024-03-20|AUTH|로그인/로그아웃/회원가입/REMEMBERME 구현 완료 |
 |V0.0.1|2024-03-20|ALBUM|/USER/ALBUM/ADD 구현 진행중 |
 
-
+### TEAM
+---
+|NAME|ROLE|GITHUBLINK|
+|------|---|---|
+|홍길동|조장-BACKEND/CONTROLLER | -
+|강지영|조원-FRONTEND|-|
+|조은파|조원-FRONTEND|-|
 
 ### PLAN
 ---
@@ -24,13 +30,6 @@
 |2024-04-01|BE|/user/album/main?keyfield=?&keyword=?|-|이미지 키워드(좋아요/조회순) 조회|**IMPORTANT**| FASLE
 |2024-04-01|BE|미정|-|이미지 랭킹 조회|**IMPORTANT**| FASLE
 
-### TEAM
----
-|NAME|ROLE|GITHUBLINK|
-|------|---|---|
-|홍길동|조장-BACKEND/CONTROLLER | -
-|강지영|조원-FRONTEND|-|
-|조은파|조원-FRONTEND|-|
 
 
 ### USE SKILLS
