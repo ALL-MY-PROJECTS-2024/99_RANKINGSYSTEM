@@ -36,9 +36,9 @@
 ---
 |NAME|ROLE|GITHUBLINK|
 |------|---|---|
-|홍길동|조장-BACKEND/CONTROLLER | github://~~~
-|강지영|조원-FRONTEND|테스트3|
-|조은파|조원-FRONTEND|테스트3|
+|홍길동|조장-BACKEND/CONTROLLER | -
+|강지영|조원-FRONTEND|-|
+|조은파|조원-FRONTEND|-|
 
 
 ### USE SKILLS
