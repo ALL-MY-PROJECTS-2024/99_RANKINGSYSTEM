@@ -11,7 +11,7 @@ public class DataSourceConfig {
     @Bean
     public HikariDataSource dataSource(){
         HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl("jdbc:mysql://3.125.168.113:3306/CreatorDB");
+        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/CreatorDB");
         dataSource.setUsername("dbconn");
         dataSource.setPassword("Zhfldk11!");
 
