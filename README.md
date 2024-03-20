@@ -20,7 +20,7 @@
 ### PLAN
 ---
 |DATE|CATEGORY|PATH|METHOD|CONTENT|LEVEL|ISSUCCEED|
-|----------|--|----|----|-----|---|---|
+|--|--|----|----|-----|---|---|
 |2024-04-01|BE|/user/join|GET|회원가입|**IMPORTANT**| **TRUE**
 |2024-04-01|BE|/user/join|POST|회원가입|**IMPORTANT**| **TRUE**
 |2024-04-01|BE|/login<br>/logout|GET|로그인/로그아웃|**IMPORTANT**| **TRUE**
