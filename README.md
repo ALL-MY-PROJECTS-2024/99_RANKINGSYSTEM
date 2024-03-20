@@ -43,8 +43,9 @@
 
 ### USE SKILLS
 ---
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">  
-<img src="https://img.shields.io/badge/css-E34F26?style=for-the-badge&logo=css&logoColor=blue"> 
+&logo=기술스택아이콘
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">  
+<img src="https://img.shields.io/badge/CSS-#1572B6?style=for-the-badge&logo=css&logoColor=blue"> 
 
 ### DEPENDENCIES
 ---
