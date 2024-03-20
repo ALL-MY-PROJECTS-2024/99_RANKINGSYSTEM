@@ -12,7 +12,7 @@
 ---
 |VERSION|DATE|CATEGORY|DESCRIPTION|
 |------|---|---|---|
-|V0.0.0|2024-03-19|INIT|기본 HTML/CSS/JS 파일생성/연결/코드구현|
+|V0.0.0|2024-03-20|INIT|로그인/로그아웃/회원가입/REMEMBERME 구현|
 |V0.0.1|-|-|-|
 
 
@@ -21,8 +21,8 @@
 ---
 |DATE|CATEGORY|PATH|CONTENT|LEVEL|ISSUCCEED|
 |----------|--|----|-----|---|---|
-|2024-04-01|BE|/user/join|회원가입|**IMPORTANT**| FASLE
-|2024-04-01|BE|/login,/logout|로그인/로그아웃|**IMPORTANT**| FASLE
+|2024-04-01|BE|/user/join|회원가입|**IMPORTANT**| **TRUE**
+|2024-04-01|BE|/login,/logout|로그인/로그아웃|**IMPORTANT**| **TRUE**
 |2024-04-01|BE|/login|REMEMBER_ME|OPTIONAL| FASLE
 |2024-04-01|BE|/user/reid,/user/repassword|아이디/패스워드 복구|OPTIONAL| FASLE
 |2024-04-01|BE|/user/album/upload|이미지 파일 업로드|**IMPORTANT**| FASLE
