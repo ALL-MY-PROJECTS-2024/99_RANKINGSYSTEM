@@ -22,7 +22,7 @@
 |DATE|CATEGORY|PATH|CONTENT|LEVEL|ISSUCCEED|
 |----------|--|----|-----|---|---|
 |2024-04-01|BE|/user/join|회원가입|**IMPORTANT**| **TRUE**
-|2024-04-01|BE|/login,/logout|로그인/로그아웃|**IMPORTANT**| **TRUE**
+|2024-04-01|BE|/login<br>/logout|로그인/로그아웃|**IMPORTANT**| **TRUE**
 |2024-04-01|BE|/login|REMEMBER_ME|OPTIONAL| FASLE
 |2024-04-01|BE|/user/reid,/user/repassword|아이디/패스워드 복구|OPTIONAL| FASLE
 |2024-04-01|BE|/user/album/upload|이미지 파일 업로드|**IMPORTANT**| FASLE
