@@ -58,7 +58,7 @@
 
 ### FILE TREE 
 ---
-[CMD]tree /F | clip <br>
+
 C:.
 └─main
     ├─generated
