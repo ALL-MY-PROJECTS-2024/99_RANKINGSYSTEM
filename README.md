@@ -26,7 +26,7 @@
 |2024-04-01|BE|/login<br>/logout|GET|로그인/로그아웃|**IMPORTANT**| **TRUE**
 |2024-04-01|BE|/login<br>/logout|POST|로그인/로그아웃|**IMPORTANT**| **TRUE**
 |2024-04-01|BE|-|-|REMEMBER_ME|OPTIONAL| **TRUE**
-|2024-04-01|BE|/user/reid,/user/repassword|-|아이디/패스워드 복구|OPTIONAL| FASLE
+|2024-04-01|BE|/user/reid<br>/user/repassword|-|아이디/패스워드 복구|OPTIONAL| FASLE
 |2024-04-01|BE|/user/album/upload|-|이미지 파일 업로드|**IMPORTANT**| FASLE
 |2024-04-01|BE|-|-|이미지 전체 조회|**IMPORTANT**| FASLE
 |2024-04-01|BE|/user/album/main?keyfield=?&keyword=?|-|이미지 키워드(좋아요/조회순) 조회|**IMPORTANT**| FASLE
