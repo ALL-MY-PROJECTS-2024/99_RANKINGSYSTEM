@@ -25,7 +25,7 @@
 |2024-04-01|BE|/user/join|POST|회원가입|**IMPORTANT**| **TRUE**
 |2024-04-01|BE|/login<br>/logout|GET|로그인/로그아웃|**IMPORTANT**| **TRUE**
 |2024-04-01|BE|/login<br>/logout|POST|로그인/로그아웃|**IMPORTANT**| **TRUE**
-|2024-04-01|BE|/login|REMEMBER_ME|-|OPTIONAL| FASLE
+|2024-04-01|BE|-|-|REMEMBER_ME|OPTIONAL| FASLE
 |2024-04-01|BE|/user/reid,/user/repassword|-|아이디/패스워드 복구|OPTIONAL| FASLE
 |2024-04-01|BE|/user/album/upload|-|이미지 파일 업로드|**IMPORTANT**| FASLE
 |2024-04-01|BE|/user/album/main|-|이미지 전체 조회|**IMPORTANT**| FASLE
