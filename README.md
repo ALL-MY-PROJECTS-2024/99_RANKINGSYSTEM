@@ -43,8 +43,8 @@
 
 ### USE SKILLS
 ---
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> | 
-<img src="https://img.shields.io/badge/css-E34F26?style=for-the-badge&logo=css&logoColor=white"> | 
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">  
+<img src="https://img.shields.io/badge/css-E34F26?style=for-the-badge&logo=css&logoColor=blue"> 
 
 ### DEPENDENCIES
 ---
