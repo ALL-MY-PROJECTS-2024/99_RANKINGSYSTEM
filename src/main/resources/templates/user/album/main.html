@@ -146,16 +146,11 @@
                             </div>
                             <div class="contents">
                                 <div>
-                                    <a href="">
-                                        <span>👍</span>
+                                    <a href="javascript:void(0)">
+                                        <span class="material-symbols-outlined">thumb_up</span>
                                     </a>
-                                    <span>|</span>
-                                    <a href="">
-                                        <span>👎</span>
-                                    </a>
-
                                 </div>
-                                <div>2024-01-01</div>
+                                <div><th:span th:text="${#temporals.format(item.images.createAt, 'yyyy-MM-dd HH:mm:ss')}"></th:span></div>
                             </div>
                         </div>
 

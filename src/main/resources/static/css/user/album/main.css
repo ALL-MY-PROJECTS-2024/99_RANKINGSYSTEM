@@ -48,17 +48,20 @@
    
 
     display:flex;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
     flex-wrap: wrap;
 
 }
 
 .wrapper>main>section>.show-block>.items>.item{
-    flex: 0 0 calc(20% - 10px); /* 한 행에 5개의 아이템을 표시 */
+    /*flex: 0 0 calc(20% - 10px);*/ /* 한 행에 5개의 아이템을 표시 */
     border : 1px solid;
     margin : 10px;
     padding : 5px;
+
+    width : 250px;
+
 }
 .wrapper>main>section>.show-block>.items>.item>*{
     margin-bottom : 2px;
@@ -70,11 +73,11 @@
 }
 
 .wrapper>main>section>.show-block>.items>.item>.image-block{
-    height : 150px;
+    height : 100px;
     width : 100%;
     border : 1px solid;
 }
-.wrapper>main>section>.show-block>.items>.item>.image-block>img{
+.wrapper>main>section>.show-block>.items>.item>.image-block img{
     width :100%;
     height : 100%;
    
@@ -88,7 +91,15 @@
     align-items : center;
     font-size : .8rem;
 }
-
+.wrapper>main>section>.show-block>.items>.item>.contents>div:nth-child(1){
+    display:flex;
+    justify-content: center;
+    align-items : center;
+    height : 100%;
+}
+.wrapper>main>section>.show-block>.items>.item>.contents .material-symbols-outlined{
+    font-size : .9rem;
+}
 
 .wrapper>main>section>.show-block .footer-block{
 
