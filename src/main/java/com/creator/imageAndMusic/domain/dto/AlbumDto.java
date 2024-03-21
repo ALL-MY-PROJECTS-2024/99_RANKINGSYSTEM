@@ -1,11 +1,10 @@
 package com.creator.imageAndMusic.domain.dto;
 
-import jakarta.persistence.Entity;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 @Data
-public class ImageDto {
+public class AlbumDto {
     private Long id;
     private String username;
     private String title;
@@ -13,4 +12,7 @@ public class ImageDto {
     private String subCategory;
     private String description;
     private MultipartFile[] files;
+    private int count;
+    private int like;
+
 }

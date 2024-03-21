@@ -1,15 +1,13 @@
 package com.creator.imageAndMusic.controller;
 
 
-import com.creator.imageAndMusic.domain.dto.ImageDto;
+import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
-
+import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
 import com.creator.imageAndMusic.domain.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,10 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-
 import org.springframework.web.bind.annotation.*;
 
-
+import java.io.IOException;
+import java.util.List;
 
 
 @Controller
@@ -43,6 +41,11 @@ public class UserController {
 
     }
 
+
+    @ExceptionHandler(Exception.class)
+    public void ExceptionHandler(Exception e){
+        log.info("User Exception.." + e);
+    }
     @PostMapping("/join")
     public String join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request) throws Exception {
         UserController.log.info("POST /join...dto " + dto);
@@ -76,19 +79,39 @@ public class UserController {
 
 
     @GetMapping("/album/main")
-    public void func2(){}
+    public void func2(Model model) throws Exception {
+
+        log.info("GET /user/album/main...");
+        List<ImagesFileInfo> list =  userService.getAllItems();
+
+
+
+        model.addAttribute("list",list);
+
+    }
 
 
     @GetMapping("/album/add")
-    public void func3(){}
+    public void func3(){
 
-    @PostMapping("/album/add_image")
-    public  @ResponseBody void add_image(ImageDto dto){
-        log.info("POST /album/add_image : " + dto);
-        //
-        //
-        //
-        //
+
+    }
+
+    @PostMapping("/album/add")
+    public  @ResponseBody void add_image(@Valid AlbumDto dto, BindingResult bindingResult) throws IOException {
+        log.info("POST /album/add : " + dto);
+        //유효성 검사
+        if(bindingResult.hasFieldErrors()){
+            for(FieldError error :bindingResult.getFieldErrors()){
+                log.info(error.getField() +" : " + error.getDefaultMessage());
+                //model.addAttribute(error.getField(),error.getDefaultMessage());
+            }
+        }
+
+        //서비스 실행
+        boolean isUploaded =  userService.uploadAlbum(dto);
+
+
     }
 
 

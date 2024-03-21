@@ -5,6 +5,7 @@ package com.creator.imageAndMusic.config.auth.jwt;
 import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 
 import com.creator.imageAndMusic.domain.dto.UserDto;
+import com.creator.imageAndMusic.properties.DBCONN;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
@@ -34,9 +35,9 @@ public class JwtTokenProvider {
     //Key 저장
     private final Key key;
 
-    String url  = "jdbc:mysql://localhost:3306/CreatorDB";
-    String username = "dbconn";
-    String password  = "Zhfldk11!";
+    String url  = DBCONN.URL;
+    String username = DBCONN.ID;
+    String password  = DBCONN.PW;
     Connection conn;
     PreparedStatement pstmt;
     ResultSet rs;
@@ -51,7 +52,7 @@ public class JwtTokenProvider {
             if(rs.next())
             {
 
-                byte [] keyByte =  rs.getBytes("signature");                 //DB로 서명Key꺼내옴
+                byte [] keyByte =  rs.getBytes("signature");                    //DB로 서명Key꺼내옴
                 this.key = Keys.hmacShaKeyFor(keyByte);                                    //this.key에 저장
 //                .out.println("[JwtTokenProvider] Key : " + this.key );
             }

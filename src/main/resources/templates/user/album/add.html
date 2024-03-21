@@ -39,6 +39,9 @@
     <link rel="stylesheet" href="/css/user/album/add.css">
 
 
+
+    <!-- axios   -->
+    <script  defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- common.js   -->
     <script src="/js/common.js" defer></script>
 
@@ -148,7 +151,7 @@
         </section>
 
         <section class="product_info_block">
-            <form  onsubmit="return false" name="imageform" >
+            <form  onsubmit="return false" name="albumform" >
                 <div>
                     <label>USER : </label>
                     <input name="username" placeholder="example@example.com"  th:value="${#authentication.name}"  class="form-control"  required readonly>
@@ -175,29 +178,30 @@
                         <option value="Car">Car</option>
                         <option value="Place">Place</option>
                         <option value="Others">Others</option>
-
                     </select>
                 </div>
                 <div class="sub_category music-cat hidden">
                     <label>SUB_CATEGORY(MUSIC) : </label>
                     <select name="sub_category"  class="form-select">
-                        <option value="01" selected>01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
+                        <option value="Jazz" selected>Jazz</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Classic">Classic</option>
+                        <option value="Progressive">Progressive</option>
+                        <option value="Advertisement">Advertisement</option>
+                        <option value="HeavyMetal">HeavyMetal</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Others">Others</option>
                     </select>
                 </div>
                 <div>
                     <label>DESCRIPTION : </label>
-                    <textarea name="itemdetals" class="form-control" required></textarea>
+                    <textarea name="description" class="form-control" required></textarea>
                 </div>
                 <div style="display:flex;justify-content: space-between;">
 
                 </div>
                 <div>
-                    <button  class="btn btn-primary add_product_btn w-100">등록</button>
+                    <button  class="btn btn-primary add_album_btn w-100">등록</button>
                 </div>
             </form>
         </section>

@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +19,7 @@ import java.util.List;
 public class Images {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long iamgeid;
 
     private String username;
     private String title;
@@ -28,9 +27,7 @@ public class Images {
     private String subCategory;
     private String description;
 
+
     private LocalDateTime createAt;
-
-
-    private List<String> files;
 
 }
