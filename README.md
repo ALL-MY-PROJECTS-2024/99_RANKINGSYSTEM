@@ -30,7 +30,6 @@
 |2024-04-01|BE_INIT|/user/album/add|-|이미지 파일 업로드|**IMPORTANT**| **TRUE**
 |2024-04-01|BE_INIT|/user/album/main|-|내 앨범 전체 조회|**IMPORTANT**| **TRUE**
 |2024-04-01|BE_INIT|/user/album/main|-|내 앨범 키워드 조회(좋아요순/조회순)|**IMPORTANT**| FALSE
-
 |2024-04-01|BE_INIT|/ranking/images|-|모든 유저 앨범 조회|**IMPORTANT**| FASLE
 |2024-04-01|BE_INIT|/user/album/main?keyfield=?&keyword=?|-|이미지 키워드(좋아요/조회순) 조회|**IMPORTANT**| FASLE
 |2024-04-01|BE_INIT|미정|-|이미지 랭킹 조회|**IMPORTANT**| FASLE
