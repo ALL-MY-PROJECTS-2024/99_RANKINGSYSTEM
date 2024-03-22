@@ -3,6 +3,7 @@ package com.creator.imageAndMusic.controller;
 
 import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
+import com.creator.imageAndMusic.domain.entity.Images;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
 import com.creator.imageAndMusic.domain.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,6 +47,8 @@ public class UserController {
     public void ExceptionHandler(Exception e){
         log.info("User Exception.." + e);
     }
+
+
     @PostMapping("/join")
     public String join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request) throws Exception {
         UserController.log.info("POST /join...dto " + dto);
@@ -93,8 +96,7 @@ public class UserController {
 
     @GetMapping("/album/add")
     public void func3(){
-
-
+        log.info("GET /album/add");
     }
 
     @PostMapping("/album/add")
@@ -110,6 +112,19 @@ public class UserController {
 
         //서비스 실행
         boolean isUploaded =  userService.uploadAlbum(dto);
+    }
+
+
+    @GetMapping("/album/read")
+    public void read_album(@RequestParam(name = "iamgeid") Long iamgeid,Model model) throws Exception {
+
+        log.info("GET /user/album/read...iamgeid " + iamgeid);
+
+        List<ImagesFileInfo> filelist =  userService.getUserItem(iamgeid);
+        Images images =  filelist.get(0).getImages();
+
+        model.addAttribute("filelist",filelist);
+        model.addAttribute("images",images);
 
 
     }

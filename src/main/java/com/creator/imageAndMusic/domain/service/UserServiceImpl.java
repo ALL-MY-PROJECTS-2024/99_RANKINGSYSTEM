@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -211,6 +212,14 @@ public class UserServiceImpl implements UserService {
         return myalbumImageList;
 
     }
+    @Transactional(rollbackFor = Exception.class)
+    public List<ImagesFileInfo> getUserItem(Long imageid) throws Exception{
+        Optional<Images> imagesOptional =  imagesRepository.findById(imageid);
+        if(!imagesOptional.isEmpty())
+            return imagesFileInfoRepository.findAllByImages(imagesOptional.get());
+        return null;
+    }
+
 
 
     //모든 이미지 조회

@@ -1,0 +1,20 @@
+main>section{}
+main>section>.read-block{
+    border : 1px solid;
+    height : 100vh;
+}
+
+main>section>.read-block .info-block{
+    border : 1px solid;
+    height : 200px;
+}
+main>section>.read-block>.image-block{
+    display:flex;
+    justify-content : center;
+    align-items : center;
+}
+
+main>section>.read-block>.image-block>.item{
+    margin : 10px;
+    border : 1px solid;
+}

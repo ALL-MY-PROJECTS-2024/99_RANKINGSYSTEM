@@ -19,4 +19,6 @@ public interface UserService {
     public List<ImagesFileInfo> getUserItems() throws Exception;
 
     public List<ImagesFileInfo> getAllItems() throws Exception;
+    public List<ImagesFileInfo> getUserItem(Long imageid) throws Exception;
+
 }

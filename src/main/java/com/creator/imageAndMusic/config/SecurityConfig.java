@@ -1,8 +1,6 @@
 package com.creator.imageAndMusic.config;
 
 
-
-
 import com.creator.imageAndMusic.config.auth.exceptionHandler.CustomAccessDeniedHandler;
 import com.creator.imageAndMusic.config.auth.exceptionHandler.CustomAuthenticationEntryPoint;
 import com.creator.imageAndMusic.config.auth.jwt.JwtAuthorizationFilter;
@@ -15,23 +13,18 @@ import com.creator.imageAndMusic.config.auth.logoutHandler.CustomLogoutHandler;
 import com.creator.imageAndMusic.config.auth.logoutHandler.CustomLogoutSuccessHandler;
 import com.creator.imageAndMusic.domain.repository.UserRepository;
 import com.zaxxer.hikari.HikariDataSource;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -64,7 +57,12 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/js/**","/css/**","/images/**","/templates","/assets/**").permitAll();
                     authorize.requestMatchers("/").permitAll();
                     authorize.requestMatchers("/login","/user/join").permitAll();
+
                     authorize.requestMatchers("/user/**").hasAnyRole("USER");
+                    authorize.requestMatchers("/user/album/add").hasAnyRole("USER");
+                    authorize.requestMatchers("/user/album/read").hasAnyRole("USER");
+                    authorize.requestMatchers("/user/album/main").hasAnyRole("USER");
+
                     authorize.anyRequest().authenticated();
 //
 //                    authorize.anyRequest().authenticated();
