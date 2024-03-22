@@ -21,8 +21,9 @@ dependencies {
 
 	//THYMELEAF
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'junit:junit:4.13.1'
 
-	//LOMBOK
+    //LOMBOK
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 

@@ -1,6 +1,7 @@
 package com.creator.imageAndMusic.domain.service;
 
 
+import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.config.auth.jwt.JwtTokenProvider;
 import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
@@ -14,6 +15,8 @@ import com.creator.imageAndMusic.properties.UPLOADPATH;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +29,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -189,9 +193,31 @@ public class UserServiceImpl implements UserService {
 
 
 
+    //유저별 이미지 조회
+    @Transactional(rollbackFor = Exception.class)
+    public List<ImagesFileInfo> getUserItems() throws Exception {
+        Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+        PrincipalDetails principalDetails =  (PrincipalDetails) authentication.getPrincipal();
+        String username =  principalDetails.getUsername();
+        List<Images>  imagesList =  imagesRepository.findAllByUsername(username);
+        List<ImagesFileInfo> myalbumImageList = new ArrayList<ImagesFileInfo>();
+
+        for(Images el : imagesList){
+            List<ImagesFileInfo> tmp =  imagesFileInfoRepository.findAllByImages(el);
+            for(ImagesFileInfo el2 : tmp)
+                myalbumImageList.add(el2);
+        }
+
+        return myalbumImageList;
+
+    }
+
+
+    //모든 이미지 조회
     @Transactional(rollbackFor = Exception.class)
     public List<ImagesFileInfo> getAllItems() throws Exception{
         return imagesFileInfoRepository.findAll();
+
     }
 
 

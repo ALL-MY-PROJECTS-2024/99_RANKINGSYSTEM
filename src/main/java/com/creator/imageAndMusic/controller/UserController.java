@@ -82,7 +82,7 @@ public class UserController {
     public void func2(Model model) throws Exception {
 
         log.info("GET /user/album/main...");
-        List<ImagesFileInfo> list =  userService.getAllItems();
+        List<ImagesFileInfo> list =  userService.getUserItems();
 
 
 

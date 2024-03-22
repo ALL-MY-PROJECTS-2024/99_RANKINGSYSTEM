@@ -15,5 +15,8 @@ public interface UserService {
 
     boolean uploadAlbum(AlbumDto dto) throws IOException;
 
+
+    public List<ImagesFileInfo> getUserItems() throws Exception;
+
     public List<ImagesFileInfo> getAllItems() throws Exception;
 }
