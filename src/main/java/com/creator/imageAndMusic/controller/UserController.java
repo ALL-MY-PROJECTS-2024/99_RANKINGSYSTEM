@@ -98,15 +98,15 @@ public class UserController {
     }
 
     @PostMapping("/album/add")
-    public  @ResponseBody void add_image(@Valid AlbumDto dto, BindingResult bindingResult) throws IOException {
-        log.info("POST /album/add : " + dto);
+    public  @ResponseBody void add_image(AlbumDto dto) throws IOException {
+        log.info("POST /album/add : " + dto+" file count : " + dto.getFiles().length);
         //유효성 검사
-        if(bindingResult.hasFieldErrors()){
-            for(FieldError error :bindingResult.getFieldErrors()){
-                log.info(error.getField() +" : " + error.getDefaultMessage());
-                //model.addAttribute(error.getField(),error.getDefaultMessage());
-            }
-        }
+//        if(bindingResult.hasFieldErrors()){
+//            for(FieldError error :bindingResult.getFieldErrors()){
+//                log.info(error.getField() +" : " + error.getDefaultMessage());
+//                //model.addAttribute(error.getField(),error.getDefaultMessage());
+//            }
+//        }
 
         //서비스 실행
         boolean isUploaded =  userService.uploadAlbum(dto);

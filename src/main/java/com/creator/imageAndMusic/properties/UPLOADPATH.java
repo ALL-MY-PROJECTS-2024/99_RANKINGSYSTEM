@@ -4,6 +4,9 @@ import java.io.File;
 
 public class UPLOADPATH {
 
+    //WINDOW
+//    public final static String ROOTDIRPATH = "C:"+File.separator;
+
     public final static String ROOTDIRPATH = File.separator;
 
     public final static String UPPERDIRPATH = "upload";
