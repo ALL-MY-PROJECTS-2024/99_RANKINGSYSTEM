@@ -5,7 +5,9 @@
 |VERSION|DATE|CATEGORY|DESCRIPTION|
 |------|---|---|---|
 |V0.0.0|2024-03-20|AUTH|로그인/로그아웃/회원가입/REMEMBERME 구현 완료 |
-|V0.0.1|2024-03-21|ALBUM|/USER/ALBUM/ADD 이미지 업로드 완료 |
+|V0.0.1|2024-03-21|ALBUM|/USER/ALBUM/ADD  이미지 업로드 완료 |
+|V0.0.1|2024-03-22|ALBUM|/USER/ALBUM/READ 이미지 상세보기  |
+
 
 ### TEAM
 ---
@@ -26,8 +28,10 @@
 |2024-04-01|BE_INIT|-|-|REMEMBER_ME|OPTIONAL| **TRUE**
 |2024-04-01|BE_INIT|/user/reid<br>/user/repassword|-|아이디/패스워드 복구|OPTIONAL| FASLE
 |2024-04-01|BE_INIT|/user/album/add|-|이미지 파일 업로드|**IMPORTANT**| **TRUE**
-|2024-04-01|BE_INIT|/user/album/main|-|내 앨범 전체 조회|**IMPORTANT**| FASLE
-|2024-04-01|BE_INIT|/user/album/main|-|모든 유저 앨범 조회|**IMPORTANT**| FASLE
+|2024-04-01|BE_INIT|/user/album/main|-|내 앨범 전체 조회|**IMPORTANT**| **TRUE**
+|2024-04-01|BE_INIT|/user/album/main|-|내 앨범 키워드 조회(좋아요순/조회순)|**IMPORTANT**| FALSE
+
+|2024-04-01|BE_INIT|/ranking/images|-|모든 유저 앨범 조회|**IMPORTANT**| FASLE
 |2024-04-01|BE_INIT|/user/album/main?keyfield=?&keyword=?|-|이미지 키워드(좋아요/조회순) 조회|**IMPORTANT**| FASLE
 |2024-04-01|BE_INIT|미정|-|이미지 랭킹 조회|**IMPORTANT**| FASLE
 
