@@ -21,6 +21,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -45,23 +46,22 @@ public class BoardController {
 
     @GetMapping("/list")
 
-    //public String boardlist(Integer pageNo, String type, String keyword, Model model, HttpServletResponse response) throws URISyntaxException, DeploymentException, IOException {
-    public String list(){
+    //public String boardlist( Integer pageNo, String type, String keyword, Model model, HttpServletResponse response) throws URISyntaxException, DeploymentException, IOException {
+    public String list(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,Model model,HttpServletResponse response){
 
-        log.info("GET /board/list... ");
+        log.info("GET /board/list... " + pageNo);
 
-//        //----------------
-//        //PageDto  Start
-//        //----------------
-//        Criteria criteria = null;
-//        if(pageNo==null) {
-//            //최초 /board/list 접근
-//            pageNo=1;
-//            criteria = new Criteria();  //pageno=1 , amount=10
-//        }
-//        else {
-//            criteria = new Criteria(pageNo,10); //페이지이동 요청 했을때
-//        }
+        //----------------
+        //PageDto  Start
+        //----------------
+        Criteria criteria = null;
+        if(pageNo!=1) {
+            criteria = new Criteria(pageNo,10); //페이지이동 요청 했을때
+        }
+        else {
+            //최초 /board/list 접근
+            criteria = new Criteria();  //pageno=1 , amount=10
+        }
 //
 //        //--------------------
 //        //Search
@@ -70,27 +70,29 @@ public class BoardController {
 //        criteria.setKeyword(keyword);
 //
 //
-//        //서비스 실행
-//        Map<String,Object> map = boardService.GetBoardList(criteria);
+        //서비스 실행
+        Map<String,Object> map = boardService.GetBoardList(criteria);
+
+        PageDto pageDto = (PageDto) map.get("pageDto");
+        List<Board> list = (List<Board>) map.get("list");
 //
-//        PageDto pageDto = (PageDto) map.get("pageDto");
-//        List<Board> list = (List<Board>) map.get("list");
 //
+        //Entity -> Dto
+        List<BoardDto>  boardList =  list.stream().map(board -> BoardDto.Of(board)).collect(Collectors.toList());
+        System.out.println(boardList);
+        System.out.println("boardList " + boardList);
+        System.out.println("pageNo " + pageNo);
+        System.out.println("pageDto " + pageDto);
+        //View 전달
+        model.addAttribute("boardList",boardList);
+        model.addAttribute("pageNo",pageNo);
+        model.addAttribute("pageDto",pageDto);
 //
-//        //Entity -> Dto
-//        List<BoardDto>  boardList =  list.stream().map(board -> BoardDto.Of(board)).collect(Collectors.toList());
-//        System.out.println(boardList);
-//
-//        //View 전달
-//        model.addAttribute("boardList",boardList);
-//        model.addAttribute("pageNo",pageNo);
-//        model.addAttribute("pageDto",pageDto);
-//
-//        //--------------------------------
-//        //COUNT UP - //쿠키 생성(/board/read.do 새로고침시 조회수 반복증가를 막기위한용도)
-//        //--------------------------------
-//        Cookie init = new Cookie("reading","true");
-//        response.addCookie(init);
+        //--------------------------------
+        //COUNT UP - //쿠키 생성(/board/read.do 새로고침시 조회수 반복증가를 막기위한용도)
+        //--------------------------------
+        Cookie init = new Cookie("reading","true");
+        response.addCookie(init);
 
 
 
