@@ -8,7 +8,7 @@ public class UPLOADPATH {
 //    public final static String ROOTDIRPATH = "c:" + File.separator;
 
 
-    public final static String ROOTDIRPATH = "";
+    public final static String ROOTDIRPATH = "/";
 
     public final static String UPPERDIRPATH = "upload";
 
