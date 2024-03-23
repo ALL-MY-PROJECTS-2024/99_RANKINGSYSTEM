@@ -63,6 +63,9 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/user/album/read").hasAnyRole("USER");
                     authorize.requestMatchers("/user/album/main").hasAnyRole("USER");
 
+
+                    authorize.requestMatchers("/board/list").hasAnyRole("USER");
+
                     authorize.anyRequest().authenticated();
 //
 //                    authorize.anyRequest().authenticated();
