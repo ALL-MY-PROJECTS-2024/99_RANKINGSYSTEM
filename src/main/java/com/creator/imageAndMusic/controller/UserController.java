@@ -53,7 +53,7 @@ public class UserController {
     public String join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request) throws Exception {
         UserController.log.info("POST /join...dto " + dto);
         //파라미터 받기
-
+            //
         //입력값 검증(유효성체크)
         //System.out.println(bindingResult);
         if(bindingResult.hasFieldErrors()){
