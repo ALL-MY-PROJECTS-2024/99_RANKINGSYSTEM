@@ -216,9 +216,10 @@
 .wrapper>main>section>.show-block>.items>.item{
     width: 300px;
     height : 100%;
-    border : 1px solid;
+   /* border : 1px solid;*/
     margin : 10px;
     position: relative;
+    border-radius:5px;
 }
 
 .wrapper>main>section>.show-block>.items>.item>*{
