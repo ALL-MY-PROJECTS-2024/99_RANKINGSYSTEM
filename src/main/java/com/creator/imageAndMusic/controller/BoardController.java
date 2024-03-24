@@ -139,8 +139,8 @@ public class BoardController {
     //-------------------
 
     @GetMapping("/read")
-    public String read(@RequestParam(name = "no") Long no,
-                       @RequestParam(name = "pageNo") Integer pageNo, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String read(@RequestParam(name = "no",defaultValue = "1") Long no,
+                       @RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo, Model model, HttpServletRequest request, HttpServletResponse response) {
         log.info("GET /board/read : " + no);
 
        //서비스 실행
@@ -226,7 +226,7 @@ public class BoardController {
     }
 
     @GetMapping("/update")
-    public void update(Long no,Model model){
+    public void update(@RequestParam(name = "no") Long no,Model model){
         log.info("GET /board/update no " + no);
 
 
