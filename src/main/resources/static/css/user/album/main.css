@@ -215,8 +215,6 @@
 
 .wrapper>main>section>.show-block>.items>.item{
     width: 300px;
-    border : 1px solid;
-
     /* border : 1px solid; */
     margin : 10px;
     position: relative;

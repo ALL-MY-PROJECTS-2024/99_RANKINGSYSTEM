@@ -174,7 +174,7 @@
 
                         <div class="item" th:each="item : ${list}">
                             <div class="title">
-                                <span>이미지제목</span>
+                                <span th:text="${item.title}"></span>
                             </div>
                             <div class="image-block">
                                 <a th:href="@{/user/album/read(iamgeid=${item.images.iamgeid})}">
