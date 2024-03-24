@@ -129,12 +129,45 @@
                 <div class="show-block layout-5">
                     <div class="controller">
                         <div>
-                            <a href="">
-                                    <span class="material-symbols-outlined filter-icon">tune</span>
-                            </a>       
+                            <a href="javascript:void(0)" class="filter-icon">
+                                <span class="material-symbols-outlined ">tune</span>
+                            </a>
                         </div>
+                        <div class="modal hidden" data-filter-id="category_filter">
+                            <div class="filter_title">Category Filter</div>
+                            <div class="filter_button_area">
+                                <ul>
+                                    <li><button onclick="change_btn(event)" data-filter="date" class="filter_button">Date</button></li>
+                                    <li><button onclick="change_btn(event)" data-filter="like" class="filter_button">Like</button></li>
+                                    <li><button onclick="change_btn(event)" data-filter="view" class="filter_button">View</button></li>
+                                    <li><button onclick="change_btn(event)" data-filter="image_name" class="filter_button">Name</button></li>
+                                </ul>
+                            </div>
+                            <div class="category_detail">
+                                <ul>
+                                    <li data-filter="all"> <a href="">All</a></li>
+                                    <li data-filter="character"> <a href="">Character</a></li>
+                                    <li data-filter="city"><a href="">City</a></li>
+                                    <li data-filter="map"><a href="">Map</a></li>
+                                    <li data-filter="icon"><a href="">iCON</a></li>
+                                    <li data-filter="furniture"><a href="">Furniture</a></li>
+                                    <li data-filter="car"><a href="">Car</a></li>
+                                    <li data-filter="others"><a href="">Others</a></li>
+                                </ul>
+                            </div>
+                            <button class="modal_closeBtn">CLOSE</button>
+                        </div>
+
+                        <div class="search">
+                            <input type="checkbox" id="search_chk">
+                            <label for="search_chk">
+                                <span class="material-symbols-outlined">search</span>
+                            </label>
+                            <input type="text">
+                        </div>
+
                         <div>
-                            <a href="/user/album/add"  class="btn btn-primary" >앨범등록</a>
+                            <a href="/user/album/add.html"  class="btn btn-primary" >앨범등록</a>
                         </div>
                     </div>
                     <div class="items">
