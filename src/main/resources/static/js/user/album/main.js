@@ -27,3 +27,8 @@ function change_btn(e) {
   }
 
 // 검색 키보드 이벤트(엔터) 추가하기
+const imageAfterEl = document.querySelector('.wrapper>main>section>.show-block>.items>.item .image-block::after');
+imageAfterEl.addEventListener('click',function(){
+    alert("TEST");
+})
+
