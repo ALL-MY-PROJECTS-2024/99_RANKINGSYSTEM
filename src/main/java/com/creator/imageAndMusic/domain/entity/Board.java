@@ -1,5 +1,6 @@
 package com.creator.imageAndMusic.domain.entity;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,4 +32,9 @@ public class Board {
     private String dirpath;
     private String filename;
     private String filesize;
+
+
+
 }
+
+

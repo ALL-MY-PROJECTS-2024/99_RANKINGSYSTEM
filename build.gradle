@@ -65,11 +65,8 @@ dependencies {
 	//MULTIPARTCONFIG
 	implementation group: 'commons-io', name: 'commons-io', version: '2.15.1'
 
-
-
 	//THUMNAILATOR
 	implementation 'net.coobird:thumbnailator:0.4.20'
-
 
 	//TEST
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

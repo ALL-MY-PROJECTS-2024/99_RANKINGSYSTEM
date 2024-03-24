@@ -260,7 +260,9 @@ ul{
 }
 
 /*  */
-.wrapper>main{}
+.wrapper>main{
+    margin : 30px auto;
+}
 .wrapper>main>section{}
 
 /*  */

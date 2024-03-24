@@ -6,33 +6,32 @@ import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
 import com.creator.imageAndMusic.domain.entity.Board;
 import com.creator.imageAndMusic.domain.service.BoardService;
-import jakarta.persistence.NamedStoredProcedureQueries;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import jakarta.websocket.DeploymentException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Slf4j
-@RequestMapping("/board")
 @Controller
+@RequestMapping("/board")
+@Slf4j
 public class BoardController {
+
+//    @Autowired
+//    private BoardRepository boardRepository;
+
+
 
     @Autowired
     private BoardService boardService;
@@ -43,58 +42,59 @@ public class BoardController {
 
 
 
-
+    //-------------------
+    //-------------------
     @GetMapping("/list")
-
-    //public String boardlist( Integer pageNo, String type, String keyword, Model model, HttpServletResponse response) throws URISyntaxException, DeploymentException, IOException {
-    public String list(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,Model model,HttpServletResponse response){
-
-        log.info("GET /board/list... " + pageNo);
+    public String list(@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
+                       @RequestParam(name = "type",defaultValue = "") String type,
+                       @RequestParam(name = "keyword",defaultValue = "") String keyword,
+                       Model model,
+                       HttpServletResponse response
+    )
+    {
+        log.info("GET /board/list... " + pageNo + " " + type +" " + keyword);
 
         //----------------
         //PageDto  Start
         //----------------
         Criteria criteria = null;
-        if(pageNo!=1) {
-            criteria = new Criteria(pageNo,10); //페이지이동 요청 했을때
-        }
-        else {
+        if(pageNo==null) {
             //최초 /board/list 접근
+            pageNo=1;
             criteria = new Criteria();  //pageno=1 , amount=10
         }
-//
-//        //--------------------
-//        //Search
-//        //--------------------
-//        criteria.setType(type);
-//        criteria.setKeyword(keyword);
-//
-//
+        else {
+            criteria = new Criteria(pageNo,10); //페이지이동 요청 했을때
+        }
+        //--------------------
+        //Search
+        //--------------------
+        //criteria.setType(type);
+        //criteria.setKeyword(keyword);
+
+
         //서비스 실행
         Map<String,Object> map = boardService.GetBoardList(criteria);
 
         PageDto pageDto = (PageDto) map.get("pageDto");
         List<Board> list = (List<Board>) map.get("list");
-//
-//
+
+
         //Entity -> Dto
         List<BoardDto>  boardList =  list.stream().map(board -> BoardDto.Of(board)).collect(Collectors.toList());
         System.out.println(boardList);
-        System.out.println("boardList " + boardList);
-        System.out.println("pageNo " + pageNo);
-        System.out.println("pageDto " + pageDto);
+
         //View 전달
         model.addAttribute("boardList",boardList);
         model.addAttribute("pageNo",pageNo);
         model.addAttribute("pageDto",pageDto);
-//
+
         //--------------------------------
         //COUNT UP - //쿠키 생성(/board/read.do 새로고침시 조회수 반복증가를 막기위한용도)
         //--------------------------------
         Cookie init = new Cookie("reading","true");
         response.addCookie(init);
-
-
+        //--------------------------------
 
         return "board/list";
     }
@@ -139,60 +139,61 @@ public class BoardController {
     //-------------------
 
     @GetMapping("/read")
-    public String read(Long no, Integer pageNo, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String read(@RequestParam(name = "no") Long no,
+                       @RequestParam(name = "pageNo") Integer pageNo, Model model, HttpServletRequest request, HttpServletResponse response) {
         log.info("GET /board/read : " + no);
 
-        //서비스 실행
-        Board board =  boardService.getBoardOne(no);
+       //서비스 실행
+       Board board =  boardService.getBoardOne(no);
 
-        BoardDto dto = new BoardDto();
-        dto.setNo(board.getNo());
-        dto.setTitle(board.getTitle());
-        dto.setContent(board.getContent());
-        dto.setRegdate(board.getRegdate());
-        dto.setUsername(board.getUsername());
-        dto.setCount(board.getCount());
+       BoardDto dto = new BoardDto();
+       dto.setNo(board.getNo());
+       dto.setTitle(board.getTitle());
+       dto.setContent(board.getContent());
+       dto.setRegdate(board.getRegdate());
+       dto.setUsername(board.getUsername());
+       dto.setCount(board.getCount());
 
-        System.out.println("FILENAMES : " + board.getFilename());
-        System.out.println("FILESIZES : " + board.getFilesize());
+       System.out.println("FILENAMES : " + board.getFilename());
+       System.out.println("FILESIZES : " + board.getFilesize());
 
-        String filenames[] = null;
-        String filesizes[] = null;
-        if(board.getFilename()!=null){
+       String filenames[] = null;
+       String filesizes[] = null;
+       if(board.getFilename()!=null){
+           //첫문자열에 [ 제거
+           filenames = board.getFilename().split(",");
+           filenames[0] = filenames[0].substring(1, filenames[0].length());
+           //마지막 문자열에 ] 제거
+           int lastIdx = filenames.length-1;
+           System.out.println("filenames[lastIdx] : " + filenames[lastIdx].substring(0,filenames[lastIdx].lastIndexOf("]")));
+           filenames[lastIdx] = filenames[lastIdx].substring(0,filenames[lastIdx].lastIndexOf("]"));
+
+           model.addAttribute("filenames", filenames);
+       }
+       if(board.getFilesize()!=null){
             //첫문자열에 [ 제거
-            filenames = board.getFilename().split(",");
-            filenames[0] = filenames[0].substring(1, filenames[0].length());
-            //마지막 문자열에 ] 제거
-            int lastIdx = filenames.length-1;
-            System.out.println("filenames[lastIdx] : " + filenames[lastIdx].substring(0,filenames[lastIdx].lastIndexOf("]")));
-            filenames[lastIdx] = filenames[lastIdx].substring(0,filenames[lastIdx].lastIndexOf("]"));
-
-            model.addAttribute("filenames", filenames);
-        }
-        if(board.getFilesize()!=null){
-            //첫문자열에 [ 제거
-            filesizes = board.getFilesize().split(",");
-            filesizes[0] = filesizes[0].substring(1, filesizes[0].length());
-            //마지막 문자열에 ] 제거
-            int lastIdx = filesizes.length-1;
-            System.out.println("filesizes[lastIdx] : " + filesizes[lastIdx].substring(0,filesizes[lastIdx].lastIndexOf("]")));
-            filesizes[lastIdx] = filesizes[lastIdx].substring(0,filesizes[lastIdx].lastIndexOf("]"));
+           filesizes = board.getFilesize().split(",");
+           filesizes[0] = filesizes[0].substring(1, filesizes[0].length());
+           //마지막 문자열에 ] 제거
+           int lastIdx = filesizes.length-1;
+           System.out.println("filesizes[lastIdx] : " + filesizes[lastIdx].substring(0,filesizes[lastIdx].lastIndexOf("]")));
+           filesizes[lastIdx] = filesizes[lastIdx].substring(0,filesizes[lastIdx].lastIndexOf("]"));
 
 
 
-            model.addAttribute("filesizes", filesizes);
-        }
+           model.addAttribute("filesizes", filesizes);
+       }
 
 
-        if(board.getDirpath()!=null){
-            //model.addAttribute("dirpath",  board.getDirpath());
-            //--------------------------------------------------------
-            // FILEDOWNLOAD 추가
-            //--------------------------------------------------------
-            this.READ_DIRECTORY_PATH = board.getDirpath();
-        }
-        model.addAttribute("boardDto",dto);
-        model.addAttribute("pageNo",pageNo);
+       if(board.getDirpath()!=null){
+           //model.addAttribute("dirpath",  board.getDirpath());
+           //--------------------------------------------------------
+           // FILEDOWNLOAD 추가
+           //--------------------------------------------------------
+           this.READ_DIRECTORY_PATH = board.getDirpath();
+       }
+       model.addAttribute("boardDto",dto);
+       model.addAttribute("pageNo",pageNo);
 
 
         //-------------------
@@ -306,6 +307,54 @@ public class BoardController {
 
     }
 
+
+
+    //--------------------------------
+//    // /Board/reply/delete
+//    //--------------------------------
+//    @GetMapping("/reply/delete/{bno}/{rno}")
+//    public String delete(@PathVariable Long bno, @PathVariable Long rno){
+//        log.info("GET /board/reply/delete bno,rno " + rno + " " + rno);
+//
+//        boardService.deleteReply(rno);
+//
+//        return "redirect:/board/read?no="+bno;
+//    }
+//
+//    //--------------------------------
+//    // /board/reply/thumbsup
+//    //--------------------------------
+//    @GetMapping("/reply/thumbsup")
+//    public String thumbsup(Long bno, Long rno)
+//    {
+//
+//        boardService.thumbsUp(rno);
+//        return "redirect:/board/read?no="+bno;
+//    }
+//    //--------------------------------
+//    // /board/reply/thumbsdown
+//    //--------------------------------
+//    @GetMapping("/reply/thumbsdown")
+//    public String thumbsudown(Long bno, Long rno)
+//    {
+//        boardService.thumbsDown(rno);
+//        return "redirect:/board/read?no="+bno;
+//    }
+
+
+
+    @ExceptionHandler(Exception.class)
+    public String error1(Exception ex,Model model) {
+        System.out.println("BoardExcptionHandler FileNotFoundException... ex " + ex);
+        //System.out.println("GlobalExceptionHandler FileNotFoundException... ex ");
+        model.addAttribute("ex",ex);
+        return "board/error";
+    }
+
+    @GetMapping("/error")
+    public void error_page(){
+
+    }
 
 
 

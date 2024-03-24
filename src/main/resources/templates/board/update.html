@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -16,23 +16,24 @@
         .material-symbols-outlined {
           font-variation-settings:
           'FILL' 0,
-          'wght' 400,
+          'wght' 300,
           'GRAD' 0,
           'opsz' 24
         }
     </style>
+
 
     <!-- GOOGLE FONTS    -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
 
+
     <!-- common.css    -->
     <link rel="stylesheet" href="/css/common.css">
 
 </head>
 <body>
-
 
 <div class="wrapper">
     <div class="top-header layout-5">
@@ -129,7 +130,6 @@
                         </li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="/board/list">자유 게시판</a>
                     <ul class="submenu">
@@ -138,8 +138,6 @@
                         <li><a href="">-3</a></li>
                     </ul>
                 </li>
-
-
                 <li>
                     <a href="">매매</a>
                     <ul class="submenu">
@@ -161,117 +159,87 @@
 
         </div>
     </nav>
-    <main  class="layout-5">
+    <main>
         <section class="row">
             <!-- aside -->
-
-            <!--
-            <div class="bd-example  col-2" style="height:90vh;width:200px;" >
+            <div class="bd-example bg-secondary col-2" style="height:90vh;width:200px;" >
                 <div class="btn-group-vertical p-3" role="group" aria-label="Vertical button group">
-
+                    <!--
                     <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU1</button>
                     <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU2</button>
                     <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU3</button>
                     <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU4</button>
                     <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU5</button>
                     <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU6</button>
-
+                    -->
                 </div>
             </div>
-            -->
-
             <!-- contents -->
             <div class="col">
                 <!-- breadcrumb -->
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                    <ol class="breadcrumb mt-2">
+                    <ol class="breadcrumb  mt-2">
                         <li class="breadcrumb-item"><a href="#">HOME</a></li>
                         <li class="breadcrumb-item"><a href="#">BOARD</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">LIST</li>
+                        <li class="breadcrumb-item"><a href="#">LIST</a></li>
+                        <li class="breadcrumb-item"><a href="#">READ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">UPDATE</li>
                     </ol>
                 </nav>
-
                 <!-- title -->
-                <h3>BOARD LIST</h3>
-                <div>
-                    <div class="board-header">
-                        Page No (<span th:text="${pageNo}"></span> / <span th:text="${pageDto.totalpage}"></span> Page)
+                <h3>BOARD UPDATE</h3>
+
+
+                <form action="/board/update" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="no" th:value="${boardDto.no}">
+                    <input type="hidden" name="count" th:value="${boardDto.count}">
+
+
+                    <div class="mb-3 w-50">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="text" name="username" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" th:value="${boardDto.username}" readonly>
                     </div>
-                    <div class="board-body">
-                        <!-- body -->
-                        <table class="table w-100">
-                            <thead>
-                            <tr>
-                                <th scope="col-1">NO</th>
-                                <th scope="col-2">SUBJECT</th>
-                                <th scope="col-2">WRITER</th>
-                                <th scope="col-2">DATE</th>
-                                <th scope="col-1">COUNT</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                                <!-- BOARD LIST ITEMS -->
-                                <th:block >
-                                    <tr th:each="boardDto : ${boardList}">
-                                        <td th:text="${boardDto.no}"></td>
-                                        <td><a th:href="@{/board/read(no=${boardDto.no},pageNo=${pageNo})}"  th:text="${boardDto.title}">  </a> </td>
-                                        <td th:text="${boardDto.username}"></td>
-                                        <td th:text="${boardDto.regdate}"></td>
-                                        <td th:text="${boardDto.count}"></td>
-                                    </tr>
-                                </th:block>
-
-
-                            </tbody>
-                        </table>
-
+                    <div class="mb-3 w-50">
+                        <label for="ex2" class="form-label">Title</label>&nbsp;&nbsp;<span class="msg" th:text="${title}"></span>
+                        <input type="text" class="form-control" id="ex2" placeholder="Title" name="title" th:value="${boardDto.title}">
+                    </div>
+                    <div class="mb-3 w-50">
+                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                        <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" th:text="${boardDto.content}"></textarea>
                     </div>
 
-                    <div class="board-footer row position-relative">
+                    <!--     파일 리스트 출력               -->
+                    <div class="mb-3  w-50" style="border : 1px solid lightgray;border-radius:5px;padding:3px;">
+                       <th:block  th:if="${filenames!=null}" >
+                           <!-- 문자열을 쉼표(,)로 분할하고 각각의 항목을 출력합니다. -->
 
-                        <!--  -->
-                        <div class="pagenation col-9">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
+                               <div th:each="i : ${#numbers.sequence(0, filenames.length-1)}"       style="display:flex;align-items;center;">
+                                   <a th:href="@{/board/download(filename=${filenames[i]}) }">
+                                       <span th:text="${filenames[i]}"> </span>&nbsp;&nbsp;
+                                       ( <span th:text="${filesizes[i]}"> </span><span> Byte</span> )
+                                   </a>
+                                   &nbsp;&nbsp;
+                                   <a href="javascript:void(0)" style="text-decoration:none; color:black;"   >
+                                        <span class="material-symbols-outlined delete_file" th:data-filename="${filenames[i]}" th:data-no="${boardDto.no}">delete</span>
+                                   </a>
+                               </div>
 
-                                    <!-- PREV -->
-                                    <li class="page-item" th:if="${pageDto.prev}">
-                                            <a class="page-link" th:href="@{/board/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                    </li>
-
-                                    <!-- PAGENATION -->
-                                    <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
-                                            <a class="page-link" th:href="@{/board/list(pageNo=${i})}" > <span th:text="${i}"></span> </a>
-                                    </li>
-
-
-                                    <!-- NEXT -->
-                                    <li class="page-item"  th:if="${pageDto.next}">
-                                        <a class="page-link" th:href="@{/board/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </nav>
-                        </div>
-                        <!--  -->
-                        <div class="button--group col-2">
-                            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                <a type="button" class="btn btn-outline-primary m-2" style="width:100px;"  href="/board/post">글쓰기</a>
-                                <button type="button" class="btn btn-outline-primary m-2" style="width:100px;">처음으로</button>
-                            </div>
-                        </div>
-
+                       </th:block>
                     </div>
-                </div>
+                    <div class="mb-3 w-50">
+                        <input type="file" name="files" multiple  class="form-control">
+                    </div>
+                    <div class="mb-3  w-50" >
+                        <button  class="btn btn-primary">수정요청</button>
+                        <a  href="javascript:history.go(-1)"  class="btn btn-primary">이전으로</a>
+                    </div>
+                </form>
 
 
             </div>
+
         </section>
+
 
         <section class="">
 
@@ -288,10 +256,32 @@
 
 
 
-
 <!-- axios -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- common.js   -->
 <script src="/js/common.js"></script>
+
+<script>
+        const delete_file_els = document.querySelectorAll('.delete_file');
+
+        delete_file_els.forEach(delete_file_el=>{
+
+            delete_file_el.addEventListener('click',function(){
+                console.log(delete_file_el.dataset.filename);
+                const filename = delete_file_el.dataset.filename;
+                const no = delete_file_el.dataset.no;
+                axios.put("/board/put/"+no+"/"+filename)
+                .then(response=>{
+                    console.log(response.data);
+                    location.reload();
+                })
+                .catch(error=>console.log(error));
+
+
+            });
+        })
+</script>
+
+
 </body>
 </html>

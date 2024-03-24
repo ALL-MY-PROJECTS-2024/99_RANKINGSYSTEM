@@ -65,6 +65,11 @@ public class SecurityConfig  {
 
 
                     authorize.requestMatchers("/board/list").hasAnyRole("USER");
+                    authorize.requestMatchers("/board/read").hasAnyRole("USER");
+                    authorize.requestMatchers("/board/update").hasAnyRole("USER");
+                    authorize.requestMatchers("/board/delete").hasAnyRole("USER");
+                    authorize.requestMatchers("/board/download").hasAnyRole("USER");
+
 
                     authorize.anyRequest().authenticated();
 //

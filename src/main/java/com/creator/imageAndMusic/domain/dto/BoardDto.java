@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardDto {
+
+
+
     private Long no;
     @NotBlank(message = "username을 입력하세요")
     @Email(message = "올바른 이메일 주소를 입력하세요")
@@ -26,8 +29,11 @@ public class BoardDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regdate;
     private Long count;
-
     private MultipartFile[] files;
+
+
+
+
 
     public static BoardDto Of(Board board) {
         BoardDto dto = new BoardDto();
