@@ -174,7 +174,7 @@
 
                         <div class="item" th:each="item : ${list}">
                             <div class="title">
-                                <span th:text="${item.title}"></span>
+                                <th:span th:text="${item.title}"></th:span>
                             </div>
                             <div class="image-block">
                                 <a th:href="@{/user/album/read(iamgeid=${item.images.iamgeid})}">
