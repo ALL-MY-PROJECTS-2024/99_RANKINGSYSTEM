@@ -214,7 +214,8 @@
 }
 
 .wrapper>main>section>.show-block>.items>.item{
-    width: 300px;
+    width: 100%;
+    flex: calc(100% /6); /* 한 행에 5개의 아이템을 표시 */
     /* border : 1px solid; */
     margin : 10px;
     position: relative;
@@ -235,50 +236,28 @@
 
 .wrapper>main>section>.show-block>.items>.item>.image-block{
     position: relative;
-    height : 150px ;
-    width : 300px;
+    height : 150px;
+    width : 100%;
     /* border : 1px solid; */
-
-    display:flex;
-    justify-content : center;
-
 }
-.wrapper>main>section>.show-block>.items>.item>.image-block img{
-    width:100%;
-    height :100%;
-    object-fit : cover;
-
-
-}
-/* .wrapper>main>section>.show-block>.items>.item>.image-block::after{
+.wrapper>main>section>.show-block>.items>.item>.image-block::after{
     display:block;
     content:"";
     background-color:rgba(0,0,0,0);
-    width: 300px;
+    width: 100%;
     height:100%;
     position:absolute;
     top:0;
     left:0;
-} */
-
-
-.wrapper>main>section>.show-block>.items>.item:hover{
-    background-color:rgba(0,0,0,0.5);
-    transition: background-color 1s;
 }
 .wrapper>main>section>.show-block>.items>.item:hover .title{
     display: block;
     z-index: 3;
 }
-
-
-.wrapper>main>section>.show-block>.items>.item:hover img{
-    opacity:.5;
-}
-/* .wrapper>main>section>.show-block>.items>.item:hover>.image-block::after{
+.wrapper>main>section>.show-block>.items>.item:hover>.image-block::after{
     background-color:rgba(0,0,0,0.5);
     transition: background-color 1s;
-} */
+}
 
 .wrapper>main>section>.show-block>.items>.item>.image-block>img{
     width :100%;
