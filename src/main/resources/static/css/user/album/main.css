@@ -24,18 +24,21 @@
     height : 40px;
     display:flex;
     justify-content: space-between;
+
+    position:relative;
 }
 .wrapper>main>section>.show-block>.controller:hover .filter-icon{
     color: #222;
 }
 .modal {
+
     display: none;
     position: absolute;
-    top: 180px;
+    top: 40px;
     background-color: #fff;
     opacity: 0.9;
     width: 280px;
-    height: 57%;
+    height: 500px;
     padding: 20px;
     box-sizing: border-box;
     box-shadow: 3px 3px 6px rgba(0,0,0, 0.5);
@@ -44,6 +47,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+
 }
 
 .hidden{
@@ -216,10 +221,9 @@
 .wrapper>main>section>.show-block>.items>.item{
     width: 300px;
     height : 100%;
-   /* border : 1px solid;*/
+    border : 1px solid;
     margin : 10px;
     position: relative;
-    border-radius:5px;
 }
 
 .wrapper>main>section>.show-block>.items>.item>*{
