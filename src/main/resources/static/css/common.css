@@ -119,17 +119,17 @@ ul{
     align-items: center;
 }
 .wrapper>.top-header>.center>ul>li{
-    width:70px;
+
 
     text-align:right;;
     position:relative;
-
-    margin:0px;
     padding : 0px 10;
+    margin-left:20px;
+
 }
 
 .wrapper>.top-header>.center>ul>li:last-child{
-    width : 50px;
+
     /* top: 100px; */
 }
 .wrapper>.top-header>.center>ul>li .material-symbols-outlined{
@@ -281,7 +281,7 @@ ul{
 }
 
 
-/* mainmenu hover시 */
+/* mainmenu hoverì‹œ */
 .wrapper>nav>.right>ul.mainmenu>li:hover{
     opacity: 1;
 }
