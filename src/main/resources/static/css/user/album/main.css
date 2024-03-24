@@ -214,8 +214,9 @@
 }
 
 .wrapper>main>section>.show-block>.items>.item{
-    width: 100%;
-    flex: calc(100% /6); /* í•œ í–‰ì— 5ê°œì˜ ì•„ì´í…œì„ í‘œì‹œ */
+    width: 300px;
+    border : 1px solid;
+
     /* border : 1px solid; */
     margin : 10px;
     position: relative;
@@ -251,7 +252,7 @@
 
 
 }
-.wrapper>main>section>.show-block>.items>.item>.image-block::after{
+/* .wrapper>main>section>.show-block>.items>.item>.image-block::after{
     display:block;
     content:"";
     background-color:rgba(0,0,0,0);
@@ -260,15 +261,26 @@
     position:absolute;
     top:0;
     left:0;
+} */
+
+
+.wrapper>main>section>.show-block>.items>.item:hover{
+    background-color:rgba(0,0,0,0.5);
+    transition: background-color 1s;
 }
 .wrapper>main>section>.show-block>.items>.item:hover .title{
     display: block;
     z-index: 3;
 }
-.wrapper>main>section>.show-block>.items>.item:hover>.image-block::after{
+
+
+.wrapper>main>section>.show-block>.items>.item:hover img{
+    opacity:.5;
+}
+/* .wrapper>main>section>.show-block>.items>.item:hover>.image-block::after{
     background-color:rgba(0,0,0,0.5);
     transition: background-color 1s;
-}
+} */
 
 .wrapper>main>section>.show-block>.items>.item>.image-block>img{
     width :100%;
