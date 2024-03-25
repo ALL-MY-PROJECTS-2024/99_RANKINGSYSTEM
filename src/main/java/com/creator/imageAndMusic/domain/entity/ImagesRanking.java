@@ -27,9 +27,4 @@ public class ImagesRanking {
     private Long count;
     private Long ilikeit;
     private LocalDateTime regDate;
-
-
-
-
-
 }

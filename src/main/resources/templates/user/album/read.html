@@ -36,8 +36,13 @@
     <link rel="stylesheet" href="/css/user/album/read.css">
 
 
+    <!-- axios   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- common.js -->
     <script src="/js/common.js" defer></script>
+    <!-- read.js -->
+    <script src="/js/user/album/read.js" defer></script>
 
 </head>
 <body>
@@ -132,7 +137,7 @@
                                     <td style="width:200px;" >TITLE</td>
                                     <td class="title"  th:text="${images.title}" style="width:500px;"></td>
                                     <td  style="width:200px;" >DATE</td>
-                                    <td class="date" th:text="${#temporals.format(images.createAt, 'yyyy-MM-dd HH:mm:ss')}">DATE</td>
+                                    <td class="date" th:text="${#temporals.format(images.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 </tr>
                                 <tr>
                                     <td>USER</td>
@@ -156,9 +161,9 @@
 
                         <div class="item" th:each="imagesFileInfo : ${filelist}">
                             <div class="btns">
-                                <a href="javascript:void(0)" class="btn btn-primary">ADD<br>RANKING</a>
-                                <a href="javascript:void(0)" class="btn btn-primary">DELETE<br>IMAGE</a>
-                                <a href="javascript:void(0)" class="btn btn-primary">CHANGE<br>CATEGORY</a>
+                                <a href="javascript:void(0)" class="btn btn-primary addRanking" th:data-fileid="${imagesFileInfo.fileid}">ADD<br>RANKING</a>
+                                <a href="javascript:void(0)" class="btn btn-primary deleteRanking">DELETE<br>IMAGE</a>
+                                <a href="javascript:void(0)" class="btn btn-primary changeCategory">CHANGE<br>CATEGORY</a>
                             </div>
                             <div class="images">
                                 <th:block  >

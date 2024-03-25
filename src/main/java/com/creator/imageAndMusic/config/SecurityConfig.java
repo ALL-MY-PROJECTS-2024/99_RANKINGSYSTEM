@@ -70,6 +70,9 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/board/delete").hasAnyRole("USER");
                     authorize.requestMatchers("/board/download").hasAnyRole("USER");
 
+                    authorize.requestMatchers("/imageRanking/add").hasAnyRole("USER");
+                    authorize.requestMatchers("/imageRanking/list").hasAnyRole("USER");
+                    authorize.requestMatchers("/imageRanking/read").hasAnyRole("USER");
 
                     authorize.anyRequest().authenticated();
 //
