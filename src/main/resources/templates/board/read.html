@@ -184,7 +184,7 @@
             -->
 
             <!-- contents -->
-            <div class="col">
+            <div class="col contents">
                 <!-- breadcrumb -->
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb  mt-2">
@@ -215,12 +215,12 @@
                     </div>
 
                     <!--     파일 리스트 출력               -->
-                    <div class="mb-3  w-50">
+                    <div class="mb-3  w-50 items">
 
                        <th:block th:if="${filenames!=null}">
                            <!-- 문자열을 쉼표(,)로 분할하고 각각의 항목을 출력합니다. -->
                            <div >
-                               <div th:each="i : ${#numbers.sequence(0, filenames.length-1)}"       style="display:flex;align-items;center;">
+                               <div class="item" th:each="i : ${#numbers.sequence(0, filenames.length-1)}"       style="display:flex;align-items;center;">
                                    <a th:href="@{/board/download(filename=${filenames[i]}) }">
                                        <span th:text="${filenames[i]}"> </span>&nbsp;&nbsp;
                                        ( <span th:text="${filesizes[i]}"> </span><span> Byte</span> )

@@ -292,13 +292,14 @@ ul{
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu{
     display:none;
     border: 1px solid darkcyan;
-    border-top: none;
-    border-bottom: none;
+    /*border-top: none;*/
+    /*border-bottom: none;*/
     position: relative;
     z-index: 2;
     opacity: 0;
     /* transition: 0.5; */
 
+    transition:.5s;
 }
 
 .wrapper>nav>.right>ul.mainmenu>li:hover .submenu{
