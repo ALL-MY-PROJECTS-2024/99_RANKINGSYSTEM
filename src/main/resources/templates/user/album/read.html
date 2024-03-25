@@ -125,12 +125,32 @@
 
                 <div class="read-block" >
                     <div class="info-block">
-                        <div class="title" th:text="${images.title}"></div>
-                        <div class="date" th:text="${#temporals.format(images.createAt, 'yyyy-MM-dd HH:mm:ss')}"></div>
-                        <div class="username" th:text="${images.username}"></div>
-                        <div class="mainCategory" th:text="${images.mainCategory}"></div>
-                        <div class="subCategory" th:text="${images.subCategory}"></div>
-                        <div class="description" th:text="${images.description}"></div>
+                        <table class="table">
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width:200px;" >TITLE</td>
+                                    <td class="title"  th:text="${images.title}" style="width:500px;"></td>
+                                    <td  style="width:200px;" >DATE</td>
+                                    <td class="date" th:text="${#temporals.format(images.createAt, 'yyyy-MM-dd HH:mm:ss')}">DATE</td>
+                                </tr>
+                                <tr>
+                                    <td>USER</td>
+                                    <td  class="username" th:text="${images.username}" colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>MAIN CATEGORY</td>
+                                    <td  class="mainCategory" th:text="${images.mainCategory}"></td>
+                                    <td>SUB CATEGORY</td>
+                                    <td class="subCategory" th:text="${images.subCategory}"></td>
+                                </tr>
+                                <tr>
+                                    <td>DESCRIPTION</td>
+                                    <td class="description" th:text="${images.description}"  colspan="3"></td>
+                                </tr>
+                           </tbody>
+                            <tfoot></tfoot>
+                        </table>
                     </div>
                     <div class="image-block">
 
@@ -139,9 +159,8 @@
                                 <a href="javascript:void(0)" class="btn btn-primary">ADD<br>RANKING</a>
                                 <a href="javascript:void(0)" class="btn btn-primary">DELETE<br>IMAGE</a>
                                 <a href="javascript:void(0)" class="btn btn-primary">CHANGE<br>CATEGORY</a>
-
                             </div>
-                            <div>
+                            <div class="images">
                                 <th:block  >
                                     <img th:src="@{${imagesFileInfo.dir}+'/'+${imagesFileInfo.filename}}" alt="" />
                                 </th:block>
