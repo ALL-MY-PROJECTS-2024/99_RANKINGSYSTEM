@@ -11,7 +11,7 @@ addRankingEls.forEach(addRankingEl=>{
                 axios.get("/imageRanking/add?fileid="+fileid)
                 .then(resp=>{
                     console.log(resp.data);
-
+                    alert(resp.data);
 
                 })
                 .catch(err=>{console.log(err.response.data)})
