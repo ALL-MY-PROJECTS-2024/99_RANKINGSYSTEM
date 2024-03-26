@@ -198,11 +198,15 @@
 
             <!-- item             -->
               <div class="item" th:each="imagesRanking :${list}">
+
                 <div class="title">
                   <span th:text="${imagesRanking.ImagesFileInfo.Images.title}"></span>
                 </div>
+                <div class="regdate">
+                  <span th:text="${#temporals.format(imagesRanking.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                </div>
                 <div class="image-block">
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'\s_'+${imagesRanking.ImagesFileInfo.filename}}"  alt="" />
                   </a>
                 </div>
@@ -212,7 +216,6 @@
                       <span class="material-symbols-outlined favorite">favorite</span>
                     </a>
                   </div>
-                  <div >2022-01-01</div>
                 </div>
               </div>
 

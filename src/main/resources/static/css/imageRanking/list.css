@@ -51,8 +51,7 @@
     margin : 10px;
     border : 1px solid;
     border-radius : 5px;
-    min-width : 250px;
-    max-width : 300px;
+    width : 250px;
     height : 150px;
 
     position:relative;
@@ -63,23 +62,76 @@
     position:absolute;
     top:5px;
     margin : 0 auto;
+    border : 1px solid ;
+    width : 100%;
+    height : 25px;
 
+    background-color : gray;
+    opacity : 0;
 
+    display:flex;
+    justify-content: left;
+    align-items : center;
+    border : 0px;
+    transition:.5s;
 }
+.main-container>.right>.items>.item:hover .title{
+    opacity : .5;
+    z-index : 6;
+}
+
+
 
 .main-container>.right>.items>.item>.title>span{
     color : white;
     font-size : .8rem;
 }
 
+.main-container>.right>.items>.item>.regdate{
+    position:absolute;
+    top:32px;
+    right : 0;
+    width :100%;
+    font-size : .7rem;
+    color :white;
+
+    background-color : gray;
+    opacity : 0;
+
+    border : 0px;
+    display:flex;
+    justify-content: right;
+    transition:.5s;
+}
+
+.main-container>.right>.items>.item:hover .regdate{
+    opacity : .5;
+    z-index : 6;
+}
+.main-container>.right>.items>.item>.regdate>span{
+
+}
+
+
 .main-container>.right>.items>.item>.image-block{
     padding : 2px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+
+    position:relative;
+    width : 100%;
+    height : 100%;
+    top:0;bottom:0;left:0;right:0;
+    margin : auto;
+
 
 }
 .main-container>.right>.items>.item>.image-block img{
-    width : 100%;
-    height : 100%;
-    object-fit : contain;
+    width : 200px;
+    height : 130px;
+    border-radius:5px;
+    object-fit : cover;
 }
 
 .main-container>.right>.items>.item>.contents{
@@ -91,9 +143,43 @@
     justify-content:space-between;
     align-items : center;
     font-size : .7rem;
+    z-index : 7;
+}
+.main-container>.right>.items>.item>.contents .favorite{
+    color : gray;
 
+    transition:.5s;
+    position:relative;
 
 }
+.main-container>.right>.items>.item:hover .favorite{
+    color : red;
+}
+
+
 .main-container>.right>.items>.item>.contents>div>*{
       color : white;
+}
+
+.main-container>.right>.items>.item>.bg{
+    width : 100%;
+    height : 100%;
+    position:absolute;
+    background-color : gray;
+    opacity : 0;
+    border-radius :5px;
+    z-index:-1;
+}
+.main-container>.right>.items>.item:hover .bg{
+    z-index : 1;
+    opacity : .3;
+}
+.main-container>.right>.items>.item:hover .image-block{
+    z-index : 5;
+}
+
+
+th,td{
+    font-size : .8rem;
+    text-align:center;
 }
