@@ -37,10 +37,10 @@ main>section>.read-block>.image-block>.item>.images{
 }
 
 main>section>.read-block>.image-block>.item>.images{
-
+    padding : 10px;
 }
 main>section>.read-block>.image-block>.item>div:nth-child(2) img{
     object-fit : contain;
     display:block;
-
+    margin : 0 auto;
 }
