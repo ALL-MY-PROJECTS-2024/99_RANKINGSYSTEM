@@ -5,3 +5,40 @@ main>section>.join_block{
 main>section>.join_block label{
     font-size : .8rem;
 }
+
+
+
+/**/
+.send-email>.sendEmailIdForm{
+   display:flex;
+   justify-content : center;
+   align-items : center;
+
+}
+.send-email>.sendEmailIdForm>*{
+    margin: 5px;
+}
+.send-email>.sendEmailIdForm a{
+    width : 80px;
+}
+
+
+
+.emailCodeForm>div{
+        display:flex;
+        justify-content : center;
+        align-items : center;
+}
+
+
+.emailCodeForm>div>*{
+    margin: 5px;
+}
+.emailCodeForm a{
+    width : 80px;
+}
+
+.hidden{
+    display:none;
+}
+

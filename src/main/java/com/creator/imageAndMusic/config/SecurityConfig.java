@@ -58,10 +58,13 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/").permitAll();
                     authorize.requestMatchers("/login","/user/join").permitAll();
 
-                    authorize.requestMatchers("/user/**").hasAnyRole("USER");
+
                     authorize.requestMatchers("/user/album/add").hasAnyRole("USER");
                     authorize.requestMatchers("/user/album/read").hasAnyRole("USER");
                     authorize.requestMatchers("/user/album/main").hasAnyRole("USER");
+                    authorize.requestMatchers("/user/join").permitAll();
+                    authorize.requestMatchers("/user/sendMail/*").permitAll();
+                    authorize.requestMatchers("/user/emailConfirm").permitAll();
 
 
                     authorize.requestMatchers("/board/list").hasAnyRole("USER");
