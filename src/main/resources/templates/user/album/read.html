@@ -161,9 +161,19 @@
 
                         <div class="item" th:each="imagesFileInfo : ${filelist}">
                             <div class="btns">
-                                <a href="javascript:void(0)" class="btn btn-primary addRanking" th:data-fileid="${imagesFileInfo.fileid}">ADD<br>RANKING</a>
-                                <a href="javascript:void(0)" class="btn btn-primary deleteRanking">DELETE<br>IMAGE</a>
-                                <a href="javascript:void(0)" class="btn btn-primary changeCategory">CHANGE<br>CATEGORY</a>
+                                <a href="javascript:void(0)" class="btn btn-primary addRanking" th:data-fileid="${imagesFileInfo.fileid}">
+                                    <span class="material-symbols-outlined" style="font-size : .8rem">add</span>
+                                    <span>ADD RANKING</span>
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-primary deleteRanking">
+                                    <span class="material-symbols-outlined" style="font-size : .8rem">delete</span>
+                                    <span>DELETE IMAGE</span>
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-primary changeCategory">
+                                    <span class="material-symbols-outlined" style="font-size : .8rem">published_with_changes</span>
+                                    <span>CHANGE CATEGORY</span>
+
+                                </a>
                             </div>
                             <div class="images">
                                 <th:block  >

@@ -36,7 +36,7 @@ public class ImageRankingController {
 
     @GetMapping("/add")
     public @ResponseBody ResponseEntity<String> addRanking(@RequestParam("fileid") Long fileid) throws Exception {
-        log.info("imageRanking/add..");
+        log.info("imageRanking/add..fileid : " + fileid);
 
         boolean isAdded =  imageRankingService.addRankingImage(fileid);
         if(isAdded)
@@ -45,21 +45,47 @@ public class ImageRankingController {
             return  new ResponseEntity("RANKING 등록 실패",HttpStatus.BAD_GATEWAY);
     }
 
+
     @GetMapping("/list")
-    public void list(Model model)
+    public String list(@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
+                       Model model,
+                       HttpServletResponse response
+    )
     {
         log.info("GET /imageRanking/list... ");
 
+        //----------------
+        //PageDto  Start
+        //----------------
+        Criteria criteria = null;
+        if(pageNo==null) {
+            //최초 /board/list 접근
+            pageNo=1;
+            criteria = new Criteria();  //pageno=1 , amount=10
+        }
+        else {
+            criteria = new Criteria(pageNo,10); //페이지이동 요청 했을때
+        }
         //파라미터 받기
         //유효성체크
         //서비스실행
-        List<ImagesRanking> list =  imageRankingService.getAllImageRanking();
+        Map<String,Object> map =  imageRankingService.getAllImageRanking(criteria);
 
+        PageDto pageDto = (PageDto) map.get("pageDto");
+        List<ImagesRanking> list = (List<ImagesRanking>) map.get("list");
+        List<ImagesRanking> rankingList = (List<ImagesRanking>) map.get("rankingList");
+        int count = (int)map.get("count");
+
+
+        model.addAttribute("pageNo",pageNo);
+        model.addAttribute("pageDto",pageDto);
         model.addAttribute("list",list);
+        model.addAttribute("rankingList",rankingList);
+
         //이동
 
 
-
+        return "imageRanking/list";
 
     }
 
@@ -70,7 +96,7 @@ public class ImageRankingController {
 
         ImagesRanking imagesRanking = imageRankingService.getImageRanking(rankingId);
         model.addAttribute("imagesRanking",imagesRanking);
-
+        model.addAttribute("title","조회순");
 
         imageRankingService.count(rankingId);
     }

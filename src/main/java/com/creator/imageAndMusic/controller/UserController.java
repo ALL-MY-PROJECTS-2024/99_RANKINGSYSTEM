@@ -49,6 +49,17 @@ public class UserController {
     }
 
 
+    //ID찾기
+    @GetMapping("/confirmId")
+    public void confirmId(){
+        log.info("GET /user/confirmId..");
+    }
+    @PostMapping("/confirmId")
+    public @ResponseBody void confirmId_post(@RequestBody UserDto dto){
+        log.info("POST /user/confirmId.." + dto);
+
+    }
+
     @PostMapping("/join")
     public String join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request) throws Exception {
         UserController.log.info("POST /join...dto " + dto);
@@ -78,7 +89,10 @@ public class UserController {
 
 
     @GetMapping("/myinfo")
-    public void func1(){}
+    public void func1(){
+          log.info("GET /user/myinfo..");
+
+    }
 
 
     @GetMapping("/album/main")

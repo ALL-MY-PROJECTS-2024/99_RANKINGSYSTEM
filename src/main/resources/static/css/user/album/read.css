@@ -12,24 +12,39 @@ main>section>.read-block>.image-block{
     display:flex;
     justify-content : center;
     align-items : start;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap:wrap;
+
+    overflow : auto;
+    height : 100vh;
+
 }
 
 main>section>.read-block>.image-block>.item{
     margin : 10px;
     border : 1px solid;
-    height : 100%:
+    height : 100%;
 }
 main>section>.read-block>.image-block>.item .btns{
     margin : 5px;
     font-size : .8rem;
     border : 1px solid;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 main>section>.read-block>.image-block>.item .btns a{
     width : 150px;
     margin : 10px;
     font-size : .8rem;
 }
-
+main>section>.read-block>.image-block>.item .btns a:last-child{
+    width : 180px;
+}
 main>section>.read-block>.image-block>.item>.images{
 
 

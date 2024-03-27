@@ -45,9 +45,11 @@
     border : 1px solid;
 
     display:flex;
-    justify-content:left;
-    align-items : start;
+    justify-content:center;
+    align-items : center;
     flex-wrap : wrap;
+
+    overflow : auto;
 }
 .main-container>.right>.items>.item{
     margin : 10px;
@@ -58,6 +60,28 @@
 
     position:relative;
 
+}
+.main-container>.right>.items>.item>.count{
+    width : 100%;
+    height : 15px;
+    display:flex;
+    justify-content: right;
+    align-items: center;
+    border-radius : 5px 5px 0px 0px;
+    margin-bottom:10px;
+
+    position:absolute;
+    top:-17px;
+    font-size : .8rem;
+    color : black;
+
+    opacity: 0;
+
+}
+.main-container>.right>.items>.item:hover .count{
+    opacity: .8;
+    z-index:7;
+    transition:.5s;
 }
 .main-container>.right>.items>.item>.title{
     padding : 5px;
@@ -72,29 +96,26 @@
     opacity : 0;
 
     display:flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items : center;
     border : 0px;
     transition:.5s;
 }
 .main-container>.right>.items>.item:hover .title{
-    opacity : .5;
+    opacity : .8;
     z-index : 6;
 }
 
 
 
-.main-container>.right>.items>.item>.title>span{
+.main-container>.right>.items>.item>.title span{
     color : white;
     font-size : .8rem;
 }
 
-.main-container>.right>.items>.item>.regdate{
-    position:absolute;
-    top:32px;
-    right : 0;
-    width :100%;
-    font-size : .7rem;
+.main-container>.right>.items>.item .regdate{
+
+    font-size : .6rem;
     color :white;
 
     background-color : gray;
@@ -107,7 +128,7 @@
 }
 
 .main-container>.right>.items>.item:hover .regdate{
-    opacity : .5;
+    opacity : 1;
     z-index : 6;
 }
 .main-container>.right>.items>.item>.regdate>span{
@@ -126,7 +147,11 @@
     height : 100%;
     top:0;bottom:0;left:0;right:0;
     margin : auto;
-
+    transition:.5s;
+}
+.main-container>.right>.items>.item>.image-block a{
+    display:block;
+    padding : 2px;
 
 }
 .main-container>.right>.items>.item>.image-block img{
@@ -178,6 +203,7 @@
 }
 .main-container>.right>.items>.item:hover .image-block{
     z-index : 5;
+    opacity: .4;
 }
 
 

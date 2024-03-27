@@ -185,7 +185,8 @@ ul{
     /* background-color: royalblue; */
     background-image: url('/assets/top-header-left.jpg');
     background-repeat: no-repeat;
-    background-size: 45px;
+
+    background-size : cover;
     background-position:left;
 
 }
@@ -257,6 +258,7 @@ ul{
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu>li{
     line-height: 35px;
     /* border : 1px solid; */
+    position:relative;
 
 }
 
@@ -324,6 +326,8 @@ ul{
     height: 600px;
     background: url('/assets/water.jpg');
     /* opacity: 0.5; */
+    background-repeat: no-repeat;
+
 }
 
 .wrapper>main>.section-1>h1{
@@ -334,8 +338,14 @@ ul{
     left: 200px;
     line-height: 80px;
     font-family: 'SUITE-Regular';
+
+}
+.movingleft{
     animation: slide1 1s ease-out;
 }
+
+
+
 
 .wrapper>main>.section-1>.photo{
     position: absolute;
@@ -359,7 +369,10 @@ ul{
     height: 600px;
     /* background-position: 100px; */
     background: url('/assets/abstract2.jpg') fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
 
 .wrapper>main>.section-2>.right-2{
     width: 430px;
@@ -368,7 +381,8 @@ ul{
     position: absolute;
     top: 980px;
     right: 250px;
-    animation: appear 1s ease-out;
+    /*animation: appear 1s ease-out;*/
+    opacity: 0;
 }
 
 .wrapper>main>.section-2>.right-2>h1{
@@ -376,6 +390,7 @@ ul{
     font-weight: 800;
     line-height: 50px;
     font-family: 'SUITE-Regular';
+
 }
 
 .wrapper>main>.section-2>.right-2>p{
@@ -482,6 +497,8 @@ ul{
     margin-top: 15%;
     justify-content: space-between;
     display: flex;
+    opacity: 1;
+
 }
 .wrapper > main >.box1 >.category {
     width: 250px;
@@ -501,9 +518,11 @@ ul{
     z-index: 1;
     border-radius: 20px;
     opacity: 0.7;
+    transition:.5s;
 }
 .wrapper > main >.box1 >.category>img:hover{
-    opacity: 0.7;
+
+    opacity: 1;
 }
 
 
@@ -602,6 +621,7 @@ ul{
     opacity: 0.7;
 }
 
+
 /*  */
 .wrapper>footer{
     height: 180px;
@@ -671,6 +691,25 @@ ul{
     bottom: 15%;
     opacity: 1;
     margin-left: 20px;
+}
+
+
+.updateContext::after{
+    content : '!';
+    position:absolute;
+    right:0;
+    top:0;
+    width : 15px;
+    height : 15px;
+
+    font-size : .7rem;
+    color : white;
+    background-color: red;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 
