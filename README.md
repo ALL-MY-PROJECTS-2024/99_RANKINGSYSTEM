@@ -9,9 +9,12 @@
 |V0.0.2|2024-03-22|ALBUM|/USER/ALBUM/READ 이미지 상세보기 - |
 |V0.0.3|2024-03-24|BOARD|/index main section / footer section 코드/스타일링 기본  |
 |V0.0.4|2024-03-24|BOARD|/user/album/main 스타일링 기본 | 
-
 |V0.1.0|2024-03-24|BOARD|/BOARD/LIST 게시판 list페이지 구현완료 |
 |V0.1.1|2024-03-24|BOARD|/BOARD/READ 게시판 read페이지 구현완료 |
+|V0.2.2|2024-03-26|IMAGERANKING|/IMAGERANKING/ADD 앨범 이미지 -> 이미지 랭킹 등록 구현완료|
+|V0.2.3|2024-03-26|IMAGERANKING|/IMAGERANKING/LIST 이미지 랭킹 페이지 구현완료|
+|V0.2.3|2024-03-27|IMAGERANKING|/IMAGERANKING/LIST 이미지 랭킹 페이지 구현완료|
+|V0.2.4|2024-03-27|IMAGERANKING|/IMAGERANKING/LIST 이미지 랭킹 페이지 COUNT UP|
 
 
 ### TEAM
