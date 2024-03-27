@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -49,7 +50,24 @@ public class ImageRankingServiceImpl implements ImageRankingService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public List<ImagesRanking> getAllImageRanking() {
-        return imageRankingRepostiroy.findAll();
+
+
+        return imageRankingRepostiroy.findAllByOrderByCountDesc();
+    }
+
+
+    @Override
+    @Transactional(rollbackFor = SQLException.class)
+    public void count(Long rankingId) {
+        ImagesRanking imageRanking =  imageRankingRepostiroy.findById(rankingId).get();
+        imageRanking.setCount(imageRanking.getCount()+1);
+        imageRankingRepostiroy.save(imageRanking);
+    }
+
+    @Override
+    @Transactional(rollbackFor = SQLException.class)
+    public ImagesRanking getImageRanking(Long rankingId) {
+       return imageRankingRepostiroy.findById(rankingId).get();
     }
 
 

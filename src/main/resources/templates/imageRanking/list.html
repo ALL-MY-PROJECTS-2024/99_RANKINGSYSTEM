@@ -206,7 +206,8 @@
                   <span th:text="${#temporals.format(imagesRanking.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
                 </div>
                 <div class="image-block">
-                  <a href="javascript:void(0)">
+                  <a th:href="@{/imageRanking/read(rankingId=${imagesRanking.rankingId} )}">
+                    
                     <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'\s_'+${imagesRanking.ImagesFileInfo.filename}}"  alt="" />
                   </a>
                 </div>

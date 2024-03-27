@@ -64,6 +64,15 @@ public class ImageRankingController {
     }
 
     @GetMapping("/read")
-    public void readRanking(){}
+    public void readRanking(@RequestParam(name = "rankingId",defaultValue = "1") Long rankingId,Model model){
+        log.info("GET /imageRanking/read..");
+
+
+        ImagesRanking imagesRanking = imageRankingService.getImageRanking(rankingId);
+        model.addAttribute("imagesRanking",imagesRanking);
+
+
+        imageRankingService.count(rankingId);
+    }
 
 }
