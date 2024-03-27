@@ -7,6 +7,7 @@ import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.Images;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
+import com.creator.imageAndMusic.domain.entity.User;
 import com.creator.imageAndMusic.domain.service.UserService;
 import com.creator.imageAndMusic.properties.AUTH;
 import io.jsonwebtoken.Claims;
@@ -28,6 +29,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.HTML;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -67,16 +69,31 @@ public class UserController {
     //ID찾기
     @GetMapping("/confirmId")
     public void confirmId(){
+
         log.info("GET /user/confirmId..");
     }
+
+
     @PostMapping("/confirmId")
-    public @ResponseBody void confirmId_post(@RequestBody UserDto dto){
-        log.info("POST /user/confirmId.." + dto);
+    public @ResponseBody ResponseEntity<String> confirmId_post(@RequestBody UserDto userDto){
+        log.info("POST /user/confirmId.." + userDto);
+
+        User user =  userService.getUser(userDto);
+
+        if(user!=null){
+            String username = user.getUsername();
+            username = username.substring(0, username.indexOf("@"));
+            log.info("USERNAME : " + username);
+            return new ResponseEntity(username, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity("일치하는 계정을 찾을수 없습니다.", HttpStatus.BAD_GATEWAY);
+        }
 
     }
 
     @PostMapping("/join")
-    public String join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request) throws Exception {
+    public String join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request,HttpServletResponse response) throws Exception {
         UserController.log.info("POST /join...dto " + dto);
         //파라미터 받기
             //
@@ -93,12 +110,26 @@ public class UserController {
         //서비스 실행
 
         boolean isJoin =  userService.memberJoin(dto,model,request);
+        log.info("isJoin : "+isJoin);
         //View로 속성등등 전달
-        if(isJoin)
+        if(isJoin) {
+
+            //JWT 토큰 쿠키중에 Email인증 토큰 쿠키 찾기
+            Cookie c =  Arrays.stream(request.getCookies())
+                    .filter(cookie -> cookie.getName().startsWith(AUTH.EMAIL_COOKIE_NAME)).findFirst().orElse(null);
+            //JWT EMAIL AUTH 토큰 제거
+            if(c!=null){
+                c.setMaxAge(0);
+                response.addCookie(c);
+            }
+
+
             return "redirect:login?msg=MemberJoin Success!";
-        else
+        }
+        else {
             return "user/join";
-        //+a 예외처리
+            //+a 예외처리
+        }
 
     }
 

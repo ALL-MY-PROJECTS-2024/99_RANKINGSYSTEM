@@ -3,6 +3,7 @@ package com.creator.imageAndMusic.domain.service;
 import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
+import com.creator.imageAndMusic.domain.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
@@ -21,4 +22,5 @@ public interface UserService {
     public List<ImagesFileInfo> getAllItems() throws Exception;
     public List<ImagesFileInfo> getUserItem(Long imageid) throws Exception;
 
+    User getUser(UserDto userDto);
 }

@@ -66,6 +66,8 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/user/sendMail/*").permitAll();
                     authorize.requestMatchers("/user/emailConfirm").permitAll();
 
+                    authorize.requestMatchers("/user/confirmId").permitAll();
+
 
                     authorize.requestMatchers("/board/list").hasAnyRole("USER");
                     authorize.requestMatchers("/board/read").hasAnyRole("USER");

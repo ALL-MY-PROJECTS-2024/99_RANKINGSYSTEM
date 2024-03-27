@@ -36,10 +36,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-        if(isAuth&&email_auth_cookie !=null) //이메일 인증코드쿠키가 있다면
+        if(isAuth&&email_auth_cookie != null) //이메일 인증코드쿠키가 있다면
         {
-
-
                 //email_auth_cookie 가 null이 아니라면 유효한지 요청 (axios)
                 axios
                 .get('/user/emailConfirm?emailCode=0')
@@ -76,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         }else{
                 //해당쿠키가 유효한지 서버로 체크
-                console.log("isAuth",isAuth);
                 console.log("isAuth",isAuth);
                 const email_auth_btn = document.querySelector('.email_auth_btn');
                 email_auth_btn.click();
@@ -142,12 +139,12 @@ document.addEventListener("DOMContentLoaded", function() {
                                       document.querySelector('#exampleModal').classList.remove('show');
                                       document.querySelector('#exampleModal').classList.add('hide');
                                       document.querySelector('.modal-backdrop').remove();
+                                      document.querySelector('#exampleModal').style.display='none';
 
                               }else{
                                       //인증X -> 인증이 안된 내용을 표시
                                       alert('이메일 인증 실패!');
                                       location.href="/";
-
                               }
 
 

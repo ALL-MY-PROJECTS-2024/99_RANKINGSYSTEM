@@ -110,6 +110,11 @@ public class UserServiceImpl implements UserService {
         user.setUsername(dto.getUsername());
         user.setPassword(dto.getPassword());
         user.setRole(dto.getRole());
+        user.setNickname(dto.getNickname());
+        user.setPhone(dto.getPhone());
+        user.setZipcode(dto.getZipcode());
+        user.setAddr1(dto.getAddr1());
+        user.setAddr2(dto.getAddr2());
         user.setRole("ROLE_USER");
 
         //Db Saved...
@@ -222,6 +227,7 @@ public class UserServiceImpl implements UserService {
 
 
 
+
     //모든 이미지 조회
     @Transactional(rollbackFor = Exception.class)
     public List<ImagesFileInfo> getAllItems() throws Exception{
@@ -229,6 +235,12 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public User getUser(UserDto userDto) {
 
+       return userRepository.findUserByNicknameAndPhone(userDto.getNickname(),userDto.getPhone());
+
+    }
 
 }
