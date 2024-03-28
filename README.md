@@ -4,7 +4,7 @@
 ---
 |VERSION|DATE|CATEGORY|DESCRIPTION|
 |------|---|---|---|
-|V0.0.0|2024-03-20|AUTH|로그인/로그아웃/회원가입/REMEMBERME 구현 완료 |
+|V0.0.0|2024-03-20|AUTH|로그인/로그아웃/회원가입/REMEMBERME 구현 완료 - JWT 기반인증(NON-SESSION) |
 |V0.0.1|2024-03-21|ALBUM|/USER/ALBUM/ADD  이미지 업로드 완료 |
 |V0.0.2|2024-03-22|ALBUM|/USER/ALBUM/READ 이미지 상세보기 - |
 |V0.0.3|2024-03-24|BOARD|/index main section / footer section 코드/스타일링 기본  |
