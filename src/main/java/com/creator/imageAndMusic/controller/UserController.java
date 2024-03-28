@@ -114,6 +114,13 @@ public class UserController {
         //View로 속성등등 전달
         if(isJoin) {
 
+            //JWT 토큰 쿠키 삭제후 response 전송
+            Cookie newCookie = new Cookie(AUTH.EMAIL_COOKIE_NAME,null);
+
+            newCookie.setMaxAge(0);
+            newCookie.setPath("/");
+            response.addCookie(newCookie);
+
             return "redirect:login?join=success";
         }
         else {

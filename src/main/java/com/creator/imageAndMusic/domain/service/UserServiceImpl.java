@@ -13,6 +13,8 @@ import com.creator.imageAndMusic.domain.repository.ImagesRepository;
 import com.creator.imageAndMusic.domain.repository.UserRepository;
 import com.creator.imageAndMusic.properties.AUTH;
 import com.creator.imageAndMusic.properties.UPLOADPATH;
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,12 +65,14 @@ public class UserServiceImpl implements UserService {
         //password vs repassword 일치여부
         if(!dto.getPassword().equals(dto.getRepassword()) ){
             model.addAttribute("password","패스워드 입력이 상이합니다 다시 입력하세요");
+            System.out.println("UserServiceImpl's memberJoin .. 패스워드 불일치");
             return false;
         }
 
         //동일 계정이 있는지 여부 확인
         if(userRepository.existsById(dto.getUsername())){
             model.addAttribute("username","동일한 계정명이 존재합니다.");
+            System.out.println("UserServiceImpl's memberJoin .. 동일한 계정명이 존재");
             return false;
         }
 
@@ -84,21 +89,18 @@ public class UserServiceImpl implements UserService {
 //        //---
         if( !jwtTokenProvider.validateToken(jwtAccessToken)){
             model.addAttribute("username","이메일 인증 유효시간을 초과했습니다");
+            System.out.println("UserServiceImpl's memberJoin .. 이메일 인증 유효시간을 초과");
             return false;
         }
         else{
             //EmailAuth Claim Value값 꺼내서 true 확인
             Claims claims = jwtTokenProvider.parseClaims(jwtAccessToken);
-            Boolean isEmailAuth = (Boolean)claims.get(EmailAuthProperties.EMAIL_JWT_COOKIE_NAME);
+            Boolean isEmailAuth = (Boolean)claims.get(AUTH.EMAIL_COOKIE_NAME);
             String id = (String)claims.get("id");
             if(isEmailAuth==null && isEmailAuth!=true){
                 //이메일인증실패!!
                 model.addAttribute("username","해당 계정의 이메일 인증이 되어있지 않습니다.");
-                return false;
-            }
-            if(!id.equals(dto.getUsername())){
-                System.out.println("!!!!!!!!!!!!!!");
-                model.addAttribute("username","해당 이메일 재인증이 필요합니다.");
+                System.out.println("UserServiceImpl's memberJoin .. 해당 계정의 이메일 인증이 되어있지 않습니다.");
                 return false;
             }
 
@@ -121,7 +123,6 @@ public class UserServiceImpl implements UserService {
         //Db Saved...
         userRepository.save(user);
 
-        //JWT 토큰 쿠키 삭제후 response 전송
 
 
         return true;
