@@ -17,6 +17,9 @@
 |V0.2.4|2024-03-27|IMAGERANKING|/IMAGERANKING/LIST 이미지 랭킹 페이지 COUNT UP|
 |V0.2.5|2024-03-27|AUTH|/USER/JOIN 회원가입 이전 이메일 인증코드 구현(JWT토큰 방식 인증승인)|
 |V0.2.6|2024-03-28|AUTH|/USER/CONFIRMID ID분실시 이름/연락처로 ID 힌트 제공 구현 완료 |
+|V0.2.7|2024-03-28|AUTH|/USER/CONFIRMPW PW분실시 재발급 구현 완료 |
+|V0.2.8|2024-03-28|ALBUM|/USER/ALBUM/ADD 이미지 앨범 업로드시 섬네일 파일 화질개선 PNG->JPEG..ETC|
+
 
 
 ### TEAM
@@ -40,9 +43,9 @@
 |2024-04-01|BE_INIT|/user/album/add|-|이미지 파일 업로드|**IMPORTANT**| **TRUE**
 |2024-04-01|BE_INIT|/user/album/main|-|내 앨범 전체 조회|**IMPORTANT**| **TRUE**
 |2024-04-01|BE_INIT|/user/album/main|-|내 앨범 키워드 조회(좋아요순/조회순)|**IMPORTANT**| FALSE
-|2024-04-01|BE_INIT|/ranking/images|-|모든 유저 앨범 조회|**IMPORTANT**| FASLE
+|2024-04-01|BE_INIT|/imageranking/list|-|이미지 랭킹 전체 조회|**IMPORTANT**| **TRUE**
 |2024-04-01|BE_INIT|/user/album/main?keyfield=?&keyword=?|-|이미지 키워드(좋아요/조회순) 조회|**IMPORTANT**| FASLE
-|2024-04-01|BE_INIT|미정|-|이미지 랭킹 조회|**IMPORTANT**| FASLE
+
 
 
 
@@ -72,6 +75,12 @@
   - 01
   - 01
   
+### AWS EC2 SETTING[지울예정]
+---
+ -
+ - Jenkins 배포시 사용할 /tmp 공간확보하기 (https://velog.io/@springkim/ubuntu-tmp-%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC-%EC%9A%A9%EB%9F%89-%EB%8A%98%EB%A6%AC%EA%B8%B0)
+ -
+
 
 ### FILE TREE [tree /F | clip]
 ---
