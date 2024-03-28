@@ -11,6 +11,7 @@ import com.creator.imageAndMusic.domain.entity.User;
 import com.creator.imageAndMusic.domain.repository.ImagesFileInfoRepository;
 import com.creator.imageAndMusic.domain.repository.ImagesRepository;
 import com.creator.imageAndMusic.domain.repository.UserRepository;
+import com.creator.imageAndMusic.properties.AUTH;
 import com.creator.imageAndMusic.properties.UPLOADPATH;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -73,36 +74,35 @@ public class UserServiceImpl implements UserService {
 
 
         //이메일인증이 되었는지 확인(JWT EmailAuth쿠키 true확인)
-//        Cookie[] cookies =  request.getCookies();
-//        String jwtAccessToken = Arrays.stream(cookies).filter(co -> co.getName().equals("EmailAuth")).findFirst()
-//                .map(co -> co.getValue())
-//                .orElse(null);
+        Cookie[] cookies =  request.getCookies();
+        String jwtAccessToken = Arrays.stream(cookies).filter(co -> co.getName().equals(AUTH.EMAIL_COOKIE_NAME)).findFirst()
+                .map(co -> co.getValue())
+                .orElse(null);
 
 //        //---
 //        // JWT토큰의 만료여부 확인
 //        //---
-//        if( !jwtTokenProvider.validateToken(jwtAccessToken)){
-//
-//            model.addAttribute("username","이메일 인증 유효시간을 초과했습니다");
-//            return false;
-//        }
-//        else{
-//            //EmailAuth Claim Value값 꺼내서 true 확인
-//            Claims claims = jwtTokenProvider.parseClaims(jwtAccessToken);
-//            Boolean isEmailAuth = (Boolean)claims.get(EmailAuthProperties.EMAIL_JWT_COOKIE_NAME);
-//            String id = (String)claims.get("id");
-//            if(isEmailAuth==null && isEmailAuth!=true){
-//                //이메일인증실패!!
-//                model.addAttribute("username","해당 계정의 이메일 인증이 되어있지 않습니다.");
-//                return false;
-//            }
-//            if(!id.equals(dto.getUsername())){
-//                System.out.println("!!!!!!!!!!!!!!");
-//                model.addAttribute("username","해당 이메일 재인증이 필요합니다.");
-//                return false;
-//            }
-//
-//        }
+        if( !jwtTokenProvider.validateToken(jwtAccessToken)){
+            model.addAttribute("username","이메일 인증 유효시간을 초과했습니다");
+            return false;
+        }
+        else{
+            //EmailAuth Claim Value값 꺼내서 true 확인
+            Claims claims = jwtTokenProvider.parseClaims(jwtAccessToken);
+            Boolean isEmailAuth = (Boolean)claims.get(EmailAuthProperties.EMAIL_JWT_COOKIE_NAME);
+            String id = (String)claims.get("id");
+            if(isEmailAuth==null && isEmailAuth!=true){
+                //이메일인증실패!!
+                model.addAttribute("username","해당 계정의 이메일 인증이 되어있지 않습니다.");
+                return false;
+            }
+            if(!id.equals(dto.getUsername())){
+                System.out.println("!!!!!!!!!!!!!!");
+                model.addAttribute("username","해당 이메일 재인증이 필요합니다.");
+                return false;
+            }
+
+        }
 
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         //Dto->Entity
@@ -117,10 +117,14 @@ public class UserServiceImpl implements UserService {
         user.setAddr2(dto.getAddr2());
         user.setRole("ROLE_USER");
 
+
         //Db Saved...
         userRepository.save(user);
 
-        return userRepository.existsById(user.getUsername());
+        //JWT 토큰 쿠키 삭제후 response 전송
+
+
+        return true;
     }
 
 

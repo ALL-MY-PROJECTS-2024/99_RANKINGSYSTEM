@@ -114,17 +114,7 @@ public class UserController {
         //View로 속성등등 전달
         if(isJoin) {
 
-            //JWT 토큰 쿠키중에 Email인증 토큰 쿠키 찾기
-            Cookie c =  Arrays.stream(request.getCookies())
-                    .filter(cookie -> cookie.getName().startsWith(AUTH.EMAIL_COOKIE_NAME)).findFirst().orElse(null);
-            //JWT EMAIL AUTH 토큰 제거
-            if(c!=null){
-                c.setMaxAge(0);
-                response.addCookie(c);
-            }
-
-
-            return "redirect:login?msg=MemberJoin Success!";
+            return "redirect:login?join=success";
         }
         else {
             return "user/join";
