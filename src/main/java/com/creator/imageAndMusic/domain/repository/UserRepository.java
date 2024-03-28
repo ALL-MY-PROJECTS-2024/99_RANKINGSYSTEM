@@ -14,5 +14,5 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User,String> {
     //@Query(value = "SELECT * FROM CreatorDB.board b WHERE b.title LIKE %:keyWord%  ORDER BY b.no DESC LIMIT :amount OFFSET :offset", nativeQuery = true)
     User findUserByNicknameAndPhone(String nickname, String phone);
-
+    User findUserByUsernameAndNicknameAndPhone(String username,String nickname, String phone);
 }

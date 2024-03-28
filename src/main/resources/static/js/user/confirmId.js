@@ -13,7 +13,7 @@ confirmId_btn.addEventListener('click',function(){
     axios.post('/user/confirmId', formData ,  {headers: {'Content-Type': 'application/json'}})
     .then(resp=>{
         console.log(resp)
-        alert("USERNAME : " + resp.data+"**");
+        alert("USERNAME : " + resp.data);
         }
     )
     .catch(err=>{

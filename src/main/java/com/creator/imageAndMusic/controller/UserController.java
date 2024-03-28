@@ -8,6 +8,7 @@ import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.Images;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
 import com.creator.imageAndMusic.domain.entity.User;
+import com.creator.imageAndMusic.domain.repository.UserRepository;
 import com.creator.imageAndMusic.domain.service.UserService;
 import com.creator.imageAndMusic.properties.AUTH;
 import io.jsonwebtoken.Claims;
@@ -82,7 +83,8 @@ public class UserController {
 
         if(user!=null){
             String username = user.getUsername();
-            username = username.substring(0, username.indexOf("@"));
+            username = username.substring(0, username.indexOf("@")-2);
+            username = username+"**";
             log.info("USERNAME : " + username);
             return new ResponseEntity(username, HttpStatus.OK);
         }
@@ -91,6 +93,53 @@ public class UserController {
         }
 
     }
+
+    //PW찾기
+    @GetMapping("/confirmPw")
+    public void confirmPw(){
+
+        log.info("GET /user/confirmPw..");
+    }
+
+    @Autowired
+    private UserRepository userRepository;
+    @PostMapping("/confirmPw")
+    public @ResponseBody ResponseEntity<String> confirmPw_post(@RequestBody UserDto userDto){
+        log.info("POST /user/confirmPw.." + userDto);
+
+        User user =  userService.getUser(userDto);
+
+        if(user!=null){
+
+            //난수 패스워드
+            Random rand =new Random();
+            int value = (int)(rand.nextDouble()*100000) ;
+
+            String rowPassword = user.getPassword();
+
+            //DB저장
+            user.setPassword(passwordEncoder.encode(String.valueOf(value)));
+            userRepository.save(user);
+
+            //이메일 발송
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(user.getUsername());
+            message.setSubject("[RANKING WEB SERVICE] 임시 패스워드 ");
+            message.setText(value+"");
+            javaMailSender.send(message);
+
+
+
+
+
+            return new ResponseEntity(user.getUsername()+" 으로 임시 패스워드 전송 완료",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity("일치하는 계정을 찾을수 없습니다.", HttpStatus.BAD_GATEWAY);
+        }
+
+    }
+
 
     @PostMapping("/join")
     public String join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request,HttpServletResponse response) throws Exception {
