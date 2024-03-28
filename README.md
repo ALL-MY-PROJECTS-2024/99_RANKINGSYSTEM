@@ -75,6 +75,12 @@
   - 01
   - 01
   
+### AWS EC2 SETTING[지울예정]
+---
+ -
+ - Jenkins 배포시 사용할 /tmp 공간확보하기 (https://velog.io/@springkim/ubuntu-tmp-%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC-%EC%9A%A9%EB%9F%89-%EB%8A%98%EB%A6%AC%EA%B8%B0)
+ -
+
 
 ### FILE TREE [tree /F | clip]
 ---
