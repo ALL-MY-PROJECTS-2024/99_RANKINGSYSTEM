@@ -175,6 +175,7 @@ ul{
     display:flex;
     justify-content: space-between;
 }
+
 .wrapper>nav>.left{
     width:200px;
     height:100%;
@@ -224,7 +225,10 @@ ul{
     text-align:center;
 }
 .wrapper>nav>.right>ul.mainmenu>li{
-    min-width : 180px;
+    width : 9.375vw;
+    /*border : 1px solid;*/
+    font-size : 0.8333vw;
+    min-font-size: 0.5vw;
     height:80px;
     opacity: .8;
     text-align:center;
