@@ -19,7 +19,10 @@
 |V0.2.6|2024-03-28|AUTH|/USER/CONFIRMID ID분실시 이름/연락처로 ID 힌트 제공 구현 완료 |
 |V0.2.7|2024-03-28|AUTH|/USER/CONFIRMPW PW분실시 재발급 구현 완료 |
 |V0.2.8|2024-03-28|ALBUM|/USER/ALBUM/ADD 이미지 앨범 업로드시 섬네일 파일 화질개선 PNG->JPEG..ETC|
-|V0.2.9|2024-03-99|AUTH| 인증 이후 유효시간 연장(현재 5분) - 진행중|
+|V0.2.9|2024-03-29|ALBUM|/IMAGERANKING/ADD ALBUM -> RANKING 등록 요청이후 RANKING PAGE로 이동질의 구현 완료|
+|V0.2.9|2024-03-29|ALBUM|/IMAGERANKING/ADD 기존의 동일한 파일이 랭킹등록되어 있으면 등록불가 설정 구현 완료|
+
+|V0.2.-|2024-03-99|AUTH| 인증 이후 유효시간 연장(현재 5분) - 진행중|
 
 
 
