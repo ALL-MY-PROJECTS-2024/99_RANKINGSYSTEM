@@ -12,7 +12,11 @@ addRankingEls.forEach(addRankingEl=>{
                 axios.get("/imageRanking/add?fileid="+fileid)
                 .then(resp=>{
                     console.log(resp.data);
-                    alert(resp.data);
+                    if(confirm(resp.data+" 랭킹페이지로 이동할까요?"))
+                        location.href="/imageRanking/list";
+
+
+
 
                 })
                 .catch(err=>{console.log(err)})
