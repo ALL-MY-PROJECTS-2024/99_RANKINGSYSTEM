@@ -9,8 +9,10 @@ import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
 import com.creator.imageAndMusic.domain.repository.ImagesFileInfoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -22,6 +24,10 @@ import java.util.Map;
 @Service
 @Slf4j
 public class ImageRankingServiceImpl implements ImageRankingService {
+
+
+    @Autowired
+    ApplicationContext appContext;
 
     @Autowired
     private ImageRankingRepository imageRankingRepostiroy;
@@ -40,6 +46,10 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         //ImagesFileInfo imagesFileInfo2 = imageRankingRepostiroy.findByImagesFileInfo(imagesFileInfo);
         //log.info("ImageRankingServiceImpl isNotNull : ",isNotnull);
         //.info("ImageRankingServiceImpl's is not null :"+(imagesFileInfo.getFileid()==imagesFileInfo2.getFileid()));
+
+        ImagesRanking isExistedRnaking = imageRankingRepostiroy.findByImagesFileInfo(imagesFileInfo);
+        if(isExistedRnaking!=null)
+            return false;
 
         ImagesRanking imagesRanking = new ImagesRanking();
         imagesRanking.setRankingId(0L);

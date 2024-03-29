@@ -14,4 +14,5 @@ public interface ImagesFileInfoRepository extends JpaRepository<ImagesFileInfo,L
     List<ImagesFileInfo> findAllByImages(Images images);
 
 
+
 }

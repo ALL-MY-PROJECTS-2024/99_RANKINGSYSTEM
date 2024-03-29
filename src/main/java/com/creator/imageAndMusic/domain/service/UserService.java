@@ -23,4 +23,6 @@ public interface UserService {
     public List<ImagesFileInfo> getUserItem(Long imageid) throws Exception;
 
     User getUser(UserDto userDto);
+
+    boolean removeAlbumFile(Long fileid);
 }

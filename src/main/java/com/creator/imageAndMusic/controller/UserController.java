@@ -329,9 +329,20 @@ public class UserController {
 
         model.addAttribute("filelist",filelist);
         model.addAttribute("images",images);
+    }
 
+    @DeleteMapping("/album/delete")
+    public @ResponseBody ResponseEntity<String> delete_album(@RequestParam(name = "fileid") Long fileid){
+        log.info("GET /user/album/delete...fileid " + fileid);
+
+        boolean isDeleted =  userService.removeAlbumFile(fileid);
+        if(isDeleted)
+           return  new ResponseEntity("삭제완료,앨범 메인 페이지로 이동하시겠습니까?",HttpStatus.OK);
+        else
+           return  new ResponseEntity("삭제실패",HttpStatus.BAD_GATEWAY);
 
     }
+
 
 
 }

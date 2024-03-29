@@ -35,7 +35,7 @@ public class ImageRankingController {
     private ImageRankingService imageRankingService;
 
     @GetMapping("/add")
-    public @ResponseBody ResponseEntity<String> addRanking(@RequestParam("fileid") Long fileid) throws Exception {
+    public @ResponseBody ResponseEntity<String> addRanking(@RequestParam("fileid") Long fileid,Model model) throws Exception {
         log.info("imageRanking/add..fileid : " + fileid);
 
         boolean isAdded =  imageRankingService.addRankingImage(fileid);

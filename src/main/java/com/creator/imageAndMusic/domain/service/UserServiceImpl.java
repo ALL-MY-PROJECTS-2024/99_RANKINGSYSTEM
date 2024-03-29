@@ -291,4 +291,42 @@ public class UserServiceImpl implements UserService {
             return userRepository.findUserByUsernameAndNicknameAndPhone(userDto.getUsername(),userDto.getNickname(),userDto.getPhone());
     }
 
+    @Override
+    public boolean removeAlbumFile(Long fileid) {
+
+        //삭제할 이미지파일정보
+        ImagesFileInfo deleteImagesFileInfo =  imagesFileInfoRepository.findById(fileid).get();
+
+        List<ImagesFileInfo> allSameImageIdFileInfo = imagesFileInfoRepository.findAllByImages(deleteImagesFileInfo.getImages());
+        log.info("TOTAL SAME IMAGEID FILE COUNT : " + allSameImageIdFileInfo.size());
+        if(allSameImageIdFileInfo.size()==1)    //마지막 삭제파일
+        {
+            imagesFileInfoRepository.deleteById(deleteImagesFileInfo.getFileid());
+            imagesRepository.deleteById(deleteImagesFileInfo.getImages().getIamgeid());
+            File file = new File(deleteImagesFileInfo.getDir()+File.separator+deleteImagesFileInfo.getFilename());
+            file.delete();
+
+            File thumb_file = new File(deleteImagesFileInfo.getDir()+File.separator+"s_"+deleteImagesFileInfo.getFilename());
+            thumb_file.delete();
+
+            File dir = new File(deleteImagesFileInfo.getDir());
+            dir.delete();
+
+            return true;
+        }
+        else
+        {
+            imagesFileInfoRepository.deleteById(deleteImagesFileInfo.getFileid());
+            File file = new File(deleteImagesFileInfo.getDir()+File.separator+deleteImagesFileInfo.getFilename());
+            file.delete();
+            File thumb_file = new File(deleteImagesFileInfo.getDir()+File.separator+"s_"+deleteImagesFileInfo.getFilename());
+            thumb_file.delete();
+
+            return true;
+        }
+
+
+
+    }
+
 }
