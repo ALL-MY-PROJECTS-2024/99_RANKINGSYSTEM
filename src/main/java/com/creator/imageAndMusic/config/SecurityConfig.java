@@ -83,6 +83,10 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/imageRanking/list").hasAnyRole("USER");
                     authorize.requestMatchers("/imageRanking/read").hasAnyRole("USER");
 
+                    authorize.requestMatchers("/lecture/list").hasAnyRole("USER");
+
+
+
                     authorize.anyRequest().authenticated();
 //
 //                    authorize.anyRequest().authenticated();

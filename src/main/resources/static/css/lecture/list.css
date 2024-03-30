@@ -1,0 +1,60 @@
+main>section{
+    padding : 15px;
+}
+
+main>section>.items{
+    
+}
+
+main>section>.items{
+
+}
+
+main>section>.items{
+    width : 100%;
+  
+}
+main>section>.items>.title{
+    font-size : 1.8rem;
+    border-bottom: 1px solid;
+    height : 50px;
+}
+.vidioBlock{
+ 
+    margin : 30px 0px;
+    height : 200px;
+    width : 100%;
+    /* border : 1px solid; */
+
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position:relative;
+}
+.bg{
+    position:absolute;
+    width : 250px;
+    height : 150px;
+    background-color:black;
+    opacity:.4;
+    z-index : 1;
+}
+.bg:hover{
+    opacity : 0;
+}
+
+main>section>.items>.vidioBlock>.item{
+    width : 250px;
+    height : 150px;
+    border : 1px solid;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modalbtn{
+    display:none;
+}
