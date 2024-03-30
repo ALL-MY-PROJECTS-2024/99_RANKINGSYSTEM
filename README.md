@@ -57,12 +57,6 @@
   - 01
   - 01
   
-### AWS EC2 ISSUE[지울예정]
----
- -
- - Jenkins 배포시 사용할 /tmp 공간확보하기 (https://velog.io/@springkim/ubuntu-tmp-%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC-%EC%9A%A9%EB%9F%89-%EB%8A%98%EB%A6%AC%EA%B8%B0)
- - /upload 폴더에 jenkins 계정으로 w 권한 주기
-
 
 ### FILE TREE [tree /F | clip]
 ---
@@ -74,6 +68,12 @@
 #### FRONTEND TREE
 ![20240321004218](https://github.com/ALL-MY-PROJECTS-2024/99_RANKINGSYSTEM_DEPLOY/assets/84259104/28c998ec-e648-4888-8164-0429d01682a2)
 ![20240321004222](https://github.com/ALL-MY-PROJECTS-2024/99_RANKINGSYSTEM_DEPLOY/assets/84259104/54f77b7b-eef9-4fa2-a4e6-20ca5c8832ce)
+
+### AWS EC2 ISSUE[지울예정]
+---
+ -
+ - Jenkins 배포시 사용할 /tmp 공간확보하기 (https://velog.io/@springkim/ubuntu-tmp-%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC-%EC%9A%A9%EB%9F%89-%EB%8A%98%EB%A6%AC%EA%B8%B0)
+ - /upload 폴더에 jenkins 계정으로 w 권한 주기
 
 
 ### RULE
