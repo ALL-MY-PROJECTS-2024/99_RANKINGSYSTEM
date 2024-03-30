@@ -19,5 +19,6 @@
 |V0.2.9|2024-03-29|IMAGERANKING|/IMAGERANKING/ADD ALBUM -> RANKING 등록 요청이후 RANKING PAGE로 이동질의 구현 완료|
 |V0.2.10|2024-03-29|IMAGERANKING|/IMAGERANKING/ADD 기존의 동일한 파일이 랭킹등록되어 있으면 등록불가 설정 구현 완료|
 |V0.2.11|2024-03-29|ALBUM|/ALBUM/DELETE 앨범삭제-> 랭킹삭제 + 파일삭제 구현완료|
+|V0.2.12|2024-03-30|LECTURE|/LECTURE/LIST 기본 온라인 강의 LAYOUT + 유튜브 링크 + 모달 |
 
 |V0.2.-|2024-03-99|AUTH| 인증 이후 유효시간 연장(현재 5분) - 진행중|
