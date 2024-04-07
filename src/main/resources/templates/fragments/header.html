@@ -6,5 +6,56 @@
 </head>
 <body>
 
+<th:block th:fragment="headerFragment" >
+    <div class="top-header layout-5">
+        <div class="left">
+            <a href="/">
+                LOGO
+            </a>
+        </div>
+        <div class="center">
+            <ul>
+                <th:block class="top-header-menu" sec:authorize="!isAuthenticated()" >
+                    <li class="item">
+                        <a href="/login">로그인</a>
+                    </li>
+
+                    <li class="item">
+                        <a href="/user/join">회원 가입</a>
+                    </li>
+                </th:block>
+
+
+
+                <th:block class="" sec:authorize="isAuthenticated()" >
+                    <li class="item" style="">
+                        <span sec:authentication="principal.username"></span>
+                    </li>
+                    <li class="item">
+                        <form method="post" action="/logout">
+                            <input type="submit" value="로그아웃" />
+                        </form>
+                    </li>
+                </th:block>
+
+
+                <li>
+                    <a href="">
+                        <span class="material-symbols-outlined">MENU</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--
+        <div class="right">
+            <a href="/index.html">
+               <img src="assets/top-header-left.jpg" alt="">
+            </a>
+        </div>
+         -->
+    </div>
+</th:block>
+
+
 </body>
 </html>

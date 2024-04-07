@@ -55,6 +55,8 @@ public class SecurityConfig  {
                 authorize->{
 
                     authorize.requestMatchers("/js/**","/css/**","/images/**","/templates","/assets/**").permitAll();
+                    authorize.requestMatchers("/upload/**").hasAnyRole("USER");
+
                     authorize.requestMatchers("/").permitAll();
                     authorize.requestMatchers("/login","/user/join").permitAll();
 
@@ -88,8 +90,7 @@ public class SecurityConfig  {
 
 
                     authorize.anyRequest().authenticated();
-//
-//                    authorize.anyRequest().authenticated();
+
                 }
         );
         //로그인
