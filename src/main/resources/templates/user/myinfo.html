@@ -23,15 +23,34 @@
         <!-- header   -->
         <th:block th:insert="fragments/header :: headerFragment" />
 
+        <!-- nav       -->
+        <th:block th:insert="fragments/nav :: albumNavFragment" />
+
         <main>
+
+            <section class="layout-5 breadcrumb-block">
+                <div class="">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">
+                                <span class="material-symbols-outlined">home</span>
+                            </a></li>
+                            <li class="breadcrumb-item active" aria-current="page">MY INFO</li>
+                        </ol>
+                    </nav>
+                </div>
+            </section>
+
             <section>
+
+
                 <div class="mymenu layout-5">
-                    메뉴 | 메뉴 | 메뉴
+
                 </div>
                 <div class="join_block">
                     <div class="header" style="text-align:center;">
                         <!-- title -->
-                        <h3>프로필 수정</h3>
+                        <h3 th:text="${#authentication.name}"></h3>
                     </div>
 
                     <div class="body">

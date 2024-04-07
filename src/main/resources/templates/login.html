@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,53 +15,32 @@
 <body>
     
     <div class="wrapper">
-        <div class="top-header layout-5">
-            <div class="left">
-                <a href="/">
-                    LOGO
-                </a>
-            </div>
-            <!-- 
-            <div class="center">
-               <ul>
-                    <li><span>USER10</span> 님</li>
-                    <li><a href="">로그아웃</a></li>
-               </ul>
-            </div>
-            
-            <div class="right">
-                <a href="/index.html">
-                   <img src="assets/top-header-left.jpg" alt=""> 
-                </a>
-            </div>
-             -->
-        </div>
-        <!-- <nav class="layout-5">
- 
 
-        </nav> -->
+
+
+
         <main>
             <section>
                 <div>
                     <form action="/login" method="post" >
                         <div class="item image">
-                            
+
                          </div>
                         <div class="item title">
-                           <h1>LOGIN</h1>
+                           <div class="logo">
+                               <img src="/assets/logo.jpg" alt="">
+                           </div>
                         </div>
                         <div class="item">
-                            <label for="">아이디 : </label>
                             <input type="text" class="form-control" placeholder="아이디를 입력하세요" name="username">
                         </div>
                         <div class="item">
-                            <label for="">패스워드 : </label>
                             <input type="password"  class="form-control"  placeholder="패스워드를 입력하세요" name="password">
                         </div>
                         <div class="item submenu">
                             <div>
                                 <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me">
-                                <label for="rememberMe">REMEMBER_ME</label>
+                                <label for="rememberMe">로그인 상태 유지</label>
                             </div>
                             <div>
                                 <a href="/user/confirmId">아이디 분실</a> |
@@ -80,7 +59,7 @@
                 </div>
             </section>
         </main>
-        <footer></footer>
+
     </div>
     
 </body>

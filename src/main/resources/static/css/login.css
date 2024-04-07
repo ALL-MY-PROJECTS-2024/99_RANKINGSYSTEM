@@ -1,36 +1,63 @@
 *{
     border : 0px;
 }
+a {
+    color : gray;
+}
+
+body{
+
+    background-image : url("/assets/bg_01.jpg");
+    background-repeat : no-repeat;
+    background-position:center;
+    background-size : cover;
+    background-color: rgba(255, 255, 255);
+}
 
 main>section{
+
+    height : 100vh;
 
     display:flex;
     justify-content: center;
     align-items: center;
+
+
+
+
 }
+
 
 main>section>div{
 
-
+    background-color : white;
     width:400px;
    
     /* border : 1px solid; */
-    margin:100px     auto;
+    margin:0px     auto;
 
     display:flex;
     justify-content: center;
     align-items: center;
     padding : 20px;
 
-    border : 1px solid lightgray;
+    /*border : 1px solid lightgray;*/
     border-radius: 5px;
 
+    /*box-shadow : 5px 5px 5px lightgray;*/
+    color : gray;
 
+    position:relative;
+    top:-50px;
 
 }
 
 main>section>div>form{
     width:100%;
+}
+
+main>section>div>form ::placeholder{
+    font-size : .8rem;
 }
 main>section>div .item.submenu{
     display:flex;
@@ -58,6 +85,16 @@ main>section>div .item{
     margin : 10px;
     padding : 5px;
 }
+main>section>div .item.image{
+
+}
+main>section>div .item img{
+    margin-bottom : 30px;
+
+}
+
+
+
 main>section>div .item>label{
     font-size : .8rem;
     margin-bottom:3px;

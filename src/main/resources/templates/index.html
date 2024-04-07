@@ -8,6 +8,14 @@
     <!--  link   -->
     <th:block th:insert="fragments/link :: linkFragment" />
 
+
+    <!-- index.css-->
+    <link rel="stylesheet" href="/css/index.css">
+
+    <!-- index.js   -->
+
+    <script src="/js/index.js" defer> </script>
+
 </head>
 <body>
     
@@ -21,39 +29,34 @@
 
 
         <main>
-            <div class="top-bar">
 
-            </div>
 
-            <!-- section - top -->
-            <section class="section-1">
-                <h1 class="lefttext movingleft">
-                    창의성과 소통의 플랫폼, <br>
-                    이달의 컨텐츠 랭킹에서 <br>
-                    새로운 재능을 발견하세요!
-                </h1>
-                <img class="photo" src="/assets/polaroid.png" alt="">
+            <section class="banner">
+                <!-- Slider main container -->
+                <div class="swiper">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide"><img src="/assets/banner/01.png"></div>
+                        <div class="swiper-slide"><img src="/assets/banner/02.jpg"></div>
+                        <div class="swiper-slide"><img src="/assets/banner/03.jpg"></div>
+                        <div class="swiper-slide"><img src="/assets/banner/04.jpg"></div>
+                    </div>
+                    <!-- If we need pagination -->
+                    <div class="swiper-pagination"></div>
 
-                <a href="">보러가기</a>
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
 
-            </section>
-
-            <section class="section-2">
-                <div class="right-2">
-                    <h1 class="movingright">
-                        새로운 genAI 기반 교육을 <br>
-                        경험하세요!
-                    </h1>
-                    <p>
-                        AI가 선별한 최신 컨텐츠로  <br>
-                        지식을 확장하고 <br>
-                        함께 배우고 나누는  <br>
-                        새로운 경험을 시작해보세요!
-                    </p>
+                    <!-- If we need scrollbar -->
+                    <div class="swiper-scrollbar"></div>
                 </div>
-                <img src="/assets/brain.png" alt="">
-
             </section>
+
+
+
+
 
             <section class="section-3">
                 <a href="">
@@ -62,6 +65,25 @@
                     </div>
                 </a>
             </section>
+
+
+            <section class="section-2 scroll-spy">
+                <div class="right-2">
+                    <h1 class="back-to-position to-left">
+                        새로운 genAI 기반 교육을 <br>
+                        경험하세요!
+                    </h1>
+                    <p class="back-to-position to-left">
+                        AI가 선별한 최신 컨텐츠로  <br>
+                        지식을 확장하고 <br>
+                        함께 배우고 나누는  <br>
+                        새로운 경험을 시작해보세요!
+                    </p>
+                </div>
+                <img src="/assets/brain.png" class="back-to-position to-right" alt="">
+
+            </section>
+
 
             <!-- section - bottom -->
             <!-- 박스 호버 시 불투명한 검정 배경 깔리게하기(투명도 약하게 조절) -->
