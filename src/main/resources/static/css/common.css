@@ -38,6 +38,9 @@ body{
     margin: 0;
     width: 100%;
 }
+body::-webkit-scrollbar{
+    display:none;
+}
 a{
     text-decoration: none;
     color: black;
