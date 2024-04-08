@@ -60,7 +60,6 @@ public class UserController {
 
     }
 
-
     @ExceptionHandler(Exception.class)
     public void ExceptionHandler(Exception e){
         log.info("User Exception.." + e);
@@ -70,7 +69,6 @@ public class UserController {
     //ID찾기
     @GetMapping("/confirmId")
     public void confirmId(){
-
         log.info("GET /user/confirmId..");
     }
 

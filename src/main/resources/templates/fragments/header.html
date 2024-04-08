@@ -11,32 +11,6 @@
 
         <div class="left">
 
-            <!-- Slider main container -->
-            <div class="swiper">
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-                    <!-- Slides -->
-                    <div class="swiper-slide">
-                        <a href="">
-                            [공지사항] 01관리자입니다.
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <span>
-                            [공지사항] 02관리자입니다.---------------------------------------
-                            </span>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            [공지사항] 03관리자입니다.
-                        </a>
-                    </div>
-                </div>
-
-             </div>
-
         </div>
 
         <div class="center">
@@ -97,5 +71,95 @@
 </th:block>
 
 
+
+<th:block th:fragment="mainHeaderFragment" >
+    <div class="top-header layout-5">
+
+        <div class="left">
+
+            <!-- Slider main container -->
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <a href="">
+                            [공지사항] 01관리자입니다.
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="">
+                            <span>
+                            [공지사항] 02관리자입니다.---------------------------------------
+                            </span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="">
+                            [공지사항] 03관리자입니다.
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="center">
+            <div class="top-banner">
+
+            </div>
+            <ul>
+                <th:block class="" sec:authorize="isAuthenticated()" >
+                    <li class="item" style="">
+                        <span sec:authentication="principal.username"></span>
+                        <span> 님</span>
+                    </li>
+                </th:block>
+
+                <li class="item">
+                    <a href="/">HOME</a>
+                </li>
+
+                <th:block class="top-header-menu" sec:authorize="!isAuthenticated()" >
+                    <li class="item">
+                        <a href="/login">LOGIN</a>
+                    </li>
+                    <li class="item">
+                        <a href="/user/join">JOIN</a>
+                    </li>
+                </th:block>
+
+                <th:block class="" sec:authorize="isAuthenticated()" >
+                    <li class="item">
+                        <a method="post" href="/user/myinfo">나의정보</a>
+                    </li>
+
+                    <li class="item">
+                        <form method="post" action="/logout">
+                            <button  class="" >로그아웃</button>
+                        </form>
+                    </li>
+                </th:block>
+
+
+                <!--                <li>-->
+                <!--                    <a href="">-->
+                <!--                        <span class="material-symbols-outlined">MENU</span>-->
+                <!--                    </a>-->
+                <!--                </li>-->
+
+                <!--                -->
+            </ul>
+        </div>
+        <!--
+        <div class="right">
+            <a href="/index.html">
+               <img src="assets/top-header-left.jpg" alt="">
+            </a>
+        </div>
+         -->
+    </div>
+</th:block>
 </body>
 </html>
