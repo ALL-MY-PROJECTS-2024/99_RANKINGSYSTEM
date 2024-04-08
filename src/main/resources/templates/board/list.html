@@ -79,7 +79,7 @@
                                         <td th:text="${boardDto.no}"></td>
                                         <td><a th:href="@{/board/read(no=${boardDto.no},pageNo=${pageNo})}"  th:text="${boardDto.title}">  </a> </td>
                                         <td th:text="${boardDto.username}"></td>
-                                        <td th:text="${boardDto.regdate}"></td>
+                                        <td th:text="${#temporals.format(boardDto.regdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                         <td th:text="${boardDto.count}"></td>
                                     </tr>
                                 </th:block>
