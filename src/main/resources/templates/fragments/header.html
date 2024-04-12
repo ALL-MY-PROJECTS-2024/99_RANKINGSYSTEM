@@ -148,7 +148,7 @@
 
 
         <!-- 오프캔버스 - 회원가입   -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width:500px;">
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width:450px;">
             <div class="offcanvas-header" >
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
@@ -162,9 +162,17 @@
                                 <div class="mt-2 mb-2">
                                     <label>이메일계정</label>&nbsp;&nbsp;
                                     <span th:text="${username}" style="font-size:0.7rem;" class="username_msg"></span>
-                                    <div style="display:flex;">
+                                    <div style="display:flex;position:relative;">
                                         <input name="username" class="form-control username"  placeholder="이메일 계정 입력" type="email" required>
-                                        <a href="javascript:void(0)"  class="btn btn-secondary email_auth_btn" style="width:80px;margin-left:5px;">확인</a>
+                                        <a href="javascript:void(0)"  class="btn btn-secondary email_auth_btn" style="width:80px;margin-left:5px;">인증</a>
+
+                                        <div class="email_auth_block">
+                                                <div>
+                                                    <input type="text"  class="form-control m-1 email_code" th:placeholder="CODE">
+                                                    <a class="btn btn-primary m-1 emailCodeForm_btn">전송</a>
+                                                </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="mb-2">
@@ -204,9 +212,6 @@
                                     <button class="btn btn-primary w-100 join_btn">가입요청</button>
                                 </div>
 
-                                <div class="mb-2">
-                                    <button  class="btn btn-secondary w-100">-</button>
-                                </div>
                             </form>
 
                         </div>

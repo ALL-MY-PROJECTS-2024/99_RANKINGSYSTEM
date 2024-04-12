@@ -143,6 +143,39 @@ public class JwtTokenProvider {
 
 
 
+    public TokenInfo generateToken(String Claimkey,String id,boolean isAuth,String username) {
+
+        long now = (new Date()).getTime();
+
+        // Access Token 생성
+        Date accessTokenExpiresIn = new Date(now + 60*5*1000);    // 60*5 초후 만료
+        String accessToken = Jwts.builder()
+                .setSubject(Claimkey+"JWT TOKEN")
+                .claim(Claimkey,isAuth)             //정보저장
+                .claim("id",id)
+                .claim("username",username)
+                .setExpiration(accessTokenExpiresIn)
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+
+        // Refresh Token 생성
+        String refreshToken = Jwts.builder()
+                .setExpiration(new Date(now + 86400000))    //1일: 24 * 60 * 60 * 1000 = 86400000
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+
+//        .out.println("[JwtTokenProvider] generateToken() accessToken : " + accessToken);
+//        .out.println("[JwtTokenProvider] generateToken() refreshToken : " + refreshToken);
+
+        return TokenInfo.builder()
+                .grantType("Bearer")
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
+
+
+
 
     // JWT 토큰을 복호화하여 토큰에 들어있는 정보를 꺼내는 메서드
     public Authentication getAuthentication(String accessToken) {

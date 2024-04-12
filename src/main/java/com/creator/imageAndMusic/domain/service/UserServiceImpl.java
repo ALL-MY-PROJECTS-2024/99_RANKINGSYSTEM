@@ -84,6 +84,8 @@ public class UserServiceImpl implements UserService {
                 .map(co -> co.getValue())
                 .orElse(null);
 
+        log.info("JWT ACCESS TOKEN : " + jwtAccessToken);
+
 //        //---
 //        // JWT토큰의 만료여부 확인
 //        //---
@@ -97,7 +99,9 @@ public class UserServiceImpl implements UserService {
             Claims claims = jwtTokenProvider.parseClaims(jwtAccessToken);
             Boolean isEmailAuth = (Boolean)claims.get(AUTH.EMAIL_COOKIE_NAME);
             String id = (String)claims.get("id");
-            if(isEmailAuth==null && isEmailAuth!=true){
+            log.info("이메일 인증 여부 : "+ isEmailAuth);
+
+            if(isEmailAuth==null || isEmailAuth!=true){
                 //이메일인증실패!!
                 model.addAttribute("username","해당 계정의 이메일 인증이 되어있지 않습니다.");
                 System.out.println("UserServiceImpl's memberJoin .. 해당 계정의 이메일 인증이 되어있지 않습니다.");

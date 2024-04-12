@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function() {
         // 예: DOM 요소에 접근하거나 초기화 작업 수행
         console.log("페이지가 로드되었습니다!");
 
-
         const searchCookieName = "email_auth_";
         let isAuth = false;
         let email_auth_cookie = null;

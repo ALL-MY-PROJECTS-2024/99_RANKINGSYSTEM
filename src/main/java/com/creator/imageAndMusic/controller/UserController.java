@@ -29,6 +29,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.swing.text.html.HTML;
 import java.io.IOException;
@@ -140,7 +141,7 @@ public class UserController {
 
 
     @PostMapping("/join")
-    public String join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public String join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request,HttpServletResponse response,RedirectAttributes redirectAttributes) throws Exception {
         UserController.log.info("POST /join...dto " + dto);
         //파라미터 받기
             //
@@ -151,7 +152,7 @@ public class UserController {
                 log.info(error.getField() +" : " + error.getDefaultMessage());
                 model.addAttribute(error.getField(),error.getDefaultMessage());
             }
-            return "user/join";
+            return "/";
         }
 
         //서비스 실행
@@ -167,11 +168,11 @@ public class UserController {
             newCookie.setMaxAge(0);
             newCookie.setPath("/");
             response.addCookie(newCookie);
-
-            return "redirect:login?join=success";
+            redirectAttributes.addAttribute("message","JOIN SUCCESS");
+            return "redirect:login";
         }
         else {
-            return "user/join";
+            return "/";
             //+a 예외처리
         }
 
@@ -196,7 +197,7 @@ public class UserController {
 
 
         //Token에 난수Value전달
-        TokenInfo tokenInfo =  jwtTokenProvider.generateToken(AUTH.EMAIL_COOKIE_NAME,value+"",false);
+        TokenInfo tokenInfo =  jwtTokenProvider.generateToken(AUTH.EMAIL_COOKIE_NAME,value+"",false,email);
         Cookie cookie  = new Cookie(AUTH.EMAIL_COOKIE_NAME,tokenInfo.getAccessToken());
         cookie.setPath("/");
         cookie.setMaxAge(60*15);
@@ -225,8 +226,13 @@ public class UserController {
         //Claims 꺼내기
         Claims claims = jwtTokenProvider.parseClaims(c.getValue());
         String idValue = (String) claims.get("id");
+        String username = (String) claims.get("username");
         boolean isAuth = (Boolean) claims.get(AUTH.EMAIL_COOKIE_NAME);
 
+        System.out.println("claims : " + claims);
+        System.out.println("idValue : " + idValue);
+        System.out.println("username : " + username);
+        System.out.println("isAuth : " + isAuth);
 
         JSONObject obj = new JSONObject();
 
@@ -242,14 +248,16 @@ public class UserController {
                 response.addCookie(c);
 
                 //true 값 가지는 쿠키 다시 만들어서 전달
-                TokenInfo tokenInfo =  jwtTokenProvider.generateToken(AUTH.EMAIL_COOKIE_NAME,"",true);
+                TokenInfo tokenInfo =  jwtTokenProvider.generateToken(AUTH.EMAIL_COOKIE_NAME,"",true,username);
                 Cookie cookie  = new Cookie(AUTH.EMAIL_COOKIE_NAME,tokenInfo.getAccessToken());
                 cookie.setPath("/");
                 cookie.setMaxAge(60*15);
                 response.addCookie(cookie);
 
                 obj.put("success",true);
+                obj.put("username",username);
                 obj.put("message","이메일 인증을 성공하셨습니다.");
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!" +username);
                 return obj;
             }
             else {
@@ -265,6 +273,7 @@ public class UserController {
         else //코드 입력 완료
         {
             obj.put("success",true);
+            obj.put("username",username);
             obj.put("message","이메일 인증을 성공하셨습니다.");
             return obj;
 
