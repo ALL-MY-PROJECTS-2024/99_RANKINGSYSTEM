@@ -126,7 +126,7 @@
                         <a href="/login">LOGIN</a>
                     </li>
                     <li class="item">
-                        <a href="/user/join">JOIN</a>
+                        <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">JOIN</a>
                     </li>
                 </th:block>
 
@@ -160,6 +160,82 @@
         </div>
          -->
     </div>
+
+
+
+        <!-- 오프캔버스    -->
+
+<!--        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>-->
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header" >
+                <h4 id="offcanvasRightLabel" >회원가입</h4>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                    <div class="join_block">
+                        <div class="header">
+
+                        </div>
+                        <div class="body">
+                            <form  class="joinform"  name="joinform" action="/user/join" method="post" >
+                                <div class="mt-2 mb-2">
+                                    <label>이메일계정</label>&nbsp;&nbsp;
+                                    <span th:text="${username}" style="font-size:0.7rem;" class="username_msg"></span>
+                                    <div style="display:flex;">
+                                        <input name="username" class="form-control username"  placeholder="이메일 계정 입력" type="email" required>
+                                        <a href="javascript:void(0)"  class="btn btn-secondary email_auth_btn" style="width:80px;margin-left:5px;">확인</a>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <label>패스워드</label>&nbsp;&nbsp;<span th:text="${password}"  style="font-size:0.7rem;color:orange;"></span>
+                                    <input type="password" name="password" class="form-control" placeholder="패스워드 입력">
+                                </div>
+                                <div class="mb-2">
+                                    <label>패스워드 확인</label>&nbsp;&nbsp;<span th:text="${repassword}"  style="font-size:0.7rem;color:orange;"></span>
+                                    <input type="password" name="repassword" class="form-control" placeholder="패스워드 다시입력">
+                                </div>
+                                <div class="mb-2">
+                                    <label>이름</label>&nbsp;&nbsp;<span th:text="${nickname}"  style="font-size:0.7rem;color:orange;"></span>
+                                    <input type="text" name="nickname" class="form-control" placeholder="이름을 입력하세요">
+                                </div>
+                                <div class="mb-2">
+                                    <label>연락처</label>  <span th:text="${phone}"  style="font-size:0.7rem;color:orange;"></span>
+                                    <div style="display:flex;">
+                                        <input name="phone" class="form-control" placeholder="- 제외하고 입력">
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <label>우편번호 검색</label>
+                                    <div style="display:flex;">
+                                        <input name="zipcode" class="form-control zipcode"  placeholder="우편번호 입력">
+                                        <a href="javascript:void(0)"  class="btn btn-secondary search_addr_btn" style="width:80px;margin-left:5px;">검색</a>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <label>기본 주소</label>
+                                    <input name="addr1" class="form-control addr1"  placeholder="기본주소 입력">
+                                </div>
+                                <div class="mb-2">
+                                    <label>상세 주소</label>
+                                    <input name="addr2" class="form-control" placeholder="상세주소 입력">
+                                </div>
+                                <div class="mb-2">
+                                    <button class="btn btn-primary w-100 join_btn">가입요청</button>
+                                </div>
+
+                                <div class="mb-2">
+                                    <button  class="btn btn-secondary w-100">-</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+
+
 </th:block>
 </body>
 </html>

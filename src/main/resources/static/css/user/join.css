@@ -1,24 +1,24 @@
-main>section>.join_block{
-    width : 400px;
-    margin:50px auto;
+.join_block{
+    width : 300px;
+    margin:0px auto;
 }
-main>section>.join_block label{
+.join_block label{
     font-size : .8rem;
 }
 
 
 
 /**/
-.send-email>.sendEmailIdForm{
+.sendEmailIdForm{
    display:flex;
    justify-content : center;
    align-items : center;
 
 }
-.send-email>.sendEmailIdForm>*{
+.sendEmailIdForm>*{
     margin: 5px;
 }
-.send-email>.sendEmailIdForm a{
+.sendEmailIdForm a{
     width : 80px;
 }
 

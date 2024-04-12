@@ -33,7 +33,8 @@
         <div class="body">
           <form  class="joinform"  name="joinform" action="/user/join" method="post" >
             <div class="mt-2 mb-2">
-              <label>이메일계정</label>&nbsp;&nbsp;<span th:text="${username}" style="font-size:0.7rem;" class="username_msg"></span>
+              <label>이메일계정</label>&nbsp;&nbsp;
+              <span th:text="${username}" style="font-size:0.7rem;" class="username_msg"></span>
 
               <div style="">
                 <input name="username" class="form-control username"  placeholder="이메일 계정 입력" type="email" required>
