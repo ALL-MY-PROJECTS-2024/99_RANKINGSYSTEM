@@ -1,0 +1,48 @@
+.join_block{
+    width : 300px;
+    margin:0px auto;
+}
+.join_block label{
+    font-size : .8rem;
+}
+
+
+
+/**/
+.sendEmailIdForm{
+   display:flex;
+   justify-content : center;
+   align-items : center;
+
+}
+.sendEmailIdForm>*{
+    margin: 5px;
+}
+.sendEmailIdForm a{
+    width : 80px;
+}
+
+
+
+.emailCodeForm>div{
+        display:flex;
+        justify-content : center;
+        align-items : center;
+}
+
+
+.emailCodeForm>div>*{
+    margin: 5px;
+}
+.emailCodeForm a{
+    width : 80px;
+}
+
+.hidden{
+    display:none;
+}
+
+
+.hide {
+    display: none;
+}

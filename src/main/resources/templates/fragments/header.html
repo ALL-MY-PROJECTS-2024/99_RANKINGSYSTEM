@@ -40,12 +40,12 @@
 
                 <th:block class="" sec:authorize="isAuthenticated()" >
                     <li class="item">
-                        <a method="post" href="/user/myinfo">나의정보</a>
+                        <a method="post" href="/user/myinfo">MYINFO</a>
                     </li>
 
                     <li class="item">
                         <form method="post" action="/logout">
-                            <button  class="" >로그아웃</button>
+                            <button  class="" >LOGOUT</button>
                         </form>
                     </li>
                 </th:block>
@@ -148,18 +148,17 @@
 
 
         <!-- 오프캔버스 - 회원가입   -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width:500px;">
             <div class="offcanvas-header" >
-                <h4 id="offcanvasRightLabel" >회원가입</h4>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                    <div class="join_block">
+                    <div class="join_block" style="width:400px;margin:0 auto;">
                         <div class="header">
-
+                            <h2 id="offcanvasRightLabel" >회원가입</h2>
                         </div>
-                        <div class="body">
-                            <form  class="joinform"  name="joinform" action="/user/join" method="post" >
+                        <div class="body" style="width:100%;padding:10px;">
+                            <form  class="joinform"  name="joinform" action="/user/join" method="post" onsubmit="return false" >
                                 <div class="mt-2 mb-2">
                                     <label>이메일계정</label>&nbsp;&nbsp;
                                     <span th:text="${username}" style="font-size:0.7rem;" class="username_msg"></span>
@@ -169,19 +168,19 @@
                                     </div>
                                 </div>
                                 <div class="mb-2">
-                                    <label>패스워드</label>&nbsp;&nbsp;<span th:text="${password}"  style="font-size:0.7rem;color:orange;"></span>
-                                    <input type="password" name="password" class="form-control" placeholder="패스워드 입력">
+                                    <label>패스워드</label>&nbsp;&nbsp;<span th:text="${password}"  style="font-size:0.7rem;color:orange;" class="password_msg"></span>
+                                    <input type="text" name="password" class="form-control" placeholder="패스워드 입력">
                                 </div>
                                 <div class="mb-2">
-                                    <label>패스워드 확인</label>&nbsp;&nbsp;<span th:text="${repassword}"  style="font-size:0.7rem;color:orange;"></span>
-                                    <input type="password" name="repassword" class="form-control" placeholder="패스워드 다시입력">
+                                    <label>패스워드 확인</label>&nbsp;&nbsp;<span th:text="${repassword}"  style="font-size:0.7rem;color:orange;"  class="repassword_msg"></span>
+                                    <input type="text" name="repassword" class="form-control" placeholder="패스워드 다시입력">
                                 </div>
                                 <div class="mb-2">
-                                    <label>이름</label>&nbsp;&nbsp;<span th:text="${nickname}"  style="font-size:0.7rem;color:orange;"></span>
+                                    <label>이름</label>&nbsp;&nbsp;<span th:text="${nickname}"  style="font-size:0.7rem;color:orange; " class="nickname_msg"></span>
                                     <input type="text" name="nickname" class="form-control" placeholder="이름을 입력하세요">
                                 </div>
                                 <div class="mb-2">
-                                    <label>연락처</label>  <span th:text="${phone}"  style="font-size:0.7rem;color:orange;"></span>
+                                    <label>연락처</label>  <span th:text="${phone}"  style="font-size:0.7rem;color:orange;" class="phone_msg"></span>
                                     <div style="display:flex;">
                                         <input name="phone" class="form-control" placeholder="- 제외하고 입력">
                                     </div>
@@ -217,13 +216,18 @@
         </div>
 
 
-        <!-- 모달 - login   -->
+        <!--
+        모달 login
+        -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
 
                     <div class="modal-body">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div style="text-align:right;">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
                             <main>
                                 <section>
                                     <div>
@@ -237,10 +241,10 @@
                                                 </div>
                                             </div>
                                             <div class="item">
-                                                <input type="text" class="form-control" placeholder="아이디를 입력하세요" name="username">
+                                                <input type="text" class="form-control w-100" placeholder="아이디를 입력하세요" name="username">
                                             </div>
                                             <div class="item">
-                                                <input type="password"  class="form-control"  placeholder="패스워드를 입력하세요" name="password">
+                                                <input type="password"  class="form-control w-100"  placeholder="패스워드를 입력하세요" name="password">
                                             </div>
                                             <div class="item submenu">
                                                 <div>
@@ -255,10 +259,6 @@
                                             <div class="item">
                                                 <label for=""></label>
                                                 <button class="btn btn-primary w-100">로그인</button>
-                                            </div>
-                                            <div class="item">
-                                                <label for=""></label>
-                                                <a href="/user/join" class="btn btn-secondary w-100" >회원가입</a>
                                             </div>
                                         </form>
                                     </div>
