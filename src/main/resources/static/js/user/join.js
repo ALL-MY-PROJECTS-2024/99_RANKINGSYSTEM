@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
         var decodedCookie = decodeURIComponent(document.cookie);
         // 쿠키 이름을 검색할 문자열 생성
         var cookieString = searchCookieName + "=";
-        // 현재 모든 쿠키 가져오기
-        var decodedCookie = decodeURIComponent(document.cookie);
         // 쿠키를 ; 로 분할하여 배열로 만듭니다.
         var cookieArray = decodedCookie.split(';');
         // 모든 쿠키에 대해 반복
@@ -62,8 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
                                       location.reload();
                               }
 
-
-
                   })
                  .catch(err=>{console.log(err);});
 
@@ -83,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
         //------------------------------
         //이메일 전송 버튼 클릭이벤트
         //------------------------------
+
         const  email_req = document.querySelector('.email_req');
         email_req.addEventListener('click', function(){
 
@@ -185,3 +182,73 @@ search_addr_btn.addEventListener('click',function(){
     }).open();
 
 });
+
+//-------------------------------------------------------------------------
+//VALIDATION CHECK BY JAVASCRIPT
+//-------------------------------------------------------------------------
+//ID
+elInputUsername.onkeyup = function () {
+    // 값을 입력한 경우
+    if (elInputUsername.value.length !== 0) {
+        // 영어 또는 숫자 외의 값을 입력했을 경우
+        if(onlyNumberAndEnglish(elInputUsername.value) === false) {
+            elSuccessMessage.classList.add('hide');
+            elFailureMessage.classList.add('hide');
+            elFailureMessageTwo.classList.remove('hide'); // 영어 또는 숫자만 가능합니다
+        }
+        // 글자 수가 4~12글자가 아닐 경우
+        else if(idLength(elInputUsername.value) === false) {
+            elSuccessMessage.classList.add('hide'); // 성공 메시지가 가려져야 함
+            elFailureMessage.classList.remove('hide'); // 아이디는 4~12글자이어야 합니다
+            elFailureMessageTwo.classList.add('hide'); // 실패 메시지2가 가려져야 함
+        }
+        // 조건을 모두 만족할 경우
+        else if(idLength(elInputUsername.value) || onlyNumberAndEnglish(elInputUsername.value)) {
+            elSuccessMessage.classList.remove('hide'); // 사용할 수 있는 아이디입니다
+            elFailureMessage.classList.add('hide'); // 실패 메시지가 가려져야 함
+            elFailureMessageTwo.classList.add('hide'); // 실패 메시지2가 가려져야 함
+        }
+    }
+        // 값을 입력하지 않은 경우 (지웠을 때)
+    // 모든 메시지를 가린다.
+    else {
+        elSuccessMessage.classList.add('hide');
+        elFailureMessage.classList.add('hide');
+        elFailureMessageTwo.classList.add('hide');
+    }
+}
+//패스워드
+elInputPassword.onkeyup = function () {
+
+    // console.log(elInputPassword.value);
+    // 값을 입력한 경우
+    if (elInputPassword.value.length !== 0) {
+        if(strongPassword(elInputPassword.value)) {
+            elStrongPasswordMessage.classList.add('hide'); // 실패 메시지가 가려져야 함
+        }
+        else {
+            elStrongPasswordMessage.classList.remove('hide'); // 실패 메시지가 보여야 함
+        }
+    }
+        // 값을 입력하지 않은 경우 (지웠을 때)
+    // 모든 메시지를 가린다.
+    else {
+        elStrongPasswordMessage.classList.add('hide');
+    }
+};
+//비밀번호 확인
+elInputPasswordRetype.onkeyup = function () {
+
+    // console.log(elInputPasswordRetype.value);
+    if (elInputPasswordRetype.value.length !== 0) {
+        if(isMatch(elInputPassword.value, elInputPasswordRetype.value)) {
+            elMismatchMessage.classList.add('hide'); // 실패 메시지가 가려져야 함
+        }
+        else {
+            elMismatchMessage.classList.remove('hide'); // 실패 메시지가 보여야 함
+        }
+    }
+    else {
+        elMismatchMessage.classList.add('hide'); // 실패 메시지가 가려져야 함
+    }
+};

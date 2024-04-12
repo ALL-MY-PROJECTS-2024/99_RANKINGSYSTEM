@@ -5,34 +5,29 @@ a {
     color : gray;
 }
 
-body{
+/*body*/
+.modal-body
+{
+    width : 100%;
+    padding : 15px;
 
-    background-image : url("/assets/bg_01.jpg");
-    background-repeat : no-repeat;
-    background-position:center;
-    background-size : cover;
-    background-color: rgba(255, 255, 255);
+    /*background-image : url("/assets/bg_01.jpg");*/
+    /*background-repeat : no-repeat;*/
+    /*background-position:center;*/
+    /*background-size : cover;*/
+    /*background-color: rgba(255, 255, 255,0.5);*/
 }
 
-main>section{
-
-    height : 100vh;
-
-    display:flex;
+.modal-body main>section {
+    display: flex;
     justify-content: center;
     align-items: center;
-
-
-
-
 }
 
-
-main>section>div{
+.modal-body  main>section>div{
 
     background-color : white;
-    width:400px;
-   
+
     /* border : 1px solid; */
     margin:0px     auto;
 
@@ -46,20 +41,17 @@ main>section>div{
 
     /*box-shadow : 5px 5px 5px lightgray;*/
     color : gray;
-
     position:relative;
-    top:-50px;
-
 }
 
-main>section>div>form{
+.modal-body  main>section>div>form{
     width:100%;
 }
 
-main>section>div>form ::placeholder{
+.modal-body  main>section>div>form ::placeholder{
     font-size : .8rem;
 }
-main>section>div .item.submenu{
+.modal-body  main>section>div .item.submenu{
     display:flex;
     font-size : .8rem;
     justify-content: space-between;
@@ -76,30 +68,30 @@ main>section>div .item.image{
     text-align: center;
 }
 */
-main>section>div .item.title{
+.modal-body  main>section>div .item.title{
     text-align: center;
 }
-main>section>div .item{
+.modal-body  main>section>div .item{
     display:flex;
     flex-direction: column;
     margin : 10px;
     padding : 5px;
 }
-main>section>div .item.image{
+.modal-body  main>section>div .item.image{
 
 }
-main>section>div .item img{
+.modal-body  main>section>div .item img{
     margin-bottom : 30px;
 
 }
 
 
 
-main>section>div .item>label{
+.modal-body  main>section>div .item>label{
     font-size : .8rem;
     margin-bottom:3px;
     color:black;
 }
-main>section>div .item>input{
+.modal-body  main>section>div .item>input{
     width:100%;
 }

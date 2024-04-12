@@ -123,7 +123,7 @@
 
                 <th:block class="top-header-menu" sec:authorize="!isAuthenticated()" >
                     <li class="item">
-                        <a href="/login">LOGIN</a>
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">LOGIN</a>
                     </li>
                     <li class="item">
                         <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">JOIN</a>
@@ -141,32 +141,13 @@
                         </form>
                     </li>
                 </th:block>
-
-
-                <!--                <li>-->
-                <!--                    <a href="">-->
-                <!--                        <span class="material-symbols-outlined">MENU</span>-->
-                <!--                    </a>-->
-                <!--                </li>-->
-
-                <!--                -->
             </ul>
         </div>
-        <!--
-        <div class="right">
-            <a href="/index.html">
-               <img src="assets/top-header-left.jpg" alt="">
-            </a>
-        </div>
-         -->
     </div>
 
 
 
-        <!-- 오프캔버스    -->
-
-<!--        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>-->
-
+        <!-- 오프캔버스 - 회원가입   -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header" >
                 <h4 id="offcanvasRightLabel" >회원가입</h4>
@@ -236,6 +217,60 @@
         </div>
 
 
+        <!-- 모달 - login   -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <main>
+                                <section>
+                                    <div>
+                                        <form action="/login" method="post" >
+                                            <div class="item image">
+
+                                            </div>
+                                            <div class="item title">
+                                                <div class="logo">
+                                                    <img src="/assets/logo.jpg" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <input type="text" class="form-control" placeholder="아이디를 입력하세요" name="username">
+                                            </div>
+                                            <div class="item">
+                                                <input type="password"  class="form-control"  placeholder="패스워드를 입력하세요" name="password">
+                                            </div>
+                                            <div class="item submenu">
+                                                <div>
+                                                    <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me">
+                                                    <label for="rememberMe">로그인 상태 유지</label>
+                                                </div>
+                                                <div>
+                                                    <a href="/user/confirmId">아이디 분실</a> |
+                                                    <a href="/user/confirmPw">패스워드 분실</a>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <label for=""></label>
+                                                <button class="btn btn-primary w-100">로그인</button>
+                                            </div>
+                                            <div class="item">
+                                                <label for=""></label>
+                                                <a href="/user/join" class="btn btn-secondary w-100" >회원가입</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </section>
+                            </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </th:block>
+
+
 </body>
 </html>
