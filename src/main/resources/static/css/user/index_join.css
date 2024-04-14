@@ -206,6 +206,10 @@
     color : white;
     border-radius: 5px;
     background-color: darkcyan;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+
 }
 .email_code a{
 
@@ -222,8 +226,28 @@
 
 
 
-.hidden{
+.hide_bg{
     display:none;
+}
+
+.offcanvas{
+
+}
+.join_block_bg{
+    position : absolute;
+    left : 0px;
+    top : 0px;
+    height : 100vh;
+    width : 100%;
+    display:flex;
+    justify-content:center;
+    align-items : center;
+
+    background-color : white;
+    z-index : 1;
+    opacity : 0.5;
+
+    display: none;
 }
 
 

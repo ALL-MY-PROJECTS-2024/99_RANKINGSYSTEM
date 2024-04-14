@@ -90,6 +90,11 @@ email_auth_btn.addEventListener("click",function(){
     }
     else
     {
+
+      //스피너 동작
+      const join_block_bg = document.querySelector('.join_block_bg');
+      join_block_bg.style.display='flex';
+
       username_msg.innerHTML="";
 
         //서버에 요청
@@ -99,6 +104,8 @@ email_auth_btn.addEventListener("click",function(){
                     //인증 성공시에
                     const email_auth_block = document.querySelector(".email_auth_block");
                     email_auth_block.style.display = "flex";
+
+                    join_block_bg.style.display='none';
             })
             .catch(err=>{console.log(err);});
 
@@ -113,6 +120,11 @@ email_auth_btn.addEventListener("click",function(){
 //---------------------------------------------
 const emailCodeForm_btn = document.querySelector('.emailCodeForm_btn');
         emailCodeForm_btn.addEventListener('click', function(){
+
+
+                const join_block_bg = document.querySelector('.join_block_bg');
+                join_block_bg.style.display='flex';
+
 
                 const username = document.joinform.username.value;
                 const emailCode = document.querySelector('.email_code').value;
@@ -132,7 +144,7 @@ const emailCodeForm_btn = document.querySelector('.emailCodeForm_btn');
                                         const email_auth_block = document.querySelector(".email_auth_block");
                                         email_auth_block.style.display = "none";
 
-
+                                     join_block_bg.style.display='none';
                               }else{
                                       //인증X -> 인증이 안된 내용을 표시
                                       alert('이메일 인증 실패!');
