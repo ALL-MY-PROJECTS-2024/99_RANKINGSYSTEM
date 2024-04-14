@@ -229,7 +229,32 @@
             </div>
         </div>
 
+            <script>
 
+
+                const search_addr_btn = document.querySelector('.search_addr_btn');
+                search_addr_btn.addEventListener('click',function(){
+                    new daum.Postcode({
+                        oncomplete: function(data) {
+                            console.log(data);
+                            const zipcode = document.querySelector('.zipcode');
+                            const addr1 = document.querySelector('.addr1');
+
+                            if(data.userSelectedType==='R')
+                            {
+                                addr1.value = data.roadAddress;
+                            }
+                            else
+                            {
+                                addr1.value = data.jibunAddress;
+                            }
+                            zipcode.value=data.zonecode;
+
+                        }
+                    }).open();
+
+                });
+            </script>
         <!--
         모달 login
         -->
