@@ -155,11 +155,13 @@
             <div class="offcanvas-body">
                     <div class="join_block" style="width:400px;margin:0 auto;">
                         <div class="header">
-                            <h2 id="offcanvasRightLabel" >회원가입</h2>
+                            <h3 id="offcanvasRightLabel" >회원가입</h3>
+                            <div class="underline"></div>
+
                         </div>
                         <div class="body" style="width:100%;padding:10px;">
                             <form  class="joinform"  name="joinform" action="/user/join" method="post" onsubmit="return false" >
-                                <div class="mt-2 mb-2">
+                                <div class="mt-1 mb-1">
                                     <label>이메일계정</label>&nbsp;&nbsp;
                                     <span th:text="${username}" style="font-size:0.7rem;" class="username_msg"></span>
                                     <div style="display:flex;position:relative;">
@@ -175,41 +177,41 @@
 
                                     </div>
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-1">
                                     <label>패스워드</label>&nbsp;&nbsp;<span th:text="${password}"  style="font-size:0.7rem;color:orange;" class="password_msg"></span>
                                     <input type="password" name="password" class="form-control" placeholder="패스워드 입력">
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-1">
                                     <label>패스워드 확인</label>&nbsp;&nbsp;<span th:text="${repassword}"  style="font-size:0.7rem;color:orange;"  class="repassword_msg"></span>
                                     <input type="password" name="repassword" class="form-control" placeholder="패스워드 다시입력">
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-1">
                                     <label>이름</label>&nbsp;&nbsp;<span th:text="${nickname}"  style="font-size:0.7rem;color:orange; " class="nickname_msg"></span>
                                     <input type="text" name="nickname" class="form-control" placeholder="이름을 입력하세요">
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-1">
                                     <label>연락처</label>  <span th:text="${phone}"  style="font-size:0.7rem;color:orange;" class="phone_msg"></span>
                                     <div style="display:flex;">
                                         <input name="phone" class="form-control" placeholder="- 제외하고 입력">
                                     </div>
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-1">
                                     <label>우편번호 검색</label>
                                     <div style="display:flex;">
                                         <input name="zipcode" class="form-control zipcode"  placeholder="우편번호 입력">
                                         <a href="javascript:void(0)"  class="btn btn-secondary search_addr_btn" style="width:80px;margin-left:5px;">검색</a>
                                     </div>
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-1">
                                     <label>기본 주소</label>
                                     <input name="addr1" class="form-control addr1"  placeholder="기본주소 입력">
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-1">
                                     <label>상세 주소</label>
                                     <input name="addr2" class="form-control" placeholder="상세주소 입력">
                                 </div>
-                                <div class="mb-2">
-                                    <button class="btn btn-primary w-100 join_btn">가입요청</button>
+                                <div class="mt-1 join_btn_block">
+                                    <button class=" w-100 join_btn">가입요청</button>
                                 </div>
 
                             </form>
