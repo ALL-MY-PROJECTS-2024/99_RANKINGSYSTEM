@@ -43,8 +43,15 @@ imageSubButtonEls.forEach(el=>{
 })
 
 
+//
+const musicSubButtonEls = document.querySelectorAll('.music_body .swiper-slide a');
+let subCategoryBodyMusicTitleEl = document.querySelector('.music_body .subCategoryBody .title');
 
-
-
+musicSubButtonEls.forEach(el=>{
+    el.addEventListener('click',function(){
+        console.log(el.innerHTML);
+        subCategoryBodyMusicTitleEl.innerHTML=el.innerText;
+    })
+})
 
 

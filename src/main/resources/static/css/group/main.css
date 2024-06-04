@@ -87,7 +87,7 @@ section.group-block .body .swiper-wrapper{
     align-items : center;
 }
 section.group-block .body .swiper-wrapper .swiper-slide{
-    width : 150px;
+    width : 7.813vw;
     height : 55px;
     display:flex;
     justify-content : center;
@@ -103,13 +103,14 @@ section.group-block .body .swiper-wrapper .swiper-slide:last-child{
 
 section.group-block .body .swiper-wrapper .swiper-slide a{
     display:block;
-    width : 150px;
+    width : 7.813vw;
     height : 55px;
     border : 1px solid;
     border-radius:5px;
     display:flex;
     justify-content : center;
     align-items : center;
+    font-size : 1vw;;
 }
 
 section.group-block .body .swiper {
