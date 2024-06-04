@@ -104,7 +104,7 @@ section.content_block *{
 }
 section.content_block{}
 section.content_block>.head{
-    height : 80px;
+    height : 8vh;
     display:flex;
     align-items : center;
     justify-content : center;

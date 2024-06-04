@@ -351,5 +351,12 @@ public class UserController {
     }
 
 
+    @GetMapping("/favorite")
+    public void favorite(){
+        log.info("GET /user/favorite");
+
+    }
+
+
 
 }

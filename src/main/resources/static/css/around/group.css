@@ -2,7 +2,7 @@
 
 section.content_block{}
 section.group-block>.head{
-    height : 80px;
+    height : 8vh;
     display:flex;
     align-items : center;
     justify-content : center;
@@ -140,6 +140,16 @@ section.group-block .body .swiper .swiper-button-next{
 section.group-block .body .swiper .swiper-button-prev::after,
 section.group-block .body .swiper .swiper-button-next::after{
     content : '';
+}
+
+
+.subCategoryBody{
+    height :800px;
+    border : 1px solid;
+    width : 100%;
+
+    padding : 10px;
+
 }
 
 

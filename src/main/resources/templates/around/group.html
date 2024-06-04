@@ -18,10 +18,10 @@
 
 
     <!--    -->
-    <link rel="stylesheet" href="/css/group/main.css">
+    <link rel="stylesheet" href="/css/around/group.css">
 
-<!--    -->
-    <script src="/js/group/main.js" defer></script>
+    <!--    -->
+    <script src="/js/around/group.js" defer></script>
 
 
 </head>
@@ -32,8 +32,8 @@
     <!-- header   -->
     <th:block th:insert="fragments/header :: mainHeaderFragment" />
 
-    <!-- albumNav       -->
-    <th:block th:insert="fragments/nav ::albumNavFragment" />
+    <!-- nav       -->
+    <th:block th:insert="fragments/nav :: navFragment" />
 
 
     <main>
@@ -47,7 +47,12 @@
                                 <span class="material-symbols-outlined">home</span>
                             </a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">GROUP</li>
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="">둘러 보기</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">그룹</li>
                     </ol>
                 </nav>
             </div>
