@@ -1,1 +1,1 @@
-CREATE TABLE IF NOT EXISTS   persistent_logins (username varchar(64) not null, series varchar(64) primary key,token varchar(64) not null, last_used timestamp not null)
+insert ignore into user(username,password,role) values('user','$2a$10$fFHaNo7/UMh7rtp3LAjH0e2ZcoI2a7Ju.TUdWt.Nc52iWN1OkALkC','ROLE_USER')

@@ -40,6 +40,36 @@ main{
 
 }
 
+/* */
+.myinfoblock{
+    display:flex;
+    justify-content : space-between;
+    align-items : start;
+
+}
+.mymenu{
+    width : 300px;
+    height : 100vh;
+
+    border : 3px solid darkcyan;
+    padding : 15px;
+
+    display:flex;
+    justify-content : center;
+    align-items : start;
+}
+.mymenu>.menus{
+    width : 100%;
+}
+.mymenu>.menus>li{
+    border : 1px solid darkcyan;
+    margin : 5px;
+    width : 100%;
+    height :45px;
+    line-height : 45px;
+    text-align : center;
+}
+
 
 
 /**/

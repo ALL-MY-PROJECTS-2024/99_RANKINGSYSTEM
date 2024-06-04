@@ -99,23 +99,54 @@ const add_product_btn_el = document.querySelector('.add_album_btn');
 //---------------------------------------------------
 //MAINCAT -> SUBCAT 변경
 //---------------------------------------------------
-const mainCategoryEl = document.querySelector('.main_category');
-const subImageCatEl = document.querySelector('.sub_category.image-cat');
-const subMusicCatEl = document.querySelector('.sub_category.music-cat');
+//const mainCategoryEl = document.querySelector('.main_category');
+//const subImageCatEl = document.querySelector('.sub_category.image-cat');
+//const subMusicCatEl = document.querySelector('.sub_category.music-cat');
+//
+//mainCategoryEl.addEventListener('change',()=>{
+//
+//    console.log(mainCategoryEl.value);
+//
+//    if(mainCategoryEl.value == 'image'){
+//
+//        subImageCatEl.classList.remove('hidden');
+//        subMusicCatEl.classList.add('hidden');
+//
+//    }else if(mainCategoryEl.value == 'music'){
+//
+//        subImageCatEl.classList.add('hidden');
+//        subMusicCatEl.classList.remove('hidden');
+//    }
+//
+//})
 
-mainCategoryEl.addEventListener('change',()=>{
+//---------------------------------------------------
+//이미지 / 음악  라벨 변경시 효과 적용
+//---------------------------------------------------
+const imagebtn = document.querySelector('.content_block>.head>div:nth-child(1) label');
+const musicbtn = document.querySelector('.content_block>.head>div:nth-child(2) label');
 
-    console.log(mainCategoryEl.value);
+const imagebody = document.querySelector('.content_block>.body .image_body');
+const musicbody = document.querySelector('.content_block>.body .music_body');
 
-    if(mainCategoryEl.value == 'image'){
 
-        subImageCatEl.classList.remove('hidden');
-        subMusicCatEl.classList.add('hidden');
+imagebtn.addEventListener('click',function(){
+    console.log("imagebtn clicked..");
 
-    }else if(mainCategoryEl.value == 'music'){
+    imagebody.classList.remove('hidden');
+    musicbody.classList.add('hidden');
 
-        subImageCatEl.classList.add('hidden');
-        subMusicCatEl.classList.remove('hidden');
-    }
+    imagebtn.style.opacity="1";
+    musicbody.style.opacity=".8";
 
 })
+musicbtn.addEventListener('click',function(){
+    console.log("musicbtn clicked..");
+    imagebody.classList.add('hidden');
+    musicbody.classList.remove('hidden');
+
+    imagebtn.style.opacity=".8";
+    musicbtn.style.opacity="1";
+})
+
+
