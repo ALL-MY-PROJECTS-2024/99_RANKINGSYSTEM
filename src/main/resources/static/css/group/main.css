@@ -50,12 +50,95 @@ section.group-block>.body{
 
 section.group-block>.body>.image_body,
 section.group-block>.body>.music_body{
-    height : 100%;
     padding : 20px;
-    padding-top:50px;
+
     display:flex;
     justify-content : space-evenly;
     align-items : start;
     /*border : 1px solid darkcyan;*/
     border-top : 0px;
+    flex-direction:column;
 }
+
+/**/
+
+section.group-block .body{}
+section.group-block .body swiper-wrapper{
+   display:flex !important;
+   justify-content : left !important;
+   align-items : center !important;
+
+}
+section.group-block .body .swiper{
+    height : 100px;
+    width : 100%;
+}
+section.group-block .body .swiper-wrapper{
+    height : 100px;
+    width : 100%;
+    position:relative;
+    left:0px;
+    top : 0px;
+
+    transition:.5s;
+
+    display:flex;
+    justify-content : space-between;
+    align-items : center;
+}
+section.group-block .body .swiper-wrapper .swiper-slide{
+    width : 150px;
+    height : 55px;
+    display:flex;
+    justify-content : center;
+    align-items : center;
+    margin : 10px;
+}
+section.group-block .body .swiper-wrapper .swiper-slide:first-child{
+    margin-left:0;
+}
+section.group-block .body .swiper-wrapper .swiper-slide:last-child{
+    margin-left:0;
+}
+
+section.group-block .body .swiper-wrapper .swiper-slide a{
+    display:block;
+    width : 150px;
+    height : 55px;
+    border : 1px solid;
+    border-radius:5px;
+    display:flex;
+    justify-content : center;
+    align-items : center;
+}
+
+section.group-block .body .swiper {
+    position:relative;
+}
+section.group-block .body .swiper .swiper-button-prev,
+section.group-block .body .swiper .swiper-button-next{
+    position:absolute;
+
+    top:43%;
+    color : royalblue;
+    width : 35px;
+    height: 35px;
+    border : 1px solid;
+    border-radius:50%;
+    padding : 2px;
+    font-size : 3rem;
+    background-color : white;
+}
+section.group-block .body .swiper .swiper-button-prev{
+    left :61.5vw;
+}
+section.group-block .body .swiper .swiper-button-next{
+    left : 63.5vw;
+}
+
+section.group-block .body .swiper .swiper-button-prev::after,
+section.group-block .body .swiper .swiper-button-next::after{
+    content : '';
+}
+
+

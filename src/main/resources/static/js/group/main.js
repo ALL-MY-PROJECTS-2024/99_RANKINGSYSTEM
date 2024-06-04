@@ -27,5 +27,24 @@ musicbtn.addEventListener('click',function(){
     imagebtn.style.opacity=".8";
     musicbtn.style.opacity="1";
 })
+//---------------------------------------------------
+//이미지 / 음악 서브카테고리 이벤트 처리
+//---------------------------------------------------
+
+const imageSubButtonEls = document.querySelectorAll('.image_body .swiper-slide a');
+let subCategoryBodyImgTitleEl = document.querySelector('.image_body .subCategoryBody .title');
+
+imageSubButtonEls.forEach(el=>{
+    el.addEventListener('click',function(){
+        console.log(el.innerHTML);
+
+        subCategoryBodyImgTitleEl.innerHTML=el.innerText;
+    })
+})
+
+
+
+
+
 
 
