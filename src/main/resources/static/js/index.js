@@ -76,4 +76,16 @@ const spyEls = document.querySelectorAll('section.scroll-spy');
             }
  })
 
-
+//----------------------
+// BOTTOM SWIPER
+//-----------------------
+       const imagesBlock = new Swiper('.images-block .swiper', {
+        loop: true,
+        centeredSlides: true,
+        speed: 7000,
+        autoplay: {
+            delay: 0,
+            disableOnInteraction: false
+        },
+        slidesPerView: 'auto',
+    });

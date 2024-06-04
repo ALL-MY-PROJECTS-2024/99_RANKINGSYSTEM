@@ -137,11 +137,12 @@ imagebtn.addEventListener('click',function(){
     musicbody.classList.add('hidden');
 
     imagebtn.style.opacity="1";
-    musicbody.style.opacity=".8";
+    musicbtn.style.opacity=".8";
 
 })
 musicbtn.addEventListener('click',function(){
     console.log("musicbtn clicked..");
+
     imagebody.classList.add('hidden');
     musicbody.classList.remove('hidden');
 
