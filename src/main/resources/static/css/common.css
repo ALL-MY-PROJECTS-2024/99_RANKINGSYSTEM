@@ -179,6 +179,7 @@ ul{
 
     display:flex;
     justify-content: space-between;
+
 }
 
 .wrapper>nav>.left{
@@ -277,11 +278,14 @@ ul{
 .wrapper>nav>.right>ul.mainmenu>li:hover>ul.submenu{
     display: block;
     opacity: 1;
+    position:relative;
+    z-index:9999;
+
 }
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu>li{
     line-height: 35px;
     /* border : 1px solid; */
-    position:relative;
+
 
 }
 
@@ -724,10 +728,12 @@ ul{
     UPDATE 코드
 */
 .updateContext{
+/*
     border : 1px solid red;
+*/
 }
 .updateContext::after{
-    content : 'UP-03/27';
+    content : '-ing';
     position:absolute;
     right:0;
     top:0;

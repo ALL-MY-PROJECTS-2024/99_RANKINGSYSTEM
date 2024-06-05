@@ -8,14 +8,16 @@
     <!--  link   -->
     <th:block th:insert="fragments/link :: linkFragment" />
 
+    <!-- Leaflet 라이브러리 가져오기(여기서는 1.9.4를 사용했지만, 원하는 버전으로 바꿔도 무방 -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    <!-- index.css-->
-    <link rel="stylesheet" href="/css/index.css">
-    <!-- join.css-->
-    <link rel="stylesheet" href="/css/user/index_join.css">
 
-    <link rel="stylesheet" href="/css/index_login.css">
+    <!--    -->
+    <link rel="stylesheet" href="/css/around/local.css">
 
+    <!--    -->
+    <script src="/js/around/local.js" defer></script>
 
 
 
@@ -47,15 +49,73 @@
                                 <span class="">둘러 보기</span>
                             </a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">국내 지도</li>
+                        <li class="breadcrumb-item active" aria-current="page">세계 지도</li>
                     </ol>
                 </nav>
             </div>
         </section>
 
 
-        <section class=" layout-5">
-            국내지도
+        <section class="layout-5 local-map-block">
+            <h2>국내 지도</h2>
+            <div id="map" ></div>
+
+
+            <div class="show-image-block">
+                <div class="images-block">
+
+                    <!-- Slider main container -->
+                    <div class="swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+
+                        </div>
+
+                        <!--                        -->
+                        <!--                        &lt;!&ndash; If we need navigation buttons &ndash;&gt;-->
+                        <!--                        <div class="swiper-button-prev">-->
+                        <!--                            <span class="material-symbols-outlined">arrow_left</span>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="swiper-button-next">-->
+                        <!--                            <span class="material-symbols-outlined">arrow_right</span>-->
+                        <!--                        </div>-->
+                        <!--                        -->
+                        <!--                        -->
+
+                    </div>
+                </div>
+            </div>
+
+
         </section>
 
     </main>
@@ -67,6 +127,7 @@
     </footer>
 
 </div>
+
 
 
 
