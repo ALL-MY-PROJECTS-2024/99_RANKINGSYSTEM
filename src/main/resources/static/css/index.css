@@ -14,7 +14,9 @@
         height:700px;
 
     }
-.banner .swiper>.swiper-wrapper{}
+.banner .swiper>.swiper-wrapper{
+   transition-timing-function: linear;
+}
 .banner .swiper>.swiper-wrapper>.swiper-slide{
 
     display:flex;
