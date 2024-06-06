@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
+
+
+    <!--  myinfo.css  -->
+    <link rel="stylesheet" href="/css/user/myinfo.css">
+
+
+
+</head>
+<body>
+
+
+    <div class="wrapper">
+
+        <!-- header   -->
+        <th:block th:insert="~{fragments/header :: headerFragment}" />
+
+        <!-- nav       -->
+        <th:block th:insert="~{fragments/nav :: albumNavFragment}" />
+
+
+
+        <main>
+
+            <section class="layout-5 breadcrumb-block">
+                <div class="">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">
+                                <span class="material-symbols-outlined">home</span>
+                            </a></li>
+                            <li class="breadcrumb-item active" aria-current="page">MY INFO</li>
+                        </ol>
+                    </nav>
+                </div>
+            </section>
+
+            <section class="myinfoblock layout-5">
+
+<!--                &lt;!&ndash; aside                &ndash;&gt;-->
+<!--                <th:block th:insert="fragments/myaside :: myasideFragment" />-->
+
+
+
+                <th:block th:insert="fragments/myaside :: myasideFragment" />
+
+
+
+                <div class="join_block">
+                    <div class="header" style="text-align:center;">
+                        <!-- title -->
+                        <h3 th:text="${#authentication.name}"></h3>
+                    </div>
+
+                    <div class="body">
+                        <div class="profileimage-block">
+                            <img src="https://img.freepik.com/free-photo/cute-puppy-sitting-in-grass-enjoying-nature-playful-beauty-generated-by-artificial-intelligence_188544-84973.jpg" alt="" />
+                        </div>
+
+                        <form class="mypageform" name="mypageform" action="" method="post"
+                              onsubmit="return false">
+                            <div>
+                                <label>이메일계정</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;"  class="username_msg"></span>
+                                <div style="display:flex;">
+                                    <input name="username" class="form-control username" placeholder="이메일 계정 입력" th:value="${dto.username}" readonly>
+                                </div>
+                            </div>
+                            <div>
+                                <label>이름</label>
+                                <input name="phone" class="form-control" th:value="${dto.nickname}" readonly>
+                            </div>
+                            <div>
+                                <label>연락처</label>
+                                <input name="phone" class="form-control" th:value="${dto.phone}" readonly>
+                            </div>
+                            <div>
+                                <label>우편번호</label>
+                                <div style="display:flex;">
+                                    <input name="zipcode" class="form-control zipcode" th:value="${dto.zipcode}" readonly>
+                                </div>
+                            </div>
+                            <div>
+                                <label>기본 주소</label>
+                                <input name="addr1" class="form-control addr1" th:value="${dto.addr1}" readonly>
+                            </div>
+                            <div class="me-2">
+                                <label>상세 주소</label>
+                                <input name="addr2" class="form-control" th:value="${dto.addr2}" readonly>
+                            </div>
+                            <div class="me-2">
+                                <a href="/user/myinfo/update" class="btn btn-success w-100">수정요청</a>
+                            </div>
+                            <div class="me-2">
+                                <a href="/" class="btn btn-secondary w-100">메인화면</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <footer>
+            <th:block th:insert="~{fragments/footer :: footerFragment}" />
+        </footer>
+
+    </div>
+
+
+
+
+
+</body>
+</html>

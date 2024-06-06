@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="fragments/link :: linkFragment" />
+
+
+    <!-- index.css-->
+    <link rel="stylesheet" href="/css/myinfo/confirm.css">
+
+    <!-- index.js   -->
+    <script src="/js/myinfo/confirm.js" defer> </script>
+
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="fragments/header :: mainHeaderFragment" />
+
+    <!-- nav       -->
+    <th:block th:insert="~{fragments/nav :: albumNavFragment}" />
+
+    <main>
+        <section class="banner">
+            <form action="/user/myinfo/confirm" method="post" style="width:500px;margin:50px auto;">
+
+                <div class="m-3" style="font-size : .7rem; color : orange;display:flex;align-items:center;">
+                    <span class="material-symbols-outlined" th:text="${icon}"></span> &nbsp;
+                    <span th:text="${message}"></span>
+                </div>
+                <div class="m-3">
+                    <label for="" class="mb-1">패스워드 입력 : </label>
+                    <input type="password" name="password" class="form-control"/>
+                </div>
+                <div class="m-3">
+                    <button  class="btn btn-primary w-100">입력</button>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="fragments/footer :: footerFragment" />
+    </footer>
+
+</div>
+
+
+
+
+</body>
+</html>

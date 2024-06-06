@@ -9,9 +9,21 @@
     <th:block th:insert="fragments/link :: linkFragment" />
 
 
-    <link rel="stylesheet" href="/css/myinfo/confirm.css">
+    <!-- index.css-->
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- join.css-->
+    <link rel="stylesheet" href="/css/user/index_join.css">
 
-    <script src="/js/myinfo/confirm.js" defer> </script>
+    <link rel="stylesheet" href="/css/index_login.css">
+
+
+    <!-- index.js   -->
+    <script src="/js/index.js" defer> </script>
+
+    <!-- join.js   -->
+    <script src="/js/user/index_join.js" defer> </script>
+
+
 
 
 </head>
@@ -23,7 +35,7 @@
     <th:block th:insert="fragments/header :: mainHeaderFragment" />
 
     <!-- nav       -->
-    <th:block th:insert="fragments/nav :: navFragment" />
+    <th:block th:insert="~{fragments/nav :: albumNavFragment}" />
 
     <main>
         <section class="banner">

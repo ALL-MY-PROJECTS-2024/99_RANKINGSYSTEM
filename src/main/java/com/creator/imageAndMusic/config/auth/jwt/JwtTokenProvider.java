@@ -79,17 +79,26 @@ public class JwtTokenProvider {
 
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         UserDto userDto = principalDetails.getUserDto();
-
+        System.out.println("JWT GENERATE TOKEN DTO : " + userDto);
         // Access Token 생성
         Date accessTokenExpiresIn = new Date(now + 60*5*1000);    // 60*5 초후 만료
         String accessToken = Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim("username",authentication.getName())             //정보저장
+                .claim("phone",userDto.getPhone())                      //정보저장
+                .claim("nickname",userDto.getNickname())                //정보저장
+                .claim("addr1",userDto.getAddr1())                      //정보저장
+                .claim("addr2",userDto.getAddr2())                      //정보저장
+                .claim("password",userDto.getPassword())                //정보저장
+                .claim("zipcode",userDto.getZipcode())                  //정보저장
+
                 .claim("auth", authorities)                             //정보저장
                 .claim("principal", authentication.getPrincipal())      //정보저장
                 .claim("credentials", authentication.getCredentials())  //정보저장
                 .claim("details", authentication.getDetails())          //정보저장
                 .claim("provider", userDto.getProvider())               //정보저장
+                .claim("providerId",userDto.getProviderId())             //정보저장
+
                 .claim("accessToken", principalDetails.getAccessToken())//정보저장
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS256)
@@ -197,13 +206,28 @@ public class JwtTokenProvider {
 //        .out.println("[JWTTOKENPROVIDER] principalDetails  : " + claims.get("principal"));
 
         String provider =  (String)claims.get("provider");
+        String providerId =  (String)claims.get("providerId");
         String password = (String)claims.get("password");
         String auth = (String)claims.get("auth");
         String oauthAccessToken = (String)claims.get("accessToken");
+        String phone = (String)claims.get("phone");
+        String zipcode = (String)claims.get("zipcode");
+        String addr1 = (String)claims.get("addr1");
+        String addr2 = (String)claims.get("addr2");
+        String nickname = (String)claims.get("nickname");
+
+
         UserDto userDto = new UserDto();
-        userDto.setProvider(provider);
         userDto.setUsername(username);
         userDto.setPassword(password);
+        userDto.setProvider(provider);
+        userDto.setProviderId(providerId);
+        userDto.setPhone(phone);
+        userDto.setAddr1(addr1);
+        userDto.setAddr2(addr2);
+        userDto.setZipcode(zipcode);
+        userDto.setNickname(nickname);
+
         userDto.setRole(auth);
 
         PrincipalDetails principalDetails = new PrincipalDetails();
@@ -211,6 +235,7 @@ public class JwtTokenProvider {
         principalDetails.setAccessToken(oauthAccessToken);   //Oauth AccessToken
 //        .out.println("[JWTTOKENPROVIDER] getAuthentication() principalDetails  : " + principalDetails);
 
+        System.out.println("JWT GETAUTHENTICATION DTO : " + userDto);
 
         //JWT + NO REMEMBERME
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =

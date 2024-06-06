@@ -1,6 +1,8 @@
 package com.creator.imageAndMusic.controller;
 
 
+import com.creator.imageAndMusic.config.auth.PrincipalDetails;
+import com.creator.imageAndMusic.config.auth.jwt.JwtProperties;
 import com.creator.imageAndMusic.config.auth.jwt.JwtTokenProvider;
 import com.creator.imageAndMusic.config.auth.jwt.TokenInfo;
 import com.creator.imageAndMusic.domain.dto.AlbumDto;
@@ -18,11 +20,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +40,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.swing.text.html.HTML;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -285,11 +293,6 @@ public class UserController {
 
 
 
-    @GetMapping("/myinfo")
-    public void func1(){
-          log.info("GET /user/myinfo..");
-
-    }
 
 
     @GetMapping("/album/main")
@@ -358,5 +361,133 @@ public class UserController {
     }
 
 
+//----------------------------------------------------------------
+//  MYINFO
+//----------------------------------------------------------------
+
+    private boolean isconfirmed = false;
+    private boolean ispasswordOk = false;
+    @GetMapping("/myinfo/read")
+    public String func1(@AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
+
+        if(!isconfirmed)
+            return "redirect:/user/myinfo/confirm";
+        UserDto userDto =  principalDetails.getUserDto();
+
+        model.addAttribute("dto",userDto);
+
+        log.info("GET /user/myinfo/read..dto" + userDto);
+        return "/user/myinfo/read";
+
+    }
+
+    @GetMapping("/myinfo/update")
+    public String update(@AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
+        if(!isconfirmed)
+            return "redirect:/user/myinfo/confirm";
+
+        UserDto userDto =  principalDetails.getUserDto();
+        model.addAttribute("dto",userDto);
+        log.info("GET /user/myinfo/update..");
+        ispasswordOk = false;
+        return "/user/myinfo/update";
+
+    }
+    @PostMapping("/myinfo/update")
+    public String update_post(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult, Authentication authentication,HttpServletResponse response, Model model){
+        log.info("POST /user/myinfo/update..userDto" + userDto);
+
+        if(!ispasswordOk){
+            model.addAttribute("oldpassword","패스워드 확인을 하지 않았습니다");
+            model.addAttribute("dto",userDto);
+            return "user/myinfo/update";
+        }
+
+        if(bindingResult.hasFieldErrors()){
+            for(FieldError error :bindingResult.getFieldErrors()){
+                log.info(error.getField() +" : " + error.getDefaultMessage());
+                model.addAttribute(error.getField(),error.getDefaultMessage());
+            }
+            model.addAttribute("dto",userDto);
+            return "user/myinfo/update";
+        }
+
+        boolean isUpdated =  userService.modifiedMyInfo(userDto,model);
+        if(!isUpdated){
+            model.addAttribute("dto",userDto);
+            return "user/myinfo/update";
+        }
+        else{
+            //--------------------------------------
+            //JWT TOKEN 변경 적용
+            //--------------------------------------
+            PrincipalDetails principalDetails = new PrincipalDetails();
+            principalDetails.setUserDto(userDto);
+
+            PrincipalDetails old = (PrincipalDetails)authentication.getPrincipal();
+            principalDetails.setAccessToken(old.getAccessToken());   //Oauth AccessToken
+
+            //JWT + NO REMEMBERME
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                    new UsernamePasswordAuthenticationToken(principalDetails, authentication.getCredentials(), authentication.getAuthorities());
+
+            TokenInfo tokenInfo = jwtTokenProvider.generateToken(usernamePasswordAuthenticationToken);
+            // 쿠키 생성
+            Cookie cookie = new Cookie(JwtProperties.COOKIE_NAME, tokenInfo.getAccessToken());
+            cookie.setMaxAge(JwtProperties.EXPIRATION_TIME); // 쿠키의 만료시간 설정
+            cookie.setPath("/");
+            response.addCookie(cookie);
+
+            //AUthentication 다시
+            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            //--------------------------------------
+        }
+
+        return "redirect:/user/myinfo/read";
+
+    }
+    @PostMapping("/myinfo/confirmPw")
+    public @ResponseBody ResponseEntity<String> confirm_pw(@RequestParam("password") String password,@AuthenticationPrincipal PrincipalDetails principalDetails){
+        log.info("POST /user/myinfo/confirmPw..password : " + password);
+        UserDto userDto =  principalDetails.getUserDto();
+
+        boolean isOk = userService.confirmIdPw(userDto.getUsername(),password);
+        if(isOk){
+            ispasswordOk = true;
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_GATEWAY);
+
+    }
+    @GetMapping("/myinfo/delete")
+    public void delete(){
+        log.info("GET /user/myinfo/delete..");
+    }
+
+
+    @GetMapping("/myinfo/confirm")
+    public void myinfoConfirm(){
+        log.info("GET /user/myinfo/confirm");
+    }
+    @PostMapping("/myinfo/confirm")
+    public String myinfoConfirm_post(@RequestParam("password") String password , @AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
+        log.info("GET /user/myinfo/confirm");
+        String username = principalDetails.getUserDto().getUsername();
+        boolean isok =  userService.confirmIdPw(username,password);
+        if(isok){
+            isconfirmed = true;
+            return "redirect:/user/myinfo/read";
+        }
+        isconfirmed = false;
+        model.addAttribute("icon","warning");
+        model.addAttribute("message","패스워드가 일치하지 않습니다.");
+        return "/user/myinfo/confirm";
+    }
+
+
+    @GetMapping("/image/upload")
+    public void f(){
+        log.info("");
+    }
 
 }

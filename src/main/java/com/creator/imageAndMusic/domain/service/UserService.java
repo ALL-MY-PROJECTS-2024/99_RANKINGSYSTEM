@@ -5,6 +5,7 @@ import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
 import com.creator.imageAndMusic.domain.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import java.io.IOException;
@@ -25,4 +26,10 @@ public interface UserService {
     User getUser(UserDto userDto);
 
     boolean removeAlbumFile(Long fileid);
+
+    boolean confirmIdPw(String username, String password);
+
+
+    @Transactional(rollbackFor = Exception.class)
+    boolean modifiedMyInfo(UserDto userDto, Model model);
 }

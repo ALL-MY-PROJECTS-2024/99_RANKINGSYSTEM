@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -296,6 +297,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean removeAlbumFile(Long fileid) {
 
         //삭제할 이미지파일정보
@@ -331,6 +333,44 @@ public class UserServiceImpl implements UserService {
 
 
 
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean confirmIdPw(String username, String password) {
+
+        Optional<User> userOp =  userRepository.findById(username);
+        if(userOp.isPresent()){
+            User user = userOp.get();
+           return  passwordEncoder.matches(password,user.getPassword());
+        }
+        return false;
+    }
+
+
+
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean modifiedMyInfo(UserDto userDto, Model model) {
+
+        if(!StringUtils.equals(userDto.getPassword(),userDto.getRepassword())){
+            model.addAttribute("password","패스워드가 일치하지 않습니다.");
+            model.addAttribute("repassword","패스워드가 일치하지 않습니다.");
+            return false;
+        }
+        User user = new User();
+        user.setUsername(userDto.getUsername());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setNickname(userDto.getNickname());
+        user.setPhone(userDto.getPhone());
+        user.setZipcode(userDto.getZipcode());
+        user.setAddr1(userDto.getAddr1());
+        user.setAddr2(userDto.getAddr2());
+        user.setRole("ROLE_USER");
+        userRepository.save(user);
+
+        return true;
     }
 
 }

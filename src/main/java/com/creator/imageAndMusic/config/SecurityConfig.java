@@ -73,6 +73,9 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/user/confirmId").permitAll();
                     authorize.requestMatchers("/user/confirmPw").permitAll();
 
+                    authorize.requestMatchers("/user/myinfo/**").hasRole("USER");
+
+
 
 
                     authorize.requestMatchers("/board/list").hasAnyRole("USER");
