@@ -377,7 +377,7 @@ public class UserController {
         model.addAttribute("dto",userDto);
 
         log.info("GET /user/myinfo/read..dto" + userDto);
-        return "/user/myinfo/read";
+        return "user/myinfo/read";
 
     }
 
@@ -390,7 +390,7 @@ public class UserController {
         model.addAttribute("dto",userDto);
         log.info("GET /user/myinfo/update..");
         ispasswordOk = false;
-        return "/user/myinfo/update";
+        return "user/myinfo/update";
 
     }
     @PostMapping("/myinfo/update")
@@ -481,7 +481,7 @@ public class UserController {
         isconfirmed = false;
         model.addAttribute("icon","warning");
         model.addAttribute("message","패스워드가 일치하지 않습니다.");
-        return "/user/myinfo/confirm";
+        return "user/myinfo/confirm";
     }
 
 
