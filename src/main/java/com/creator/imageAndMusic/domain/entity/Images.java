@@ -30,4 +30,8 @@ public class Images {
 
     private LocalDateTime createAt;
 
+    private double lat;
+    private double lng;
+
+
 }

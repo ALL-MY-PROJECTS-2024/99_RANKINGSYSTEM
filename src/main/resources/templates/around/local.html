@@ -16,8 +16,12 @@
     <!--    -->
     <link rel="stylesheet" href="/css/around/local.css">
 
-    <!--    -->
-    <script src="/js/around/local.js" defer></script>
+    <!--  MODEL 속성가져오기  -->
+    <script th:inline="javascript">
+        let fileList = [[${list}]]
+    </script>
+
+    <script src="/js/around/local.js" defer th:inline="javascript"></script>
 
 
 

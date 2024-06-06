@@ -1,7 +1,18 @@
 
 //---------------------------------------------------
+//좌표가져오기
 //---------------------------------------------------
+let lat = null;
+let lng = null;
 
+function fetchCoordinatesAndUse() {
+    window.navigator.geolocation.getCurrentPosition(function(position) {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        console.log("lat", lat, "lng", lng); // 여기서 좌표를 사용
+        // 여기서 좌표를 사용하여 필요한 작업을 수행합니다.
+    });
+}
 //---------------------------------------------------
 //---------------------------------------------------
 //---------------------------------------------------
@@ -59,8 +70,15 @@ uploadBoxEl.addEventListener('drop',function(e){
 });
 
 
+
+// 좌표 가져오기 및 사용하기
+fetchCoordinatesAndUse();
 const add_product_btn_el = document.querySelector('.add_album_btn');
         add_product_btn_el.addEventListener('click',function(){
+
+        //업로드 한위치에서의 좌표 가져오기
+        fetchCoordinatesAndUse();
+        console.log("lat",lat,"lng",lng)
 
 
         const username = document.albumform.username.value;
@@ -83,6 +101,8 @@ const add_product_btn_el = document.querySelector('.add_album_btn');
         formData.append('mainCategory',main_category);
         formData.append('subCategory',sub_category);
         formData.append('description',description);
+        formData.append('lat',lat);
+        formData.append('lng',lng);
 
         axios.post('/user/album/add',formData,{ headers: {'Content-Type' :'multipart/form-data' } } )
                 .then(res=>{

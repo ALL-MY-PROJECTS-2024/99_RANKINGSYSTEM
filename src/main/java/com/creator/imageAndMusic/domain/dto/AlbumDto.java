@@ -14,5 +14,7 @@ public class AlbumDto {
     private MultipartFile[] files;
     private int count;
     private int like;
+    private double lat;
+    private double lng;
 
 }

@@ -159,6 +159,9 @@ public class UserServiceImpl implements UserService {
         images.setDescription(dto.getDescription());
         images.setUsername(dto.getUsername());
         images.setCreateAt(LocalDateTime.now());
+        images.setLat(dto.getLat());
+        images.setLng(dto.getLng());
+
         imagesRepository.save(images);
 
         //저장 폴더 지정()

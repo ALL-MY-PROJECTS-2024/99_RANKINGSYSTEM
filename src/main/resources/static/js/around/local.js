@@ -1,3 +1,13 @@
+//----------------------------------------------------------------
+// M
+//----------------------------------------------------------------
+    console.log(fileList);
+    list = [];
+    fileList.forEach(el=>{
+        console.log(el);
+        list.push( { latlng:[el.images.lat,el.images.lng],popupContent:el.images.title });
+    })
+    console.log(list);
     //참고 : https://jh-tr.tistory.com/188#google_vignette
 
     // Leaflet 초기화
@@ -9,10 +19,8 @@
     }).addTo(map);
 
     // 다중 마커를 추가하고 각 마커에 팝업 설정
-    var markers = [
-        {latlng: [37.5729, 126.9794], popupContent: '서울특별시 종로구'},
-        {latlng: [37.5631, 126.9829], popupContent: '경복궁'}
-    ];
+
+    var markers = list;
 
     markers.forEach(function(markerInfo) {
         var marker = L.marker(markerInfo.latlng).addTo(map);
