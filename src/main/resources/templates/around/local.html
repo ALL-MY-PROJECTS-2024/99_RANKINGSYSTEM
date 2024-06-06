@@ -68,35 +68,10 @@
                     <div class="swiper">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
-                            <!-- Slides -->
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+
+                            <th:block th:each="info:${list}">
+                                <div class="swiper-slide"><a href=""><img th:src="@{${info.dir}+'/'+${info.filename}}"></a></div>
+                            </th:block>
 
                         </div>
 

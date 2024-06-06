@@ -30,8 +30,14 @@ public class AroundController {
         log.info("GET /around/group");
     }
     @GetMapping("/local")
-    public void local(){
+    public void local(Model model){
         log.info("GET /around/local");
+
+        List<ImagesFileInfo> list =  aroundService.getAllImages();
+        for(ImagesFileInfo info : list){
+            System.out.println(list);
+        }
+        model.addAttribute("list",list);
     }
     @GetMapping("/global")
     public void global(Model model){
