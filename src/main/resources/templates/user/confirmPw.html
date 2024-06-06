@@ -19,10 +19,12 @@
 
 <div class="wrapper ">
 
-    <header>
-        <!-- th:fragment     -->
+    <!-- header   -->
+    <th:block th:insert="~{fragments/header :: mainHeaderFragment}" />
 
-    </header>
+    <!-- nav       -->
+    <th:block th:insert="~{fragments/nav :: navFragment}" />
+
 
     <main class="container-xxl">
         <section>
@@ -63,6 +65,10 @@
 
         </section>
 
+        <!-- Footer        -->
+        <footer>
+            <th:block th:insert="~{fragments/footer :: footerFragment}" />
+        </footer>
     </main>
 </div>
 

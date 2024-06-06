@@ -56,3 +56,8 @@ section>#map{
 .show-image-block .images-block .swiper .swiper-slide:hover{
 
 }
+
+.show-image-block .images-block .swiper .swiper-slide img{
+    width :  100px;
+    height : 50px;
+}

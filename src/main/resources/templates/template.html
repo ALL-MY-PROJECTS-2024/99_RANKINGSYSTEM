@@ -6,7 +6,7 @@
     <title>Document</title>
 
     <!--  link   -->
-    <th:block th:insert="fragments/link :: linkFragment" />
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
 
 
     <link rel="stylesheet" href="/css/myinfo/confirm.css">
@@ -20,10 +20,10 @@
 <div class="wrapper">
 
     <!-- header   -->
-    <th:block th:insert="fragments/header :: mainHeaderFragment" />
+    <th:block th:insert="~{fragments/header :: mainHeaderFragment}" />
 
     <!-- nav       -->
-    <th:block th:insert="fragments/nav :: navFragment" />
+    <th:block th:insert="~{fragments/nav :: navFragment}" />
 
     <main>
         <section class="banner">
@@ -34,7 +34,7 @@
 
     <!-- Footer        -->
     <footer>
-        <th:block th:insert="fragments/footer :: footerFragment" />
+        <th:block th:insert="~{fragments/footer :: footerFragment}" />
     </footer>
 
 </div>
