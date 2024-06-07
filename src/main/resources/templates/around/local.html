@@ -74,7 +74,7 @@
                         <div class="swiper-wrapper">
 
                             <th:block th:each="info:${list}">
-                                <div class="swiper-slide"><a href=""><img th:src="@{${info.dir}+'/'+${info.filename}}"></a></div>
+                                <div class="swiper-slide"><a href=""><img th:src="@{${info.imagesFileInfo.dir}+'/'+${info.imagesFileInfo.filename}}"></a></div>
                             </th:block>
 
                         </div>

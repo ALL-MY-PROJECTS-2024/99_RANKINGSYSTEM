@@ -1,8 +1,6 @@
 .main-container{
 
-    display:flex;
-    justify-content : space-between;
-    align-items : center;
+
     padding : 10px;
 }
 .main-container>.left{
@@ -23,7 +21,7 @@
 }
 
 .main-container>.right{
-    width : 60vw;
+    width : 100%;
     height : 100vh;
     padding : 10px;
 
@@ -45,80 +43,93 @@
     border : 1px solid;
 
     display:flex;
-    justify-content:center;
-    align-items : center;
+    justify-content:start;
+    align-items : space-between;
     flex-wrap : wrap;
 
     overflow : auto;
 }
 .main-container>.right>.items>.item{
     margin : 10px;
-    border : 1px solid;
-    border-radius : 5px;
+
+
     width : 250px;
     height : 150px;
 
     position:relative;
+    opacity :.7;
+
+    padding : 10px;
+}
+.main-container>.right>.items>.item:hover{
+    opacity :1;
 
 }
-.main-container>.right>.items>.item>.count{
+.main-container>.right>.items>.item .count{
     width : 100%;
-    height : 15px;
+
+
     display:flex;
     justify-content: right;
     align-items: center;
-    border-radius : 5px 5px 0px 0px;
-    margin-bottom:10px;
 
-    position:absolute;
-    top:-17px;
-    font-size : .8rem;
-    color : black;
 
+    font-size : .7rem;
     opacity: 0;
+    color : white;
 
 }
 .main-container>.right>.items>.item:hover .count{
+    padding :2px 0;
     opacity: .8;
     z-index:7;
     transition:.5s;
 }
-.main-container>.right>.items>.item>.title{
-    padding : 5px;
-    position:absolute;
-    top:5px;
-    margin : 0 auto;
-    border : 1px solid ;
-    width : 100%;
-    height : 25px;
-
-    background-color : gray;
-    opacity : 0;
-
-    display:flex;
-    justify-content: space-between;
-    align-items : center;
-    border : 0px;
-    transition:.5s;
+.main-container>.right>.items>.item .title{
+   font-size : .8rem;
+   width : 100%:
+   position:absolute;
+   left:0px;
+   top:0px;
+   display:none;
 }
 .main-container>.right>.items>.item:hover .title{
-    opacity : .8;
-    z-index : 6;
+    display:block;
 }
-
-
-
-.main-container>.right>.items>.item>.title span{
+.main-container>.right>.items>.item .title span{
     color : white;
     font-size : .8rem;
 }
 
+.main-container>.right>.items>.item>.ranking-block{
+
+    height : 25px;
+
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index : 5;
+
+}
+.main-container>.right>.items>.item>.ranking-block>div{
+    width : 25px;
+    height : 25px;
+    background-color : black;
+    color : white;
+    display:flex;
+    justify-content: center;
+    align-items : center;
+    font-size : .8rem;
+}
+
+
 .main-container>.right>.items>.item .regdate{
 
-    font-size : .6rem;
+
+    font-size : .7rem;
     color :white;
 
-    background-color : gray;
+    margin-bottom : 2px;
     opacity : 0;
 
     border : 0px;
@@ -130,6 +141,7 @@
 .main-container>.right>.items>.item:hover .regdate{
     opacity : 1;
     z-index : 6;
+    border-top : 1px solid white;
 }
 .main-container>.right>.items>.item>.regdate>span{
 
@@ -157,32 +169,76 @@
 .main-container>.right>.items>.item>.image-block img{
     width : 200px;
     height : 130px;
-    border-radius:5px;
+
     object-fit : cover;
 }
 
-.main-container>.right>.items>.item>.contents{
+.main-container>.right>.items>.item .contents{
     width :100%;
-    padding : 5px;
-    position:absolute;
-    bottom:0px;
     display:flex;
     justify-content:space-between;
     align-items : center;
-    font-size : .7rem;
+
     z-index : 7;
+    margin-top : 5px;
+    color : white;
 }
-.main-container>.right>.items>.item>.contents .favorite{
-    color : gray;
+.main-container>.right>.items>.item:hover .contents{
+    border-top : 1px solid white;
+}
 
+ .main-container>.right>.items>.item .contents .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 300,
+          'GRAD' 0,
+          'opsz' 18;
+
+}
+
+
+.main-container>.right>.items>.item .contents .favorite,
+.main-container>.right>.items>.item .contents .bookmark
+{
+    margin-top : 3px;
+    margin-left:5px;
+    display:none;
+    font-size : 1.1rem;
+}
+.main-container>.right>.items>.item:hover .contents .favorite,
+.main-container>.right>.items>.item:hover .contents .bookmark
+{
+    display:block;
+    color :white;
+}
+
+.main-container>.right>.items>.item:hover .contents>div>a{
+    display:flex;
+    justify-content : center;
+    align-items:center;
+}
+
+
+
+.main-container>.right>.items>.item>.extra{
+    height : 0px;
+    position:absolute;
+    top:80px;
+    left :0px;
+    width : 100%;
+    z-index : 100;
     transition:.5s;
-    position:relative;
 
 }
-.main-container>.right>.items>.item:hover .favorite{
-    color : red;
-}
+.main-container>.right>.items>.item:hover .extra{
+    padding : 5px;
 
+    margin-top : 10px;
+    border : 1px solid darkcyan;
+    background-color : darkcyan;
+    opacity.8;
+    height : 95px;
+}
 
 .main-container>.right>.items>.item>.contents>div>*{
       color : white;
@@ -194,7 +250,7 @@
     position:absolute;
     background-color : gray;
     opacity : 0;
-    border-radius :5px;
+
     z-index:-1;
 }
 .main-container>.right>.items>.item:hover .bg{

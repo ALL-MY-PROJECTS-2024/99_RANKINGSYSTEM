@@ -88,7 +88,7 @@ const add_product_btn_el = document.querySelector('.add_album_btn');
 
         //선택되어진 sub_category 를 확인
 
-        const sub_categoryEls = document.querySelectorAll('.sub_category');
+        const sub_categoryEls = document.querySelectorAll('.sub_category.image-cat');
         let sub_category = '';
         sub_categoryEls.forEach(el=>{
             if(!el.classList.contains('hidden'))
@@ -114,8 +114,6 @@ const add_product_btn_el = document.querySelector('.add_album_btn');
                 .catch(err=>{console.log(err);})
 
 });
-
-
 
 //---------------------------------------------------
 //MAINCAT -> SUBCAT 변경

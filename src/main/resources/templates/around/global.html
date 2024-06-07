@@ -26,6 +26,10 @@
     <!--    -->
     <link rel="stylesheet" href="/css/around/global.css">
 
+    <!--  MODEL 속성가져오기  -->
+    <script th:inline="javascript">
+        let fileList = [[${list}]]
+    </script>
     <!--    -->
     <script src="/js/around/global.js" defer></script>
 
@@ -81,7 +85,7 @@
                         <div class="swiper-wrapper">
                             <!-- Slides -->
                             <th:block th:each="info:${list}">
-                                <div class="swiper-slide"><a href=""><img th:src="@{${info.dir}+'/'+${info.filename}}"></a></div>
+                                <div class="swiper-slide"><a href=""><img th:src="@{${info.imagesFileInfo.dir}+'/'+${info.imagesFileInfo.filename}}"></a></div>
                             </th:block>
 
                         </div>

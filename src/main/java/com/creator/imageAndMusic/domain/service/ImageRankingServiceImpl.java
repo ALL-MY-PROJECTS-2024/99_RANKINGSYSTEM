@@ -2,7 +2,6 @@ package com.creator.imageAndMusic.domain.service;
 
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
-import com.creator.imageAndMusic.domain.entity.Board;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
 import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -87,8 +85,14 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         returns.put("count",totalcount);
 
         return returns;
+    }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public List<ImagesRanking> getAllImageRanking() {
 
+        Map<String,Object> returns = new HashMap<String,Object>();
+        return imageRankingRepostiroy.findAll();
     }
 
 

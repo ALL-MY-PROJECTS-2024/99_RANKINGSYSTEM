@@ -5,7 +5,38 @@
     list = [];
     fileList.forEach(el=>{
         console.log(el);
-        list.push( { latlng:[el.images.lat,el.images.lng],popupContent:el.images.title });
+
+        let popup = `<div  style='border : 1px solid gray;padding : 10px; border-radius:5px;'>
+            <h6>TITLE : ${el.imagesFileInfo.images.title}</h6>
+            <hr>
+            <div class='m-2' style='width:200px;height:200px;'>
+                <img style='width:100%;height:100%;object-fit:contain' src=${el.imagesFileInfo.dir}/${el.imagesFileInfo.filename}/>
+            </div>
+            <hr>
+            <div class='m-2'>
+                <label>CAT : </label>
+                <span>${el.imagesFileInfo.images.mainCategory}</span> |
+                <span>${el.imagesFileInfo.images.subCategory}</span>
+            </div>
+            <hr>
+            <div class='m-2'>
+                OWNER :  <span>${el.imagesFileInfo.images.username}</span>
+            </div>
+            <hr>
+            <div style='display:flex;justify-content:right;'>
+                <a href='javascript:void(0)' style='margin-right:5px;'>
+                    <span class='material-symbols-outlined m-1'>bookmark</span>
+                    <div style='font-size:.5rem;'>즐겨찾기</div>
+                </a>
+                <a href='javascript:void(0)'>
+                    <span class='material-symbols-outlined m-1'>add</span>
+                    <div style='font-size:.5rem;'>구매요청</div>
+                </a>
+            </div>
+        </div>`;
+
+
+        list.push( { latlng:[el.imagesFileInfo.images.lat,el.imagesFileInfo.images.lng],popupContent:popup });
     })
     console.log(list);
     //참고 : https://jh-tr.tistory.com/188#google_vignette

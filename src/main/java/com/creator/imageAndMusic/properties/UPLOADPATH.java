@@ -5,7 +5,7 @@ import java.io.File;
 public class UPLOADPATH {
 
     //WINDOW
-    //public final static String ROOTDIRPATH = "c:" + File.separator;
+//    public final static String ROOTDIRPATH = "c:" + File.separator;
 
     //LINUX
     public final static String ROOTDIRPATH = "/";

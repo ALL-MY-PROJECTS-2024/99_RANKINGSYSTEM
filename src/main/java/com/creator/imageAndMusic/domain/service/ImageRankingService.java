@@ -14,6 +14,9 @@ public interface ImageRankingService {
 
     Map<String,Object> getAllImageRanking(Criteria criteria);
 
+    @Transactional(rollbackFor = Exception.class)
+    List<ImagesRanking> getAllImageRanking();
+
     @Transactional(rollbackFor = SQLException.class)
     void count(Long rankingId);
 

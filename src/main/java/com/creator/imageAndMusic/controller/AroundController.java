@@ -2,7 +2,10 @@ package com.creator.imageAndMusic.controller;
 
 
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
+import com.creator.imageAndMusic.domain.entity.ImagesRanking;
+import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
 import com.creator.imageAndMusic.domain.service.AroundServiceImpl;
+import com.creator.imageAndMusic.domain.service.ImageRankingServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,9 @@ public class AroundController {
 
     @Autowired
     private AroundServiceImpl aroundService;
+
+    @Autowired
+    private ImageRankingServiceImpl imageRankingServiceImpl;
     @GetMapping("/popular")
     public void popular(){
         log.info("GET /around/popular");
@@ -33,18 +39,20 @@ public class AroundController {
     public void local(Model model){
         log.info("GET /around/local");
 
-        List<ImagesFileInfo> list =  aroundService.getAllImages();
-        for(ImagesFileInfo info : list){
-            System.out.println(list);
+        List<ImagesRanking> list =  imageRankingServiceImpl.getAllImageRanking();
+
+        //List<ImagesFileInfo> list =  aroundService.getAllImages();
+        for(ImagesRanking info : list){
+            System.out.println(info);
         }
         model.addAttribute("list",list);
     }
     @GetMapping("/global")
     public void global(Model model){
         log.info("GET /around/global");
-        List<ImagesFileInfo> list =  aroundService.getAllImages();
-        for(ImagesFileInfo info : list){
-            System.out.println(list);
+        List<ImagesRanking> list =  imageRankingServiceImpl.getAllImageRanking();
+        for(ImagesRanking info : list){
+            System.out.println(info);
         }
         model.addAttribute("list",list);
 
