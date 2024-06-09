@@ -19,7 +19,10 @@
   <script th:inline="javascript">
     let  favoriteList = /*[[${ favoriteList}]]*/
     console.log(favoriteList);
+    let pageDto = /*[[${pageDto}]]*/
+    console.log(pageDto);
   </script>
+
 
   <!-- /user/album/main.js -->
   <script src="/js/imageRanking/list.js" defer></script>
@@ -122,7 +125,7 @@
             <!-- item             -->
               <div class="item" th:each="imagesRanking,i:${list}">
                 <div class="ranking-block">
-                    <div class="rank" th:text="${i.count}"></div>
+                    <div class="rank" ></div>
                     <div class="bookmark">
                       <a href="javascript:void(0)" class="bookmark_btn" th:data-id="${imagesRanking.rankingId}">
                         <span class="material-symbols-outlined bookmark">bookmark</span>

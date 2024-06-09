@@ -73,3 +73,13 @@ bookmarkBtnEls.forEach(el=>{
 
     })
 })
+//----------------------------------------------------------------
+// .rank 숫자 처리
+//----------------------------------------------------------------
+const rankEls = document.querySelectorAll('.rank');
+
+let i = pageDto.startPage;
+rankEls.forEach(el=>{
+    el.innerHTML=i;
+    i++;
+})
