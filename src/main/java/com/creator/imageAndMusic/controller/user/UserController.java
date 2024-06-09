@@ -1,4 +1,4 @@
-package com.creator.imageAndMusic.controller;
+package com.creator.imageAndMusic.controller.user;
 
 
 import com.creator.imageAndMusic.config.auth.PrincipalDetails;
@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,9 +37,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.swing.text.html.HTML;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -354,11 +351,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/favorite")
-    public void favorite(){
-        log.info("GET /user/favorite");
 
-    }
 
 
 //----------------------------------------------------------------
@@ -489,5 +482,18 @@ public class UserController {
     public void f(){
         log.info("");
     }
+
+
+
+
+    //----------------------------------------------------------------  
+    // 즐겨찾기
+    //----------------------------------------------------------------
+    @GetMapping("/bookmark")
+    public void favorite(){
+        log.info("GET /user/bookmark/my");
+
+    }
+    
 
 }

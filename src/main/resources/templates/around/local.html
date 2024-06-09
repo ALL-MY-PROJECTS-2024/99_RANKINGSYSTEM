@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,10 +18,12 @@
 
     <!--  MODEL 속성가져오기  -->
     <script th:inline="javascript">
-        let fileList = [[${list}]]
+        let fileList = /*[[${list}]]*/
+        console.log(fileList);
     </script>
 
-    <script src="/js/around/local.js" defer th:inline="javascript"></script>
+
+     <script src="/js/around/local.js" defer></script>
 
 
 
@@ -62,6 +64,7 @@
 
         <section class="layout-5 local-map-block">
             <h2>국내 지도</h2>
+
             <div id="map" ></div>
 
 
@@ -76,20 +79,7 @@
                             <th:block th:each="info:${list}">
                                 <div class="swiper-slide"><a href=""><img th:src="@{${info.imagesFileInfo.dir}+'/'+${info.imagesFileInfo.filename}}"></a></div>
                             </th:block>
-
                         </div>
-
-                        <!--                        -->
-                        <!--                        &lt;!&ndash; If we need navigation buttons &ndash;&gt;-->
-                        <!--                        <div class="swiper-button-prev">-->
-                        <!--                            <span class="material-symbols-outlined">arrow_left</span>-->
-                        <!--                        </div>-->
-                        <!--                        <div class="swiper-button-next">-->
-                        <!--                            <span class="material-symbols-outlined">arrow_right</span>-->
-                        <!--                        </div>-->
-                        <!--                        -->
-                        <!--                        -->
-
                     </div>
                 </div>
             </div>

@@ -28,7 +28,9 @@ public class FavoriteController {
 
 
     @GetMapping("/image/{id}")
-    public @ResponseBody ResponseEntity<String> favorites(@PathVariable("id")Long id){
+    public @ResponseBody ResponseEntity<String> favorites(@PathVariable("id")Long id,Authentication authentication){
+        System.out.println("authentication : " + authentication);
+
         log.info("GET /favorite/image/id : " + id);
         Map<String, Object> result =  favoriteImageService.addFavoriteImage(id);
 

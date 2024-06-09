@@ -15,7 +15,9 @@ public interface FavoriteImageRepository extends JpaRepository<FavoriteImage,Lon
 
     boolean existsByUserAndImagesRanking(User user,ImagesRanking imagesRanking);
 
-    int deleteByUser(User user);
+    int deleteByUserAndImagesRanking(User user,ImagesRanking imagesRanking);
 
     long countByImagesRanking(ImagesRanking imagesRanking);
+
+    List<FavoriteImage> findByUser(User user);
 }

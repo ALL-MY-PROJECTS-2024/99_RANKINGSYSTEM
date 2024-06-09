@@ -26,3 +26,50 @@ thumb_up_btn_els.forEach((el)=>{
 
     })
 })
+
+
+//----------------------------------------------------------------
+// 내가 누른 좋아요 확인
+//----------------------------------------------------------------
+const favoriteBlock = document.querySelectorAll('.favorite-block');
+
+favoriteBlock.forEach(el=>{
+    const rankingId =  el.getAttribute('data-rankingid');
+
+    favoriteList.forEach(myFavorite=>{
+
+        if(rankingId==myFavorite.imagesRanking.rankingId){
+
+            const thumbUp =  el.querySelector('.favorite');
+            thumbUp.setAttribute('style',"font-variation-settings:'FILL' 100,'wght' 300,'GRAD' 0,'opsz' 18");
+
+        }
+
+    })
+})
+
+//----------------------------------------------------------------
+// 즐겨찾기 추가
+//----------------------------------------------------------------
+
+const bookmarkBtnEls = document.querySelectorAll('.bookmark_btn');
+bookmarkBtnEls.forEach(el=>{
+
+    el.addEventListener('click',()=>{
+
+           const rankingId =  el.getAttribute('data-id');
+           axios.get(`/bookmark/add/${rankingId}`)
+           .then(resp=>{
+                console.log(resp);
+                if(resp.data.exist=='true'){
+                    alert("이미 즐겨찾기에 추가되어 있습니다.");
+                }
+                else if(resp.data.exist=='false'){
+                    alert("즐겨찾기에 추가했습니다.");
+                }
+           })
+           .catch(err=>{console.log(err)});
+
+
+    })
+})

@@ -5,6 +5,7 @@ import com.creator.imageAndMusic.domain.dto.BoardDto;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
 import com.creator.imageAndMusic.domain.entity.Board;
+import com.creator.imageAndMusic.domain.entity.FavoriteImage;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
 import com.creator.imageAndMusic.domain.service.FavoriteImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.ImageRankingService;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,8 +54,10 @@ public class ImageRankingController {
 
     @GetMapping("/list")
     public String list(@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
+                       Authentication authentication,
                        Model model,
                        HttpServletResponse response
+
     )
     {
         log.info("GET /imageRanking/list... ");
@@ -86,7 +90,10 @@ public class ImageRankingController {
         model.addAttribute("list",list);
         model.addAttribute("rankingList",rankingList);
 
-        //이동
+        //favorites 찾기
+
+        List<FavoriteImage> favoriteImageList  = favoriteImageService.getMyfavoriteImage(authentication.getName());
+        model.addAttribute("favoriteList",favoriteImageList);
 
 
         return "imageRanking/list";

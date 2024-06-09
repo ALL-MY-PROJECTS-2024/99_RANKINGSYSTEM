@@ -36,7 +36,7 @@ public class AroundController {
         log.info("GET /around/group");
     }
     @GetMapping("/local")
-    public void local(Model model){
+    public String local(Model model){
         log.info("GET /around/local");
 
         List<ImagesRanking> list =  imageRankingServiceImpl.getAllImageRanking();
@@ -46,15 +46,18 @@ public class AroundController {
             System.out.println(info);
         }
         model.addAttribute("list",list);
+
+        return "around/local";
     }
     @GetMapping("/global")
-    public void global(Model model){
+    public String global(Model model){
         log.info("GET /around/global");
         List<ImagesRanking> list =  imageRankingServiceImpl.getAllImageRanking();
         for(ImagesRanking info : list){
             System.out.println(info);
         }
         model.addAttribute("list",list);
+        return "around/global";
 
     }
 }

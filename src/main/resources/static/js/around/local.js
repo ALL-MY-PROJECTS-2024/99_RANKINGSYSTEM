@@ -34,8 +34,6 @@
                 </a>
             </div>
         </div>`;
-
-
         list.push( { latlng:[el.imagesFileInfo.images.lat,el.imagesFileInfo.images.lng],popupContent:popup });
     })
     console.log(list);

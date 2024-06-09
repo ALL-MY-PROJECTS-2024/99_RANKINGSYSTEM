@@ -17,7 +17,7 @@ public class ImagesFileInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fileid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "iamgeid",foreignKey = @ForeignKey(name="FK_Images_imagesfileInfo",
             foreignKeyDefinition ="FOREIGN KEY(iamgeid) REFERENCES images(iamgeid) ON DELETE CASCADE ON UPDATE CASCADE" ))
     private Images images;

@@ -14,6 +14,13 @@
   <!-- /css/album/main.css -->
   <link rel="stylesheet" href="/css/imageRanking/list.css">
 
+
+  <!--  MODEL 속성가져오기  -->
+  <script th:inline="javascript">
+    let  favoriteList = /*[[${ favoriteList}]]*/
+    console.log(favoriteList);
+  </script>
+
   <!-- /user/album/main.js -->
   <script src="/js/imageRanking/list.js" defer></script>
 
@@ -117,7 +124,7 @@
                 <div class="ranking-block">
                     <div class="rank" th:text="${i.count}"></div>
                     <div class="bookmark">
-                      <a href="javascript:void(0)">
+                      <a href="javascript:void(0)" class="bookmark_btn" th:data-id="${imagesRanking.rankingId}">
                         <span class="material-symbols-outlined bookmark">bookmark</span>
                       </a>
                     </div>
@@ -128,23 +135,19 @@
                     <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'\s_'+${imagesRanking.ImagesFileInfo.filename}}"  alt="" />
                   </a>
                 </div>
-                <div class="favorite-block">
-
+                <div class="favorite-block" th:data-rankingid="${imagesRanking.rankingId}">
+                  <input type="hidden"  />
                   <a href="javascript:void(0)" th:data-imageid="${imagesRanking.ImagesFileInfo.images.iamgeid}" class="thumb_up_btn">
-
                       <span class="material-symbols-outlined favorite">thumb_up</span>&nbsp;
-
-                    <span style="font-size : .8rem;" class="thumb-up-counter" th:text="${imagesRanking.ilikeit}"></span>
+                    <span style="font-size : .8rem;color:black;font-weight:800" class="thumb-up-counter" th:text="${imagesRanking.ilikeit}"></span>
                   </a>
-
-
-
                 </div>
 
                 <div class="extra">
                   <!--    -->
                   <div>
                     <div class="title">
+
                       <div>
                         <span>제목 : </span><span th:text="${imagesRanking.ImagesFileInfo.Images.title}"></span>
                       </div>
@@ -154,10 +157,10 @@
                     </div>
                   </div>
 
-
-                    <!--    -->
+                    <!--      -->
                     <div class="regdate">
-                      <span th:text="${#temporals.format(imagesRanking.regDate, 'yyyy-MM-dd')}"></span>
+                      <div></div>
+                      <div th:text="${#temporals.format(imagesRanking.regDate, 'yyyy-MM-dd')}"></div>
                     </div>
 
                   <!--    -->

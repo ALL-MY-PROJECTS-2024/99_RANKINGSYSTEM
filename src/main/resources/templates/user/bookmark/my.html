@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
+
+
+    <link rel="stylesheet" href="/css/user/bookmark/my.css">
+
+    <script src="/js/user/bookmark/my.js" defer></script>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="fragments/header :: mainHeaderFragment" />
+
+    <!-- nav       -->
+    <th:block th:insert="fragments/nav :: albumNavFragment" />
+
+
+    <main>
+        <section class="layout-5 breadcrumb-block">
+            <div class="">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">
+                            <span class="material-symbols-outlined">home</span>
+                        </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">FAVORITE</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="layout-5 ">
+
+            <div class="items" >
+
+
+                <div class="item" th:each="bookmark :${list}">
+                    <div class="cancel">
+                        <a href="javascript:void(0)" th:data-id="${bookmark.id}">
+                            x
+                        </a>
+                    </div>
+                    <div class="title" >TITLE [<span th:text="${bookmark.imagesRanking.imagesFileInfo.images.title}"></span>]</div>
+                    <div class="cat" th:text="${bookmark.imagesRanking.imagesFileInfo.images.subCategory}"></div>
+                    <div class="image" >
+                        <a href="">
+                            <img th:src="@{${bookmark.imagesRanking.imagesFileInfo.dir}+'\s_'+${bookmark.imagesRanking.imagesFileInfo.filename}}" alt="" />
+                        </a>
+                    </div>
+                    <div class="createdAt" th:text="${bookmark.imagesRanking.imagesFileInfo.images.createAt}"></div>
+                    <div class="ilikeit" >좋아요 수 [<span th:text="${bookmark.imagesRanking.ilikeit}"></span>]</div>
+                    <div class="count" > 조회수 [<span th:text="${bookmark.imagesRanking.count}"></span>]</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="fragments/footer :: footerFragment" />
+    </footer>
+
+</div>
+
+
+
+
+</body>
+</html>

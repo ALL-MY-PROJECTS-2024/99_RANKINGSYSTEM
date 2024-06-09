@@ -1,0 +1,40 @@
+
+.items {
+    width : 100%;
+    height : 800px;
+    overflow : auto;
+    border : 1px solid lightgrey;
+
+    display:flex;
+    justify-content : left;
+    align-items : start;
+    padding : 20px;
+
+}
+
+.items .item{
+    padding : 10px;
+    border : 1px solid darkcyan;
+    width : 300px;
+    margin : 5px;
+
+    position:relative;
+
+}
+.items .item>*{
+    margin-bottom : 5px;
+    border : 1px solid darkcyan;
+    text-align:center;
+}
+.items .item .cancel{
+    display:flex;
+    justify-content : right;
+    align-items : center;
+    color :white;
+    background-color : darkcyan;
+    padding-right : 5px;
+}
+.items .item .cancel a{
+    color : white;
+
+}

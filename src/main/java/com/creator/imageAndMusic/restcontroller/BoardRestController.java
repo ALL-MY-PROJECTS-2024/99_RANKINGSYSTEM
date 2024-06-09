@@ -1,7 +1,7 @@
 package com.creator.imageAndMusic.restcontroller;
 
 
-import com.creator.imageAndMusic.controller.BoardController;
+import com.creator.imageAndMusic.controller.board.BoardController;
 import com.creator.imageAndMusic.domain.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

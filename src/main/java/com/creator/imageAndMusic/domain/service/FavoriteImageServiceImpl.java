@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -75,7 +76,7 @@ public class FavoriteImageServiceImpl {
 
         boolean isExistedUser =favoriteImageRepository.existsByUserAndImagesRanking(user,imagesRanking);
         if(isExistedUser){
-            favoriteImageRepository.deleteByUser(user);
+            favoriteImageRepository.deleteByUserAndImagesRanking(user,imagesRanking);
 
             result.put("favorite",true);
 
@@ -95,7 +96,19 @@ public class FavoriteImageServiceImpl {
         imageRankingRepository.save(imagesRanking);
 
         result.put("count",count);
+
+
         return result;
     }
 
+
+    @Transactional(rollbackFor=Exception.class)
+    public List<FavoriteImage> getMyfavoriteImage(String name) {
+        Optional<User> userOp = userRepository.findById(name);
+        if(userOp.isEmpty()){
+            return null;
+        }
+        return favoriteImageRepository.findByUser(userOp.get());
+
+    }
 }
