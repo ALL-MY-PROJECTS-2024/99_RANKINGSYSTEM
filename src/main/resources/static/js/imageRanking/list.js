@@ -78,7 +78,7 @@ bookmarkBtnEls.forEach(el=>{
 //----------------------------------------------------------------
 const rankEls = document.querySelectorAll('.rank');
 
-let i = (pageDto.startPage-1)*pageDto.criteria.amount + 1
+let i = (pageDto.criteria.pageno-1)*pageDto.criteria.amount + 1
 rankEls.forEach(el=>{
     el.innerHTML=i;
 
