@@ -81,7 +81,7 @@ public class JwtTokenProvider {
         UserDto userDto = principalDetails.getUserDto();
         System.out.println("JWT GENERATE TOKEN DTO : " + userDto);
         // Access Token 생성
-        Date accessTokenExpiresIn = new Date(now + 60*5*1000);    // 60*5 초후 만료
+        Date accessTokenExpiresIn = new Date(now + 60*30*1000);    // 60*30 초후 만료
         String accessToken = Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim("username",authentication.getName())             //정보저장
