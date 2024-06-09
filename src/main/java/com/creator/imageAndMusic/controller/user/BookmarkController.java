@@ -45,6 +45,7 @@ public class BookmarkController {
     @GetMapping("/add/{rankingId}")
     public @ResponseBody ResponseEntity<String> add(@PathVariable("rankingId") Long rankingId, Authentication authentication){
 
+        System.out.println("rankingId : " + rankingId);
         Map<String,Object> result=  bookmarkService.addBookmark(rankingId,authentication.getName());
 
         return new ResponseEntity(result, HttpStatus.OK);

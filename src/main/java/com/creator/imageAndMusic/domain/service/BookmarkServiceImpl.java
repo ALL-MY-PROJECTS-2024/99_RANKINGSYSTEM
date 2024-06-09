@@ -37,6 +37,7 @@ public class BookmarkServiceImpl {
 
     @Transactional(rollbackFor=Exception.class)
     public Map<String,Object> addBookmark(Long ranking_id, String username){
+        log.info("addBookmark() ranking_id : " + ranking_id + " username : " + username);
         Optional<ImagesRanking> imagesRankingOptional = imageRankingRepository.findById(ranking_id);
         Map<String,Object> result = new HashMap();
         if(imagesRankingOptional.isEmpty()){

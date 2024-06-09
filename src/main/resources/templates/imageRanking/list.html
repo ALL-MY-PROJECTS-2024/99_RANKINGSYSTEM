@@ -137,7 +137,7 @@
                 </div>
                 <div class="favorite-block" th:data-rankingid="${imagesRanking.rankingId}">
                   <input type="hidden"  />
-                  <a href="javascript:void(0)" th:data-imageid="${imagesRanking.ImagesFileInfo.images.iamgeid}" class="thumb_up_btn">
+                  <a href="javascript:void(0)" th:data-imageid="${imagesRanking.rankingId}" class="thumb_up_btn">
                       <span class="material-symbols-outlined favorite">thumb_up</span>&nbsp;
                     <span style="font-size : .8rem;color:black;font-weight:800" class="thumb-up-counter" th:text="${imagesRanking.ilikeit}"></span>
                   </a>
