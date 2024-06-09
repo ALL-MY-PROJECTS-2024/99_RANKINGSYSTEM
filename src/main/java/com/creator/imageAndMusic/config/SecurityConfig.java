@@ -76,6 +76,7 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/user/myinfo/**").hasRole("USER");
 
 
+                    authorize.requestMatchers("/bookmark/**").hasRole("USER");
 
 
                     authorize.requestMatchers("/board/list").hasAnyRole("USER");
