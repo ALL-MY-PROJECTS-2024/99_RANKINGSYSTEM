@@ -115,7 +115,12 @@
             <!-- item             -->
               <div class="item" th:each="imagesRanking,i:${list}">
                 <div class="ranking-block">
-                    <div th:text="${i.count}"></div>
+                    <div class="rank" th:text="${i.count}"></div>
+                    <div class="bookmark">
+                      <a href="javascript:void(0)">
+                        <span class="material-symbols-outlined bookmark">bookmark</span>
+                      </a>
+                    </div>
                 </div>
 
                 <div class="image-block">
@@ -123,36 +128,40 @@
                     <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'\s_'+${imagesRanking.ImagesFileInfo.filename}}"  alt="" />
                   </a>
                 </div>
+                <div class="favorite-block">
+
+                  <a href="javascript:void(0)" th:data-imageid="${imagesRanking.ImagesFileInfo.images.iamgeid}" class="thumb_up_btn">
+
+                      <span class="material-symbols-outlined favorite">thumb_up</span>&nbsp;
+
+                    <span style="font-size : .8rem;" class="thumb-up-counter" th:text="${imagesRanking.ilikeit}"></span>
+                  </a>
+
+
+
+                </div>
 
                 <div class="extra">
                   <!--    -->
-                  <div class="title">
-                    <div>
-                      <span>제목 : </span><span th:text="${imagesRanking.ImagesFileInfo.Images.title}"></span>
+                  <div>
+                    <div class="title">
+                      <div>
+                        <span>제목 : </span><span th:text="${imagesRanking.ImagesFileInfo.Images.title}"></span>
+                      </div>
+                    </div>
+                    <div class="count">
+                      <span>조회 : </span><span th:text="${imagesRanking.count}"></span>
                     </div>
                   </div>
-                  <!--    -->
-                  <div class="count">
-                    <span>조회 : </span><span th:text="${imagesRanking.count}"></span>
-                  </div>
-                  <!--    -->
-                  <div class="regdate">
-                    <span th:text="${#temporals.format(imagesRanking.regDate, 'yyyy-MM-dd')}"></span>
-                  </div>
-                  <!--    -->
-                  <div class="contents">
-                    <div>
-                      <a href="javascript:void(0)">
-                        <span class="material-symbols-outlined favorite">thumb_up</span>&nbsp;
-                        <span style="font-size : .8rem;color : white;">15</span>
-                      </a>
+
+
+                    <!--    -->
+                    <div class="regdate">
+                      <span th:text="${#temporals.format(imagesRanking.regDate, 'yyyy-MM-dd')}"></span>
                     </div>
-                    <div>
-                      <a href="javascript:void(0)">
-                        <span class="material-symbols-outlined bookmark">bookmark</span>
-                      </a>
-                    </div>
-                  </div>
+
+                  <!--    -->
+
 
                 </div>
 

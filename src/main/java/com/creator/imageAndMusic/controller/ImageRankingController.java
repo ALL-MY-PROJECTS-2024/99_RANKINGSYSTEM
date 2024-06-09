@@ -6,6 +6,7 @@ import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
 import com.creator.imageAndMusic.domain.entity.Board;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
+import com.creator.imageAndMusic.domain.service.FavoriteImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.ImageRankingService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,6 +34,9 @@ public class ImageRankingController {
     }
     @Autowired
     private ImageRankingService imageRankingService;
+
+    @Autowired
+    private FavoriteImageServiceImpl favoriteImageService;
 
     @GetMapping("/add")
     public @ResponseBody ResponseEntity<String> addRanking(@RequestParam("fileid") Long fileid,Model model) throws Exception {

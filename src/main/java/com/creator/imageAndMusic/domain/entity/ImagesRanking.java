@@ -19,7 +19,7 @@ public class ImagesRanking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rankingId;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "images_file_info",foreignKey = @ForeignKey(name="FK_Images_ImageRanking",
             foreignKeyDefinition ="FOREIGN KEY(images_file_info) REFERENCES images_file_info(fileid) ON DELETE CASCADE ON UPDATE CASCADE" ))
     private ImagesFileInfo imagesFileInfo;

@@ -66,8 +66,6 @@
 
 }
 .main-container>.right>.items>.item .count{
-    width : 100%;
-
 
     display:flex;
     justify-content: right;
@@ -85,33 +83,23 @@
     z-index:7;
     transition:.5s;
 }
-.main-container>.right>.items>.item .title{
-   font-size : .8rem;
-   width : 100%:
-   position:absolute;
-   left:0px;
-   top:0px;
-   display:none;
-}
-.main-container>.right>.items>.item:hover .title{
-    display:block;
-}
-.main-container>.right>.items>.item .title span{
-    color : white;
-    font-size : .8rem;
-}
+
 
 .main-container>.right>.items>.item>.ranking-block{
 
     height : 25px;
 
     position:absolute;
+    width : 100%;
     left:0px;
     top:0px;
     z-index : 5;
+    display:flex;
+    justify-content : space-between;
+    align-items : center;
 
 }
-.main-container>.right>.items>.item>.ranking-block>div{
+.main-container>.right>.items>.item>.ranking-block>.rank{
     width : 25px;
     height : 25px;
     background-color : black;
@@ -122,7 +110,9 @@
     font-size : .8rem;
 }
 
+.main-container>.right>.items>.item>.ranking-block>.bookmark{
 
+}
 .main-container>.right>.items>.item .regdate{
 
 
@@ -141,7 +131,7 @@
 .main-container>.right>.items>.item:hover .regdate{
     opacity : 1;
     z-index : 6;
-    border-top : 1px solid white;
+
 }
 .main-container>.right>.items>.item>.regdate>span{
 
@@ -197,38 +187,30 @@
 }
 
 
-.main-container>.right>.items>.item .contents .favorite,
-.main-container>.right>.items>.item .contents .bookmark
-{
-    margin-top : 3px;
-    margin-left:5px;
-    display:none;
-    font-size : 1.1rem;
-}
-.main-container>.right>.items>.item:hover .contents .favorite,
-.main-container>.right>.items>.item:hover .contents .bookmark
-{
-    display:block;
-    color :white;
-}
 
-.main-container>.right>.items>.item:hover .contents>div>a{
-    display:flex;
-    justify-content : center;
-    align-items:center;
-}
+
 
 
 
 .main-container>.right>.items>.item>.extra{
+   ;
+
     height : 0px;
-    position:absolute;
-    top:80px;
+    position:relative;
+    top:5px;
     left :0px;
     width : 100%;
     z-index : 100;
     transition:.5s;
-
+}
+.main-container>.right>.items>.item>.extra .title{
+    font-size : .8rem;
+    color :white;
+}
+.main-container>.right>.items>.item>.extra>div{
+    display:flex;
+    justify-content : space-between;
+    align-items :center;
 }
 .main-container>.right>.items>.item:hover .extra{
     padding : 5px;
@@ -237,11 +219,7 @@
     border : 1px solid darkcyan;
     background-color : darkcyan;
     opacity.8;
-    height : 95px;
-}
-
-.main-container>.right>.items>.item>.contents>div>*{
-      color : white;
+    height : 50px;
 }
 
 .main-container>.right>.items>.item>.bg{
@@ -260,6 +238,32 @@
 .main-container>.right>.items>.item:hover .image-block{
     z-index : 5;
     opacity: .4;
+}
+.main-container>.right>.items>.item .favorite-block{
+    position:absolute;
+
+    left:0;
+    bottom:0;
+    font-size : .9rem;
+    display:none;
+    z-index : 99999
+}
+.main-container>.right>.items>.item .favorite-block a{
+    width : 35px;
+
+    display:flex;
+    justify-content : space-between;
+    align-items : start;
+}
+.main-container>.right>.items>.item:hover .favorite-block{
+    display:block;
+}
+.main-container>.right>.items>.item .ranking-block .bookmark
+{
+    display:none;
+}
+.main-container>.right>.items>.item:hover .bookmark{
+    display:block;
 }
 
 

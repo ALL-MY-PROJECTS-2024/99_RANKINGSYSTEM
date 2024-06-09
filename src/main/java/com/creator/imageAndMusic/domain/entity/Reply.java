@@ -21,7 +21,7 @@ public class Reply {
     private Long rno;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bno",foreignKey = @ForeignKey(name = "FK_reply_board",
             foreignKeyDefinition = "FOREIGN KEY (bno) REFERENCES board(no) ON DELETE CASCADE ON UPDATE CASCADE") ) //FK설정\
     private Board board;
