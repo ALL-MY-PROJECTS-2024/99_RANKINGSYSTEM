@@ -68,6 +68,9 @@
     align-items : center;
     z-index :1;
     background-color : lightgrey;
+    font-size : 1rem;
+    color : gray;
+    font-weight :800;
 
 }
 
@@ -346,6 +349,26 @@ th,td{
     border : 1px solid;
 }
 th,td{
+    font-size : .8rem;
 
+}
+td{
+    font-size : .7rem;
+}
 
+.items.summary-block .item .table th .material-symbols-outlined{
+
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 200,
+          'GRAD' 0,
+          'opsz' 18;
+    font-size : 1rem;
+
+}
+
+ .paging{
+    position:absolute;
+    top:20px;
+    left : 20px;
 }
