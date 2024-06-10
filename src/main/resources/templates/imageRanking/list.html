@@ -20,6 +20,7 @@
     let  favoriteList = /*[[${ favoriteList}]]*/
     console.log(favoriteList);
     let pageDto = /*[[${pageDto}]]*/
+    let listpageDto = /*[[${listpageDto}]]*/
     console.log(pageDto);
   </script>
 
@@ -48,9 +49,7 @@
       <div class="show-block layout-5">
 
         <div class="main-container">
-          <div>
-            <a href="javascript:void(0)"> 랭킹보기[수정중]</a>
-          </div>
+
           <!--
                     <div class="left">
                         <div class="ranking">
@@ -85,44 +84,14 @@
               -->
 
           <div class="right">
-              <!--              -->
-              <div class="right-header">
-                  <div class="paging">
-                    <!--  -->
-                    <div class="pagenation col-9">
-                      <nav aria-label="Page navigation example">
-                        <ul class="pagination">
+            <div class="btn-group">
+              <span class="countOrder active">조회순</span>
+              <span class="likeOrder">좋아요순</span>
+              <span class="summary">요약보기</span>
+            </div>
 
-                          <!-- PREV -->
-                          <li class="page-item" th:if="${pageDto.prev}">
-                            <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
-                              <span aria-hidden="true">&laquo;</span>
-                            </a>
-                          </li>
-
-                          <!-- PAGENATION -->
-                          <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
-                            <a class="page-link" th:href="@{/imageRanking/list(pageNo=${i})}" > <span th:text="${i}"></span> </a>
-                          </li>
-
-
-                          <!-- NEXT -->
-                          <li class="page-item"  th:if="${pageDto.next}">
-                            <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
-                              <span aria-hidden="true">&raquo;</span>
-                            </a>
-                          </li>
-
-                        </ul>
-                      </nav>
-                    </div>
-                  </div>
-              </div>
-              <!--              -->
-
-            <div class="items">
-
-            <!-- item             -->
+            <div class="items count-order-block">
+              <!-- item             -->
               <div class="item" th:each="imagesRanking,i:${list}">
                 <div class="ranking-block">
                     <div class="rank" ></div>
@@ -159,7 +128,6 @@
                       <span>조회 : </span><span th:text="${imagesRanking.count}"></span>
                     </div>
                   </div>
-
                     <!--      -->
                     <div class="regdate">
                       <div></div>
@@ -167,27 +135,195 @@
                     </div>
 
                   <!--    -->
-
-
                 </div>
+              </div>
+
+
+              <!-- -->
+              <div class="paging" style="position;">
+                <!--  -->
+                <div class="pagenation col-9">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+
+                      <!-- PREV -->
+                      <li class="page-item" th:if="${pageDto.prev}">
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+
+                      <!-- PAGENATION -->
+                      <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${i})}" > <span th:text="${i}"></span> </a>
+                      </li>
+
+
+                      <!-- NEXT -->
+                      <li class="page-item"  th:if="${pageDto.next}">
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+              <!-- -->
+
+            </div>
+
+            <!--   좋아요순           -->
+            <div class="items like-order-block hidden">
+
+              <!-- item             -->
+              <div class="item" th:each="imagesRanking,i:${likelist}">
+                <div class="ranking-block">
+                  <div class="rank" ></div>
+                  <div class="bookmark">
+                    <a href="javascript:void(0)" class="bookmark_btn" th:data-id="${imagesRanking.rankingId}">
+                      <span class="material-symbols-outlined bookmark">bookmark</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="image-block">
+                  <a th:href="@{/imageRanking/read(rankingId=${imagesRanking.rankingId} )}">
+                    <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'\s_'+${imagesRanking.ImagesFileInfo.filename}}"  alt="" />
+                  </a>
+                </div>
+                <div class="favorite-block" th:data-rankingid="${imagesRanking.rankingId}">
+                  <input type="hidden"  />
+                  <a href="javascript:void(0)" th:data-imageid="${imagesRanking.rankingId}" class="thumb_up_btn">
+                    <span class="material-symbols-outlined favorite">thumb_up</span>&nbsp;
+                    <span style="font-size : .8rem;color:black;font-weight:800" class="thumb-up-counter" th:text="${imagesRanking.ilikeit}"></span>
+                  </a>
+                </div>
+
+                <div class="extra">
+                  <!--    -->
+                  <div>
+                    <div class="title">
+
+                      <div>
+                        <span>제목 : </span><span th:text="${imagesRanking.ImagesFileInfo.Images.title}"></span>
+                      </div>
+                    </div>
+                    <div class="count">
+                      <span>조회 : </span><span th:text="${imagesRanking.count}"></span>
+                    </div>
+                  </div>
+                  <!--      -->
+                  <div class="regdate">
+                    <div></div>
+                    <div th:text="${#temporals.format(imagesRanking.regDate, 'yyyy-MM-dd')}"></div>
+                  </div>
+
+                  <!--    -->
+                </div>
+              </div>
+
+
+              <div class="paging" style="position;">
+                <!--  -->
+                <div class="pagenation col-9">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+
+                      <!-- PREV -->
+                      <li class="page-item" th:if="${pageDto.prev}">
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+
+                      <!-- PAGENATION -->
+                      <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${i})}" > <span th:text="${i}"></span> </a>
+                      </li>
+
+
+                      <!-- NEXT -->
+                      <li class="page-item"  th:if="${pageDto.next}">
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 요약 하기 -->
+            <div class="items summary-block hidden">
+              <div class="item">
+                <h4 style="">조회순 RANKING</h4>
+                <hr>
+                <table class="table w-100">
+
+                  <thead>
+                  <tr>
+                    <th>순위</th>
+                    <th>제목</th>
+                    <th>카테고리</th>
+                    <th>소유계정</th>
+                    <th>조회수</th>
+                    <th>좋아요수</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="imagesRanking,obj : ${rankingList}">
+                    <td th:text="${obj.count}"></td>
+                    <td th:text="${imagesRanking.ImagesFileInfo.Images.title}"></td>
+                    <td th:text="${imagesRanking.ImagesFileInfo.Images.subCategory}"></td>
+                    <td th:text="${imagesRanking.ImagesFileInfo.Images.username}"></td>
+                    <td th:text="${imagesRanking.count}"></td>
+                    <td th:text="${imagesRanking.ilikeit}"></td>
+
+                  </tr>
+                  </tbody>
+                </table>
 
 
 
               </div>
-
-
+              <div class="item">
+                <h4 style="">좋아요순 RANKING</h4>
+                <hr>
+                <table class="table w-100">
+                  <thead>
+                  <tr>
+                    <th>순위</th>
+                    <th>제목</th>
+                    <th>카테고리</th>
+                    <th>소유계정</th>
+                    <th>조회수</th>
+                    <th>좋아요수</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="imagesRanking,obj : ${rankingLikeList}">
+                    <td th:text="${obj.count}"></td>
+                    <td th:text="${imagesRanking.ImagesFileInfo.Images.title}"></td>
+                    <td th:text="${imagesRanking.ImagesFileInfo.Images.subCategory}"></td>
+                    <td th:text="${imagesRanking.ImagesFileInfo.Images.username}"></td>
+                    <td th:text="${imagesRanking.count}"></td>
+                    <td th:text="${imagesRanking.ilikeit}"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
 
           </div>
 
 
-
         </div>
-
-
-
-
 
         <div class="footer-block">
           <div class="left">
@@ -197,7 +333,9 @@
       </div>
 
     </section>
+
   </main>
+
   <!-- Footer        -->
   <footer>
     <th:block th:insert="fragments/footer :: footerFragment" />

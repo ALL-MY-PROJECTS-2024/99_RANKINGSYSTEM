@@ -75,17 +75,35 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         //시작 게시물 번호 구하기(수정) - OFFSET
         int offset =(criteria.getPageno()-1) * criteria.getAmount();    //1page = 0, 2page = 10
 
+        //조회순
         List<ImagesRanking> list  =  imageRankingRepostiroy.findImagesRankingAmountStart(pagedto.getCriteria().getAmount(),offset);
 
+        PageDto likepagedto = new PageDto(totalcount,criteria);
+        int likeoffset =(criteria.getPageno()-1) * criteria.getAmount();
+        //좋아요순
+        List<ImagesRanking> likelist  =  imageRankingRepostiroy.findImagesRankingAmountStartOderByLike(likepagedto.getCriteria().getAmount(),likeoffset);
+
+        //count순 전체 값
         List<ImagesRanking> rankingList =  imageRankingRepostiroy.findAllByOrderByCountDesc();
 
-        returns.put("rankingList",rankingList);
+        //
+        List<ImagesRanking> rankingLikeList =  imageRankingRepostiroy.findAllByOrderByLikeDesc();
+
         returns.put("list",list);
+        returns.put("likelist",likelist);
+        returns.put("rankingList",rankingList);
+        returns.put("rankingLikeList",rankingLikeList);
+
         returns.put("pageDto",pagedto);
+        returns.put("likepagedto",likepagedto);
         returns.put("count",totalcount);
 
         return returns;
     }
+
+
+
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)

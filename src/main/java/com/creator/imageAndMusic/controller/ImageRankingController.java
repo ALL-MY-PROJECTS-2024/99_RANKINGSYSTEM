@@ -80,20 +80,28 @@ public class ImageRankingController {
         Map<String,Object> map =  imageRankingService.getAllImageRanking(criteria);
 
         PageDto pageDto = (PageDto) map.get("pageDto");
+        PageDto likepageDto = (PageDto) map.get("likepageDto");
         List<ImagesRanking> list = (List<ImagesRanking>) map.get("list");
+        List<ImagesRanking> likelist = (List<ImagesRanking>) map.get("likelist");
         List<ImagesRanking> rankingList = (List<ImagesRanking>) map.get("rankingList");
+        List<ImagesRanking> rankingLikeList = (List<ImagesRanking>) map.get("rankingLikeList");
         int count = (int)map.get("count");
 
 
         model.addAttribute("pageNo",pageNo);
         model.addAttribute("pageDto",pageDto);
+        model.addAttribute("likepageDto",likepageDto);
         model.addAttribute("list",list);
+        model.addAttribute("likelist",likelist);
         model.addAttribute("rankingList",rankingList);
+        model.addAttribute("rankingLikeList",rankingLikeList);
 
-        //favorites 찾기
-
+        //ThumbUp 찾기
         List<FavoriteImage> favoriteImageList  = favoriteImageService.getMyfavoriteImage(authentication.getName());
         model.addAttribute("favoriteList",favoriteImageList);
+
+
+        //좋아요 순서
 
 
         return "imageRanking/list";

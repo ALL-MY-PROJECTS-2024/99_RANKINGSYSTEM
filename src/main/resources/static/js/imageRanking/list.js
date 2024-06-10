@@ -76,11 +76,68 @@ bookmarkBtnEls.forEach(el=>{
 //----------------------------------------------------------------
 // .rank 숫자 처리
 //----------------------------------------------------------------
-const rankEls = document.querySelectorAll('.rank');
+//조회순
+const rankEls = document.querySelectorAll('.count-order-block .rank');
 
 let i = (pageDto.criteria.pageno-1)*pageDto.criteria.amount + 1
 rankEls.forEach(el=>{
     el.innerHTML=i;
 
     i++;
+})
+
+//좋아요 순
+const likerankEls = document.querySelectorAll('.like-order-block .rank');
+
+let j = (pageDto.criteria.pageno-1)*pageDto.criteria.amount + 1
+likerankEls.forEach(el=>{
+    el.innerHTML=j;
+    j++;
+})
+
+//----------------------------------------------------------------
+// 좋아요 / 조회순
+//----------------------------------------------------------------
+
+const countOrder = document.querySelector(".countOrder");
+const likeOrder = document.querySelector(".likeOrder");
+const summary = document.querySelector(".summary");
+
+const countOrderBlock = document.querySelector(".count-order-block");
+const likeOrderBlock = document.querySelector(".like-order-block");
+const summaryBlock = document.querySelector(".summary-block");
+
+
+countOrder.addEventListener('click',function(){
+    console.log('clicked...');
+    countOrderBlock.classList.remove('hidden');
+    likeOrderBlock.classList.add("hidden");
+    summaryBlock.classList.add('hidden');
+
+    countOrder.classList.add('active');
+    likeOrder.classList.remove('active');
+    summary.classList.remove('active');
+});
+
+likeOrder.addEventListener('click',function(){
+    console.log('clicked...')
+    likeOrderBlock.classList.remove("hidden");;
+    countOrderBlock.classList.add('hidden');
+    summaryBlock.classList.add('hidden');
+
+    likeOrder.classList.add('active');
+    countOrder.classList.remove('active');
+    summary.classList.remove('active');
+})
+
+summary.addEventListener('click',function(){
+    summaryBlock.classList.remove('hidden');
+    countOrderBlock.classList.add('hidden');
+    likeOrderBlock.classList.add("hidden");
+
+
+    summary.classList.add('active');
+    likeOrder.classList.remove('active');
+    countOrder.classList.remove('active');
+
 })
