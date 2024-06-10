@@ -68,9 +68,9 @@
     align-items : center;
     z-index :1;
     background-color : lightgrey;
-    font-size : 1rem;
+    font-size : .9rem;
     color : gray;
-    font-weight :800;
+    font-weight :400;
 
 }
 

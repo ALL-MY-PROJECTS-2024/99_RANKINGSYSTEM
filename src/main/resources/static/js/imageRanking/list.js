@@ -141,3 +141,25 @@ summary.addEventListener('click',function(){
     countOrder.classList.remove('active');
 
 })
+//----------------------------------------------------------------
+// MODE
+//----------------------------------------------------------------
+    if(mode=="1"){
+
+            countOrderBlock.classList.remove('hidden');
+            likeOrderBlock.classList.add("hidden");
+            summaryBlock.classList.add('hidden');
+
+            countOrder.classList.add('active');
+            likeOrder.classList.remove('active');
+            summary.classList.remove('active');
+    }else{
+
+        likeOrderBlock.classList.remove("hidden");;
+        countOrderBlock.classList.add('hidden');
+        summaryBlock.classList.add('hidden');
+
+        likeOrder.classList.add('active');
+        countOrder.classList.remove('active');
+        summary.classList.remove('active');
+    }

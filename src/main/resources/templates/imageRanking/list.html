@@ -21,6 +21,7 @@
     console.log(favoriteList);
     let pageDto = /*[[${pageDto}]]*/
     let listpageDto = /*[[${listpageDto}]]*/
+    let mode = /*[[${mode}]]*/
     console.log(pageDto);
   </script>
 
@@ -148,20 +149,20 @@
 
                       <!-- PREV -->
                       <li class="page-item" th:if="${pageDto.prev}">
-                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} ,mode=1)}" aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
                         </a>
                       </li>
 
                       <!-- PAGENATION -->
                       <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
-                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${i})}" > <span th:text="${i}"></span> </a>
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${i},mode=1)}" > <span th:text="${i}"></span> </a>
                       </li>
 
 
                       <!-- NEXT -->
                       <li class="page-item"  th:if="${pageDto.next}">
-                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1},mode=1 )}" aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
                         </a>
                       </li>
@@ -189,7 +190,7 @@
                 </div>
 
                 <div class="image-block">
-                  <a th:href="@{/imageRanking/read(rankingId=${imagesRanking.rankingId} )}">
+                  <a th:href="@{/imageRanking/read(rankingId=${imagesRanking.rankingId})}">
                     <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'\s_'+${imagesRanking.ImagesFileInfo.filename}}"  alt="" />
                   </a>
                 </div>
@@ -233,20 +234,20 @@
 
                       <!-- PREV -->
                       <li class="page-item" th:if="${pageDto.prev}">
-                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1},mode=2 )}" aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
                         </a>
                       </li>
 
                       <!-- PAGENATION -->
                       <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
-                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${i})}" > <span th:text="${i}"></span> </a>
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${i},mode=2)}" > <span th:text="${i}"></span> </a>
                       </li>
 
 
                       <!-- NEXT -->
                       <li class="page-item"  th:if="${pageDto.next}">
-                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
+                        <a class="page-link" th:href="@{/imageRanking/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1},mode=2 )}" aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
                         </a>
                       </li>

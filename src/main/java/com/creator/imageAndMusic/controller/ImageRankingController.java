@@ -54,6 +54,7 @@ public class ImageRankingController {
 
     @GetMapping("/list")
     public String list(@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
+                       @RequestParam(name="mode",defaultValue="1") Integer mode,
                        Authentication authentication,
                        Model model,
                        HttpServletResponse response
@@ -95,7 +96,7 @@ public class ImageRankingController {
         model.addAttribute("likelist",likelist);
         model.addAttribute("rankingList",rankingList);
         model.addAttribute("rankingLikeList",rankingLikeList);
-
+        model.addAttribute("mode",mode);
         //ThumbUp 찾기
         List<FavoriteImage> favoriteImageList  = favoriteImageService.getMyfavoriteImage(authentication.getName());
         model.addAttribute("favoriteList",favoriteImageList);
