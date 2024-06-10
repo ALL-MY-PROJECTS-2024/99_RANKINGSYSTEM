@@ -8,8 +8,8 @@
     <!--  link   -->
     <th:block th:insert="fragments/link :: linkFragment" />
 
-
     <!-- /css/album/add.css -->
+
     <link rel="stylesheet" href="/css/user/album/add.css">
     <!--    -->
     <script src="/js/user/album/add.js" defer></script>
@@ -90,7 +90,7 @@
 
 
                     <section class="product_info_block">
-                        <form  onsubmit="return false" name="albumform" >
+                        <form  onsubmit="return false" name="albumform" action="/user/music/add" enctype="multipart/form-data" >
                             <div>
                                 <label>USER : </label>
                                 <input name="username" placeholder="example@example.com"  th:value="${#authentication.name}"  class="form-control"  required readonly>
@@ -133,7 +133,7 @@
                 </div>
                 <div class="music_body hidden">
 
-                    <form onsubmit="return false" name="musicForm">
+                    <form onsubmit="return false" name="musicForm"  >
                         <div class="m-2">
                             <label>USER : </label>
                             <input name="username" placeholder="example@example.com"  th:value="${#authentication.name}"  class="form-control"  required readonly>
@@ -169,7 +169,7 @@
 
 
                         <div class="btn-block m-2">
-                            <button  class="add_music_btn btn  w-100" style="">등록</button>
+                            <button class="add-music-btn btn  w-100" style="">등록</button>
                         </div>
                     </form>
 
