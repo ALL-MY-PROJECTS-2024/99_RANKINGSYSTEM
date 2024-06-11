@@ -329,6 +329,8 @@ public class UserController {
         System.out.println("POST /music/add : " + dto+" file count : " + dto.getFiles().length);
         //서비스 실행
 
+        boolean isUploaded =userService.uploadMusicAlbum(dto);
+
     }
 
     @GetMapping("/album/read")

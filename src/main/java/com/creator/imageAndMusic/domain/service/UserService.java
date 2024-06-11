@@ -32,4 +32,6 @@ public interface UserService {
 
     @Transactional(rollbackFor = Exception.class)
     boolean modifiedMyInfo(UserDto userDto, Model model);
+
+    boolean uploadMusicAlbum(AlbumDto dto);
 }

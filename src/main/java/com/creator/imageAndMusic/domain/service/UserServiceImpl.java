@@ -376,4 +376,49 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    //음악 앨범 추가
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public boolean uploadMusicAlbum(AlbumDto dto) throws Exception{
+        //Dto->ImagesEntity
+        Images images = new Images();
+
+        images.setMainCategory(dto.getMainCategory());
+        images.setSubCategory(dto.getSubCategory());
+        images.setTitle(dto.getTitle());
+        images.setDescription(dto.getDescription());
+        images.setUsername(dto.getUsername());
+        images.setCreateAt(LocalDateTime.now());
+        images.setLat(dto.getLat());
+        images.setLng(dto.getLng());
+
+        imagesRepository.save(images);
+
+        //저장 폴더 지정()
+        String uploadPath = UPLOADPATH.ROOTDIRPATH + File.separator + UPLOADPATH.UPPERDIRPATH + File.separator;
+        uploadPath += UPLOADPATH.MUSICDIRPATH + File.separator + dto.getUsername() + File.separator + dto.getSubCategory() + File.separator + images.getIamgeid();
+
+        File dir = new File(uploadPath);
+        if (!dir.exists())
+            dir.mkdirs();
+
+        for (MultipartFile file : dto.getFiles()) {
+                System.out.println("-----------------------------");
+                System.out.println("filename : " + file.getName());
+                System.out.println("filename(origin) : " + file.getOriginalFilename());
+                System.out.println("filesize : " + file.getSize());
+                System.out.println("-----------------------------");
+                File fileobj = new File(dir, file.getOriginalFilename());    //파일객체생성
+
+
+                file.transferTo(fileobj);   //저장
+
+                // DB에 파일경로 저장
+                saveFileInfo(images, dto, fileobj);
+        }
+        return true;
+
+    }
+
+
 }
