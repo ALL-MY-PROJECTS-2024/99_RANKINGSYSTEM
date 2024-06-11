@@ -90,7 +90,7 @@
 
 
                     <section class="product_info_block">
-                        <form  onsubmit="return false" name="albumform" action="/user/music/add" enctype="multipart/form-data" >
+                        <form  onsubmit="return false"  method="post" name="albumform" action="/user/album/add" enctype="multipart/form-data" >
                             <div>
                                 <label>USER : </label>
                                 <input name="username" placeholder="example@example.com"  th:value="${#authentication.name}"  class="form-control"  required readonly>
@@ -133,14 +133,14 @@
                 </div>
                 <div class="music_body hidden">
 
-                    <form onsubmit="return false" name="musicForm"  >
+                    <form onsubmit="return false" method="post" name="musicForm" action="/user/music/add" enctype="multipart/form-data" >
                         <div class="m-2">
                             <label>USER : </label>
                             <input name="username" placeholder="example@example.com"  th:value="${#authentication.name}"  class="form-control"  required readonly>
                         </div>
                         <div class="m-2">
                             <label>MAIN_CATEGORY : </label>
-                            <input name="main_category" value="music" class="form-control" placeholder="제품명" readonly>
+                            <input name="mainCategory" value="music" class="form-control" placeholder="제품명" readonly>
                         </div>
                         <div class="m-2">
                             <label>TITLE : </label>
@@ -149,13 +149,13 @@
 
                         <div class="m-2">
                             <label>FILE : </label>
-                            <input name="musicfile" type="file" class="form-control">
+                            <input name="files" type="file" class="form-control">
                         </div>
 
 
                         <div class="sub_category music-cat  m-2">
                             <label>SUB_CAT : </label>
-                            <select name="sub_category"  class="form-select">
+                            <select name="subCategory"  class="form-select">
                                 <option value="Jazz" selected>Jazz</option>
                                 <option value="Rock">Rock</option>
                                 <option value="Classic">Classic</option>
@@ -167,7 +167,8 @@
                             </select>
                         </div>
 
-
+                        <input type="hidden" name="lat" />
+                        <input type="hidden" name="lng" />
                         <div class="btn-block m-2">
                             <button class="add-music-btn btn  w-100" style="">등록</button>
                         </div>

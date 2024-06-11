@@ -325,18 +325,10 @@ public class UserController {
         boolean isUploaded =  userService.uploadAlbum(dto);
     }
     @PostMapping("/music/add")
-    public  @ResponseBody void add_music(AlbumDto dto) throws IOException {
-        log.info("POST /album/add : " + dto+" file count : " + dto.getFiles().length);
-        //유효성 검사
-//        if(bindingResult.hasFieldErrors()){
-//            for(FieldError error :bindingResult.getFieldErrors()){
-//                log.info(error.getField() +" : " + error.getDefaultMessage());
-//                //model.addAttribute(error.getField(),error.getDefaultMessage());
-//            }
-//        }
-
+    public   void add_music(AlbumDto dto) throws IOException {
+        System.out.println("POST /music/add : " + dto+" file count : " + dto.getFiles().length);
         //서비스 실행
-        boolean isUploaded =  userService.uploadAlbum(dto);
+
     }
 
     @GetMapping("/album/read")

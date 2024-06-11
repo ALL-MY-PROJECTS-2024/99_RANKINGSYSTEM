@@ -170,29 +170,33 @@ musicbtn.addEventListener('click',function(){
 })
 
 //---------------------------------------------------
-//뮤직 버튼 클릭시(안됨!!)
+//뮤직 버튼 클릭시
 //---------------------------------------------------
 const addMusicBtn = document.querySelector('.add-music-btn');
 addMusicBtn.addEventListener('click',function(){
+
     console.log('clicked..!!');
     const fileForm = /(.*?)\.(mp3|wav)$/;
     var maxSize = 5 * 1024 * 1024;
 
     const form =  document.musicForm;
-    if(form.musicfile.value==""||form.musicfile.value==null){
+
+    if(form.files.value==""||form.files.value==null){
         alert("음악 파일을 첨부해주세요.")
         return ;
     }
-    if(!form.musicfile.value.match(fileForm)){
+    if(!form.files.value.match(fileForm)){
         alert("*.mp3 or *.wav 파일만 가능")
         return ;
     }
-    if(form.musicfile.files[0].size>maxSize)
+    if(form.files.files[0].size>maxSize)
     {
         alert("파일 사이즈는 5MB까지 가능");
         return ;
     }
 
+    form.lat.value = lat;
+    form.lng.value = lat;
     form.submit();
 })
 
