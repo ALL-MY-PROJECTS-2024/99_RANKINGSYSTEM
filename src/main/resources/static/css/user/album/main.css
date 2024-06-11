@@ -9,7 +9,11 @@
     display:flex;
     justify-content : space-between;
     align-items : start;
+
+    position:relative;
 }
+
+
 .mymenu{
     width : 300px;
     height : 100vh;
@@ -228,12 +232,41 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    border : 1px solid lightgray;
+
+    position:relative;
+    top:35px;
 }
 
+.my-btn{
+    position:absolute;
+    left:0px;
+    top:-35px;
+    width : 150px;
+    height:35px;
+    border : 1px solid black;
+
+    display:flex;
+    justify-content : center;
+    align-items : center;
+    background-color : lightgray;
+    cursor : pointer;
+}
+
+.active{
+    background-color : white !important;
+}
+.hidden{
+    display:none !important;;
+}
+
+.wrapper>main>section>.show-block .my-btn:nth-child(2)
+{
+    left:150px;
+}
 
 .wrapper>main>section>.show-block>.controller>div{
     margin :3px;
-
 }
 
 .wrapper>main>section>.show-block>.controller .btn-primary{

@@ -325,12 +325,16 @@ public class UserController {
         boolean isUploaded =  userService.uploadAlbum(dto);
     }
     @PostMapping("/music/add")
-    public   void add_music(AlbumDto dto) throws IOException {
+    public String add_music(AlbumDto dto) throws IOException {
         System.out.println("POST /music/add : " + dto+" file count : " + dto.getFiles().length);
         //서비스 실행
 
-        boolean isUploaded =userService.uploadMusicAlbum(dto);
+        boolean isUploaded = userService.uploadMusicAlbum(dto);
 
+        if(isUploaded){
+            return "redirect:/user/album/main";
+        }
+        return "user/album/add";
     }
 
     @GetMapping("/album/read")

@@ -197,6 +197,7 @@ addMusicBtn.addEventListener('click',function(){
 
     form.lat.value = lat;
     form.lng.value = lat;
+
     form.submit();
 })
 
