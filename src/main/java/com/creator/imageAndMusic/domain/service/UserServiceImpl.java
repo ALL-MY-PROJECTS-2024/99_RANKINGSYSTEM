@@ -5,12 +5,8 @@ import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.config.auth.jwt.JwtTokenProvider;
 import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
-import com.creator.imageAndMusic.domain.entity.Images;
-import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
-import com.creator.imageAndMusic.domain.entity.User;
-import com.creator.imageAndMusic.domain.repository.ImagesFileInfoRepository;
-import com.creator.imageAndMusic.domain.repository.ImagesRepository;
-import com.creator.imageAndMusic.domain.repository.UserRepository;
+import com.creator.imageAndMusic.domain.entity.*;
+import com.creator.imageAndMusic.domain.repository.*;
 import com.creator.imageAndMusic.properties.AUTH;
 import com.creator.imageAndMusic.properties.UPLOADPATH;
 import io.jsonwebtoken.Claims;
@@ -57,6 +53,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ImagesFileInfoRepository imagesFileInfoRepository;
 
+    @Autowired
+    private MusicRepository musicRepository;
+
+    @Autowired
+    private MusicFileInfoRepository musicFileInfoRepository;
 
     @Transactional(rollbackFor = Exception.class)
     public boolean memberJoin(UserDto dto, Model model, HttpServletRequest request) throws Exception{
@@ -245,6 +246,19 @@ public class UserServiceImpl implements UserService {
         imagesFileInfoRepository.save(imageBoardFileInfo);
     }
 
+    //작업중!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private void saveFileInfoMusic(Music music, AlbumDto dto, File fileobj) {
+
+        MusicFileInfo musicFileInfo = new MusicFileInfo();
+        musicFileInfo.setMusic(music);
+        String dirPath = File.separator + UPLOADPATH.UPPERDIRPATH + File.separator;
+        dirPath += UPLOADPATH.MUSICDIRPATH + File.separator + dto.getUsername() + File.separator
+                + dto.getSubCategory() + File.separator + music.getMusicid();
+        musicFileInfo.setDir(dirPath);
+        musicFileInfo.setFilename(fileobj.getName());
+
+        musicFileInfoRepository.save(musicFileInfo);
+    }
 
     @Transactional(rollbackFor = Exception.class)
     public boolean uploadMusic(AlbumDto dto){
@@ -379,30 +393,30 @@ public class UserServiceImpl implements UserService {
     //음악 앨범 추가
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public boolean uploadMusicAlbum(AlbumDto dto) throws Exception{
+    public boolean uploadMusicAlbum(AlbumDto dto) {
         //Dto->ImagesEntity
-        Images images = new Images();
 
-        images.setMainCategory(dto.getMainCategory());
-        images.setSubCategory(dto.getSubCategory());
-        images.setTitle(dto.getTitle());
-        images.setDescription(dto.getDescription());
-        images.setUsername(dto.getUsername());
-        images.setCreateAt(LocalDateTime.now());
-        images.setLat(dto.getLat());
-        images.setLng(dto.getLng());
+        Music music = new Music();
+        music.setMainCategory(dto.getMainCategory());
+        music.setSubCategory(dto.getSubCategory());
+        music.setTitle(dto.getTitle());
+        music.setDescription(dto.getDescription());
+        music.setUsername(dto.getUsername());
+        music.setCreateAt(LocalDateTime.now());
+        music.setLat(dto.getLat());
+        music.setLng(dto.getLng());
 
-        imagesRepository.save(images);
+        musicRepository.save(music);
 
         //저장 폴더 지정()
         String uploadPath = UPLOADPATH.ROOTDIRPATH + File.separator + UPLOADPATH.UPPERDIRPATH + File.separator;
-        uploadPath += UPLOADPATH.MUSICDIRPATH + File.separator + dto.getUsername() + File.separator + dto.getSubCategory() + File.separator + images.getIamgeid();
+        uploadPath += UPLOADPATH.MUSICDIRPATH + File.separator + dto.getUsername() + File.separator + dto.getSubCategory() + File.separator + music.getMusicid();
 
         File dir = new File(uploadPath);
         if (!dir.exists())
             dir.mkdirs();
-
-        for (MultipartFile file : dto.getFiles()) {
+        try {
+            for (MultipartFile file : dto.getFiles()) {
                 System.out.println("-----------------------------");
                 System.out.println("filename : " + file.getName());
                 System.out.println("filename(origin) : " + file.getOriginalFilename());
@@ -414,7 +428,10 @@ public class UserServiceImpl implements UserService {
                 file.transferTo(fileobj);   //저장
 
                 // DB에 파일경로 저장
-                saveFileInfo(images, dto, fileobj);
+                saveFileInfoMusic(music, dto, fileobj);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
         }
         return true;
 
