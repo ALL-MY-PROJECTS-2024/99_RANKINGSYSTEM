@@ -51,8 +51,12 @@ main>section>.read-block>.image-block>.item>.images{
 
 }
 
-main>section>.read-block>.image-block>.item>.images{
+main>section>.read-block>.image-block>.item>.music{
     padding : 10px;
+    display:flex;
+    justify-content: center;
+    align-items : start;
+    padding-top : 50px;
 }
 main>section>.read-block>.image-block>.item>div:nth-child(2) img{
     object-fit : contain;

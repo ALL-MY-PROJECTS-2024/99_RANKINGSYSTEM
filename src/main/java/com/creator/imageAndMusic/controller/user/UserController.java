@@ -7,9 +7,7 @@ import com.creator.imageAndMusic.config.auth.jwt.JwtTokenProvider;
 import com.creator.imageAndMusic.config.auth.jwt.TokenInfo;
 import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
-import com.creator.imageAndMusic.domain.entity.Images;
-import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
-import com.creator.imageAndMusic.domain.entity.User;
+import com.creator.imageAndMusic.domain.entity.*;
 import com.creator.imageAndMusic.domain.repository.UserRepository;
 import com.creator.imageAndMusic.domain.service.UserService;
 import com.creator.imageAndMusic.properties.AUTH;
@@ -296,13 +294,18 @@ public class UserController {
     public void func2(Model model) throws Exception {
 
         log.info("GET /user/album/main...");
+        //전체 보유 이미지(제한 걸어야되는데..)
         List<ImagesFileInfo> list =  userService.getUserItems();
-
-
-
         model.addAttribute("list",list);
 
+//        //전체 보유 음악(제한 걸어야되는데..)
+        List<MusicFileInfo> musicList =  userService.getUserMusicItems();
+        model.addAttribute("musicList",musicList);
+
     }
+
+
+
 
 
     @GetMapping("/album/add")
@@ -348,6 +351,18 @@ public class UserController {
         model.addAttribute("filelist",filelist);
         model.addAttribute("images",images);
     }
+    @GetMapping("/album/readmusic")
+    public void read_album_music(@RequestParam(name = "musicid") Long musicid,Model model) throws Exception {
+
+        log.info("GET /user/album/readmusic...musicid " + musicid);
+
+        List<MusicFileInfo> filelist =  userService.getUserMusicItem(musicid);
+        Music music =  filelist.get(0).getMusic();
+
+        model.addAttribute("filelist",filelist);
+        model.addAttribute("music",music);
+    }
+
 
     @DeleteMapping("/album/delete")
     public @ResponseBody ResponseEntity<String> delete_album(@RequestParam(name = "fileid") Long fileid){

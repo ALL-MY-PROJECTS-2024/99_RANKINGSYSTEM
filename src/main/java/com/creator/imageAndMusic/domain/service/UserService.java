@@ -3,6 +3,7 @@ package com.creator.imageAndMusic.domain.service;
 import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
+import com.creator.imageAndMusic.domain.entity.MusicFileInfo;
 import com.creator.imageAndMusic.domain.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,4 +35,10 @@ public interface UserService {
     boolean modifiedMyInfo(UserDto userDto, Model model);
 
     boolean uploadMusicAlbum(AlbumDto dto);
+
+    @Transactional(rollbackFor = Exception.class)
+    public List<MusicFileInfo> getUserMusicItems() throws Exception;
+
+    @Transactional(rollbackFor = Exception.class)
+    List<MusicFileInfo> getUserMusicItem(Long musicid);
 }

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!--  link   -->
+    <th:block th:insert="fragments/link :: linkFragment" />
+
+    <!-- /css/album/read.css   -->
+    <link rel="stylesheet" href="/css/user/album/readmusic.css">
+
+    <!-- read.js -->
+    <script src="/js/user/album/readmusicjs" defer></script>
+
+</head>
+<body>
+    
+    <div class="wrapper">
+
+        <!-- header   -->
+        <th:block th:insert="fragments/header :: headerFragment" />
+
+        <!-- albumNav       -->
+        <th:block th:insert="fragments/nav ::albumNavFragment" />
+
+
+        <main class="layout-5" >
+            <section>
+
+                <div class="read-block" >
+                    <div class="info-block">
+                        <table class="table">
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width:200px;" >TITLE</td>
+                                    <td class="title"  th:text="${music.title}" style="width:500px;"></td>
+                                    <td  style="width:200px;" >DATE</td>
+                                    <td class="date" th:text="${#temporals.format(music.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                </tr>
+                                <tr>
+                                    <td>USER</td>
+                                    <td  class="username" th:text="${music.username}" colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>MAIN CATEGORY</td>
+                                    <td  class="mainCategory" th:text="${music.mainCategory}"></td>
+                                    <td>SUB CATEGORY</td>
+                                    <td class="subCategory" th:text="${music.subCategory}"></td>
+                                </tr>
+                                <tr>
+                                    <td>DESCRIPTION</td>
+                                    <td class="description" th:text="${music.description}"  colspan="3"></td>
+                                </tr>
+                           </tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                    <div class="image-block">
+
+                        <div class="item" th:each="musicFileInfo : ${filelist}">
+                            <div class="btns">
+                                <a href="javascript:void(0)" class="btn btn-primary addRanking" th:data-fileid="${musicFileInfo.fileid}">
+                                    <span class="material-symbols-outlined" style="font-size : .8rem">add</span>
+                                    <span>ADD RANKING</span>
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-primary deleteRanking" th:data-fileid="${musicFileInfo.fileid}">
+                                    <span class="material-symbols-outlined" style="font-size : .8rem">delete</span>
+                                    <span>DELETE MUSIC</span>
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-primary changeCategory">
+                                    <span class="material-symbols-outlined" style="font-size : .8rem">published_with_changes</span>
+                                    <span>CHANGE INFO</span>
+                                </a>
+                            </div>
+                            <div class="music">
+                                <th:block  >
+                                    <audio controls>
+                                        <source th:src="@{${musicFileInfo.dir}+'/'+${musicFileInfo.filename}}" type="audio/mp3">
+                                        <source th:src="@{${musicFileInfo.dir}+'/'+${musicFileInfo.filename}}" type="audio/wav">
+                                        이 문장은 여러분의 브라우저가 audio 태그를 지원하지 않을 때 화면에 표시됩니다!
+                                    </audio>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+
+<!--                    <div class="contents-block">-->
+
+<!--                    </div>-->
+
+                </div>
+
+            </section>
+        </main>
+        <footer></footer>
+    </div>
+    
+</body>
+</html>

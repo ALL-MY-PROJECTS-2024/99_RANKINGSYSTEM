@@ -51,10 +51,10 @@ public class UserServiceImpl implements UserService {
     private ImagesRepository imagesRepository;
 
     @Autowired
-    private ImagesFileInfoRepository imagesFileInfoRepository;
+    private MusicRepository musicRepository;
 
     @Autowired
-    private MusicRepository musicRepository;
+    private ImagesFileInfoRepository imagesFileInfoRepository;
 
     @Autowired
     private MusicFileInfoRepository musicFileInfoRepository;
@@ -286,6 +286,26 @@ public class UserServiceImpl implements UserService {
         return myalbumImageList;
 
     }
+    //유저별 음악 조회
+    @Transactional(rollbackFor = Exception.class)
+    public List<MusicFileInfo> getUserMusicItems() throws Exception{
+        Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+        PrincipalDetails principalDetails =  (PrincipalDetails) authentication.getPrincipal();
+        String username =  principalDetails.getUsername();
+        List<Music>  musicList =  musicRepository.findAllByUsername(username);
+        List<MusicFileInfo> myalbumMusicList = new ArrayList();
+
+        for(Music el : musicList){
+            List<MusicFileInfo> tmp =  musicFileInfoRepository.findAllByMusic(el);
+            for(MusicFileInfo el2 : tmp)
+                myalbumMusicList.add(el2);
+        }
+        return myalbumMusicList;
+    }
+
+
+
+
     @Transactional(rollbackFor = Exception.class)
     public List<ImagesFileInfo> getUserItem(Long imageid) throws Exception{
         Optional<Images> imagesOptional =  imagesRepository.findById(imageid);
@@ -293,7 +313,14 @@ public class UserServiceImpl implements UserService {
             return imagesFileInfoRepository.findAllByImages(imagesOptional.get());
         return null;
     }
-
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public List<MusicFileInfo> getUserMusicItem(Long musicid) {
+        Optional<Music> musicOptional =  musicRepository.findById(musicid);
+        if(!musicOptional.isEmpty())
+            return musicFileInfoRepository.findAllByMusic(musicOptional.get());
+        return null;
+    }
 
 
 
@@ -301,9 +328,13 @@ public class UserServiceImpl implements UserService {
     @Transactional(rollbackFor = Exception.class)
     public List<ImagesFileInfo> getAllItems() throws Exception{
         return imagesFileInfoRepository.findAll();
-
     }
 
+
+
+
+
+    
     @Override
     @Transactional(rollbackFor = Exception.class)
     public User getUser(UserDto userDto) {
