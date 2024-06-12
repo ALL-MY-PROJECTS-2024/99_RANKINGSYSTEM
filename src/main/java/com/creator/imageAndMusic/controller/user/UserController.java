@@ -377,7 +377,17 @@ public class UserController {
     }
 
 
+    @DeleteMapping("/album/musicdelete")
+    public @ResponseBody ResponseEntity<String> delete_albu_music(@RequestParam(name = "fileid") Long fileid){
+        log.info("GET /user/album/musicdelete...fileid " + fileid);
 
+        boolean isDeleted =  userService.removeAlbumMusicFile(fileid);
+        if(isDeleted)
+            return  new ResponseEntity("삭제완료,앨범 메인 페이지로 이동하시겠습니까?",HttpStatus.OK);
+        else
+            return  new ResponseEntity("삭제실패",HttpStatus.BAD_GATEWAY);
+
+    }
 
 
 //----------------------------------------------------------------

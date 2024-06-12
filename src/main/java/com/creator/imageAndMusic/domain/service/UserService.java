@@ -41,4 +41,6 @@ public interface UserService {
 
     @Transactional(rollbackFor = Exception.class)
     List<MusicFileInfo> getUserMusicItem(Long musicid);
+
+    boolean removeAlbumMusicFile(Long fileid);
 }

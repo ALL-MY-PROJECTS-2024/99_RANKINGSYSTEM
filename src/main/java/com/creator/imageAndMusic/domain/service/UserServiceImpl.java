@@ -246,7 +246,7 @@ public class UserServiceImpl implements UserService {
         imagesFileInfoRepository.save(imageBoardFileInfo);
     }
 
-    //작업중!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     private void saveFileInfoMusic(Music music, AlbumDto dto, File fileobj) {
 
         MusicFileInfo musicFileInfo = new MusicFileInfo();
@@ -374,6 +374,45 @@ public class UserServiceImpl implements UserService {
             File file = new File(deleteImagesFileInfo.getDir()+File.separator+deleteImagesFileInfo.getFilename());
             file.delete();
             File thumb_file = new File(deleteImagesFileInfo.getDir()+File.separator+"s_"+deleteImagesFileInfo.getFilename());
+            thumb_file.delete();
+
+            return true;
+        }
+
+
+
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean removeAlbumMusicFile(Long fileid) {
+
+        //삭제할 이미지파일정보
+        MusicFileInfo deleteMusicFileInfo =  musicFileInfoRepository.findById(fileid).get();
+
+        List<MusicFileInfo> allSameMusicIdFileInfo = musicFileInfoRepository.findAllByMusic(deleteMusicFileInfo.getMusic());
+        log.info("TOTAL SAME IMAGEID FILE COUNT : " + allSameMusicIdFileInfo.size());
+        if(allSameMusicIdFileInfo.size()==1)    //마지막 삭제파일
+        {
+            musicFileInfoRepository.deleteById(deleteMusicFileInfo.getFileid());
+            imagesRepository.deleteById(deleteMusicFileInfo.getMusic().getMusicid());
+            File file = new File(deleteMusicFileInfo.getDir()+File.separator+deleteMusicFileInfo.getFilename());
+            file.delete();
+
+            File thumb_file = new File(deleteMusicFileInfo.getDir()+File.separator+"s_"+deleteMusicFileInfo.getFilename());
+            thumb_file.delete();
+
+            File dir = new File(deleteMusicFileInfo.getDir());
+            dir.delete();
+
+            return true;
+        }
+        else
+        {
+            musicFileInfoRepository.deleteById(deleteMusicFileInfo.getFileid());
+            File file = new File(deleteMusicFileInfo.getDir()+File.separator+deleteMusicFileInfo.getFilename());
+            file.delete();
+            File thumb_file = new File(deleteMusicFileInfo.getDir()+File.separator+"s_"+deleteMusicFileInfo.getFilename());
             thumb_file.delete();
 
             return true;

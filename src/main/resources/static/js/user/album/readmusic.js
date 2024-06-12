@@ -31,9 +31,9 @@ deleteRankingEls.forEach(deleteRankingEl=>{
         console.log("deleteRanking")
 
         const fileid = this.getAttribute('data-fileid');
-        if(confirm("해당 앨범이미지 삭제시 등록된 랭킹에서도 함께 삭제 됩니다.\n진행하시겠습니까?"))
+        if(confirm("해당 음악파일 삭제시 등록된 랭킹에서도 함께 삭제 됩니다.\n진행하시겠습니까?"))
         {
-            axios.delete("/user/album/delete?fileid=" +fileid )
+            axios.delete("/user/album/musicdelete?fileid=" +fileid )
             .then(resp=>{
                 console.log(resp.data);
                 if(confirm(resp.data)){
