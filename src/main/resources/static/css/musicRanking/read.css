@@ -1,0 +1,52 @@
+main>section{}
+main>section>.read-block{
+
+    /*height : 100vh;*/
+}
+
+main>section>.read-block .info-block{
+    /*border : 1px solid;*/
+    /*height : 200px;*/
+}
+main>section>.read-block>.image-block{
+    display:flex;
+    justify-content : center;
+    align-items : start;
+}
+
+main>section>.read-block>.image-block>.item{
+    margin : 10px;
+    border : 1px solid;
+    height : 100%;
+}
+main>section>.read-block>.image-block>.item .btns{
+    margin : 5px;
+    font-size : .8rem;
+    border : 1px solid;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+main>section>.read-block>.image-block>.item .btns a{
+    width : 150px;
+    margin : 10px;
+    font-size : .8rem;
+}
+
+main>section>.read-block>.image-block>.item>.images{
+
+
+
+}
+
+main>section>.read-block>.image-block>.item>.images{
+    padding : 10px;
+
+
+}
+main>section>.read-block>.image-block>.item>div:nth-child(2) img{
+    object-fit : contain;
+    display:block;
+    margin : 0 auto;
+}

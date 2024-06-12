@@ -5,15 +5,15 @@ addRankingEls.forEach(addRankingEl=>{
     addRankingEl.addEventListener("click",function(e){
         console.log("addRanking ",e.target);
 
-        if(confirm("이미지를 RANKING BOARD에 등록하시겠습니까?")){
+        if(confirm("음악을 RANKING BOARD에 등록하시겠습니까?")){
                 const fileid = this.getAttribute('data-fileid');
                 console.log("fileid",fileid);
 
-                axios.get("/imageRanking/add?fileid="+fileid)
+                axios.get("/musicRanking/add?fileid="+fileid)
                 .then(resp=>{
                     console.log(resp.data);
                     if(confirm(resp.data+" 랭킹페이지로 이동할까요?"))
-                        location.href="/imageRanking/list";
+                        location.href="/musicRanking/list";
 
                 })
                 .catch(err=>{console.log(err)})

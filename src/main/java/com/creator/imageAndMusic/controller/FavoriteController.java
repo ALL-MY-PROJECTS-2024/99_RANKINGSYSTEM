@@ -4,6 +4,7 @@ package com.creator.imageAndMusic.controller;
 import com.creator.imageAndMusic.config.auth.jwt.JwtProperties;
 import com.creator.imageAndMusic.config.auth.jwt.JwtTokenProvider;
 import com.creator.imageAndMusic.domain.service.FavoriteImageServiceImpl;
+import com.creator.imageAndMusic.domain.service.FavoriteMusicServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class FavoriteController {
     @Autowired
     FavoriteImageServiceImpl favoriteImageService;
 
+    @Autowired
+    FavoriteMusicServiceImpl favoriteMusicService;
+
 
     @GetMapping("/image/{id}")
     public @ResponseBody ResponseEntity<String> favorites(@PathVariable("id")Long id,Authentication authentication){
@@ -34,6 +38,13 @@ public class FavoriteController {
         log.info("GET /favorite/image/id : " + id);
         Map<String, Object> result =  favoriteImageService.addFavoriteImage(id);
 
+        return new ResponseEntity( result,HttpStatus.OK);
+    }
+    @GetMapping("/music/{id}")
+    public @ResponseBody ResponseEntity<String> favorites_music(@PathVariable("id")Long id,Authentication authentication){
+        System.out.println("authentication : " + authentication);
+        log.info("GET /favorite/image/id : " + id);
+        Map<String, Object> result =  favoriteMusicService.addFavoriteMusic(id);
         return new ResponseEntity( result,HttpStatus.OK);
     }
 }

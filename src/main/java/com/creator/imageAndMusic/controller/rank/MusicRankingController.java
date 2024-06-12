@@ -1,15 +1,17 @@
-package com.creator.imageAndMusic.controller;
+package com.creator.imageAndMusic.controller.rank;
 
 
-import com.creator.imageAndMusic.domain.dto.BoardDto;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
-import com.creator.imageAndMusic.domain.entity.Board;
 import com.creator.imageAndMusic.domain.entity.FavoriteImage;
+import com.creator.imageAndMusic.domain.entity.FavoriteMusic;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
+import com.creator.imageAndMusic.domain.entity.MusicRanking;
 import com.creator.imageAndMusic.domain.service.FavoriteImageServiceImpl;
+import com.creator.imageAndMusic.domain.service.FavoriteMusicServiceImpl;
 import com.creator.imageAndMusic.domain.service.ImageRankingService;
-import jakarta.servlet.http.Cookie;
+
+import com.creator.imageAndMusic.domain.service.MusicRankingServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
-@RequestMapping("/imageRanking")
-public class ImageRankingController {
+@RequestMapping("/musicRanking")
+public class MusicRankingController {
 
 
     @ExceptionHandler
@@ -40,17 +41,23 @@ public class ImageRankingController {
     @Autowired
     private FavoriteImageServiceImpl favoriteImageService;
 
+    @Autowired
+    private FavoriteMusicServiceImpl favoriteMusicService;
+    @Autowired
+    private MusicRankingServiceImpl musicRankingService;
+
+
+
     @GetMapping("/add")
     public @ResponseBody ResponseEntity<String> addRanking(@RequestParam("fileid") Long fileid,Model model) throws Exception {
         log.info("imageRanking/add..fileid : " + fileid);
 
-        boolean isAdded =  imageRankingService.addRankingImage(fileid);
+        boolean isAdded =  musicRankingService.addRankingImage(fileid);
         if(isAdded)
             return  new ResponseEntity("RANKING 등록 완료",HttpStatus.OK);
         else
             return  new ResponseEntity("RANKING 등록 실패",HttpStatus.BAD_GATEWAY);
     }
-
 
     @GetMapping("/list")
     public String list(@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
@@ -61,7 +68,7 @@ public class ImageRankingController {
 
     )
     {
-        log.info("GET /imageRanking/list... ");
+        log.info("GET /musicRanking/list... ");
 
         //----------------
         //PageDto  Start
@@ -78,14 +85,14 @@ public class ImageRankingController {
         //파라미터 받기
         //유효성체크
         //서비스실행
-        Map<String,Object> map =  imageRankingService.getAllImageRanking(criteria);
+        Map<String,Object> map =  musicRankingService.getAllMusicRanking(criteria);
 
         PageDto pageDto = (PageDto) map.get("pageDto");
         PageDto likepageDto = (PageDto) map.get("likepageDto");
-        List<ImagesRanking> list = (List<ImagesRanking>) map.get("list");
-        List<ImagesRanking> likelist = (List<ImagesRanking>) map.get("likelist");
-        List<ImagesRanking> rankingList = (List<ImagesRanking>) map.get("rankingList");
-        List<ImagesRanking> rankingLikeList = (List<ImagesRanking>) map.get("rankingLikeList");
+        List<MusicRanking> list = (List<MusicRanking>) map.get("list");
+        List<MusicRanking> likelist = (List<MusicRanking>) map.get("likelist");
+        List<MusicRanking> rankingList = (List<MusicRanking>) map.get("rankingList");
+        List<MusicRanking> rankingLikeList = (List<MusicRanking>) map.get("rankingLikeList");
         int count = (int)map.get("count");
 
 
@@ -97,28 +104,28 @@ public class ImageRankingController {
         model.addAttribute("rankingList",rankingList);
         model.addAttribute("rankingLikeList",rankingLikeList);
         model.addAttribute("mode",mode);
-        //ThumbUp 찾기
-        List<FavoriteImage> favoriteImageList  = favoriteImageService.getMyfavoriteImage(authentication.getName());
-        model.addAttribute("favoriteList",favoriteImageList);
+
+//        //ThumbUp 찾기
+        List<FavoriteMusic> favoriteMusicList  = favoriteMusicService.getMyfavoriteMusic(authentication.getName());
+        model.addAttribute("favoriteList",favoriteMusicList);
 
 
-        //좋아요 순서
 
-
-        return "imageRanking/list";
+        return "musicRanking/list";
 
     }
 
     @GetMapping("/read")
     public void readRanking(@RequestParam(name = "rankingId",defaultValue = "1") Long rankingId,Model model){
-        log.info("GET /imageRanking/read..");
+        log.info("GET /musicRanking/read..");
 
 
-        ImagesRanking imagesRanking = imageRankingService.getImageRanking(rankingId);
-        model.addAttribute("imagesRanking",imagesRanking);
+        MusicRanking musicRanking = musicRankingService.getMusicRanking(rankingId);
+        model.addAttribute("musicRanking",musicRanking);
         model.addAttribute("title","조회순");
 
-        imageRankingService.count(rankingId);
+        musicRankingService.count(rankingId);
+
     }
 
 }

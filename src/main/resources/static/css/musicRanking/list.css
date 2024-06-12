@@ -1,0 +1,374 @@
+.main-container{
+
+
+    padding : 10px;
+}
+.main-container>.left{
+    width : 30vw;;
+    height : 100vh;
+    padding : 10px;
+    border : 1px solid;
+    overflow : auto;
+
+}
+.main-container>.left>.ranking{
+    min-width:500px;
+    max-width:800px;
+
+}
+.main-container>.left>.ranking>div:nth-child(1){
+    text-align:center;
+}
+
+.main-container>.right{
+    width : 100%;
+    padding : 20px;
+    border : 1px solid;
+
+    position:relative;
+}
+
+.main-container>.right>.right-header{
+    display:flex;
+    justify-content:right;
+    align-items : center;
+}
+.main-container>.right>.items{
+    width : 100%;
+    height : 800px;
+    padding : 10px;
+    border : 1px solid;
+
+    display:flex;
+    justify-content:center;
+    align-items : center;
+    flex-wrap : wrap;
+
+    overflow : auto;
+    position:relative;
+    z-index : 2;
+}
+.main-container>.right>.btn-group{
+    width : 450px;
+}
+.main-container>.right  .countOrder,
+.main-container>.right  .likeOrder,
+.main-container>.right  .summary
+{
+
+    position:relative;
+    left:0px;
+    top : 1px;
+    width : 150px;
+    height : 50px;
+
+    cursor : pointer;
+    display:flex;
+    justify-content:center;
+    align-items : center;
+    z-index :1;
+    background-color : lightgrey;
+    font-size : .9rem;
+    color : gray;
+    font-weight :400;
+
+}
+
+
+.main-container>.right>.items>.item{
+    margin : 10px;
+
+
+    width : 250px;
+    height : 150px;
+
+    position:relative;
+    opacity :.7;
+
+    padding : 10px;
+}
+.main-container>.right>.items>.item:hover{
+    opacity :1;
+
+}
+.main-container>.right>.items>.item .count{
+
+    display:flex;
+    justify-content: right;
+    align-items: center;
+
+
+    font-size : .7rem;
+    opacity: 0;
+    color : black;
+
+}
+.main-container>.right>.items>.item:hover .count{
+    padding :2px 0;
+    opacity: .8;
+    z-index:7;
+    transition:.5s;
+}
+
+
+.main-container>.right>.items>.item>.ranking-block{
+
+    height : 25px;
+
+    position:absolute;
+    width : 100%;
+    left:0px;
+    top:0px;
+    z-index : 5;
+    display:flex;
+    justify-content : space-between;
+    align-items : center;
+
+}
+.main-container>.right>.items>.item>.ranking-block>.rank{
+    width : 25px;
+    height : 25px;
+    background-color : black;
+    color : white;
+    display:flex;
+    justify-content: center;
+    align-items : center;
+    font-size : .8rem;
+}
+
+.main-container>.right>.items>.item>.ranking-block>.bookmark{
+
+}
+.main-container>.right>.items>.item .regdate{
+
+
+    font-size : .7rem;
+    color :black;
+
+    margin-bottom : 2px;
+    opacity : 0;
+    width : 100%;
+    border : 0px;
+    display:flex;
+    justify-content: right;
+    transition:.5s;
+}
+.main-container>.right>.items>.item .regdate >span{
+    display:block;
+    width : 100%:
+    text-align:right;
+}
+.main-container>.right>.items>.item:hover .regdate{
+    opacity : 1;
+    z-index : 6;
+
+}
+
+
+
+.main-container>.right>.items>.item>.image-block{
+    padding : 2px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+
+    position:relative;
+    width : 100%;
+    height : 100%;
+    top:0;bottom:0;left:0;right:0;
+    margin : auto;
+    transition:.5s;
+}
+.main-container>.right>.items>.item>.image-block a{
+    display:block;
+    padding : 2px;
+
+}
+.main-container>.right>.items>.item>.image-block img{
+    width : 200px;
+    height : 130px;
+
+    object-fit : contain;
+}
+
+.main-container>.right>.items>.item .contents{
+    width :100%;
+    display:flex;
+    justify-content:space-between;
+    align-items : center;
+
+    z-index : 7;
+    margin-top : 5px;
+    color : black;
+}
+.main-container>.right>.items>.item:hover .contents{
+    border-top : 1px solid white;
+}
+
+ .main-container>.right>.items>.item .contents .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 300,
+          'GRAD' 0,
+          'opsz' 18;
+
+}
+
+.main-container>.right>.items>.item>.extra{
+
+
+    position:relative;
+    top:5px;
+    left :0px;
+    width : 100%;
+    z-index : 100;
+    transition:.5s;
+    height : 50px;
+    opacity:0;
+}
+.main-container>.right>.items>.item>.extra .title{
+    font-size : .8rem;
+    color :black;
+
+}
+.main-container>.right>.items>.item:hover .title{
+    display:block;
+}
+.main-container>.right>.items>.item>.extra>div{
+    display:flex;
+    justify-content : space-between;
+    align-items :center;
+}
+.main-container>.right>.items>.item:hover .extra{
+    padding : 5px;
+    margin-top : 10px;
+    opacity : 1;
+    border : 1px solid lightgray;
+    height :50px;
+    width : 100%:
+    position:absolute;
+    bottom:0;
+    left:-8px;
+    width : 245px;
+    background-color : white;
+
+}
+
+.main-container>.right>.items>.item>.bg{
+    width : 100%;
+    height : 100%;
+    position:absolute;
+    background-color : gray;
+    opacity : 0;
+
+    z-index:-1;
+}
+.main-container>.right>.items>.item:hover .bg{
+    z-index : 1;
+    opacity : .3;
+}
+.main-container>.right>.items>.item:hover .image-block{
+    z-index : 5;
+    opacity: .4;
+}
+.main-container>.right>.items>.item .favorite-block{
+    position:absolute;
+
+    left:0;
+    bottom:0;
+    font-size : .9rem;
+    display:none;
+    z-index : 99999
+}
+.main-container>.right>.items>.item .favorite-block a{
+    width : 35px;
+    color : darkcyan;
+    display:flex;
+    justify-content : space-between;
+    align-items : start;
+}
+.main-container>.right>.items>.item:hover .favorite-block{
+    display:block;
+}
+.main-container>.right>.items>.item .ranking-block .bookmark
+{
+    display:none;
+}
+.main-container>.right>.items>.item:hover .bookmark{
+    display:block;
+    width : 35px;
+    height :35px;
+    color : darkcyan;
+    display:flex;
+    justify-content : right;
+    align-items : start;
+}
+
+
+th,td{
+    font-size : .8rem;
+    text-align:center;
+}
+
+.hidden{
+    display:none !important;
+}
+
+.active{
+    background-color :white !important;
+    border : 1px solid !important;
+    border-bottom: 1px solid white !important;
+    z-index : 3;
+    position:relative;
+}
+
+.items.summary-block {
+    display:flex;
+    justify-content:space-between;
+    align-items:start;
+    height : 800px;
+    margin :0px;;
+    position:relative;
+}
+.items.summary-block .item {
+    margin : 20px;
+    width : 500px !important;
+    height : 600px;
+    position:relative;
+    top:-280px;
+
+}
+.items.summary-block .item .table{
+
+
+}
+
+.items.summary-block .item .table th{
+    background-color : black;
+    color : white;
+    border : 1px solid;
+}
+th,td{
+    font-size : .8rem;
+
+}
+td{
+    font-size : .7rem;
+}
+
+.items.summary-block .item .table th .material-symbols-outlined{
+
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 200,
+          'GRAD' 0,
+          'opsz' 18;
+    font-size : 1rem;
+
+}
+
+ .paging{
+    position:absolute;
+    top:20px;
+    left : 20px;
+}
