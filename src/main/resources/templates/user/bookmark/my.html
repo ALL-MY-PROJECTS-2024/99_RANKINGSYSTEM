@@ -38,11 +38,34 @@
             </div>
         </section>
 
-        <section class="layout-5 ">
+        <section class="layout-5 show-block ">
+            <div class="my-btn btn-img active" style="">이미지</div>
+            <div class="my-btn btn-music" style="">음악</div>
+            <div class="items image-block" >
 
-            <div class="items" >
+                <div class="item" th:each="bookmark :${list}">
+                    <div class="cancel">
+                        <a href="javascript:void(0)" th:data-id="${bookmark.id}">
+                            x
+                        </a>
+                    </div>
+                    <div class="title" >TITLE [<span th:text="${bookmark.imagesRanking.imagesFileInfo.images.title}"></span>]</div>
+                    <div class="cat" th:text="${bookmark.imagesRanking.imagesFileInfo.images.subCategory}"></div>
+                    <div class="image" >
+                        <a href="">
+                            <img th:src="@{${bookmark.imagesRanking.imagesFileInfo.dir}+'\s_'+${bookmark.imagesRanking.imagesFileInfo.filename}}" alt="" />
+                        </a>
+                    </div>
+                    <div class="createdAt" th:text="${bookmark.imagesRanking.imagesFileInfo.images.createAt}"></div>
+                    <div class="ilikeit" >좋아요 수 [<span th:text="${bookmark.imagesRanking.ilikeit}"></span>]</div>
+                    <div class="count" > 조회수 [<span th:text="${bookmark.imagesRanking.count}"></span>]</div>
+                </div>
+            </div>
 
+        <!--            -->
+            <div class="items music-block" >
 
+                    !!!
                 <div class="item" th:each="bookmark :${list}">
                     <div class="cancel">
                         <a href="javascript:void(0)" th:data-id="${bookmark.id}">

@@ -14,3 +14,29 @@ cancelEls.forEach(el=>{
         .catch(err=>{console.log(err);})
     })
 })
+
+//이미지 / 음악 버튼 누를시 반응
+//음악 / 이미지 버튼
+const btnImg = document.querySelector('.my-btn.btn-img');
+const btnMusic = document.querySelector('.my-btn.btn-music');
+
+const imageBlock = document.querySelector('.image-block.items');
+const musicBlock = document.querySelector('.music-block.items');
+
+btnImg.addEventListener('click',function(){
+
+    btnImg.classList.add('active')
+    btnMusic.classList.remove('active');
+
+    imageBlock.classList.remove('hidden');
+    musicBlock.classList.add('hidden');
+
+})
+btnMusic.addEventListener('click',function(){
+    btnMusic.classList.add('active')
+    btnImg.classList.remove('active');
+
+    musicBlock.classList.remove('hidden');
+    imageBlock.classList.add('hidden');
+
+})

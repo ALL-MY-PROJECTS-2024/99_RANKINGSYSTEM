@@ -9,15 +9,15 @@
     justify-content : left;
     align-items : start;
     padding : 20px;
-
+    position:relative;
+    top:35px;
 }
 
 .items .item{
     padding : 10px;
     border : 1px solid darkcyan;
-    width : 300px;
+    width : 250px;
     margin : 5px;
-
     position:relative;
 
 }
@@ -37,4 +37,36 @@
 .items .item .cancel a{
     color : white;
 
+}
+.items .item img{
+    width : 100%;
+}
+.show-block {
+    position:relative;
+}
+.my-btn{
+    position:absolute;
+    left:5%;
+    top:0px;
+    width : 150px;
+    height:35px;
+    border : 1px solid black;
+
+    display:flex;
+    justify-content : center;
+    align-items : center;
+    background-color : lightgray;
+    cursor : pointer;
+}
+.my-btn:nth-child(2)
+{
+    margin-left:5%;
+    left:150px;
+}
+
+.hidden{
+    display: none;
+}
+.active{
+    background-color : white !important;
 }
