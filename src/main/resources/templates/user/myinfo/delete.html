@@ -9,21 +9,9 @@
     <th:block th:insert="fragments/link :: linkFragment" />
 
 
-    <!-- index.css-->
-    <link rel="stylesheet" href="/css/index.css">
-    <!-- join.css-->
-    <link rel="stylesheet" href="/css/user/index_join.css">
+    <link rel="stylesheet" href="/css/user/myinfo/delete.css">
 
-    <link rel="stylesheet" href="/css/index_login.css">
-
-
-    <!-- index.js   -->
-    <script src="/js/index.js" defer> </script>
-
-    <!-- join.js   -->
-    <script src="/js/user/index_join.js" defer> </script>
-
-
+    <script  src="/js/user/myinfo/delete.js"  defer></script>
 
 
 </head>
@@ -38,11 +26,34 @@
     <th:block th:insert="~{fragments/nav :: albumNavFragment}" />
 
     <main>
+        <section class="warning">
+            <div>
+                경고! 계정 삭제시 업로드된 이미지파일/음악 파일 랭킹정보 등이 모두 삭제됩니다.<br>
+                계속 하시려면 패스워드를 입력해주세요.<br>
+            </div>
+        </section>
         <section class="banner">
+              <!--
                 //  이미지 폴더 삭제
                 //  뮤직 폴더 삭제
                 // DB 내의 images / music 찾아 삭제
                 // DB 내의 user 정보삭제
+                -->
+            <form name="deleteForm" onsubmit="return false" action="/user/myinfo/delete" method="delete" style="width:500px;margin:50px auto;">
+
+                <div class="m-3" style="font-size : .7rem; color : orange;display:flex;align-items:center;">
+                    <span class="material-symbols-outlined" th:text="${icon}"></span> &nbsp;
+                    <span th:text="${message}"></span>
+                </div>
+                <div class="m-3">
+                    <label for="" class="mb-1">패스워드 입력 : </label>
+                    <input type="password" name="password" class="form-control"/>
+                </div>
+                <div class="m-3">
+                    <button  class="btn btn-primary delete_btn w-100">입력</button>
+                </div>
+
+            </form>
         </section>
     </main>
 

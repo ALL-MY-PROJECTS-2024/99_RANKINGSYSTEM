@@ -12,4 +12,5 @@ public interface ImagesRepository extends JpaRepository<Images,Long> {
 
     List<Images> findAllByUsername(String username);
 
+    void deleteAllByUsername(String username);
 }

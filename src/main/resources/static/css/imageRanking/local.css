@@ -75,7 +75,17 @@ section #map{
 }
 
 .info.leaflet-control{
-    display:none;
+    display:block;
+    position:relative;
+    left:-30px;
+    width : 120px;
+    margin :0px;
+    height :55px;
+
+    display:flex;
+    justify-content : center;
+    align-items : center;
+    flex-direction : column;
 }
 
 .show-block .table-block .material-symbols-outlined {

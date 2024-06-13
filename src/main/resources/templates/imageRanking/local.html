@@ -21,6 +21,24 @@
     <script th:inline="javascript">
         let result = /*[[${result}]]*/
         console.log(result);
+        //정렬하기
+        result.강원도.sort((a, b) => b.count - a.count);
+        result.경기도.sort((a, b) => b.count - a.count);
+        result.경상남도.sort((a, b) => b.count - a.count);
+        result.경상북도.sort((a, b) => b.count - a.count);
+        result.광주광역시.sort((a, b) => b.count - a.count);
+        result.대구광역시.sort((a, b) => b.count - a.count);
+        result.대전광역시.sort((a, b) => b.count - a.count);
+        result.부산광역시.sort((a, b) => b.count - a.count);
+        result.서울특별시.sort((a, b) => b.count - a.count);
+        result.세종특별자치시.sort((a, b) => b.count - a.count);
+        result.울산광역시.sort((a, b) => b.count - a.count);
+        result.인천광역시.sort((a, b) => b.count - a.count);
+        result.전라남도.sort((a, b) => b.count - a.count);
+        result.제주특별자치도.sort((a, b) => b.count - a.count);
+        result.충청남도.sort((a, b) => b.count - a.count);
+        result.충청북도.sort((a, b) => b.count - a.count);
+
     </script>
 
 
@@ -118,7 +136,7 @@
                                     <th style="width:40px !important;"><span class="material-symbols-outlined">thumb_up</span></th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="table-body">
                                 <tr>
                                     <td>1</td>
                                     <td>1</td>
@@ -126,7 +144,6 @@
                                     <td>1</td>
                                     <td>1</td>
                                     <td>1</td>
-
                                 </tr>
                                 </tbody>
                             </table>

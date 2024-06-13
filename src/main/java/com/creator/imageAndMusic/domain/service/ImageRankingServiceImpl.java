@@ -168,7 +168,6 @@ public class ImageRankingServiceImpl implements ImageRankingService {
              User user =  userRepository.findById(username).get();
              System.out.println("user : " + user);
              if(user.getAddr1()!=null && user.getAddr1().contains("인천")){
-
                  a.add(imageRanking);
              }else if(user.getAddr1()!=null && user.getAddr1().contains("서울")){
                  b.add(imageRanking);
@@ -176,23 +175,23 @@ public class ImageRankingServiceImpl implements ImageRankingService {
                  c.add(imageRanking);
              }else if(user.getAddr1()!=null &&user.getAddr1().contains("강원")){
                  d.add(imageRanking);
-             }else if(user.getAddr1()!=null &&user.getAddr1().contains("충청남도")){
+             }else if(user.getAddr1()!=null &&user.getAddr1().contains("충남")){
                  e.add(imageRanking);
              }else if(user.getAddr1()!=null &&user.getAddr1().contains("세종")){
                  f.add(imageRanking);
              }else if(user.getAddr1()!=null &&user.getAddr1().contains("대전")){
                  g.add(imageRanking);
-             }else if(user.getAddr1()!=null &&user.getAddr1().contains("충청북도")){
+             }else if(user.getAddr1()!=null &&user.getAddr1().contains("충북")){
                  h.add(imageRanking);
-             }else if(user.getAddr1()!=null &&user.getAddr1().contains("경상북도")){
+             }else if(user.getAddr1()!=null && user.getAddr1().contains("경북")){
                  i.add(imageRanking);
              }else if(user.getAddr1()!=null &&user.getAddr1().contains("대구")){
                  j.add(imageRanking);
-             }else if(user.getAddr1()!=null &&user.getAddr1().contains("전라남도")){
+             }else if(user.getAddr1()!=null &&user.getAddr1().contains("전남")){
                  k.add(imageRanking);
              }else if(user.getAddr1()!=null &&user.getAddr1().contains("광주")){
                  l.add(imageRanking);
-             }else if(user.getAddr1()!=null &&user.getAddr1().contains("경상남도")){
+             }else if(user.getAddr1()!=null &&user.getAddr1().contains("경남")){
                  m.add(imageRanking);
              }else if(user.getAddr1()!=null &&user.getAddr1().contains("부산")){
                  n.add(imageRanking);

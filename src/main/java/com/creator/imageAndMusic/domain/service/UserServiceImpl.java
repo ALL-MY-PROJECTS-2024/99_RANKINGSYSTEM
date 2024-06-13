@@ -424,6 +424,42 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    public boolean removeUser(UserDto userDto) {
+
+
+        //  이미지 폴더 삭제
+        String imageUploadPath= UPLOADPATH.ROOTDIRPATH+ File.separator+UPLOADPATH.UPPERDIRPATH+ File.separator;
+        imageUploadPath+=UPLOADPATH.IMAGEDIRPATH+ File.separator+userDto.getUsername();
+
+        File imageDir = new File(imageUploadPath);
+        if(imageDir.exists())
+            imageDir.delete();
+
+        //  뮤직 폴더 삭제
+        String musicUploadPath= UPLOADPATH.ROOTDIRPATH+ File.separator+UPLOADPATH.UPPERDIRPATH+ File.separator;
+        musicUploadPath+=UPLOADPATH.MUSICDIRPATH+ File.separator+userDto.getUsername();
+
+        File musicDir = new File(musicUploadPath);
+        if(musicDir.exists())
+            musicDir.delete();
+
+        //DB 삭제
+        imagesRepository.deleteAllByUsername(userDto.getUsername());
+        musicRepository.deleteAllByUsername(userDto.getUsername());
+        userRepository.deleteById(userDto.getUsername());
+        //imagesFileInfoRepository.save(null);
+        //musicFileInfoRepository.save(null);
+
+        //AccessToken 만료시키기
+
+        //Authentication Null로 초기화하기
+
+
+        return true;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean confirmIdPw(String username, String password) {
 
         Optional<User> userOp =  userRepository.findById(username);

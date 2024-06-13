@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -488,9 +489,29 @@ public class UserController {
         return new ResponseEntity(HttpStatus.BAD_GATEWAY);
 
     }
+    //계정삭제
     @GetMapping("/myinfo/delete")
     public void delete(){
         log.info("GET /user/myinfo/delete..");
+    }
+
+    @DeleteMapping("/myinfo/delete")
+    public @ResponseBody ResponseEntity<String> delete_del(@RequestParam("password") String password, @AuthenticationPrincipal PrincipalDetails principalDetails){
+        log.info("DELETE /user/myinfo/delete..");
+
+
+        UserDto userDto =  principalDetails.getUserDto();
+
+        boolean isOk = userService.confirmIdPw(userDto.getUsername(),password);
+        boolean isdeleted = false;
+        if(isOk){
+            isdeleted = userService.removeUser(userDto);
+        }
+
+        if(!isdeleted)
+            return new ResponseEntity("fail",HttpStatus.BAD_GATEWAY);
+
+        return new ResponseEntity("success",HttpStatus.OK);
     }
 
 

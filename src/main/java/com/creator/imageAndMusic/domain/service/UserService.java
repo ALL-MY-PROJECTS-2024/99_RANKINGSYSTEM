@@ -43,4 +43,6 @@ public interface UserService {
     List<MusicFileInfo> getUserMusicItem(Long musicid);
 
     boolean removeAlbumMusicFile(Long fileid);
+
+    boolean removeUser(UserDto userDto);
 }
