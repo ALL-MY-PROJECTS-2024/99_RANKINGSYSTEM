@@ -1,0 +1,93 @@
+
+
+section{
+
+}
+
+
+
+
+/*SWIPER*/
+.local-map-block .show-image-block{
+
+    position : relative;
+    left:0%;
+    top: 0px;
+    height : 80px;
+    width : 100%;
+    border : 1px solid gray;
+    z-index : 8888;
+    /*background-color : white;*/
+}
+
+.show-image-block .images-block{}
+.show-image-block .images-block{
+    height : 100%;
+}
+.show-image-block .images-block .swiper{
+    width : 100%;
+    height : 100%;
+    background-color:darkcyan;
+
+}
+.show-image-block .images-block .swiper .swiper-wrapper{
+    display:flex;
+    justify-content : center;
+    align-items : center;
+
+    transition-timing-function: linear;
+}
+.show-image-block .images-block .swiper .swiper-slide{
+    width : 100px;
+    height : 50px;
+    border : 1px solid;
+    margin : 5px;
+    background-color:white;
+
+}
+.show-image-block .images-block .swiper .swiper-slide:hover{
+
+}
+.show-image-block .images-block .swiper .swiper-slide img{
+    width :  100px;
+    height : 50px;
+}
+
+
+.local-map-block{
+    margin-top : 20px;
+}
+.show-block{
+    display:flex;
+    justify-content : center;
+    align-items : start;
+
+}
+
+section #map{
+    width : 500px;
+    height :500px;
+}
+.show-block .table-block{
+    width : 600px;
+
+    font-size : .9rem;
+}
+
+.info.leaflet-control{
+    display:none;
+}
+
+.show-block .table-block .material-symbols-outlined {
+     font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+        ;
+        font-size : 1rem;
+}
+
+.show-block .table-block td{
+    font-size : .8rem;
+}

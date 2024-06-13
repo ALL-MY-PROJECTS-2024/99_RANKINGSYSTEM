@@ -21,4 +21,8 @@ public interface ImageRankingService {
     void count(Long rankingId);
 
     ImagesRanking getImageRanking(Long rankingId);
+
+    //지역별로 묶인 이미지 정보가져오기(USER가 Ranking등록한 이미지 가져와서 지역별로 선별하기)
+    @Transactional(rollbackFor = SQLException.class)
+    Map<String,Object> getLocalImageRanking();
 }

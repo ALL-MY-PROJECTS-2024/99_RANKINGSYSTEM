@@ -1,0 +1,57 @@
+
+
+section{
+
+}
+
+section>#map{
+    width : 100%;
+    height : 800px;
+}
+
+
+/*SWIPER*/
+.local-map-block .show-image-block{
+
+    position : relative;
+    left:0%;
+    top: 0px;
+    height : 80px;
+    width : 100%;
+    border : 1px solid gray;
+    z-index : 8888;
+    /*background-color : white;*/
+}
+
+.show-image-block .images-block{}
+.show-image-block .images-block{
+    height : 100%;
+}
+.show-image-block .images-block .swiper{
+    width : 100%;
+    height : 100%;
+    background-color:darkcyan;
+
+}
+.show-image-block .images-block .swiper .swiper-wrapper{
+    display:flex;
+    justify-content : center;
+    align-items : center;
+
+    transition-timing-function: linear;
+}
+.show-image-block .images-block .swiper .swiper-slide{
+    width : 100px;
+    height : 50px;
+    border : 1px solid;
+    margin : 5px;
+    background-color:white;
+
+}
+.show-image-block .images-block .swiper .swiper-slide:hover{
+
+}
+.show-image-block .images-block .swiper .swiper-slide img{
+    width :  100px;
+    height : 50px;
+}

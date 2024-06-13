@@ -121,4 +121,17 @@ public class ImageRankingController {
         imageRankingService.count(rankingId);
     }
 
+    @GetMapping("/local")
+    public String local(Model model){
+        log.info("GET /around/local");
+
+        Map<String,Object> result = imageRankingService.getLocalImageRanking();
+
+        model.addAttribute("result",result);
+
+
+
+        return "imageRanking/local";
+    }
+
 }
