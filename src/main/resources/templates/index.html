@@ -11,17 +11,13 @@
 
     <!-- index.css-->
     <link rel="stylesheet" href="/css/index.css">
-    <!-- join.css-->
-    <link rel="stylesheet" href="/css/user/index_join.css">
-
-    <link rel="stylesheet" href="/css/index_login.css">
 
 
     <!-- index.js   -->
     <script src="/js/index.js" defer> </script>
 
-    <!-- join.js   -->
-    <script src="/js/user/index_join.js" defer> </script>
+    <!-- chart.js    -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 
@@ -39,28 +35,222 @@
 
 
         <main>
+            <!--SECTION01-->
+            <section class="layout-5 breadcrumb-block">
+                <div class="">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page" style="border : 0px !important;">
+                                <span class="material-symbols-outlined">home</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </section>
 
 
-            <section class="banner">
-                <!-- Slider main container -->
-                <div class="swiper">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide"><img src="/assets/banner/01.png"></div>
-                        <div class="swiper-slide"><img src="/assets/banner/02.jpg"></div>
-                        <div class="swiper-slide"><img src="/assets/banner/03.jpg"></div>
-                        <div class="swiper-slide"><img src="/assets/banner/04.jpg"></div>
+            <section class="section1 ">
+
+                <div class="left layout-5">
+                    <div class="board">
+                        <div>
+                            <div style="margin-bottom:10px">
+                                공지사항 <span style="font-size:.7rem;">최신글 5</span>
+                            </div>
+                            <table class="table">
+                                <tr class="table-dark">
+                                    <th>제목</th>
+                                </tr>
+                                <tr>
+                                    <td>[공지] 공지공기</td>
+                                </tr>
+                                <tr>
+                                    <td>[공지] 공지공기</td>
+                                </tr>
+                                <tr>
+                                    <td>[공지] 공지공기</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <div style="margin-bottom:10px">
+                                자유게시판 <span style="font-size:.7rem;">최신글 5</span>
+                            </div>
+                            <table class="table">
+                                <tr class="table-dark">
+                                    <th>제목</th>
+                                </tr>
+                                <tr>
+                                    <td>게시글 - </td>
+                                </tr>
+                                <tr>
+                                    <td>게시글 - </td>
+                                </tr>
+                                <tr>
+                                    <td>게시글 - </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    <!-- If we need pagination -->
-                    <div class="swiper-pagination"></div>
+                    <div class="ranking-summary">
+                        <div class="title">
+                            <h6>RANKING TOP 10</h6>
+                            <div>
+                                <a href="" class="" >조회순</a>
+                                <a href="" class="" >좋아요순</a>
+                            </div>
 
-                    <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                        </div>
 
-                    <!-- If we need scrollbar -->
-                    <div class="swiper-scrollbar"></div>
+                        <table class="table">
+                            <tr class="table-dark">
+                                <th>Rank</th>
+                                <th>Title</th>
+                                <th>Cat</th>
+                                <th>View</th>
+                                <th>Like</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>                      </tr>                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>                      </tr>                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>                      </tr>                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="right layout-5">
+                    <canvas id="section1Chart"></canvas>
+                </div>
+            </section>
+
+            <!--SECTION02-->
+            <hr class="margin-top:15px;">
+            <h5 class="layout-5" style="color : white;text-align:center;height:45px;line-height:45px;background-color:darkcyan">경매</h5>
+            <hr>
+            <section class="section2 ">
+
+                <div class="left layout-5">
+                        <span style="font-size : 1rem;">이번주 경매일정</span> <span style="font-size : .7rem;font-weight:800;color:green">경매일정 전체보기 ></span>
+                        <hr>
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span>06월 10일(월)</span>
+                                    <span>22 건</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span>06월 10일(월)</span>
+                                    <span>22 건</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span>06월 10일(월)</span>
+                                    <span>22 건</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <span>06월 10일(월)</span>
+                                    <span>22 건</span>
+                                </a>
+                            </li>
+                            <li class="today">
+                                <a href="javascript:void(0)">
+                                    <span>06월 10일(월)</span>
+                                    <span>22 건</span>
+                                </a>
+                            </li>
+                        </ul>
+                </div>
+                <div class="right layout-5">
+                    <span style="font-size : 1rem;">진행중인 경매</span>
+                    <hr>
+                    <div class="images-block">
+                        <!-- Slider main container -->
+                        <div class="swiper">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Slides -->
+                                <div class="swiper-slide"><a href="">
+                                    <span class="material-symbols-outlined">military_tech</span>
+                                    <img src="">
+                                </a></div>
+                                <div class="swiper-slide"><a href=""><img src=""></a></div>
+                                <div class="swiper-slide"><a href=""><img src=""></a></div>
+                                <div class="swiper-slide"><a href=""><img src=""></a></div>
+                                <div class="swiper-slide"><a href=""><img src=""></a></div>
+                                <div class="swiper-slide"><a href=""><img src=""></a></div>
+                                <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            </div>
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-prev">
+                                <span class="material-symbols-outlined">arrow_left</span>
+                            </div>
+                            <div class="swiper-button-next">
+                                <span class="material-symbols-outlined">arrow_right</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -68,66 +258,16 @@
 
 
 
-            <section class="section-3">
-                <a href="">
-                    <div class="middle-bar">
-                        경매 간단 설명 및 페이지 이동
-                    </div>
-                </a>
-            </section>
-
-
-            <section class="section-2 scroll-spy">
-                <div class="right-2">
-                    <h1 class="back-to-position to-left">
-                        새로운 genAI 기반 교육을 <br>
-                        경험하세요!
-                    </h1>
-                    <p class="back-to-position to-left">
-                        AI가 선별한 최신 컨텐츠로  <br>
-                        지식을 확장하고 <br>
-                        함께 배우고 나누는  <br>
-                        새로운 경험을 시작해보세요!
-                    </p>
+            <!--
+            <section class="section2 ">
+                <div class="left layout-5">
+                    <canvas id=""></canvas>
                 </div>
-                <img src="/assets/brain.png" class="back-to-position to-right" alt="">
-
+                <div class="right layout-5"></div>
             </section>
+            -->
 
 
-            <!-- section - bottom -->
-            <!-- 박스 호버 시 불투명한 검정 배경 깔리게하기(투명도 약하게 조절) -->
-
-            <section class="images-block">
-
-                <div class="images-block-control layout-5">
-                    <div class="title">
-                        <h3>실시간 조회수 이미지</h3>
-                    </div>
-                </div>
-                <!-- Slider main container -->
-                <div class="swiper">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide"><a href=""><img src="/assets/character.jpg"></a></div>
-                        <div class="swiper-slide"><a href=""><img src="/assets/city.jpg"></a> </div>
-                        <div class="swiper-slide"><a href=""><img src="/assets/map.jpg"></a> </div>
-                        <div class="swiper-slide"><a href=""><img src="/assets/icon.jpg"></a>  </div>
-                        <div class="swiper-slide"><a href=""><img src="/assets/furniture.jpg"></a>  </div>
-                        <div class="swiper-slide"><a href=""><img src="/assets/car.jpg"></a>  </div>
-                        <div class="swiper-slide"><a href=""><img src="/assets/place.jpg"></a>  </div>
-                        <div class="swiper-slide"><a href=""><img src="/assets/others.jpg"></a>  </div>
-                    </div>
-                    <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev">
-                        <span class="material-symbols-outlined">arrow_left</span>
-                    </div>
-                    <div class="swiper-button-next">
-                        <span class="material-symbols-outlined">arrow_right</span>
-                    </div>
-                </div>
-            </section>
         </main>
 
 

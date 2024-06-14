@@ -2,6 +2,7 @@ package com.creator.imageAndMusic.domain.service;
 
 
 import com.creator.imageAndMusic.config.auth.PrincipalDetails;
+import com.creator.imageAndMusic.config.auth.jwt.JwtProperties;
 import com.creator.imageAndMusic.config.auth.jwt.JwtTokenProvider;
 import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
@@ -12,6 +13,7 @@ import com.creator.imageAndMusic.properties.UPLOADPATH;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -58,6 +60,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private MusicFileInfoRepository musicFileInfoRepository;
+
+    @Autowired
+    private HttpServletResponse httpServletResponse;
+
+    @Autowired
+    private HttpServletRequest httpServletRequest;
+
 
     @Transactional(rollbackFor = Exception.class)
     public boolean memberJoin(UserDto dto, Model model, HttpServletRequest request) throws Exception{
@@ -451,9 +460,11 @@ public class UserServiceImpl implements UserService {
         //musicFileInfoRepository.save(null);
 
         //AccessToken 만료시키기
-
-        //Authentication Null로 초기화하기
-
+        // cookie 에서 JWT token을 가져옵니다.
+        Cookie cookie = new Cookie(JwtProperties.COOKIE_NAME,null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        httpServletResponse.addCookie(cookie);
 
         return true;
     }

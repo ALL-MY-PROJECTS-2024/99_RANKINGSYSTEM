@@ -1,4 +1,4 @@
-package com.creator.imageAndMusic.controller.user;
+package com.creator.imageAndMusic.controller;
 
 
 import com.creator.imageAndMusic.domain.entity.Bookmark;

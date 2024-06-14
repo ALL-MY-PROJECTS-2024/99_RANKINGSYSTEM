@@ -1,91 +1,57 @@
-//        const swiper_vertical = new Swiper('.banner .swiper', {
-//        direction: 'vertical',
-//        autoplay:{
-//            delay:1000,
-//        },
-//        loop: true,
-//        });
+//-------------------------------
+// section1
+//-------------------------------
+const ctx = document.getElementById('section1Chart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [5, 21, 7, 4,15, 9],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 
-        const swiper_banner = new Swiper('.banner .swiper', {
-        direction: 'horizontal',
-        autoplay:{
-            delay:3000,
-
-            pauseOnMouseEnter:true
-        },
+//-------------------------------
+// section2
+//-------------------------------
+const section2imagesBlock = new Swiper('.section2 .right .swiper', {
         loop: true,
-            // If we need pagination
-            pagination: {
-                el: '.swiper-pagination',
-                clickable:'true',
-                type:'bullets', //bullets,progressbar,fraction
-            },
-
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-
-            // And if we need scrollbar
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
-            mousewheel:false,
-            // effect:'fade',
-        });
-
-//
-//        const swiper_multi_slider = new Swiper('.three_section .swiper', {
-//        direction: 'horizontal',
-//        autoplay:{
-//            delay:1000,
-//        },
-//        loop: true,
-//        slidesPerView:4 ,
-//        centeredSlides:true,
-//
-//        });\
-
-
-//----------------------
-// SCROLL MAGIC
-//-----------------------
-const spyEls = document.querySelectorAll('section.scroll-spy');
-        let cnt =0;
-        spyEls.forEach(function(spyEl){
-
-            console.log("spyEl",spyEl);
-            if(cnt==0){
-                // 스크롤매직이벤트처리 객체
-                new ScrollMagic.Scene({
-                    triggerElement : spyEl, //감시할 요소 선택
-                    triggerHook : 0.5       //스크린에서의 스크롤 위치
-                })
-                .setClassToggle(spyEl,'show')
-                .addTo(new ScrollMagic.Controller());
-                cnt++;
-            }else{
-                // 스크롤매직이벤트처리 객체
-                new ScrollMagic.Scene({
-                    triggerElement : spyEl, //감시할 요소 선택
-                    triggerHook : 0.5       //스크린에서의 스크롤 위치
-                })
-                .setClassToggle(spyEl,'show2')
-                .addTo(new ScrollMagic.Controller());
-            }
- })
-
-//----------------------
-// BOTTOM SWIPER
-//-----------------------
-       const imagesBlock = new Swiper('.images-block .swiper', {
-        loop: true,
-        centeredSlides: true,
-        speed: 7000,
+        initialSlide: 1,
+        //centeredSlides: true,
+        speed: 10000,
         autoplay: {
             delay: 0,
             disableOnInteraction: false
         },
         slidesPerView: 'auto',
+
     });
+
+//-------------------------------
+//
+//-------------------------------
+
+//-------------------------------
+//
+//-------------------------------
+
+//-------------------------------
+//
+//-------------------------------
+
+//-------------------------------
+//
+//-------------------------------
+
+
+

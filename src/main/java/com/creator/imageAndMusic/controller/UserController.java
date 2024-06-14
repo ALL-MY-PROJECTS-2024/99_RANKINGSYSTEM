@@ -1,4 +1,4 @@
-package com.creator.imageAndMusic.controller.user;
+package com.creator.imageAndMusic.controller;
 
 
 import com.creator.imageAndMusic.config.auth.PrincipalDetails;
@@ -18,7 +18,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
