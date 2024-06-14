@@ -4,13 +4,30 @@ package com.creator.imageAndMusic.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
 @RequestMapping("/trading")
 public class TradingController {
+   
+   
+    /*
+        req : 사용자 경매 요청 ->
+    */
+    @PostMapping("/req")
+    public void req(){
+        log.info("GET /trading/req");
+    }
+    @PostMapping("/my")
+    public void my(){
+        log.info("GET /trading/my");
+    }
 
+    /*
+    auction
+    */
     @GetMapping("/auction/chat")
     public void auction_chat(){
         log.info("GET /trading/auction/chat");
