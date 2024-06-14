@@ -134,4 +134,9 @@ public class ImageRankingController {
         return "imageRanking/local";
     }
 
+
+    @GetMapping("/cat")
+    public void cat(){
+        log.info("GET /imageRanking/cat...");
+    }
 }

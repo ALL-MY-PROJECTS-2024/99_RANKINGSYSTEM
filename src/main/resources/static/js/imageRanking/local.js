@@ -142,7 +142,7 @@
     //클릭 이벤트 처리 함수
     function zoomToFeature(e) {
 
-        map.fitBounds(e.target.getBounds());
+        //map.fitBounds(e.target.getBounds());
 
         var props = e.target.feature.properties;
 

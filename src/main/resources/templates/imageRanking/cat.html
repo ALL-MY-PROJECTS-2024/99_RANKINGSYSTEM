@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="fragments/link :: linkFragment" />
+
+
+
+
+
+    <!--    -->
+    <link rel="stylesheet" href="/css/around/group.css">
+
+    <!--    -->
+    <script src="/js/around/group.js" defer></script>
+
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="fragments/header :: mainHeaderFragment" />
+
+    <!-- nav       -->
+    <th:block th:insert="fragments/nav :: navFragment" />
+
+
+    <main>
+
+        <section class="layout-5 breadcrumb-block">
+            <div class="">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="material-symbols-outlined">home</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="">둘러 보기</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">그룹</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+
+        <section class="group-block layout-5">
+            <div class="head">
+                <div class="">
+                    <input type="radio" id="image" name="choose">
+                    <label for="image">이미지</label>
+                </div>
+                <div class="">
+                    <input type="radio" id="music" name="choose">
+                    <label for="music">음악</label>
+                </div>
+            </div>
+            <div class="body">
+
+                <!--   IMAGE BODY             -->
+                <div class="image_body">
+
+                    <div class="swiper sub_category">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Character">Character</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="City">City </a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Map">Map </a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="iCON">iCON</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Furniture">Furniture </a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Car">Car </a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Place">Place </a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Others">Others </a>   </div>
+                        </div>
+
+                    </div>
+
+                    <div class="subCategoryBody">
+                        <div >
+                            <div class="title"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="music_body hidden">
+
+                    <div class="swiper sub_category">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+
+
+                            <!-- Slides -->
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Jazz</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Rock </a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Classic</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Prgressive</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Advertisement </a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Heavy Metal</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Pop</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Others </a>   </div>
+
+                        </div>
+                    </div>
+                    <div class="subCategoryBody ">
+                        <div>
+                            <div class="title"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="fragments/footer :: footerFragment" />
+    </footer>
+
+</div>
+
+
+
+
+</body>
+</html>
