@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
+
+
+    <link rel="stylesheet" href="/css/myinfo/confirm.css">
+
+    <script src="/js/myinfo/confirm.js" defer> </script>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('calendar');
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth'
+          });
+          calendar.render();
+        });
+
+    </script>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="~{fragments/header :: mainHeaderFragment}" />
+
+    <!-- nav       -->
+    <th:block th:insert="~{fragments/nav :: navFragment}" />
+
+    <main>
+        <section class="layout-5 breadcrumb-block">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb mt-2">
+                    <li class="breadcrumb-item"><a href="#">HOME</a></li>
+                    <li class="breadcrumb-item"><a href="#">매매</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">달력</li>
+                </ol>
+            </nav>
+        </section>
+
+        <section class="banner">
+            <div id='calendar' class="layout-5"></div>
+        </section>
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footerFragment}" />
+    </footer>
+
+</div>
+
+
+
+
+</body>
+</html>

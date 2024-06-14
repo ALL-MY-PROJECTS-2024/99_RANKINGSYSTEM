@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
+
+
+
+    <!--  socketJS    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="~{fragments/header :: mainHeaderFragment}" />
+
+    <!-- nav       -->
+    <th:block th:insert="~{fragments/nav :: navFragment}" />
+
+    <main>
+        <section class="banner">
+            <div>
+                <input id="message" type="text" placeholder="Type a message..." />
+                <button id="conn" onclick="connection('chat1')">CHAT1</button>
+                <button id="conn" onclick="connection('chat2')">CHAT2</button>
+                <button id="send">Send</button>
+            </div>
+            <div id="chat">
+                <!-- Chat messages will be displayed here -->
+            </div>
+
+
+        </section>
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footerFragment}" />
+    </footer>
+
+</div>
+
+
+<script >
+
+    //소켓연결
+    var socket = null;
+    function connection(chat){
+        socket = new WebSocket(`ws://192.168.194.106:8080/${chat}`);
+
+        //메세지 수신
+        socket.onmessage = function(event) {
+            var message = event.data;
+            console.log('message : ',message);
+            document.getElementById('chat').innerHTML += '<p>' + message + '</p>';
+        };
+        //소켓 진입시
+        socket.onopen=function(event){
+            console.log("Message Recv",event.data);
+            document.getElementById('chat').innerHTML += '<p>' + chat  + ' 연결완료</p>';
+        }
+        //
+        socket.onclose = function(event){
+             console.log("onclose...",event);
+             document.getElementById('chat').innerHTML += '<p>' + chat  + ' 연결종료</p>';
+        }
+
+        //메시지 송신
+        document.getElementById('send').onclick = function() {
+            var message = document.getElementById('message').value;
+            console.log("send btn click... : ",message);
+            socket.send(message);
+            document.getElementById('message').value = '';
+        };
+
+    }
+
+
+
+
+</script>
+
+</body>
+</html>

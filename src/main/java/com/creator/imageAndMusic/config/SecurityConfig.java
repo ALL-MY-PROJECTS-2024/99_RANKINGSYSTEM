@@ -93,6 +93,7 @@ public class SecurityConfig  {
 
                     authorize.requestMatchers("/lecture/list").hasAnyRole("USER");
 
+                    authorize.requestMatchers("/auction/**").hasAnyRole("USER");
 
 
                     authorize.anyRequest().authenticated();
