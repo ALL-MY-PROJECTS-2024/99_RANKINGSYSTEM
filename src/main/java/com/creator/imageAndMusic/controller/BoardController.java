@@ -1,4 +1,4 @@
-package com.creator.imageAndMusic.controller.board;
+package com.creator.imageAndMusic.controller;
 
 
 import com.creator.imageAndMusic.domain.dto.BoardDto;

@@ -24,7 +24,11 @@
                         <span> 님</span>
                     </li>
                 </th:block>
-
+                <li class="item notification">
+                    <a href="/">
+                        <span class="material-symbols-outlined ">notifications</span>
+                    </a>
+                </li>
                 <li class="item">
                     <a href="/">HOME</a>
                 </li>
@@ -117,6 +121,16 @@
                     </li>
                 </th:block>
 
+                <li class="item "  sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a href="/admin/main">
+                        관리자 메뉴
+                    </a>
+                </li>
+                <li class="item notification">
+                    <a href="/">
+                        <span class="material-symbols-outlined ">notifications</span>
+                    </a>
+                </li>
                 <li class="item">
                     <a href="/">HOME</a>
                 </li>

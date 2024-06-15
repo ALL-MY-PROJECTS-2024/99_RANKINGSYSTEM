@@ -1,7 +1,7 @@
 package com.creator.imageAndMusic.domain.service;
 
 
-import com.creator.imageAndMusic.controller.board.BoardController;
+import com.creator.imageAndMusic.controller.BoardController;
 import com.creator.imageAndMusic.domain.dto.BoardDto;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;

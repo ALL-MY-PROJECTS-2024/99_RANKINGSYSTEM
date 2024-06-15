@@ -61,31 +61,12 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/login","/user/join").permitAll();
 
 
-                    authorize.requestMatchers("/user/album/add").hasAnyRole("USER");
-                    authorize.requestMatchers("/user/album/read").hasAnyRole("USER");
-                    authorize.requestMatchers("/user/album/delete").hasAnyRole("USER");
-                    authorize.requestMatchers("/user/album/main").hasAnyRole("USER");
-
-                    authorize.requestMatchers("/user/music/add").hasAnyRole("USER");
-
-                    authorize.requestMatchers("/user/join").permitAll();
-                    authorize.requestMatchers("/user/sendMail/*").permitAll();
-                    authorize.requestMatchers("/user/emailConfirm").permitAll();
-
-                    authorize.requestMatchers("/user/confirmId").permitAll();
-                    authorize.requestMatchers("/user/confirmPw").permitAll();
-
-                    authorize.requestMatchers("/user/myinfo/**").hasRole("USER");
-
+                    authorize.requestMatchers("/user/**").hasAnyRole("USER");
 
                     authorize.requestMatchers("/bookmark/**").hasRole("USER");
 
+                    authorize.requestMatchers("/board/**").hasAnyRole("USER","ADMIN");
 
-                    authorize.requestMatchers("/board/list").hasAnyRole("USER");
-                    authorize.requestMatchers("/board/read").hasAnyRole("USER");
-                    authorize.requestMatchers("/board/update").hasAnyRole("USER");
-                    authorize.requestMatchers("/board/delete").hasAnyRole("USER");
-                    authorize.requestMatchers("/board/download").hasAnyRole("USER");
 
                     authorize.requestMatchers("/imageRanking/add").hasAnyRole("USER");
                     authorize.requestMatchers("/imageRanking/list").hasAnyRole("USER");
@@ -95,6 +76,7 @@ public class SecurityConfig  {
 
                     authorize.requestMatchers("/auction/**").hasAnyRole("USER");
 
+                    authorize.requestMatchers("/admin/**").hasAnyRole("ADMIN");
 
                     authorize.anyRequest().authenticated();
 

@@ -9,6 +9,7 @@ import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.*;
 import com.creator.imageAndMusic.domain.repository.UserRepository;
+import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.UserService;
 import com.creator.imageAndMusic.properties.AUTH;
 import io.jsonwebtoken.Claims;
@@ -58,6 +59,10 @@ public class UserController {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private TradingImageServiceImpl tradingImageService;
+
     @GetMapping("/join")
     public void join(){
         log.info("GET /user/join...");
@@ -548,6 +553,19 @@ public class UserController {
     @GetMapping("/bookmark")
     public void favorite(){
         log.info("GET /user/bookmark/my");
+
+    }
+
+    //----------------------------------------------------------------
+    // 경매상태 확인
+    //----------------------------------------------------------------
+    @GetMapping("/myinfo/trading")
+    public void trade(@AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
+        log.info("GET /user/myinfo/trading");
+        String seller =  principalDetails.getUserDto().getUsername();
+        List<TradingImage> list =  tradingImageService.getMyTradingImage(seller);
+
+        model.addAttribute("list",list);
 
     }
     

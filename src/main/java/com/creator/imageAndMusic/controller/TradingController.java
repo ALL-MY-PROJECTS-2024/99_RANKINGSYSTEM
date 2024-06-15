@@ -1,11 +1,20 @@
 package com.creator.imageAndMusic.controller;
 
 
+import com.creator.imageAndMusic.config.auth.PrincipalDetails;
+import com.creator.imageAndMusic.domain.dto.TradingImageDto;
+import com.creator.imageAndMusic.domain.repository.TradingImageRepository;
+import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -16,9 +25,25 @@ public class TradingController {
     /*
         req : 사용자 경매 요청 ->
     */
-    @PostMapping("/req")
-    public void req(){
-        log.info("GET /trading/req");
+    @Autowired
+    TradingImageServiceImpl tradingImageService;
+
+    @GetMapping("/req")
+    public @ResponseBody ResponseEntity<String> req(@RequestParam("fildid") Long fileId, @AuthenticationPrincipal PrincipalDetails principalDetails){
+
+        log.info("GET /trading/req " + fileId);
+        TradingImageDto tradeImageDto = new TradingImageDto();
+        tradeImageDto.setFileid(fileId);
+        tradeImageDto.setSeller(principalDetails.getUsername());
+        Map<String,Object> result =  tradingImageService.requestTradingImage(tradeImageDto);
+
+        boolean status = (boolean) result.get("status");
+        String message = (String) result.get("message");
+
+        if(!status){
+            return new ResponseEntity(message, HttpStatus.BAD_GATEWAY);
+        }
+        return new ResponseEntity(message, HttpStatus.OK);
     }
     @PostMapping("/my")
     public void my(){

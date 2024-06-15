@@ -54,10 +54,21 @@ deleteRankingEls.forEach(deleteRankingEl=>{
     })
 })
 
-//카테고리 변경
-const changeCategoryEls = document.querySelectorAll(".changeCategory");
-changeCategoryEls.forEach(changeCategory=>{
-    changeCategory.addEventListener("click",function(){
-        console.log("changeCategory")
+//경매 요청
+const requestAuctionEls = document.querySelectorAll(".requestAuction");
+requestAuctionEls.forEach(requestAuction=>{
+    requestAuction.addEventListener("click",function(){
+
+        const fileid = requestAuction.getAttribute("data-fileid");
+        console.log("requestAuction",fileid)
+        axios.get('/trading/req?fildid='+fileid)
+        .then(resp=>{
+            console.log(resp);
+            alert(resp.data);
+        })
+        .catch(err=>{
+            console.log(err.response.data);
+            alert(err.response.data+"");
+        })
     })
 })

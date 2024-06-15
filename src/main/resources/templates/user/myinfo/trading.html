@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="fragments/link :: linkFragment" />
+
+    <link rel="stylesheet" href="/css/user/myinfo.css">
+
+
+
+</head>
+<body>
+
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="fragments/header :: headerFragment" />
+
+    <!-- nav       -->
+    <th:block th:insert="~{fragments/nav :: albumNavFragment}" />
+
+
+
+    <main>
+
+        <section class="layout-5 breadcrumb-block">
+            <div class="">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="material-symbols-outlined">home</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="">MY INFO</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">TRADING</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="myinfoblock layout-5">
+
+            <th:block th:insert="fragments/myaside :: myasideFragment" />
+
+            <div class="join-block">
+                <div th:each="dto : ${list}" style="width : 1000px;overflow : auto;">
+                    <div th:text="${dto}"></div>
+                    <hr>
+
+                    <!--승인된 Trading에 가격 요청-->
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <th:block th:insert="fragments/footer :: footerFragment" />
+    </footer>
+
+</div>
+
+
+
+
+
+</body>
+</html>
