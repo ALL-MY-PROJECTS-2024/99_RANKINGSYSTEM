@@ -27,7 +27,8 @@ public class TradingImageDto {
     String price;                       //낙찰가
     boolean paymentState; //            //결제여부
 
-
+    String fileDir;
+    String filename;
     public void  setAdminAccepted(boolean adminAccepted){
         this.isAdminAccepted = adminAccepted;
     }

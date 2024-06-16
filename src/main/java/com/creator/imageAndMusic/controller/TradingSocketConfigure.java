@@ -9,8 +9,8 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @Configuration
 @EnableWebSocket
 @RequiredArgsConstructor
-public class AuctionSocketConfigure implements WebSocketConfigurer {
-    private final AuctionSocketHandler webSocketHandler;
+public class TradingSocketConfigure implements WebSocketConfigurer {
+    private final TradingSocketHandler webSocketHandler;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {

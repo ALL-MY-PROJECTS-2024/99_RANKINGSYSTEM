@@ -118,4 +118,42 @@ public class TradingController {
     public void trading_calendar_update(){
         log.info("GET /trading/calendar/update");
     }
+
+
+    @GetMapping("/image/main")
+    public void image_main(Model model){
+        log.info("GET /trading/image/main..");
+        List<TradingImage> listEntity =  tradingImageService.getAllTradingImages();
+
+        List<TradingImageDto> list = new ArrayList();
+
+        listEntity.forEach(entity ->{
+            TradingImageDto dto = new TradingImageDto();
+            dto.setTradingid(entity.getTradingid());
+            dto.setTitle(entity.getFileid().getImages().getTitle() );
+
+            dto.setSeller((entity.getSeller()!=null)?entity.getSeller().getUsername():null);
+            dto.setBuyer( (entity.getBuyer()!=null)?entity.getBuyer().getUsername():null);
+            dto.setFileid(entity.getFileid().getFileid());
+            dto.setFileDir(entity.getFileid().getDir());
+            dto.setFilename(entity.getFileid().getFilename());
+            dto.setAdminAccepted(entity.isAdminAccepted());
+            dto.setAuctionStartTime(entity.getAuctionStartTime());
+            dto.setAuctionEndTime(entity.getAuctionEndTime());
+            dto.setPrice(entity.getPrice());
+            dto.setPaymentState(entity.isPaymentState());
+
+            list.add(dto);
+        });
+
+        System.out.println(list);
+        model.addAttribute("list",list);
+
+    }
+
+    @GetMapping("/chat/join")
+    public void join(){
+        log.info("GET /trading/chat/join");
+    }
+
 }

@@ -13,7 +13,10 @@
 
     <script src="/js/myinfo/confirm.js" defer> </script>
 
-
+    <script th:inline="javascript">
+        let  list = /*[[${ list}]]*/
+        console.log(list);
+    </script>
 </head>
 <body>
 
@@ -26,8 +29,57 @@
     <th:block th:insert="~{fragments/nav :: navFragment}" />
 
     <main>
-        <section class="banner">
-
+        <section class="layout-5 breadcrumb-block">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb mt-2">
+                    <li class="breadcrumb-item"><a href="#">HOME</a></li>
+                    <li class="breadcrumb-item"><a href="#">매매</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">이미지</li>
+                </ol>
+            </nav>
+        </section>
+        <section class="banner layout-5">
+            <div>
+                <table class="table" >
+                    <thead>
+                        <tr class="table-dark">
+                            <th>경매번호</th>
+                            <th>이미지</th>
+                            <th>제목</th>
+                            <th>판매자</th>
+                            <th>승인여부</th>
+                            <th>낙찰가</th>
+                            <th>경매시작일</th>
+                            <th>경매종료일</th>
+                            <th>신청인원</th>
+                            <th>참여하기</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <th:block th:each="dto : ${list}">
+                            <tr>
+                                <td th:text="${dto.tradingid}"></td>
+                                <td >
+                                    <a href="javascript:void(0)">
+                                    <img  style="width:100px;height:50px;" th:src="@{${dto.fileDir}+'\s_'+${dto.filename}}"  alt="" />
+                                    </a>
+                                </td>
+                                <td th:text="${dto.title}"></td>
+                                <td th:text="${dto.seller}"></td>
+                                <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
+                                <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
+                                <td th:text="${dto.auctionStartTime}"></td>
+                                <td th:text="${dto.auctionEndTime}"></td>
+                                <td>2/10</td>
+                                <td>
+                                    <a href="">신청</a> |
+                                    <a href="/trading/chat/join">입장</a>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 

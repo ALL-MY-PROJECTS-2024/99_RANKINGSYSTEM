@@ -1,7 +1,6 @@
 package com.creator.imageAndMusic.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -12,7 +11,7 @@ import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 @Component
-public class AuctionSocketHandler  extends TextWebSocketHandler {
+public class TradingSocketHandler extends TextWebSocketHandler {
 
     private static final ConcurrentHashMap<String, WebSocketSession> CLIENTS = new ConcurrentHashMap<String, WebSocketSession>();
 
