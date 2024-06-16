@@ -9,20 +9,58 @@
     <th:block th:insert="~{fragments/link :: linkFragment}" />
 
 
-    <link rel="stylesheet" href="/css/myinfo/confirm.css">
-
-    <script src="/js/myinfo/confirm.js" defer> </script>
-
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
-    <script>
 
-        document.addEventListener('DOMContentLoaded', function() {
-          var calendarEl = document.getElementById('calendar');
-          var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth'
-          });
-          calendar.render();
+
+    <script th:inline="javascript">
+        let  list = /*[[${ list}]]*/
+        console.log(list);
+        eventList = [];
+        list.forEach(el=>{
+            console.log(el);
+            let eventObject=null;
+            if(!el.adminAccepted)
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'red'};
+            else
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'green'};
+            eventList.push(eventObject)
         });
+    </script>
+    <script>
+        var calendar = null;
+        document.addEventListener('DOMContentLoaded', function() {
+
+                  var calendarEl = document.getElementById('calendar');
+                  calendar = new FullCalendar.Calendar(calendarEl, {
+                    locale: "ko",
+                    initialView: 'dayGridMonth',
+                    selectable : true,
+                    events : eventList,
+
+                    //Date 클릭시 표시
+                    dateClick : function(info){
+                        console.log(info);
+                        //addEventToCalendar({start:info.dateStr})
+                    },
+                    eventClick:function(info){
+                        console.log(info.event._def);
+                        const calenderEventModal = document.querySelector('.calenderEventModal');
+                        calenderEventModal.click();
+                        const exampleModal2= document.getElementById('exampleModal2');
+                        const modelBody =  exampleModal2.querySelector('.modal-body');
+                        modelBody.innerHTML = info.event._def;
+
+                    },
+                  });
+                  calendar.render();
+                  //기존 이벤트 업로드
+
+        });
+
+
+                function addEventToCalendar(event){
+                    calendar.addEvent(event);
+                };
 
     </script>
 </head>
@@ -62,6 +100,29 @@
 
 
 
+<!-- Button trigger modal -->
+<button style="display:none;" type="button" class="btn btn-primary calenderEventModal" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

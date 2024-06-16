@@ -26,24 +26,7 @@
     <th:block th:insert="~{fragments/nav :: navFragment}" />
 
     <main>
-            <span>MESSAGE : </span> <span th:text="${message}">  </span><br>
         <section class="banner">
-
-            <div th:each="tradingImages:${list}">
-
-                <div th:text="${tradingImages}">
-                </div>
-
-                <form action="/admin/trading/accept" >
-                    <input name="tradingid" th:value="${tradingImages.tradingid}" readonly>
-                    <input type="datetime-local" name="auctionStartTime"  />
-                    <button>승인 처리요청</button>
-                </form>
-                <div>
-                    <a th:href="@{/admin/trading/cancel(tradingid=${tradingImages.tradingid})}">경매 승인 취소</a>
-                </div>
-                <hr>
-            </div>
 
         </section>
     </main>

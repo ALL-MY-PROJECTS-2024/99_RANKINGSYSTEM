@@ -77,6 +77,7 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/auction/**").hasAnyRole("USER");
 
                     authorize.requestMatchers("/admin/**").hasAnyRole("ADMIN");
+                    authorize.requestMatchers("/trading/**").hasAnyRole("USER","ADMIN");
 
                     authorize.anyRequest().authenticated();
 

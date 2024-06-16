@@ -3,6 +3,7 @@ package com.creator.imageAndMusic.controller;
 
 import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.domain.dto.TradingImageDto;
+import com.creator.imageAndMusic.domain.entity.TradingImage;
 import com.creator.imageAndMusic.domain.repository.TradingImageRepository;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -12,8 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -74,8 +78,32 @@ public class TradingController {
         calendar
     */
     @GetMapping("/calendar/main")
-    public void trading_calendar(){
+    public void trading_calendar(Model model){
+
         log.info("GET /trading/calendar/main");
+        List<TradingImage> listEntity =  tradingImageService.getAllTradingImages();
+
+       List<TradingImageDto> list = new ArrayList();
+
+        listEntity.forEach(entity ->{
+            TradingImageDto dto = new TradingImageDto();
+            dto.setTradingid(entity.getTradingid());
+            dto.setTitle( (entity.isAdminAccepted())?"[승인] 경매":"[미승인]경매" );
+            dto.setSeller((entity.getSeller()!=null)?entity.getSeller().getUsername():null);
+            dto.setBuyer( (entity.getBuyer()!=null)?entity.getBuyer().getUsername():null);
+            dto.setFileid(entity.getFileid().getFileid());
+            dto.setAdminAccepted(entity.isAdminAccepted());
+            dto.setAuctionStartTime(entity.getAuctionStartTime());
+            dto.setAuctionEndTime(entity.getAuctionEndTime());
+            dto.setPrice(entity.getPrice());
+            dto.setPaymentState(entity.isPaymentState());
+
+            list.add(dto);
+        });
+
+        System.out.println(list);
+        model.addAttribute("list",list);
+
     }
 
     @GetMapping("/calendar/add")
