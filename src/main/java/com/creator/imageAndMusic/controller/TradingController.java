@@ -126,7 +126,7 @@ public class TradingController {
 
 
     @GetMapping("/image/main")
-    public void image_main(Model model){
+    public void image_main(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model){
         log.info("GET /trading/image/main..");
         List<TradingImage> listEntity =  tradingImageService.getAllTradingImages();
         List<TradingImageDto> list = new ArrayList();
@@ -147,16 +147,44 @@ public class TradingController {
             dto.setAuctionEndTime(entity.getAuctionEndTime());
             dto.setPrice(entity.getPrice());
             dto.setPaymentState(entity.isPaymentState());
-
+            dto.setCur(entity.getCur());
             //채팅방
             dto.setRoomId(entity.getRoomId());
             dto.setMax(entity.getMax());
+            dto.setMembers(entity.getMembers());
+            
+            //요청버튼 활성화여부
+            List<String> members = entity.getMembers();
+            if(members.isEmpty() && members.size()<dto.getMax() ){
 
+                if(!members.contains(principalDetails.getUserDto().getUsername())){
+                    dto.setReq(true);
+                }
+            }
+            else {
+                dto.setReq(false);
+            }
+
+            //참가목록에 있다면 입장버튼 true
+            for(String member : entity.getMembers()){
+
+                if(member.equals(principalDetails.getUserDto().getUsername())&&dto.getRoomId()!=null ){
+                    dto.setJoin(true);
+                    break;
+                }
+            }
+            String role = principalDetails.getUserDto().getRole();
+            if(role.equals("ROLE_ADMIN"))
+                dto.setJoin(true);
+
+            
             list.add(dto);
         });
 
         System.out.println(list);
         model.addAttribute("list",list);
+        model.addAttribute("username",principalDetails.getUserDto().getUsername());
+        ;
 
     }
 
@@ -186,12 +214,13 @@ public class TradingController {
     }
 
     @GetMapping("/chat/enter")
-    public String chat_room( @RequestParam("roomId") String roomId,@AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
+    public String chat_room( @RequestParam("roomId") String roomId, @AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
         ChatRoom room = tradingImageService.findRoomById(roomId);
         model.addAttribute("room",room);            //현재 방에 들어오기위해서 필요한데...... 접속자 수 등등은 실시간으로 보여줘야 돼서 여기서는 못함
 
         String username = principalDetails.getUserDto().getUsername();
         model.addAttribute("username",username);
+
 
         return "trading/chat/room";
     }

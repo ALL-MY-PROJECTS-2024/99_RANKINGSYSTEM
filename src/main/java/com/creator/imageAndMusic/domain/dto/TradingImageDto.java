@@ -34,7 +34,10 @@ public class TradingImageDto {
 
     //채팅방
     String roomId;
+    Long cur;
     Long max;
+    boolean join; //참가버튼
+    boolean req; //신청
     List<String> members;
 
     public void  setAdminAccepted(boolean adminAccepted){

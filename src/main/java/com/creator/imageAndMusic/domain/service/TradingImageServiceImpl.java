@@ -140,21 +140,31 @@ public class TradingImageServiceImpl {
 
         TradingImage tradingImage =  tradingImageRepository.findById(tradingid).get();
         tradingImage.setRoomId(chatRoom.getRoomId());
+
         tradingImage.setMax(5L);//정원 5명
         tradingImageRepository.save(tradingImage);
     }
     @Transactional(rollbackFor=Exception.class)
     public void joinChatMember(Long tradingid, String username) {
         TradingImage tradingImage =  tradingImageRepository.findById(tradingid).get();
-        if(tradingImage.getMax()+1<=5)
-        {
+
+        if(tradingImage.getCur() == null || tradingImage.getCur()==0L){
+            tradingImage.setCur(1L);
             List<String> members = tradingImage.getMembers();
             members.add(username);
             tradingImageRepository.save(tradingImage);
         }
-        else{
-            ;
+        else if(tradingImage.getCur()+1<=5)
+        {
+            tradingImage.setCur(tradingImage.getCur()+1);
+            List<String> members = tradingImage.getMembers();
+            members.add(username);
+            tradingImageRepository.save(tradingImage);
         }
+
+
+
+
 
     }
 

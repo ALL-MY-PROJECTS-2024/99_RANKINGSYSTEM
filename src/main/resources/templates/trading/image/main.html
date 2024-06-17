@@ -60,6 +60,7 @@
                     </thead>
                     <tbody>
                         <th:block th:each="dto : ${list}">
+                            <div th:text="${dto}"></div>
                             <tr>
                                 <td th:text="${dto.tradingid}"></td>
                                 <td >
@@ -73,17 +74,45 @@
                                 <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
                                 <td th:text="${dto.auctionStartTime}"></td>
                                 <td th:text="${dto.auctionEndTime}"></td>
-                                <td><span th:text="${dto.members.length}<=0?'0':${dto.members.length}">0</span>/<span th:text="${dto.max}==null ? '0':${dto.max}"></span></td>
+                                <td><span th:text="${dto.cur}">0</span>/<span th:text="${dto.max}==null ? '0':${dto.max}"></span></td>
                                 <td>
+                                    <!--유저-->
+                                    <th:block sec:authorize="hasRole('ROLE_USER')">
+                                        <th:block th:if="${dto.roomId}!=null">
+                                            <th:block th:if="${dto.req}">
+                                                <a th:href="@{/trading/chat/req(tradingid=${dto.tradingid})}">신청</a>
+                                            </th:block>
+                                            <th:block th:if="${dto.join}">
+                                                <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}">입장</a>
+                                            </th:block>
+                                        </th:block>
+                                        <th:block th:unless="${dto.roomId}!=null">
+                                            <a href="javascript:void(0)">대기</a>
+                                        </th:block>
+                                    </th:block>
 
-                                    <a th:href="@{/trading/chat/req(tradingid=${dto.tradingid})}">신청</a> |
-                                    <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}">입장</a>
-
+                                    <!--관리자-->
+                                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                        <th:block th:if="${dto.roomId}==null">
+                                            <a href="javascript:void(0)">대기</a>
+                                        </th:block>
+                                        <th:block th:unless="${dto.roomId}==null">
+                                            <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}">입장</a>
+                                        </th:block>
+                                    </th:block>
                                 </td>
+
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <td>
-                                        <a th:href="@{/trading/chat/create(tradingid=${dto.tradingid})}" >채팅방 생성</a>
-                                    </td>
+                                    <th:block th:if="${dto.roomId}==null">
+                                        <td>
+                                            <a th:href="@{/trading/chat/create(tradingid=${dto.tradingid})}" >채팅방 생성</a>
+                                        </td>
+                                    </th:block>
+                                    <th:block th:unless="${dto.roomId}==null">
+                                        <td>
+                                            <a href="javascript:void(0)" >채팅방 제거</a>
+                                        </td>
+                                    </th:block>
                                 </th:block>
 
                             </tr>

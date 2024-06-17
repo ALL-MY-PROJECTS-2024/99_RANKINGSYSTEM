@@ -49,6 +49,7 @@ public class TradingImage {
     //채팅방
     String roomId;
     Long max;
+    Long cur;
     @ElementCollection
     List<String> members;
 

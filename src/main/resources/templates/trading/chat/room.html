@@ -81,10 +81,10 @@
         }
 
         function quit(){
-             var quitMsg={"type" : "QUIT","roomId":[[${room.roomId}]] ,"sender":[[${room.roomId}]],"msg":""};
-           socket.send(JSON.stringify(quitMsg));
+             var quitMsg={"type" : "QUIT","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":"연결을 종료합니다."};
+            socket.send(JSON.stringify(quitMsg));
             socket.close();
-            location.href="/chat/chatList";
+            location.href="/trading/image/main";
         }
 
     </script>
