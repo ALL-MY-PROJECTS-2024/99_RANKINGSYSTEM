@@ -53,6 +53,9 @@
                             <th>경매종료일</th>
                             <th>신청인원</th>
                             <th>참여하기</th>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                            <th>관리</th>
+                            </th:block>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,7 +77,14 @@
                                 <td>
                                     <a href="">신청</a> |
                                     <a href="/trading/chat/join">입장</a>
+
                                 </td>
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <td>
+                                        <a href="">채팅방 생성</a>
+                                    </td>
+                                </th:block>
+
                             </tr>
                         </th:block>
                     </tbody>

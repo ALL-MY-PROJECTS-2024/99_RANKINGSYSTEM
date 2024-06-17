@@ -1,6 +1,7 @@
 package com.creator.imageAndMusic.domain.service;
 
 
+import com.creator.imageAndMusic.domain.dto.ChatRoom;
 import com.creator.imageAndMusic.domain.dto.TradingImageDto;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
@@ -11,6 +12,8 @@ import com.creator.imageAndMusic.domain.repository.ImagesFileInfoRepository;
 import com.creator.imageAndMusic.domain.repository.TradingImageRepository;
 
 import com.creator.imageAndMusic.domain.repository.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,10 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -37,7 +37,9 @@ public class TradingImageServiceImpl {
     @Autowired
     private ImageRankingRepository imageRankingRepository;;
 
-
+    //채팅 처리
+    private  ObjectMapper objectMapper= new ObjectMapper();
+    private Map<String, ChatRoom> chatRooms= new LinkedHashMap<>();
 
     @Transactional(rollbackFor=Exception.class)
     public Map<String,Object> requestTradingImage(TradingImageDto dto){
@@ -108,4 +110,27 @@ public class TradingImageServiceImpl {
         tradingImageRepository.save(tradingImage);
         return true;
     }
+
+    //채팅관련
+    public List<ChatRoom> findAllRoom() {
+        return new ArrayList<>(chatRooms.values());
+    }
+
+    public ChatRoom findRoomById(String roomId) {
+        return chatRooms.get(roomId);
+    }
+
+    public ChatRoom createRoom(String name) {
+        String randomId = UUID.randomUUID().toString();
+        ChatRoom chatRoom = ChatRoom.builder()
+                .roomId(randomId)
+                .name(name)
+                .sessions(new HashSet<>())
+                .build();
+        chatRooms.put(randomId, chatRoom);
+
+        System.out.println("createRoom!  : " + chatRoom);
+        return chatRoom;
+    }
+
 }

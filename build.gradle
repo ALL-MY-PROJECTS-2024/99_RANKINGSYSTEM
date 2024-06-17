@@ -71,6 +71,9 @@ dependencies {
 	//WEBSOCKET
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
+	//JACKSON_DATA_BINDER
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.2'
+
 	//TEST
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

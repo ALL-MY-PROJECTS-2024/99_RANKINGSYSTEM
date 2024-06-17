@@ -60,6 +60,8 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/").permitAll();
                     authorize.requestMatchers("/login","/user/join").permitAll();
 
+                    authorize.requestMatchers("/user/confirmId").permitAll();
+                    authorize.requestMatchers("/user/confirmPw").permitAll();
 
                     authorize.requestMatchers("/user/**").hasAnyRole("USER");
 
