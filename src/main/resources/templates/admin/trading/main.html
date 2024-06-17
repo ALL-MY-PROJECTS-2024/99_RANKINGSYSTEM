@@ -26,7 +26,9 @@
     <th:block th:insert="~{fragments/nav :: navFragment}" />
 
     <main>
-            <span>MESSAGE : </span> <span th:text="${message}">  </span><br>
+        <a href="/trading/image/main">경매리스트로 이동</a>
+        <hr>
+        <span>MESSAGE : </span> <span th:text="${message}">  </span><br>
         <section class="banner">
 
             <div th:each="tradingImages:${list}">
@@ -40,7 +42,7 @@
                     <button>승인 처리요청</button>
                 </form>
                 <div>
-                    <a th:href="@{/admin/trading/cancel(tradingid=${tradingImages.tradingid})}">경매 승인 취소</a>
+                    <a th:href="@{/admin/trading/caX`ncel(tradingid=${tradingImages.tradingid})}">경매 승인 취소</a>
                 </div>
                 <hr>
             </div>

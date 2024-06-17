@@ -15,6 +15,8 @@
 
     <script th:inline="javascript">
         let  list = /*[[${ list}]]*/
+
+
         console.log(list);
     </script>
 </head>
@@ -103,16 +105,24 @@
                                 </td>
 
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <th:block th:if="${dto.roomId}==null">
+                                    <th:block th:if="${dto.adminAccepted}" >
+                                        <th:block th:if="${dto.roomId}==null">
+                                            <td>
+                                                <a th:href="@{/trading/chat/create(tradingid=${dto.tradingid})}" >채팅방 생성</a>
+                                            </td>
+                                        </th:block>
+                                        <th:block th:unless="${dto.roomId}==null">
+                                            <td>
+                                                <a href="javascript:void(0)" >채팅방 제거</a>
+                                            </td>
+                                        </th:block>
+                                    </th:block>
+                                    <th:block th:unless="${dto.adminAccepted}" >
                                         <td>
-                                            <a th:href="@{/trading/chat/create(tradingid=${dto.tradingid})}" >채팅방 생성</a>
+                                            <a href="/admin/trading/main" >승인요청 필요</a>
                                         </td>
                                     </th:block>
-                                    <th:block th:unless="${dto.roomId}==null">
-                                        <td>
-                                            <a href="javascript:void(0)" >채팅방 제거</a>
-                                        </td>
-                                    </th:block>
+
                                 </th:block>
 
                             </tr>

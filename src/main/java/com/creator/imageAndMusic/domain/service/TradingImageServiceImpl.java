@@ -1,6 +1,7 @@
 package com.creator.imageAndMusic.domain.service;
 
 
+import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.domain.dto.ChatRoom;
 import com.creator.imageAndMusic.domain.dto.TradingImageDto;
 import com.creator.imageAndMusic.domain.entity.*;
@@ -140,7 +141,6 @@ public class TradingImageServiceImpl {
 
         TradingImage tradingImage =  tradingImageRepository.findById(tradingid).get();
         tradingImage.setRoomId(chatRoom.getRoomId());
-
         tradingImage.setMax(5L);//정원 5명
         tradingImageRepository.save(tradingImage);
     }
@@ -169,8 +169,50 @@ public class TradingImageServiceImpl {
     }
 
     @Transactional(rollbackFor=Exception.class)
-    public void disconnectTradingIMageChat(WebSocketSession session) {
-        //db에서 제거
+    public void disconnectTradingIMageChat(WebSocketSession session,String username) {
+        System.out.println("disconnectTradingIMageChat...");
+
+        //Session이 비어이으면 모두 제거
+//        for(String key : chatRooms.keySet()){
+//            ChatRoom chatRoom =  chatRooms.get(key);
+//            System.out.println("chatRoom : " + chatRoom);
+//            //채팅방에 연결된 세션이 하나도 없다.(초기화)
+//            Optional<TradingImage> tradingImageOptional =  tradingImageRepository.findById(chatRoom.getTradingid());
+//            TradingImage tradeImage = tradingImageOptional.get();
+//            if(chatRoom.getSessions().isEmpty()){
+//                System.out.println("chatRoom.getSessions().isEmpty()! true");
+//                tradeImage.setRoomId(null);
+//                tradeImage.setCur(0L);
+//                tradeImage.setMembers(null);
+//                tradingImageRepository.save(tradeImage);
+//                chatRooms.remove(chatRoom.getRoomId());
+//            }
+//        }
+
+        for(String key : chatRooms.keySet()){
+            ChatRoom chatRoom =  chatRooms.get(key);
+            Set<WebSocketSession> savedSessions = chatRoom.getSessions();
+            Optional<TradingImage> tradingImageOptional =  tradingImageRepository.findById(chatRoom.getTradingid());
+            TradingImage tradeImage = tradingImageOptional.get();
+
+            for(WebSocketSession savedSession  :savedSessions){
+                if(savedSession.getId().equals(session.getId())){
+                    if(tradeImage.getCur()-1<=0){
+                        tradeImage.setCur(0L);
+                        tradeImage.setRoomId(null);
+                    }else{
+                        tradeImage.setCur(tradeImage.getCur()-1);
+                    }
+
+                    List<String> list =  tradeImage.getMembers();
+                    list.remove(username);
+                    tradeImage.setMembers(list);
+                }
+            }
+        }
+
+
+
 
     }
 

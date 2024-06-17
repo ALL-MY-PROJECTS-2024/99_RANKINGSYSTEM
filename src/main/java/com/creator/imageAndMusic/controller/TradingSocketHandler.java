@@ -48,18 +48,15 @@ public class TradingSocketHandler extends TextWebSocketHandler {
                 throw new RuntimeException(e);
             }
         });
-
-
-
-
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        System.out.println(session.getPrincipal().getName() + " 연결종료");
+        System.out.println("afterConnectionClosed...");
+        System.out.println("getPrincipal() : " +  session.getPrincipal().getName());
         System.out.println(session);
 
-        tradingImageServiceImpl.disconnectTradingIMageChat(session);
+
 
     }
 
@@ -105,6 +102,8 @@ public class TradingSocketHandler extends TextWebSocketHandler {
             chatMessage.setMsg(chatMessage.getSender() + "님이 입장했습니다.");  //TALK일 경우 msg가 있을 거고, ENTER일 경우 메세지 없으니까 message set
             sendToEachSocket(sessions,new TextMessage(objectMapper.writeValueAsString(chatMessage)) );
         }else if (chatMessage.getType().equals(ChatMessage.MessageType.QUIT)) {
+
+            tradingImageServiceImpl.disconnectTradingIMageChat(session,chatMessage.getSender());
             sessions.remove(session);
             chatMessage.setMsg(chatMessage.getSender() + "님이 퇴장했습니다..");
             sendToEachSocket(sessions,new TextMessage(objectMapper.writeValueAsString(chatMessage)) );

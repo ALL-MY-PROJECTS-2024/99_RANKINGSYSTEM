@@ -7,6 +7,7 @@ import com.creator.imageAndMusic.domain.dto.TradingImageDto;
 import com.creator.imageAndMusic.domain.entity.TradingImage;
 import com.creator.imageAndMusic.domain.repository.TradingImageRepository;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
+import com.creator.imageAndMusic.properties.SOCKET;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -137,47 +138,53 @@ public class TradingController {
             dto.setTitle(entity.getFileid().getImages().getTitle() );
 
 
-            dto.setSeller((entity.getSeller()!=null)?entity.getSeller().getUsername():null);
-            dto.setBuyer( (entity.getBuyer()!=null)?entity.getBuyer().getUsername():null);
-            dto.setFileid(entity.getFileid().getFileid());
-            dto.setFileDir(entity.getFileid().getDir());
-            dto.setFilename(entity.getFileid().getFilename());
-            dto.setAdminAccepted(entity.isAdminAccepted());
-            dto.setAuctionStartTime(entity.getAuctionStartTime());
-            dto.setAuctionEndTime(entity.getAuctionEndTime());
-            dto.setPrice(entity.getPrice());
-            dto.setPaymentState(entity.isPaymentState());
-            dto.setCur(entity.getCur());
-            //채팅방
-            dto.setRoomId(entity.getRoomId());
-            dto.setMax(entity.getMax());
-            dto.setMembers(entity.getMembers());
-            
-            //요청버튼 활성화여부
-            List<String> members = entity.getMembers();
-            if(members.isEmpty() && members.size()<dto.getMax() ){
+                dto.setSeller((entity.getSeller()!=null)?entity.getSeller().getUsername():null);
+                dto.setBuyer( (entity.getBuyer()!=null)?entity.getBuyer().getUsername():null);
+                dto.setFileid(entity.getFileid().getFileid());
+                dto.setFileDir(entity.getFileid().getDir());
+                dto.setFilename(entity.getFileid().getFilename());
+                dto.setAdminAccepted(entity.isAdminAccepted());
+                dto.setAuctionStartTime(entity.getAuctionStartTime());
+                dto.setAuctionEndTime(entity.getAuctionEndTime());
+                dto.setPrice(entity.getPrice());
+                dto.setPaymentState(entity.isPaymentState());
+                dto.setCur(entity.getCur());
+                //채팅방
+                dto.setRoomId(entity.getRoomId());
+                dto.setMax(entity.getMax());
+                dto.setMembers(entity.getMembers());
 
-                if(!members.contains(principalDetails.getUserDto().getUsername())){
+                //요청버튼 활성화여부
+                List<String> members = entity.getMembers();
+
+                if(members.isEmpty()){
                     dto.setReq(true);
                 }
-            }
-            else {
-                dto.setReq(false);
-            }
-
-            //참가목록에 있다면 입장버튼 true
-            for(String member : entity.getMembers()){
-
-                if(member.equals(principalDetails.getUserDto().getUsername())&&dto.getRoomId()!=null ){
-                    dto.setJoin(true);
-                    break;
+                else if(dto.getRoomId()==null){
+                    dto.setReq(false);
                 }
-            }
-            String role = principalDetails.getUserDto().getRole();
-            if(role.equals("ROLE_ADMIN"))
-                dto.setJoin(true);
+                else if(members.size()>=5){
+                    dto.setReq(false);
+                }
+                else if(members.contains(principalDetails.getUserDto().getUsername())){
+                    dto.setReq(false);
+                }else{
+                    dto.setReq(true);
+                }
 
-            
+
+
+                //참가목록에 있다면 입장버튼 true
+                for(String member : entity.getMembers()){
+                    System.out.println(member + "==" +principalDetails.getUserDto().getUsername() +" > "+  member.equals(principalDetails.getUserDto().getUsername()));
+                    if(member.equals(principalDetails.getUserDto().getUsername())&&dto.getRoomId()!=null ){
+                        dto.setJoin(true);
+                        break;
+                    }
+                }
+                String role = principalDetails.getUserDto().getRole();
+                if(role.equals("ROLE_ADMIN"))
+                    dto.setJoin(true);
             list.add(dto);
         });
 
@@ -220,7 +227,7 @@ public class TradingController {
 
         String username = principalDetails.getUserDto().getUsername();
         model.addAttribute("username",username);
-
+        model.addAttribute("wspath", SOCKET.REQ_PATH);
 
         return "trading/chat/room";
     }
