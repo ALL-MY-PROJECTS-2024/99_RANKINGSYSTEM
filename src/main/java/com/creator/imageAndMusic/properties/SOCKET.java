@@ -2,8 +2,8 @@ package com.creator.imageAndMusic.properties;
 
 public class SOCKET {
 
-    public static final String REQ_PATH ="test.wooriac.store";
+    public static final String REQ_PATH ="wss://test.wooriac.store/ws/chat";
 
-//    public static final String REQ_PATH ="172.30.1.70:8080";
+//    public static final String REQ_PATH ="ws://172.30.1.d 870:8080/ws/chat";
 
 }
