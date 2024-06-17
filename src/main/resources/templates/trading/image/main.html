@@ -43,7 +43,7 @@
                 <table class="table" >
                     <thead>
                         <tr class="table-dark">
-                            <th>경매번호</th>
+                            <th style="width:30px;">NO</th>
                             <th>이미지</th>
                             <th>제목</th>
                             <th>판매자</th>
@@ -73,15 +73,16 @@
                                 <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
                                 <td th:text="${dto.auctionStartTime}"></td>
                                 <td th:text="${dto.auctionEndTime}"></td>
-                                <td>2/10</td>
+                                <td><span th:text="${dto.members.length}<=0?'0':${dto.members.length}">0</span>/<span th:text="${dto.max}==null ? '0':${dto.max}"></span></td>
                                 <td>
-                                    <a href="">신청</a> |
-                                    <a href="/trading/chat/join">입장</a>
+
+                                    <a th:href="@{/trading/chat/req(tradingid=${dto.tradingid})}">신청</a> |
+                                    <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}">입장</a>
 
                                 </td>
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <td>
-                                        <a href="">채팅방 생성</a>
+                                        <a th:href="@{/trading/chat/create(tradingid=${dto.tradingid})}" >채팅방 생성</a>
                                     </td>
                                 </th:block>
 

@@ -57,11 +57,13 @@ public class TradingSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         System.out.println(session.getPrincipal().getName() + " 연결종료");
-        CLIENTS.remove( session.getPrincipal().getName());
+        System.out.println(session);
 
-
+        tradingImageServiceImpl.disconnectTradingIMageChat(session);
 
     }
+
+
 
     public WebSocketSession findWebSocketSession(String username){
 

@@ -32,6 +32,7 @@ public class TradingController {
     @Autowired
     TradingImageServiceImpl tradingImageService;
 
+
     @GetMapping("/req")
     public @ResponseBody ResponseEntity<String> req(@RequestParam("fildid") Long fileId, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
@@ -98,6 +99,10 @@ public class TradingController {
             dto.setPrice(entity.getPrice());
             dto.setPaymentState(entity.isPaymentState());
 
+            //채팅방
+            String roomId = entity.getRoomId();
+
+
             list.add(dto);
         });
 
@@ -124,13 +129,13 @@ public class TradingController {
     public void image_main(Model model){
         log.info("GET /trading/image/main..");
         List<TradingImage> listEntity =  tradingImageService.getAllTradingImages();
-
         List<TradingImageDto> list = new ArrayList();
 
         listEntity.forEach(entity ->{
             TradingImageDto dto = new TradingImageDto();
             dto.setTradingid(entity.getTradingid());
             dto.setTitle(entity.getFileid().getImages().getTitle() );
+
 
             dto.setSeller((entity.getSeller()!=null)?entity.getSeller().getUsername():null);
             dto.setBuyer( (entity.getBuyer()!=null)?entity.getBuyer().getUsername():null);
@@ -142,6 +147,10 @@ public class TradingController {
             dto.setAuctionEndTime(entity.getAuctionEndTime());
             dto.setPrice(entity.getPrice());
             dto.setPaymentState(entity.isPaymentState());
+
+            //채팅방
+            dto.setRoomId(entity.getRoomId());
+            dto.setMax(entity.getMax());
 
             list.add(dto);
         });
@@ -160,31 +169,39 @@ public class TradingController {
       return "redirect:/trading/image/main";
     }
 
-
+    @GetMapping("/chat/create")        //방을 만들었으면 해당 방으로 가야지.
+    public String createRoom(@RequestParam("tradingid") Long tradingid, Model model) {
+        log.info("POST /trading/chat/create... name : " + tradingid  );
+        tradingImageService.createRoom("이미지 경매 채팅방",tradingid);
+        //return "redirect:/trading/chat/room?roomId="+room.getRoomId()+"&username="+username;  //만든사람이 채팅방 1빠로 들어가게 됩니다
+        return "redirect:/trading/image/main";
+    }
+    
     //채팅 관련
-    @RequestMapping("/chat/list")
+    @GetMapping("/chat/list")
     public String chatList(Model model){
         List<ChatRoom> roomList = tradingImageService.findAllRoom();
         model.addAttribute("roomList",roomList);
         return "trading/chat/list";
     }
-    @PostMapping("/chat/create")        //방을 만들었으면 해당 방으로 가야지.
-    public String createRoom(@RequestParam("name") String name, @RequestParam("username")String username,Model model) {
-        log.info("POST /trading/chat/create... name : "  + name + " username : "  + username);
 
-        ChatRoom room = tradingImageService.createRoom(name);
-        model.addAttribute("room",room);
-        model.addAttribute("username",username);
-        return "redirect:/trading/chat/room?roomId="+room.getRoomId()+"&username="+username;  //만든사람이 채팅방 1빠로 들어가게 됩니다
-    }
-    @GetMapping("/chat/room")
-    public void chat_room( @RequestParam("roomId") String roomId,@AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
+    @GetMapping("/chat/enter")
+    public String chat_room( @RequestParam("roomId") String roomId,@AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
         ChatRoom room = tradingImageService.findRoomById(roomId);
         model.addAttribute("room",room);            //현재 방에 들어오기위해서 필요한데...... 접속자 수 등등은 실시간으로 보여줘야 돼서 여기서는 못함
 
         String username = principalDetails.getUserDto().getUsername();
         model.addAttribute("username",username);
 
+        return "trading/chat/room";
+    }
+    @GetMapping("/chat/req")
+    public String chat_req(@RequestParam("tradingid") Long tradingid,@AuthenticationPrincipal PrincipalDetails principalDetails)
+    {
+        String username = principalDetails.getUserDto().getUsername();
+        tradingImageService.joinChatMember(tradingid,username);
+
+        return "redirect:/trading/image/main";
     }
 
 }

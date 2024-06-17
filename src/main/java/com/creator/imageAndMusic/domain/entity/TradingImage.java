@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Builder
@@ -44,6 +45,14 @@ public class TradingImage {
     String price;                       //낙찰가
 
     boolean paymentState; //            //결제여부
+
+    //채팅방
+    String roomId;
+    Long max;
+    @ElementCollection
+    List<String> members;
+
+
 
 
 

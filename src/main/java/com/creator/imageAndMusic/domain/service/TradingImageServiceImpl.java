@@ -3,15 +3,9 @@ package com.creator.imageAndMusic.domain.service;
 
 import com.creator.imageAndMusic.domain.dto.ChatRoom;
 import com.creator.imageAndMusic.domain.dto.TradingImageDto;
-import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
-import com.creator.imageAndMusic.domain.entity.ImagesRanking;
-import com.creator.imageAndMusic.domain.entity.TradingImage;
-import com.creator.imageAndMusic.domain.entity.User;
-import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
-import com.creator.imageAndMusic.domain.repository.ImagesFileInfoRepository;
-import com.creator.imageAndMusic.domain.repository.TradingImageRepository;
+import com.creator.imageAndMusic.domain.entity.*;
+import com.creator.imageAndMusic.domain.repository.*;
 
-import com.creator.imageAndMusic.domain.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.socket.WebSocketSession;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -28,6 +23,8 @@ import java.util.*;
 public class TradingImageServiceImpl {
     @Autowired
     private TradingImageRepository tradingImageRepository;
+
+
     @Autowired
     private UserRepository userRepository;
 
@@ -36,6 +33,8 @@ public class TradingImageServiceImpl {
 
     @Autowired
     private ImageRankingRepository imageRankingRepository;;
+
+
 
     //채팅 처리
     private  ObjectMapper objectMapper= new ObjectMapper();
@@ -120,17 +119,51 @@ public class TradingImageServiceImpl {
         return chatRooms.get(roomId);
     }
 
-    public ChatRoom createRoom(String name) {
+
+    @Transactional(rollbackFor=Exception.class)
+
+    public void createRoom(String name,Long tradingid) {
+
+        Map<String,Object> result = new LinkedHashMap<>();
+
         String randomId = UUID.randomUUID().toString();
         ChatRoom chatRoom = ChatRoom.builder()
                 .roomId(randomId)
                 .name(name)
+                .tradingid(tradingid)
                 .sessions(new HashSet<>())
                 .build();
         chatRooms.put(randomId, chatRoom);
 
         System.out.println("createRoom!  : " + chatRoom);
-        return chatRoom;
+
+
+        TradingImage tradingImage =  tradingImageRepository.findById(tradingid).get();
+        tradingImage.setRoomId(chatRoom.getRoomId());
+        tradingImage.setMax(5L);//정원 5명
+        tradingImageRepository.save(tradingImage);
     }
+    @Transactional(rollbackFor=Exception.class)
+    public void joinChatMember(Long tradingid, String username) {
+        TradingImage tradingImage =  tradingImageRepository.findById(tradingid).get();
+        if(tradingImage.getMax()+1<=5)
+        {
+            List<String> members = tradingImage.getMembers();
+            members.add(username);
+            tradingImageRepository.save(tradingImage);
+        }
+        else{
+            ;
+        }
+
+    }
+
+    @Transactional(rollbackFor=Exception.class)
+    public void disconnectTradingIMageChat(WebSocketSession session) {
+        //db에서 제거
+
+    }
+
+
 
 }

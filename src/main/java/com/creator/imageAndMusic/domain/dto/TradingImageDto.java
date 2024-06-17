@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 public class TradingImageDto {
 
     Long tradingid;
+    ChatRoom room;                      //
     String seller ;                     //판매자유저
     String buyer;                       //구매자유저
     Long fileid;                        //이미지 파일(랭킹에 등록되어있는 - 조회수 5회이상, 좋아요 3이상 - 조건셋업은 나중에)
@@ -29,6 +31,12 @@ public class TradingImageDto {
 
     String fileDir;
     String filename;
+
+    //채팅방
+    String roomId;
+    Long max;
+    List<String> members;
+
     public void  setAdminAccepted(boolean adminAccepted){
         this.isAdminAccepted = adminAccepted;
     }
