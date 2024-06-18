@@ -26,6 +26,7 @@ public class TradingImageDto {
     LocalDateTime auctionStartTime ;    //경매시작일/시간
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime auctionEndTime;       //경매종료일/시간
+    String startPrice;                  //시작가
     String price;                       //낙찰가
     boolean paymentState; //            //결제여부
 

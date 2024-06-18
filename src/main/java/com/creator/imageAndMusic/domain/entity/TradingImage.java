@@ -54,6 +54,8 @@ public class TradingImage {
     List<String> members;
 
 
+    //상태
+    String status; // 경매진행중 , 관리자 승인 , 관리자 승인필요 ,
 
 
 

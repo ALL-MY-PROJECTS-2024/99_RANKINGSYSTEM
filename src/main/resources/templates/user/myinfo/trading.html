@@ -53,11 +53,51 @@
             <th:block th:insert="fragments/myaside :: myasideFragment" />
 
             <div class="join-block">
-                <div th:each="dto : ${list}" style="width : 1000px;overflow : auto;">
-                    <div th:text="${dto}"></div>
+                <div  style="width : 1000px;overflow : auto;">
+
                     <hr>
 
                     <!--승인된 Trading에 가격 요청-->
+                    <table class="table">
+                        <thead>
+                            <th>번호</th>
+                            <th>이미지</th>
+                            <th>관리자승인여부</th>
+                            <th>경매시작일</th>
+                            <th>경매종료일</th>
+                            <th>신청인원</th>
+                            <th>낙찰가</th>
+                            <th>구매자</th>
+                            <th>상태</th>
+                            <th>취소</th>
+                        </thead>
+                        <tbody>
+
+                            <th:block th:each="dto : ${list}">
+<!--                                <div th:text="${dto}"></div>-->
+                                <tr>
+                                    <td th:text="${dto.tradingid}"></td>
+                                    <td>
+                                        <a href="javascript:void(0)">
+                                              <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
+                                        </a>
+                                    </td>
+                                    <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
+                                    <td th:text="${dto.auctionStartTime}"></td>
+                                    <td th:text="${dto.auctionEndTime}"></td>
+                                    <td th:text="${dto.cur}"></td>
+                                    <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
+                                    <td th:text="${dto.buyer}==null?'미정':${dto.buyer.username}"></td>
+                                    <td>구현중</td>
+                                    <td>구현중</td>
+                                </tr>
+                            </th:block>
+
+                        </tbody>
+
+
+
+                    </table>
 
                 </div>
             </div>

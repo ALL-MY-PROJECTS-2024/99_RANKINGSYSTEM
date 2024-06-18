@@ -50,6 +50,7 @@
                             <th>제목</th>
                             <th>판매자</th>
                             <th>승인여부</th>
+                            <th>시작가</th>
                             <th>낙찰가</th>
                             <th>경매시작일</th>
                             <th>경매종료일</th>
@@ -73,6 +74,7 @@
                                 <td th:text="${dto.title}"></td>
                                 <td th:text="${dto.seller}"></td>
                                 <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
+                                <td>0</td>
                                 <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
                                 <td th:text="${dto.auctionStartTime}"></td>
                                 <td th:text="${dto.auctionEndTime}"></td>
