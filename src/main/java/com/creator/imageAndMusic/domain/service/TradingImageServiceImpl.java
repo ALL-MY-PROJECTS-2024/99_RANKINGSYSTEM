@@ -81,7 +81,13 @@ public class TradingImageServiceImpl {
         return  tradingImageRepository.findAllBySeller(user);
     }
 
-
+    @Transactional(rollbackFor=Exception.class)
+    public TradingImage getTradingImage(Long tradingid){
+        Optional<TradingImage> tradingImageOptional =    tradingImageRepository.findById(tradingid);
+        if(tradingImageOptional.isEmpty())
+            return null;
+        return  tradingImageOptional.get();
+    }
 
     public List<TradingImage> getAllTradingImages() {
         return tradingImageRepository.findAll();
@@ -216,6 +222,9 @@ public class TradingImageServiceImpl {
 
     }
 
+    @Transactional(rollbackFor=Exception.class)
 
-
+    public void updateTradingImage(TradingImage tradingImage) {
+        tradingImageRepository.save(tradingImage);
+    }
 }

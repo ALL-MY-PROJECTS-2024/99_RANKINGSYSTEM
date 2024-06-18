@@ -79,7 +79,7 @@ public class JwtTokenProvider {
 
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         UserDto userDto = principalDetails.getUserDto();
-        System.out.println("JWT GENERATE TOKEN DTO : " + userDto);
+        //System.out.println("JWT GENERATE TOKEN DTO : " + userDto);
         // Access Token 생성
         Date accessTokenExpiresIn = new Date(now + 60*30*1000);    // 60*30 초후 만료
         String accessToken = Jwts.builder()
@@ -235,7 +235,7 @@ public class JwtTokenProvider {
         principalDetails.setAccessToken(oauthAccessToken);   //Oauth AccessToken
 //        .out.println("[JWTTOKENPROVIDER] getAuthentication() principalDetails  : " + principalDetails);
 
-        System.out.println("JWT GETAUTHENTICATION DTO : " + userDto);
+        //System.out.println("JWT GETAUTHENTICATION DTO : " + userDto);
 
         //JWT + NO REMEMBERME
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
