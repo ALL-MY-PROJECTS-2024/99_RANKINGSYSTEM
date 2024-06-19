@@ -73,7 +73,7 @@
                                 <td th:text="${dto.tradingid}"></td>
                                 <td >
                                     <a href="javascript:void(0)">
-                                    <img  style="width:100px;height:50px;" th:src="@{${dto.fileDir}+'\s_'+${dto.filename}}"  alt="" />
+                                        <img  style="width:100px;height:50px;" th:src="@{${dto.fileDir}+'\s_'+${dto.filename}}"  alt="" />
                                     </a>
                                 </td>
                                 <td th:text="${dto.title}"></td>
@@ -120,7 +120,7 @@
                                         </th:block>
                                         <th:block th:unless="${dto.roomId}==null">
                                             <td>
-                                                <a href="javascript:void(0)" >채팅방 제거</a>
+                                                <a th:href="@{/trading/chat/del(tradingid=${dto.tradingid})}" >채팅방 제거</a>
                                             </td>
                                         </th:block>
                                     </th:block>

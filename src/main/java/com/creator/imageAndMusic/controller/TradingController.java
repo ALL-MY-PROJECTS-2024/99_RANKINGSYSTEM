@@ -274,5 +274,11 @@ public class TradingController {
 
         return "redirect:/trading/image/main";
     }
+    @GetMapping("/chat/del")
+    public String chat_del(@RequestParam("tradingid") Long tradingid)
+    {
+        tradingImageService.deleteChat(tradingid);
 
+        return "redirect:/trading/image/main";
+    }
 }

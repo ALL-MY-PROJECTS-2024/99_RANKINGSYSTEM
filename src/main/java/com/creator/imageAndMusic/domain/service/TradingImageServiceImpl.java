@@ -239,4 +239,28 @@ public class TradingImageServiceImpl {
         tradingImageRepository.deleteById(tradingid);
         return true;
     }
+
+    @Transactional(rollbackFor=Exception.class)
+    public void deleteChat(Long tradingid) {
+
+        for(String key : chatRooms.keySet()){
+            ChatRoom chatRoom = chatRooms.get(key);
+            Long savedTradingId =  chatRoom.getTradingid();
+            if(Objects.equals(savedTradingId, tradingid)){
+
+                chatRooms.remove(key);
+
+                Optional<TradingImage> tradingImagOptional =  tradingImageRepository.findById(tradingid);
+                if(tradingImagOptional.isPresent()){
+                     TradingImage tradingImage =tradingImagOptional.get();
+                    tradingImage.setCur(0L);
+                    tradingImage.setAuctionState("채팅방 제거");
+                    tradingImage.setRoomId(null);
+                    
+                }
+            }
+        }
+    }
+
+
 }

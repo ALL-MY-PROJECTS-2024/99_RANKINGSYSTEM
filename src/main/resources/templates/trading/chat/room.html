@@ -19,6 +19,8 @@
         let  users = /*[[${users}]]*/
         console.log(users);
     </script>
+
+
 </head>
 <body>
 
@@ -37,84 +39,136 @@
                     <img  th:src="@{${tradingImage.fileid.dir}+'\s_'+${tradingImage.fileid.filename}}"  alt="" />
 
                 </div>
-                <div class="title">
-                    <span>TITLE</span>
+                <div>
+                    <table clas="table">
+                        <tr>
+                            <td>제목</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>판매자</td>
+                            <td></span><span th:text="${tradingImage.fileid.images.username}"></span></td>
+                        </tr>
+
+                    </table>
                 </div>
-                <div class="start-price">
-                    <span>제작자 : </span><span th:text="${tradingImage.fileid.images.username}"></span>
-                </div>
-                <div class="start-price">
-                    <span>시작가 : </span><span></span>
-                </div>
-                <div class="start-price">
-                    <span>낙찰가 : </span><span ></span>
-                </div>
-                <div class="status">
-                    <span>상태 : </span><span></span>
-                </div>
+
+
             </div>
             <div class="center">
-                <div class="status">
-                    <div class="now-price">
-                        <div>
-                            <span>시작가 : </span> <span>1000 </span><span> 원</span>
-                        </div>
-                        <div>
-                            <span>낙찰가 : </span><span>1000</span><span> 원</span>
-                        </div>
-                        <div>
-                            <span>유저 : </span><span>user@example.com</span>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="show-item">
                     <div class="chat">
                     </div>
                 </div>
+                <div class="status">
+                    <div class="now-price">
+                        <table class="table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width:80px;">시작가</th>
+                                    <th style="width:80px;">낙찰가</th>
+                                    <th style="width:210px;">유저</th>
+
+                                </tr>
+                            </thead>
+                            <tr>
+                                <th><span class="startPrice">1000 </span><span> 원</span></th>
+                                <th><span class="auctionPrice">0</span><span> 원</span></th>
+                                <th><span class="rankingUser"> </span></th>
+
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+
                 <div class="user-call">
-                    <div class="top">
-                        <div class="control">
-                            <a href="javascript:void(0)" class=" ">관리자호출</a>
-                            <a href="javascript:quit()" class=" ">나가기</a>
+
+                        <div style="">
+                            <table class="table simple-input w-100 m-2">
+                                <tr>
+                                    <td colspan="6">간편입력</td>
+
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:plusPriceMsg(500)" class="btn btn-primary">+500</a></td>
+                                    <td><a href="javascript:plusPriceMsg(1000)" class="btn btn-primary">+1000</a></td>
+                                    <td><a href="javascript:plusPriceMsg(1500)" class="btn btn-primary">+1500</a></td>
+                                    <td><a href="javascript:plusPriceMsg(3000)" class="btn btn-primary">+3000</a></td>
+                                    <td><a href="javascript:plusPriceMsg(5000)" class="btn btn-primary">+5000</a></td>
+                                    <td><a href="javascript:plusPriceMsg(10000)" class="btn btn-primary">+10000</a></td>
+                                </tr>
+                            </table>
+
+                            <table class="table w-100 m-2">
+                                <tr>
+                                    <td>계정명</td>
+                                    <td>호가</td>
+                                </tr>
+                                <tr>
+                                    <td th:text="${username}"></td>
+                                    <td>
+                                        <input class="form-control  content" placeholder="직접입력">
+                                    </td>
+                                </tr>
+                            </table>
+
                         </div>
-                        <div style="display:flex;justify-content:center;">
-                            <input class="form-control w-50 m-2 content" placeholder="가격입력">
-                            <button onclick="sendMsg()" class="m-2 btn btn-primary">가격부르기</button>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="body">
-                        <a href="" class="btn btn-primary m-1">+1000</a>
-                        <a href="" class="btn btn-primary m-1">+3000</a>
-                        <a href="" class="btn btn-primary m-1">+5000</a>
-                        <a href="" class="btn btn-primary m-1">+10000</a>
-                    </div>
                 </div>
 
             </div>
 
             <div class="right">
-                <div>총 : <span class="cur">0</span>/<span>5</span> <span style="font-size : .7rem;">(관리자계정은제외)</span></div>
-                <div class="user-block">
+                <div>
 
-<!--                    <div class="user">-->
-<!--                        <div class="profile-image">-->
-<!--                            <img src="anon.jpg" alt="">-->
-<!--                        </div>-->
-<!--                        <div class="username">user@naver.com</div>-->
-<!--                        <div class="accept">-->
-<!--                            <a href="">낙찰</a>-->
-<!--                        </div>-->
-<!--                        <div class="control-1">-->
-<!--                            <div><a href="">1:1</a></div>-->
-<!--                        </div>-->
-<!--                        <div class="control-2">-->
-<!--                            <div><a href="">강퇴</a></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div class="controller">
+                        <a href="javascript:void(0)" class="person-group-block">
+                            <span class="material-symbols-outlined">group</span>
+                            <span class="cur">0</span>
+                        </a>
+                        <a href="javascript:quit()">
+                            <span class="material-symbols-outlined">logout</span>
+                        </a>
+                    </div>
+                    <hr >
+                    <div class="timer">
+                        <table class="table">
+                            <tr>
+                                <td><span class="material-symbols-outlined">timer</span></td>
+                                <td>10:00</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="user-block hidden"></div>
+
+                    <div class="user-call-result-block">
+<!--                        <table class="table">-->
+<!--                            <thead class="table-primary">-->
+<!--                                <tr>-->
+<!--                                    <th>순위</th>-->
+<!--                                    <th>유저명</th>-->
+<!--                                    <th>호가</th>-->
+<!--                                    <th>선택</th>-->
+<!--                                </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                                <tr>-->
+<!--                                    <td>1</td>-->
+<!--                                    <td>user1@naver.com</td>-->
+<!--                                    <td>10000</td>-->
+<!--                                    <td><a href="" class="btn btn-secondary">낙찰</a></td>-->
+<!--                                </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+                    </div>
 
                 </div>
 
+
+                <div style="position:absolute;bottom:30px;right:30px;">
+                    <a href="javascript:void(0)" class="commit-btn btn btn-primary" style="width:150px;">낙찰확정</a>
+                </div>
             </div>
         </section>
 
@@ -132,15 +186,13 @@
     </footer>
 
 
-
     <script th:inline="javascript">
-
         let total=0;
         let userlist = [];
         const curEl =document.querySelector('.cur');
         curEl.innerHTML = total;
         function enterRoom(socket){
-            var enterMsg={"type" : "ENTER","roomId":[[${room.roomId}]],"sender":[[${username}]],"msg":""}; //sender는  글쓸때 수정하자.
+            var enterMsg={"type" : "ENTER","roomId":[[${room.roomId}]],"sender":[[${username}]],"msg":""};
             socket.send(JSON.stringify(enterMsg));
         }
 
@@ -173,38 +225,58 @@
 
                    //기존 접속 제거
                    var AllUserBlock = document.querySelectorAll('.user-item');
-                   AllUserBlock.forEach(el=>{
-                    el.remove();
-                   });
+                   if(AllUserBlock!=null){
+                        AllUserBlock.forEach(el=>{
+                            el.remove();
+                        });
+                   }
+
+                   const userCallResultBlock = document.querySelectorAll('.user-call-result-block table');
+
+                    if(userCallResultBlock != null){
+                        userCallResultBlock.forEach(el=>{
+                            el.remove();
+                           })
+                    }
+
+
 
                   if(obj.sender!=username){
                       if(!users.includes(obj.sender))
                         users.push(obj.sender);
                   }
+                  curEl.innerHTML=users.length;
 
-                   curEl.innerHTML=users.length;
-                   //접속 유저 추가
-                   users.forEach(user=>{
+
+                  //접속 유저 추가
+                  users.forEach(user=>{
                     createUserItem(user);
+                    createUserCallResult(user)
                    });
-
-
-
 
            }
            else if(obj.type=='TALK'){
                 if(username==obj.sender){
                     newMsg.innerText= obj.msg;
                     newMsg.setAttribute("style","text-align:right;color:black;font-size:1rem;margin:5px;");
+
+
                 }else{
                     newMsg.innerText= "[ "+ obj.sender +" ] : "+obj.msg;
                     newMsg.setAttribute("style","text-align:left;color:black;font-size:1rem;margin:5px;");
                 }
 
-           }else if(obj.type=='QUIT'){
-                newMsg.innerText="--- "  + obj.msg + " ----";
-                newMsg.setAttribute("style","text-align:center;color:gray;font-size:.8rem;margin:5px;");
+                const userCallResultBlock = document.querySelectorAll('.user-call-result-block table');
+                userCallResultBlock.forEach(el=>{
+                    if(el.classList.contains(obj.sender)){
+                        const priceEl =  el.querySelector('.price');
+                        priceEl.innerHTML = obj.msg;
+                    }
+                })
 
+          }else if(obj.type=='QUIT'){
+                    newMsg.innerText="--- "  + obj.msg + " ----";
+                    newMsg.setAttribute("style","text-align:center;color:gray;font-size:.8rem;margin:5px;");
 
                    //기존 접속 제거
                    var AllUserBlock = document.querySelectorAll('.user-item');
@@ -212,14 +284,20 @@
                     el.remove();
                    });
 
-
-
+                   var deletedUser = users.filter(user=>user==obj.sender);
                    users = users.filter(user=>user!=obj.sender);
-
                    curEl.innerHTML=users.length;
-                   //접속 유저 추가
+
+                   //다시 추가
                    users.forEach(user=>{
                     createUserItem(user);
+                   });
+
+                   //기존 호가 테이블 제거
+                   const userCallResultBlock = document.querySelectorAll('.user-call-result-block table');
+                   userCallResultBlock.forEach(el=>{
+                        if(el.classList.contains(deletedUser))
+                            el.remove();
                    });
            }
 
@@ -230,21 +308,37 @@
         }
 
         //메세지 보내기 버튼 눌렀을 떄..
-        function sendMsg() {
-            let content=document.querySelector('.content').value;
-             var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":content};
+        function plusPriceMsg(price) {
+           const oldPrice = document.querySelector(`.user-call-result-block .table.${username} .price`).innerHTML;
+           console.log(oldPrice,price);
+           price= Number(price) +Number(oldPrice);
+           var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":price};
+           socket.send(JSON.stringify(talkMsg));
+        }
+
+        function sendMsg(price) {
+
+           var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":price};
            socket.send(JSON.stringify(talkMsg));
            content.value='';
         }
         let content=document.querySelector('.content');
         content.addEventListener('keydown',function(e){
             console.log(e.keyCode);
+            let price=document.querySelector('.content').value;
+
+            const regexId = /^[0-9]+$/;
+
             if(e.keyCode==13){
-                sendMsg()
+                if(!regexId.test(price)){
+                    alert("숫자만 입력가능합니다.");
+                    content.value='';
+                    return ;
+                }
+                sendMsg(price)
                 content.value='';
             }
         });
-
 
         function quit(){
              var quitMsg={"type" : "QUIT","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":"연결을 종료합니다."};
@@ -254,59 +348,52 @@
         }
 
 
-        function createUserItem(user){
-                // 프로필 요소를 선택
-
-                var userBlock = document.querySelector('.user-block');
-
-                var profile = document.createElement('div');
-                profile.classList.add('user-item');
-                profile.classList.add(user);
-
-                // 프로필 정보 설정
-                var profileImageSrc = '/assets/anon.jpg';
-                var usernameText = user;
-
-                // 프로필 이미지 생성
-                var profileImage = document.createElement('div');
-                profileImage.classList.add('profile-image');
-                profileImage.innerHTML = '<img src="' + profileImageSrc + '" alt="">';
-                profile.appendChild(profileImage);
-
-                // 사용자명 생성
-                var username = document.createElement('div');
-                username.classList.add('username');
-                username.textContent = usernameText;
-                profile.appendChild(username);
-
-                // '낙찰' 링크 생성
-                var acceptLink = document.createElement('div');
-                acceptLink.classList.add('accept');
-                acceptLink.innerHTML = '<a href="">낙찰</a>';
-                profile.appendChild(acceptLink);
-
-                // '1:1' 링크 생성
-                var control1Link = document.createElement('div');
-                control1Link.classList.add('control-1');
-                control1Link.innerHTML = '<div><a href="">1:1</a></div>';
-                profile.appendChild(control1Link);
-
-                // '강퇴' 링크 생성
-                var control2Link = document.createElement('div');
-                control2Link.classList.add('control-2');
-                control2Link.innerHTML = '<div><a href="">강퇴</a></div>';
-                profile.appendChild(control2Link);
 
 
-                userBlock.appendChild(profile);
+
+        //타이머 호가 이벤트가 발생할때마다 초기화됨 10분기본값
+        function timer(){
+
         }
 
-         function removeUserItem(obj){
-            var userBlock = document.querySelector('.user-block');
-            userBlock.querySelector(`.${obj.sender}`).remove();
-         }
+        //버튼누를때 실행으로 변경할것
+        //2초마다 순위정해서 배치 다시
+        let ranking = setInterval(function(){
+            console.log("TEST");
+
+            const userCallResultBlock = document.querySelector('.user-call-result-block');
+            const tables = document.querySelectorAll('.user-call-result-block table');
+             // 각 테이블에 대해 처리합니다.
+             const sortedTables = Array.from(tables).sort((table1, table2) => {
+                    // 각 테이블의 첫 번째 .price 값을 가져와 비교합니다.
+                    const price1 = parseInt(table1.querySelector('.price').textContent);
+                    const price2 = parseInt(table2.querySelector('.price').textContent);
+                    // 내림차순으로 정렬합니다.
+                    return price2 - price1;
+             });
+                // 정렬된 순서대로 부모 요소에 다시 추가합니다.
+             sortedTables.forEach((table,index) => {
+                        const rank = index + 1;
+                        const rankingElement = table.querySelector('.ranking');
+                        rankingElement.textContent = `${rank}`;
+                        userCallResultBlock.appendChild(table);
+                        //1순위에 있는 가격은 낙찰가에도 업로드하기
+                        if(rank==1){
+                            const auctionPrice = document.querySelector('.auctionPrice');
+                            auctionPrice.innerHTML = table.querySelector('.price').innerHTML;
+                            const rankingUser = document.querySelector('.rankingUser');
+                            rankingUser.innerHTML = table.querySelector('.username').innerHTML;
+                        }
+                    }
+             );
+
+
+
+        },2000);
 
     </script>
+    <script   src="/js/trading/chat/room.js" ></script>
+
 </div>
 
 
