@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Slf4j
@@ -23,5 +25,5 @@ public class ChatRoom {
     private String name;
     private Long tradingid;
     private TradingImageDto tradingImageDto;
-    private Set<WebSocketSession> sessions ;
+    private Map<String,WebSocketSession> sessions ;
 }

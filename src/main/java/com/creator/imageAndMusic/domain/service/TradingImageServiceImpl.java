@@ -65,6 +65,12 @@ public class TradingImageServiceImpl {
             result.put("status",false);
             return result;
         }
+        if(tradingImageRepository.existsBySellerAndFileid(user,imagesFileInfo)){
+            log.info("이미 경매요청 했습니다.");
+            result.put("message","이미 경매요청 했습니다.\n매매>이미지 에서 확인하세요.");
+            result.put("status",false);
+            return result;
+        }
 
 
         tradingImageRepository.save(tradeImage);
@@ -138,7 +144,7 @@ public class TradingImageServiceImpl {
                 .roomId(randomId)
                 .name(name)
                 .tradingid(tradingid)
-                .sessions(new HashSet<>())
+                .sessions(new HashMap<>())
                 .build();
         chatRooms.put(randomId, chatRoom);
 
@@ -197,11 +203,11 @@ public class TradingImageServiceImpl {
 
         for(String key : chatRooms.keySet()){
             ChatRoom chatRoom =  chatRooms.get(key);
-            Set<WebSocketSession> savedSessions = chatRoom.getSessions();
+            Map<String,WebSocketSession> savedSessions = chatRoom.getSessions();
             Optional<TradingImage> tradingImageOptional =  tradingImageRepository.findById(chatRoom.getTradingid());
             TradingImage tradeImage = tradingImageOptional.get();
 
-            for(WebSocketSession savedSession  :savedSessions){
+            for(WebSocketSession savedSession  :savedSessions.values()){
                 if(savedSession.getId().equals(session.getId())){
                     if(tradeImage.getCur()-1<=0){
                         tradeImage.setCur(0L);
@@ -226,5 +232,11 @@ public class TradingImageServiceImpl {
 
     public void updateTradingImage(TradingImage tradingImage) {
         tradingImageRepository.save(tradingImage);
+    }
+
+    @Transactional(rollbackFor=Exception.class)
+    public boolean removeTradingImage(Long tradingid) {
+        tradingImageRepository.deleteById(tradingid);
+        return true;
     }
 }

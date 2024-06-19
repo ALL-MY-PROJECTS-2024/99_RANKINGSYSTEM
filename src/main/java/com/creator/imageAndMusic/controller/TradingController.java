@@ -18,11 +18,10 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.socket.WebSocketSession;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @Slf4j
@@ -50,8 +49,7 @@ public class TradingController {
 
         if(!status){
             return new ResponseEntity(message, HttpStatus.BAD_GATEWAY);
-        }
-        return new ResponseEntity(message, HttpStatus.OK);
+        }    return new ResponseEntity(message, HttpStatus.OK);
     }
     @PostMapping("/my")
     public void my(){
@@ -136,9 +134,7 @@ public class TradingController {
 
         List<ChatRoom> chatRooms =  tradingImageService.findAllRoom();
 
-
         listEntity.forEach(entity ->{
-
 
                 //재부팅시 초기화
                 if(chatRooms.isEmpty()){
@@ -211,6 +207,14 @@ public class TradingController {
 
     }
 
+
+    @GetMapping("/image/del")
+    public String del(@RequestParam("tradingid") Long tradingid, RedirectAttributes attrs)
+    {
+        boolean isdel = tradingImageService.removeTradingImage(tradingid);
+        attrs.addFlashAttribute("message","경매ID : " + tradingid + " 정보를 삭제하였습니다");
+        return "redirect:/trading/image/main";
+    }
     @GetMapping("/image/accept")
     public String trading_accept(TradingImageDto dto){
       log.info("GET /trading/image/accept..." + dto.getTradingid());
@@ -240,31 +244,25 @@ public class TradingController {
     @GetMapping("/chat/enter")
     public String chat_room( @RequestParam("roomId") String roomId, @AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
         ChatRoom room = tradingImageService.findRoomById(roomId);
-                  //현재 방에 들어오기위해서 필요한데...... 접속자 수 등등은 실시간으로 보여줘야 돼서 여기서는 못함
+
+        Long tradingid = room.getTradingid();
+        TradingImage tradingImage = tradingImageService.getTradingImage(tradingid);
+
+
         String username = principalDetails.getUserDto().getUsername();
+        Map<String, WebSocketSession> sessions =  room.getSessions();
 
-        List<String> members=null;
-        if(joinMemberSession.get(roomId)==null)
-        {
-            members = new ArrayList<String>();
-            members.add(username);
-        }else{
-            members = (List<String>)joinMemberSession.get(roomId);
-            members.add(username);
 
-        }
-        joinMemberSession.put(roomId,members);
-        System.out.println("MEMBERS : " + members);
-
+        sessions.put(username,null);
+        Set<String> users = sessions.keySet();
         System.out.println("/chat/enter... username : " + username);
         model.addAttribute("username",username);
+        model.addAttribute("users", users);
         model.addAttribute("wspath", SOCKET.REQ_PATH);
-        model.addAttribute("members",members);
         model.addAttribute("room",room);
+        model.addAttribute("tradingImage", tradingImage);
 
 
-
-        TradingImage tradingImage = tradingImageService.getTradingImage(room.getTradingid());
 
         return "trading/chat/room";
     }

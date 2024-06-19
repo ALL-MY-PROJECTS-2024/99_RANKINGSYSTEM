@@ -23,4 +23,6 @@ public class TradingSocketConfigure implements WebSocketConfigurer {
 //        registry.addHandler(webSocketHandler, "/wss/chat").setAllowedOrigins("https://test.wooriac.store");
 
     }
+
+
 }

@@ -25,6 +25,7 @@ import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -200,21 +201,28 @@ public class JwtTokenProvider {
                         .map(auth -> new SimpleGrantedAuthority(auth))
                         .collect(Collectors.toList());
 
-        String username = claims.getSubject(); //username
-
-        //JWT Added
-//        .out.println("[JWTTOKENPROVIDER] principalDetails  : " + claims.get("principal"));
-
-        String provider =  (String)claims.get("provider");
-        String providerId =  (String)claims.get("providerId");
-        String password = (String)claims.get("password");
-        String auth = (String)claims.get("auth");
-        String oauthAccessToken = (String)claims.get("accessToken");
-        String phone = (String)claims.get("phone");
-        String zipcode = (String)claims.get("zipcode");
+        //String username = claims.getSubject(); //username
+        String username =  (String)claims.get("username");
+        String phone =  (String)claims.get("phone");
+        String nickname = (String)claims.get("nickname");
         String addr1 = (String)claims.get("addr1");
         String addr2 = (String)claims.get("addr2");
-        String nickname = (String)claims.get("nickname");
+        String password = (String)claims.get("password");
+        String zipcode = (String)claims.get("zipcode");
+
+
+
+        String auth = (String)claims.get("auth");
+        LinkedHashMap principal = (LinkedHashMap)claims.get("principal");
+        String credentials = (String)claims.get("credentials");
+        LinkedHashMap details = (LinkedHashMap)claims.get("details");
+        String provider = (String)claims.get("provider");
+        String providerId = (String)claims.get("providerId");
+        String oauthAccessToken = (String)claims.get("accessToken");
+
+
+
+
 
 
         UserDto userDto = new UserDto();

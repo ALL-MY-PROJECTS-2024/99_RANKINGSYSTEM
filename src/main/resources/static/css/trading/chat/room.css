@@ -73,12 +73,12 @@
     text-align:center;
     border : 1px solid;
     overflow : hidden;
-
 }
 .room-block .center .show-item .chat{
-    height : 100%;
+    height : 95%;
     position:relative;
-    overflow:auto;
+    overflow : auto;
+
 }
 .room-block .center .show-item>*{
     margin-bottom : 10px;
@@ -88,8 +88,20 @@
 .room-block .center .status{
     border : 1px solid;
     width : 100%;
-}
 
+}
+.room-block .center .status .now-price{
+    width : 100%;
+    display:flex;
+    justify-content: space-between;
+    align-items : center;
+}
+.room-block .center .status .now-price>*{
+    border : 1px solid;
+    margin : 5px;
+    font-size : .8rem;
+    height : 45px;
+}
 .room-block .center .user-call{
 
     border : 1px solid;
@@ -146,7 +158,7 @@
     align-items: center;
 }
 .room-block .center .status{
-    margin-top : 20px;
+    margin-bottom : 20px;
     height : 50px;
     line-height : 50px;
 
@@ -173,14 +185,14 @@
     border : 1px solid;
     margin : 10px;
 }
-.room-block .right .user-block .user{
+.room-block .right .user-block .user-item{
     padding : 5px;
     margin : 5px;
     display:flex;
     justify-content: space-between;
     align-items : center;
 }
-.room-block .right .user-block .user>*{
+.room-block .right .user-block .user-item>*{
     border : 1px solid;
     margin : 5px;
     height : 100%;
@@ -191,18 +203,18 @@
     justify-content: center;
     align-items: center;
 }
-.room-block .right .user-block .user>.profile-image{
+.room-block .right .user-block .user-item>.profile-image{
     width : 45px;
     height : 45px;;
     border-radius:50%;
 }
-.room-block .right .user-block .user>.profile-image img{
+.room-block .right .user-block .user-item>.profile-image img{
     width : 100%;
     height :100%;
     border-radius : 50%;
 
 }
-.room-block .right .user-block .user>.username{
+.room-block .right .user-block .user-item>.username{
     height : 35px;
     padding : 5px;
 
@@ -212,7 +224,7 @@
 
 
 }
-.room-block .right .user-block .user>.control{
+.room-block .right .user-block .user-item>.control{
     display:flex;
     justify-content: center;
     align-items: center;

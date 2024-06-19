@@ -42,7 +42,9 @@
         </section>
         <section class="banner layout-5">
             <div>
+
                 <table class="table" >
+                    <div class="message-block" th:text="${message}"></div>
                     <thead>
                         <tr class="table-dark">
                             <th style="width:30px;">NO</th>
@@ -58,6 +60,9 @@
                             <th>참여하기</th>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                             <th>관리</th>
+                            </th:block>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <th>삭제</th>
                             </th:block>
                         </tr>
                     </thead>
@@ -127,6 +132,13 @@
 
                                 </th:block>
 
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <th:block th:if="${dto.roomId}==null">
+                                        <th><a th:href="@{/trading/image/del(tradingid=${dto.tradingid})}">제거하기</a></th>
+                                    </th:block>
+                                    <th:block th:unless="${dto.roomId}==null">
+                                        <th><span style="font-size : .7rem">[삭제불가]경매중</span></th>
+                                    </th:block>
                             </tr>
                         </th:block>
                     </tbody>
