@@ -18,6 +18,7 @@
         let  username = /*[[${username}]]*/
         let  users = /*[[${users}]]*/
         console.log(users);
+
     </script>
 
 
@@ -74,7 +75,7 @@
                     <table class="table  w-100">
                         <tr>
                             <td>제목</td>
-                            <td></td>
+                            <td th:text="${tradingImage.fileid.images.title}"></td>
                         </tr>
                         <tr>
                             <td>판매자</td>
@@ -85,18 +86,21 @@
                 <div class="status">
                     <div class="now-price">
                         <table class="table  w-100">
-                            <thead class="table-dark">
-                                <tr>
+                            <thead style="height:35px;">
+                                <tr class="table-dark">
                                     <th style="width:80px;">시작가</th>
                                     <th style="width:80px;">낙찰가</th>
                                     <th style="width:210px;">유저</th>
                                 </tr>
                             </thead>
-                            <tr>
-                                <th><span class="startPrice">1000 </span><span> 원</span></th>
-                                <th><span class="auctionPrice">0</span><span> 원</span></th>
-                                <th><span class="rankingUser"> </span></th>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <th><span class="startPrice" th:text="${tradingImage.startPrice}"></span><span> 원</span></th>
+                                    <th><span class="auctionPrice"  th:text="${tradingImage.startPrice}"></span><span> 원</span></th>
+                                    <th><span class="rankingUser"> </span></th>
+                                </tr>
+                            </tbody>
+
                         </table>
 
                     </div>
@@ -192,14 +196,14 @@
                     <div style="position:absolute;bottom:30px;right:30px;">
                         <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2" style="width:100px;">낙찰확정</a>
                         <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2 auction_start" style="width:100px;">경매시작</a>
-                        <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2" style="width:100px;">경매종료</a>
+                        <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2 auction_cancel" style="width:100px;">경매종료</a>
                     </div>
                 </th:block>
             </div>
         </section>
 
 
-        <div th:text="${tradingImage}"></div>
+<!--        <div th:text="${tradingImage}"></div>-->
     </main>
 
     <!-- Button trigger modal -->
@@ -221,7 +225,7 @@
                             <div id="timerDisplay">00:00:00</div>
                         </div>
                         <div class="m-2">
-                            <label for="timer">타이머 설정 (초):</label>
+                            <label for="timer" class="mb-2" style="font-size : .8rem;">타이머 설정 (초):</label>
                             <input type="range" id="timer" name="timer" min="1" max="3600" step="1" class="form-control"   oninput="updateTimerDisplay(this.value)">
                         </div>
                     </form>
@@ -331,6 +335,13 @@
                     asyncRankingFunc();
                      statusColorControl('start','경매중');
                 }
+                else if(obj.msg=='auction_cancel'){
+                    clearInterval(timerAsync1);
+                    clearInterval(timerAsync2);
+                    clearInterval(rankingAsync);
+                    statusColorControl('cancel','경매종료');
+                    alert('관리자에 의해 경매가 종료되었습니다.');
+                }
                 else if(obj.msg.toString().includes('time:'))
                 {
                     console.log("time",obj.msg);
@@ -348,11 +359,9 @@
                             clearInterval(rankingAsync);
                             console.log("타이머 종료!");
                             //alert("경매 시간 종료..");
-                            statusColorControl('end','경매종료');  //알림표시
+                            statusColorControl('end','경매완료');  //알림표시
                         }
                     }, 1000);
-
-
                 }
                 else
                 {
@@ -384,7 +393,7 @@
 
                    //다시 추가
                    users.forEach(user=>{
-                    createUserItem(user);
+                    //createUserItem(user);
                    });
 
                    //기존 호가 테이블 제거
@@ -402,7 +411,13 @@
         }
 
         //메세지 보내기 버튼 눌렀을 떄..
+        let startPriceInit=true;
         function plusPriceMsg(price) {
+           const startPrice = document.querySelector('.startPrice').innerHTML;
+           if(startPriceInit){
+                price = Number(price) + Number(startPrice);
+                startPriceInit=false;
+           }
            const oldPrice = document.querySelector(`.user-call-result-block .table.${username} .price`).innerHTML;
            console.log(oldPrice,price);
            price= Number(price) +Number(oldPrice);
@@ -531,6 +546,8 @@
             var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":'time:'+time};
             socket.send(JSON.stringify(talkMsg));
         })
+
+
         function updateTimerDisplay(seconds) {
             let hours = Math.floor(seconds / 3600);
             let minutes = Math.floor((seconds % 3600) / 60);
@@ -552,19 +569,36 @@
             circleStatus.classList.remove('pending');
             circleStatus.classList.remove('start');
             circleStatus.classList.remove('end');
+            circleStatus.classList.remove('cancel');
 
-            if(color=='start'){
+            if(color==='start'){
                 circleStatus.classList.add('start');
-            }else if(color='end'){
+            }else if(color==='end'){
                 circleStatus.classList.add('end');
-            }else {
+            }else if(color==='pending'){
                 circleStatus.classList.add('pending');
+            }else if(color==='cancel'){
+                circleStatus.classList.add('cancel');
             }
             message.innerHTML=text;
 
         }
+        //----------------------------------------------------------------
+        //경매 취소 버튼
+        //----------------------------------------------------------------
+        const auction_cancel = document.querySelector('.auction_cancel');
+        auction_cancel.addEventListener('click',()=>{
+            clearInterval(timerAsync1);
+            clearInterval(timerAsync2);
+            clearInterval(rankingAsync);
+            statusColorControl('cancel','경매종료');
+            alert('경매 강제 종료');
 
+            //경매 종료 신호를 멤버들에게 전달
+            var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":'auction_cancel'};
+            socket.send(JSON.stringify(talkMsg));
 
+        })
         //----------------------------------------------------------------
         //새로고침 방지코드
         //----------------------------------------------------------------
@@ -616,8 +650,9 @@
         }
 
         //----------------------------------------------------------------
-        //사용자 계정조회
+        //사용자 계정조회(생략)
         //----------------------------------------------------------------
+        /*
         function createUserItem(user){
                         // 프로필 요소를 선택
 
@@ -664,6 +699,7 @@
 
                         userBlock.appendChild(profile);
         }
+        */
 
         function createUserCallResult(username,price) {
             // 부모 요소인 user-call-result-block를 선택합니다.
@@ -688,14 +724,14 @@
             th2.textContent = '유저명';
             var th3 = document.createElement('th');
             th3.textContent = '호가';
-            var th4 = document.createElement('th');
-            th4.textContent = '선택';
+            //var th4 = document.createElement('th');
+            //th4.textContent = '선택';
 
             // trHead에 th 요소들을 자식으로 추가합니다.
             trHead.appendChild(th1);
             trHead.appendChild(th2);
             trHead.appendChild(th3);
-            trHead.appendChild(th4);
+            //trHead.appendChild(th4);
 
             // thead에 trHead를 자식으로 추가합니다.
             thead.appendChild(trHead);
@@ -714,24 +750,27 @@
             td2.textContent = username;
             td2.classList.add('username');
             var td3 = document.createElement('td');
-            td3.textContent = price;
+            if(price==null)
+                td3.textContent = 0;
+            else
+                td3.textContent = price;
             td3.classList.add('price');
-            var td4 = document.createElement('td');
 
+            //var td4 = document.createElement('td');
             // td4 내에 a 요소를 생성하고 클래스 및 텍스트를 설정합니다.
-            var a = document.createElement('a');
-            a.href = '#';  // 링크 URL 설정 필요
-            a.className = 'btn btn-secondary';
-            a.textContent = '낙찰';
+            //var a = document.createElement('a');
+            //a.href = '#';  // 링크 URL 설정 필요
+            //a.className = 'btn btn-secondary';
+            //a.textContent = '낙찰';
 
             // td4에 a를 자식으로 추가합니다.
-            td4.appendChild(a);
+            //td4.appendChild(a);
 
             // trBody에 td 요소들을 자식으로 추가합니다.
             trBody.appendChild(td1);
             trBody.appendChild(td2);
             trBody.appendChild(td3);
-            trBody.appendChild(td4);
+            //trBody.appendChild(td4);
 
             // tbody에 trBody를 자식으로 추가합니다.
             tbody.appendChild(trBody);

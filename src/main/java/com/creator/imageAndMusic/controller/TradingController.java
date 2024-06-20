@@ -36,11 +36,12 @@ public class TradingController {
 
 
     @GetMapping("/req")
-    public @ResponseBody ResponseEntity<String> req(@RequestParam("fildid") Long fileId, @AuthenticationPrincipal PrincipalDetails principalDetails){
+    public @ResponseBody ResponseEntity<String> req(@RequestParam("fildid") Long fileId, @RequestParam("startPrice") String startPrice,@AuthenticationPrincipal PrincipalDetails principalDetails){
 
-        log.info("GET /trading/req " + fileId);
+        log.info("GET /trading/req " + fileId + " startPrice  :"+startPrice );
         TradingImageDto tradeImageDto = new TradingImageDto();
         tradeImageDto.setFileid(fileId);
+        tradeImageDto.setStartPrice(startPrice);
         tradeImageDto.setSeller(principalDetails.getUsername());
         Map<String,Object> result =  tradingImageService.requestTradingImage(tradeImageDto);
 
@@ -161,6 +162,7 @@ public class TradingController {
                 dto.setPrice(entity.getPrice());
                 dto.setPaymentState(entity.isPaymentState());
                 dto.setCur(entity.getCur());
+                dto.setStartPrice(entity.getStartPrice());
                 //채팅방
                 dto.setRoomId(entity.getRoomId());
                 dto.setMax(entity.getMax());

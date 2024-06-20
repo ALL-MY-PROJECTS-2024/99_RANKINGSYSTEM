@@ -96,7 +96,7 @@
 }
 .room-block .center .status .now-price .table{
     width : 100%;
-
+    text-align:center;
     margin : 10px auto;
     box-shdow : 5px 5px 5px lightgray;
 }
@@ -354,5 +354,8 @@
     background-color:green;
 }
 .end{
-    background-color:blue;
+    background-color:royalblue;
+}
+.cancel{
+    background-color:red;
 }

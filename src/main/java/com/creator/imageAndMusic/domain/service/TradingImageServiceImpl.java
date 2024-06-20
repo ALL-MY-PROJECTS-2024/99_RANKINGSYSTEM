@@ -48,6 +48,7 @@ public class TradingImageServiceImpl {
         User user = userRepository.findById(dto.getSeller()).get();
         ImagesFileInfo imagesFileInfo = imagesFileInfoRepository.findById(dto.getFileid()).get();
         tradeImage.setSeller(user);
+        tradeImage.setStartPrice(dto.getStartPrice());
         tradeImage.setFileid(imagesFileInfo);
         tradeImage.setReqStartTime(LocalDateTime.now());
         tradeImage.setReqTimeout(LocalDateTime.now().plusDays(14)); //14일뒤 제거 예정

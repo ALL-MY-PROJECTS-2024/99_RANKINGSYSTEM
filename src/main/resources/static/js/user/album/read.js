@@ -61,7 +61,9 @@ requestAuctionEls.forEach(requestAuction=>{
 
         const fileid = requestAuction.getAttribute("data-fileid");
         console.log("requestAuction",fileid)
-        axios.get('/trading/req?fildid='+fileid)
+
+        const startPrice = prompt("시작가격을 입력하세요 : ");
+        axios.get('/trading/req?fildid='+fileid+"&startPrice="+startPrice)
         .then(resp=>{
             console.log(resp);
             alert(resp.data);

@@ -42,6 +42,7 @@ public class TradingImage {
     LocalDateTime reqTimeout ;          //경매미승인시 자동 삭제시간
     LocalDateTime auctionStartTime ;    //경매시작일/시간
     LocalDateTime auctionEndTime;       //경매종료일/시간
+    String startPrice;
     String price;                       //낙찰가
 
     boolean paymentState; //            //결제여부
@@ -50,6 +51,7 @@ public class TradingImage {
     String roomId;
     Long max;
     Long cur;
+
     @ElementCollection
     List<String> members;
 
