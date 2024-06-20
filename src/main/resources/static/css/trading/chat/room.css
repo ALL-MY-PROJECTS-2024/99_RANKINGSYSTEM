@@ -7,19 +7,19 @@
     padding :  0 5%;
 }
 
-.room-block>section{
+.room-block>section.auction-block{
     width :100%;
-    height :  700px;
-    border : 1px solid;
+    height : 750px;
+
     padding : 15px;
 
     display:flex;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: center;
+    align-items: start;
 
 }
-.room-block>section>*{
-    margin : 20px;
+.room-block>section.auction-block>*{
+    margin : 0 50px;;
 }
 
 .room-block .left{
@@ -36,53 +36,52 @@
         text-align:center;
         border : 1px solid;
     }
-.room-block .left .image-block{
-    height : 400px;
-    border : 1px solid;
+.room-block .center .image-block{
+    height : 200px;
+
     display:flex;
     justify-content: center;
     align-items : center;
     padding : 10px;
 }
-.room-block .left .image-block img{
+.room-block .center .image-block img{
     width : 100%;
     height : 100%;
     object-fit: contain;
 }
 .room-block .center{
     width : 500px;
-    height : 100%;
+    height : 95%;
     padding : 15px;
-    border : 1px solid;
 
-    display:flex;
+
+/*    display:flex;
     justify-content: end;
     align-items: center;
-    flex-direction: column;
-
+    flex-direction: column;*/
+    box-shadow: 5px 5px 5px lightgray;
 }
 
 
 .room-block .center .show-item{
 
     width : 100%;
-    height : 100%;
-
+    height : 35px;
     padding : 5px;
 
     text-align:center;
-    border : 1px solid;
+   /* border : 1px solid;*/
     overflow : hidden;
+    box-shadow: 5px 5px 5px lightgray;
 }
 .room-block .center .show-item .chat{
     height : 95%;
     position:relative;
-    overflow : auto;
+    overflow : hidden;
 
 }
 .room-block .center .show-item>*{
     margin-bottom : 10px;
-    border : 1px solid;
     width : 100%;
 }
 .room-block .center .status{
@@ -92,25 +91,24 @@
 }
 .room-block .center .status .now-price{
     width : 100%;
-  /*  display:flex;
-    justify-content: space-between;
-    align-items : center;*/
+
+
 }
 .room-block .center .status .now-price .table{
-    width : 450px;
+    width : 100%;
+
     margin : 10px auto;
     box-shdow : 5px 5px 5px lightgray;
 }
 .room-block .center .status .now-price .table th,
 .room-block .center .status .now-price .table td{
     text-align:center;
-    height : 25px;
-    border : 1px solid;
+
 }
 
 .room-block .center .user-call{
 
-    border : 1px solid;
+
 
     width : 100%;
     height :200px ;
@@ -119,7 +117,7 @@
 
 }
 .room-block .center .user-call>*{
-    margin : 10px;
+    margin-bottom : 10px;
 }
 .room-block .center .user-call .top{
     display:flex;
@@ -131,7 +129,7 @@
     width : 90%;
     text-align:right;
     border : 1px solid lightgray;
-    width : 95%;
+    width : 100%;
 }
 .room-block .center .user-call .top>.control{
     display:flex;
@@ -174,7 +172,7 @@
 
 .room-block .right{
     width : 400px;
-    height : 100%;
+    height : 95%;
     padding : 5px;
     font-size : .9rem;
     position:relative;
@@ -323,4 +321,38 @@
 .now-price .table th
 {
 
+}
+
+.right .auction_status{
+    width :100%;
+    height : 25px;
+    margin-bottom :5px;
+    font-size : .8rem;
+    padding : 2px;
+
+    display:flex;
+    justify-content : left;
+    align-items : center;
+    position:absolute;;
+    top:-25px;
+}
+.right .auction_status>*{
+    margin-right:10px;
+}
+.right .auction_status .circle_status{
+    display:block;
+    width : 10px;
+    height : 10px;
+    border : 1px solid;
+    border-radius :50%;
+}
+
+.pending{
+    background-color:gray;
+}
+.start{
+    background-color:green;
+}
+.end{
+    background-color:blue;
 }

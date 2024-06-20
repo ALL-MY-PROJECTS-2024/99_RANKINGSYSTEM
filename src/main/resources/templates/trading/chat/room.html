@@ -33,14 +33,45 @@
     <th:block th:insert="~{fragments/nav :: navFragment}" />
 
     <main class="room-block layout-5">
-        <section>
-            <div class="left">
+        <section class="layout-5 breadcrumb-block">
+            <div class="">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="material-symbols-outlined">home</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/user/album/main">
+                                <span class="">매매</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/user/album/main">
+                                <span class="">이미지</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page" style="border : 0px !important;">경매방</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="auction-block">
+<!--            <div class="left">-->
+<!--            </div>-->
+            <div class="center">
+
+                <div class="show-item">
+                    <div class="chat">
+                    </div>
+                </div>
                 <div class="image-block">
                     <img  th:src="@{${tradingImage.fileid.dir}+'\s_'+${tradingImage.fileid.filename}}"  alt="" />
-
                 </div>
                 <div>
-                    <table clas="table">
+                    <table class="table  w-100">
                         <tr>
                             <td>제목</td>
                             <td></td>
@@ -49,34 +80,22 @@
                             <td>판매자</td>
                             <td></span><span th:text="${tradingImage.fileid.images.username}"></span></td>
                         </tr>
-
                     </table>
-                </div>
-
-
-            </div>
-            <div class="center">
-
-                <div class="show-item">
-                    <div class="chat">
-                    </div>
                 </div>
                 <div class="status">
                     <div class="now-price">
-                        <table class="table">
+                        <table class="table  w-100">
                             <thead class="table-dark">
                                 <tr>
                                     <th style="width:80px;">시작가</th>
                                     <th style="width:80px;">낙찰가</th>
                                     <th style="width:210px;">유저</th>
-
                                 </tr>
                             </thead>
                             <tr>
                                 <th><span class="startPrice">1000 </span><span> 원</span></th>
                                 <th><span class="auctionPrice">0</span><span> 원</span></th>
                                 <th><span class="rankingUser"> </span></th>
-
                             </tr>
                         </table>
 
@@ -86,7 +105,7 @@
                 <div class="user-call">
 
                         <div style="">
-                            <table class="table simple-input w-100 m-2">
+                            <table class="table simple-input w-100">
                                 <tr>
                                     <td colspan="6">간편입력</td>
 
@@ -101,7 +120,7 @@
                                 </tr>
                             </table>
 
-                            <table class="table w-100 m-2">
+                            <table class="table w-100">
                                 <tr>
                                     <td>계정명</td>
                                     <td>호가</td>
@@ -120,8 +139,11 @@
             </div>
 
             <div class="right">
-                <div>
+                <div class="auction_status">
+                    <span class="circle_status pending"></span> <span class="message">대기중</span>
+                </div>
 
+                <div>
                     <div class="controller">
                         <a href="javascript:void(0)" class="person-group-block">
                             <span class="material-symbols-outlined">group</span>
@@ -136,7 +158,7 @@
                         <table class="table">
                             <tr>
                                 <td><span class="material-symbols-outlined">timer</span></td>
-                                <td>10:00</td>
+                                <td class="timer-clock">00:00:00</td>
                             </tr>
                         </table>
                     </div>
@@ -167,7 +189,9 @@
 
 
                 <div style="position:absolute;bottom:30px;right:30px;">
-                    <a href="javascript:void(0)" class="commit-btn btn btn-primary" style="width:150px;">낙찰확정</a>
+                    <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2" style="width:100px;">낙찰확정</a>
+                    <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2 auction_start" style="width:100px;">경매시작</a>
+                    <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2" style="width:100px;">경매종료</a>
                 </div>
             </div>
         </section>
@@ -175,6 +199,40 @@
 
         <div th:text="${tradingImage}"></div>
     </main>
+
+    <!-- Button trigger modal -->
+    <button style="display:none;" type="button" class="modal_button" data-bs-toggle="modal" data-bs-target="#exampleModal2323">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal2323" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">경매시간 설정</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form name="auctionForm">
+                        <div class="m-2">
+                            <div id="timerDisplay">00:00:00</div>
+                        </div>
+                        <div class="m-2">
+                            <label for="timer">타이머 설정 (초):</label>
+                            <input type="range" id="timer" name="timer" min="1" max="3600" step="1" class="form-control"   oninput="updateTimerDisplay(this.value)">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a  href="javascript:void(0)" class="btn btn-primary auction_time_btn" >확인</a>
+                    <button style="display:none" type="button" class="btn btn-secondary modal_exit_btn" data-bs-dismiss="modal">Close</button>
+                    <button style="display:none" type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -188,7 +246,7 @@
 
     <script th:inline="javascript">
         let total=0;
-        let userlist = [];
+        let userList = {};
         const curEl =document.querySelector('.cur');
         curEl.innerHTML = total;
         function enterRoom(socket){
@@ -250,29 +308,40 @@
 
                   //접속 유저 추가
                   users.forEach(user=>{
-                    createUserItem(user);
-                    createUserCallResult(user)
+                    //createUserItem(user);
+                    createUserCallResult(user,userList[user])
                    });
+
 
            }
            else if(obj.type=='TALK'){
-                if(username==obj.sender){
-                    newMsg.innerText= obj.msg;
-                    newMsg.setAttribute("style","text-align:right;color:black;font-size:1rem;margin:5px;");
+
+                console.log('TALK',typeof obj.msg);
 
 
-                }else{
-                    newMsg.innerText= "[ "+ obj.sender +" ] : "+obj.msg;
-                    newMsg.setAttribute("style","text-align:left;color:black;font-size:1rem;margin:5px;");
+                if(obj.msg=='auction_start'){
+                    asyncRankingFunc();
+                    statusColorControl('start','경매중');
+                }
+                else if(obj.msg.toString().includes('time:'))
+                {
+                    console.log("time",obj.msg);
+                    const time = obj.msg.toString().replace('time:','');
+                    timerFunc(time);
+                }
+                else
+                {
+                    const userCallResultBlock = document.querySelectorAll('.user-call-result-block table');
+                    userCallResultBlock.forEach(el=>{
+                        if(el.classList.contains(obj.sender)){
+                            const priceEl =  el.querySelector('.price');
+                            priceEl.innerHTML = obj.msg;
+                        }
+                    })
+                    userList[obj.sender] = obj.msg;
                 }
 
-                const userCallResultBlock = document.querySelectorAll('.user-call-result-block table');
-                userCallResultBlock.forEach(el=>{
-                    if(el.classList.contains(obj.sender)){
-                        const priceEl =  el.querySelector('.price');
-                        priceEl.innerHTML = obj.msg;
-                    }
-                })
+
 
           }else if(obj.type=='QUIT'){
                     newMsg.innerText="--- "  + obj.msg + " ----";
@@ -347,49 +416,114 @@
             location.href="/trading/image/main";
         }
 
+        //----------------------------------------------------------------
+        // 랭킹 처리
+        //----------------------------------------------------------------
+        //버튼누를때 실행으로 변경할것
+        //2초마다 순위정해서 배치 다시
+        let ranking = null;
+        function asyncRankingFunc(){
+                ranking = setInterval(function(){
+                        console.log("TEST");
+                        const userCallResultBlock = document.querySelector('.user-call-result-block');
+                        const tables = document.querySelectorAll('.user-call-result-block table');
+                         // 각 테이블에 대해 처리합니다.
+                         const sortedTables = Array.from(tables).sort((table1, table2) => {
+                                // 각 테이블의 첫 번째 .price 값을 가져와 비교합니다.
+                                const price1 = parseInt(table1.querySelector('.price').textContent);
+                                const price2 = parseInt(table2.querySelector('.price').textContent);
+                                // 내림차순으로 정렬합니다.
+                                return price2 - price1;
+                         });
+                            // 정렬된 순서대로 부모 요소에 다시 추가합니다.
+                         sortedTables.forEach((table,index) => {
+                                    const rank = index + 1;
+                                    const rankingElement = table.querySelector('.ranking');
+                                    rankingElement.textContent = `${rank}`;
+                                    userCallResultBlock.appendChild(table);
+                                    //1순위에 있는 가격은 낙찰가에도 업로드하기
+                                    if(rank==1){
+                                        const auctionPrice = document.querySelector('.auctionPrice');
+                                        auctionPrice.innerHTML = table.querySelector('.price').innerHTML;
+                                        const rankingUser = document.querySelector('.rankingUser');
+                                        rankingUser.innerHTML = table.querySelector('.username').innerHTML;
+                                    }
+                                }
+                         );
+                    },2000);
+        }
+
+        //----------------------------------------------------------------
+        //경매시작버튼
+        //----------------------------------------------------------------
+        const auctionStart = document.querySelector('.auction_start');
+        const modalButton = document.querySelector('.modal_button');
+        auctionStart.addEventListener('click',()=>{
+            const message=document.querySelector('.auction_status .message');
+            if(message.innerHTML=='경매중'){
+                alert('경매가 진행중 입니다.');
+                return ;
+            }
+            modalButton.click();
+        })
+        const auctionTimeBtn=document.querySelector('.auction_time_btn');
+        const modalExitBtn = document.querySelector('.modal_exit_btn');
+        auctionTimeBtn.addEventListener('click',()=>{
 
 
+            if(timerAsync!=null){
+                alert("기존 경매 시간을 초기화합니다.");
+                clearInterval(timerAsync);
+                timerAsync=null;
+            }
+            const form = document.auctionForm;
+            console.log(form.timer.value);
+            const time =  form.timer.value;
 
+            timerFunc(time);        //타이머시작
+            modalExitBtn.click();   //모달종료
 
-        //타이머 호가 이벤트가 발생할때마다 초기화됨 10분기본값
-        function timer(){
+            statusColorControl('start','경매중');  //알림표시
+            //경매 시작 신호를 멤버들에게 전달
+            var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":'auction_start'};
+            socket.send(JSON.stringify(talkMsg));
+            var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":'time:'+time};
+            socket.send(JSON.stringify(talkMsg));
+        })
+        function updateTimerDisplay(seconds) {
+            let hours = Math.floor(seconds / 3600);
+            let minutes = Math.floor((seconds % 3600) / 60);
+            let secs = seconds % 60;
+
+            // 시간, 분, 초를 두 자리 숫자로 포맷팅
+            let hoursStr = hours.toString().padStart(2, '0');
+            let minutesStr = minutes.toString().padStart(2, '0');
+            let secondsStr = secs.toString().padStart(2, '0');
+
+            // 시간을 hh:mm:ss 형식으로 표시
+            document.getElementById('timerDisplay').textContent = `${hoursStr}:${minutesStr}:${secondsStr}`;
+        }
+
+        function statusColorControl(color,text){
+            const circleStatus=document.querySelector('.circle_status');
+            const message=document.querySelector('.auction_status .message');
+
+            circleStatus.classList.remove('pending');
+            circleStatus.classList.remove('start');
+            circleStatus.classList.remove('end');
+
+            if(color=='start'){
+                circleStatus.classList.add('start');
+            }else if(color='end'){
+                circleStatus.classList.add('end');
+            }else {
+                circleStatus.classList.add('pending');
+            }
+            message.innerHTML=text;
 
         }
 
-        //버튼누를때 실행으로 변경할것
-        //2초마다 순위정해서 배치 다시
-        let ranking = setInterval(function(){
-            console.log("TEST");
 
-            const userCallResultBlock = document.querySelector('.user-call-result-block');
-            const tables = document.querySelectorAll('.user-call-result-block table');
-             // 각 테이블에 대해 처리합니다.
-             const sortedTables = Array.from(tables).sort((table1, table2) => {
-                    // 각 테이블의 첫 번째 .price 값을 가져와 비교합니다.
-                    const price1 = parseInt(table1.querySelector('.price').textContent);
-                    const price2 = parseInt(table2.querySelector('.price').textContent);
-                    // 내림차순으로 정렬합니다.
-                    return price2 - price1;
-             });
-                // 정렬된 순서대로 부모 요소에 다시 추가합니다.
-             sortedTables.forEach((table,index) => {
-                        const rank = index + 1;
-                        const rankingElement = table.querySelector('.ranking');
-                        rankingElement.textContent = `${rank}`;
-                        userCallResultBlock.appendChild(table);
-                        //1순위에 있는 가격은 낙찰가에도 업로드하기
-                        if(rank==1){
-                            const auctionPrice = document.querySelector('.auctionPrice');
-                            auctionPrice.innerHTML = table.querySelector('.price').innerHTML;
-                            const rankingUser = document.querySelector('.rankingUser');
-                            rankingUser.innerHTML = table.querySelector('.username').innerHTML;
-                        }
-                    }
-             );
-
-
-
-        },2000);
 
     </script>
     <script   src="/js/trading/chat/room.js" ></script>

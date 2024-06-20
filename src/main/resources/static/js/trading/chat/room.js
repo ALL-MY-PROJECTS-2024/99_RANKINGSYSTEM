@@ -1,3 +1,18 @@
+//----------------------------------------------------------------
+//새로고침 방지코드
+//----------------------------------------------------------------
+function NotReload(){
+    if( (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) || (event.keyCode == 116) ) {
+        event.keyCode = 0;
+        event.cancelBubble = true;
+        event.returnValue = false;
+    }
+}
+document.onkeydown = NotReload;
+
+//----------------------------------------------------------------
+//
+//----------------------------------------------------------------
 console.log("room.js...");
 
 const memberBtn = document.querySelector('.person-group-block');
@@ -13,6 +28,42 @@ memberBtn.addEventListener('click',()=>{
         isClosed = true;
     }
 })
+
+//----------------------------------------------------------------
+//낙찰확정
+//----------------------------------------------------------------
+//----------------------------------------------------------------
+//타이머
+//----------------------------------------------------------------
+let timerAsync=null;
+function timerFunc(seconds){
+    timerAsync = setInterval(() => {
+        const timerClock = document.querySelector('.timer-clock');
+        timerClock.innerHTML=formatTime(seconds)
+        seconds--;
+
+        if (seconds === 0) {
+            clearInterval(timerAsync);
+            console.log("타이머 종료!");
+            alert("경매 시간 종료..");
+            timerAsync=null;
+        }
+    }, 1000);
+}
+
+function formatTime(seconds) {
+    // 시간 계산
+    let hours = Math.floor(seconds / 3600);
+    let minutes = Math.floor((seconds % 3600) / 60);
+    let secs = seconds % 60;
+
+    // 시간, 분, 초를 두 자리 숫자로 포맷팅
+    let hoursStr = hours.toString().padStart(2, '0');
+    let minutesStr = minutes.toString().padStart(2, '0');
+    let secondsStr = secs.toString().padStart(2, '0');
+
+    return `${hoursStr}:${minutesStr}:${secondsStr}`;
+}
 
 //----------------------------------------------------------------
 //사용자 계정조회
@@ -64,7 +115,7 @@ function createUserItem(user){
                 userBlock.appendChild(profile);
 }
 
-function createUserCallResult(username) {
+function createUserCallResult(username,price) {
     // 부모 요소인 user-call-result-block를 선택합니다.
     var parentDiv = document.querySelector('.user-call-result-block');
 
@@ -113,7 +164,7 @@ function createUserCallResult(username) {
     td2.textContent = username;
     td2.classList.add('username');
     var td3 = document.createElement('td');
-    td3.textContent = 0;
+    td3.textContent = price;
     td3.classList.add('price');
     var td4 = document.createElement('td');
 
