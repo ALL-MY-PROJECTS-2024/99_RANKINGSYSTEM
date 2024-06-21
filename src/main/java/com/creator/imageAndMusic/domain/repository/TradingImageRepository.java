@@ -14,4 +14,6 @@ public interface TradingImageRepository extends JpaRepository<TradingImage, Long
     List<TradingImage> findAllBySeller(User seller);
 
     boolean existsBySellerAndFileid(User user , ImagesFileInfo imageFile);
+
+    List<TradingImage> findAllByBuyer(User user);
 }

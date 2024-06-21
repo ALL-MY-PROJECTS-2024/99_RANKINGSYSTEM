@@ -52,13 +52,13 @@
 
             <th:block th:insert="fragments/myaside :: myasideFragment" />
 
-            <div class="join-block">
-                <div  style="width : 1000px;overflow : auto;">
+            <div class="join_block">
+                <div >
 
-                    <hr>
+
 
                     <!--승인된 Trading에 가격 요청-->
-                    <table class="table">
+                    <table class="table w-100" style="font-size :.7rem;">
                         <thead>
                             <th>번호</th>
                             <th>이미지</th>
@@ -71,7 +71,7 @@
                             <th>상태</th>
                             <th>취소</th>
                         </thead>
-                        <tbody>
+                        <tbody style="font-size :.7rem;">
 
                             <th:block th:each="dto : ${list}">
 <!--                                <div th:text="${dto}"></div>-->
@@ -88,8 +88,8 @@
                                     <td th:text="${dto.cur}"></td>
                                     <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
                                     <td th:text="${dto.buyer}==null?'미정':${dto.buyer.username}"></td>
-                                    <td>구현중</td>
-                                    <td>구현중</td>
+                                    <td th:text="${dto.status}"></td>
+                                    <td><a th:href="@{/user/myinfo/trading/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">취소</a></td>
                                 </tr>
                             </th:block>
 

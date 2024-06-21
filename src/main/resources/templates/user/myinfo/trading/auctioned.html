@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!--  link   -->
+  <th:block th:insert="fragments/link :: linkFragment" />
+
+  <link rel="stylesheet" href="/css/user/myinfo.css">
+
+  <script th:inline="javascript">
+    var userDto = /*[[${userDto}]]*/
+    console.log(userDto);
+  </script>
+
+</head>
+<body>
+
+
+<div class="wrapper">
+
+  <!-- header   -->
+  <th:block th:insert="fragments/header :: headerFragment" />
+
+  <!-- nav       -->
+  <th:block th:insert="~{fragments/nav :: albumNavFragment}" />
+
+
+
+  <main>
+
+    <section class="layout-5 breadcrumb-block">
+      <div class="">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/">
+                <span class="material-symbols-outlined">home</span>
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/">
+                <span class="">나의정보</span>
+              </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">낙찰 ITEM</li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <section class="myinfoblock layout-5">
+
+      <th:block th:insert="fragments/myaside :: myasideFragment" />
+
+      <div class="join_block">
+        <div >
+
+
+
+          <!--승인된 Trading에 가격 요청-->
+          <table class="table w-100" style="font-size :.7rem;">
+            <thead>
+            <th>번호</th>
+            <th>이미지</th>
+            <th>관리자승인여부</th>
+            <th>경매시작일</th>
+            <th>경매종료일</th>
+            <th>신청인원</th>
+            <th>낙찰가</th>
+            <th>구매자</th>
+            <th>상태</th>
+            <th>결제</th>
+            </thead>
+            <tbody style="font-size :.7rem;">
+
+            <th:block th:each="dto : ${list}">
+<!--              <div th:text="${dto}"></div>-->
+              <!--                                <div th:text="${dto}"></div>-->
+              <tr>
+                <td th:text="${dto.tradingid}"></td>
+                <td>
+                  <a href="javascript:void(0)">
+                    <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
+                  </a>
+                </td>
+                <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
+                <td th:text="${dto.auctionStartTime}"></td>
+                <td th:text="${dto.auctionEndTime}"></td>
+                <td th:text="${dto.cur}"></td>
+                <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
+                <td th:text="${dto.buyer}==null?'미정':${dto.buyer.username}"></td>
+                <td th:text="${dto.status}"></td>
+                <td>
+                  <button th:onclick='requestPay( [[${dto.price}]] , [[${dto.fileid.images.title}]],[[${dto.tradingid}]] )' class="btn btn-secondary" style="font-size :.7rem;">결제</button>
+                </td>
+              </tr>
+            </th:block>
+
+            </tbody>
+
+          </table>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <th:block th:insert="fragments/footer :: footerFragment" />
+  </footer>
+
+</div>
+
+
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script th:inline="javascript">
+
+  IMP.init("imp87380722");
+
+  function requestPay(price,title,tradingid) {
+
+    console.log(price,title);
+    IMP.request_pay
+    (
+      {
+        pg: "html5_inicis.INIpayTest",
+        pay_method: "card",
+        merchant_uid: "test_"+Date.now(),
+        name: title,
+        //amount: price,
+        amount: 100,
+        buyer_tel: userDto.phone,
+      }
+      ,
+      function(resp)
+      {
+        console.log(resp);
+          axios.post('/payment/add',resp)
+          .then(resp=>{
+              console.log(resp)
+              //완료 되었으면 TradingImage의 상품상태 변경
+              const params = {
+                'tradingid':tradingid,
+                'status':'결제완료'
+              }
+              axios.post(`/trading/image/updateStatus`,params)
+              .then(resp=>{console.log(resp);})
+              .catch(err=>{console.log(err);})
+
+           })
+          .catch(err=>{console.log(err)});
+
+        alert("결제가 완료되었습니다.\n나의 구매내역 에서 확인하세요");
+
+      }
+    );
+
+  }
+</script>
+
+
+</body>
+</html>

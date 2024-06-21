@@ -29,7 +29,7 @@ public class TradingImageDto {
     String startPrice;                  //시작가
     String price;                       //낙찰가
     boolean paymentState; //            //결제여부
-
+    String status;
     String fileDir;
     String filename;
 

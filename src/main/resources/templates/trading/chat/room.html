@@ -18,6 +18,7 @@
         let  username = /*[[${username}]]*/
         let  users = /*[[${users}]]*/
         console.log(users);
+        let  tradingid = /*[[${tradingid}]]*/
 
     </script>
 
@@ -100,9 +101,7 @@
                                     <th><span class="rankingUser"> </span></th>
                                 </tr>
                             </tbody>
-
                         </table>
-
                     </div>
                 </div>
 
@@ -112,7 +111,6 @@
                             <table class="table simple-input w-100">
                                 <tr>
                                     <td colspan="6">간편입력</td>
-
                                 </tr>
                                 <tr>
                                     <td><a href="javascript:plusPriceMsg(500)" class="btn btn-primary">+500</a></td>
@@ -194,7 +192,7 @@
 
                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                     <div style="position:absolute;bottom:30px;right:30px;">
-                        <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2" style="width:100px;">낙찰확정</a>
+                        <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2 auction_commit" style="width:100px;">낙찰확정</a>
                         <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2 auction_start" style="width:100px;">경매시작</a>
                         <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2 auction_cancel" style="width:100px;">경매종료</a>
                     </div>
@@ -615,12 +613,10 @@
         //
         //----------------------------------------------------------------
         console.log("room.js...");
-
         const memberBtn = document.querySelector('.person-group-block');
         let isClosed = true
         memberBtn.addEventListener('click',()=>{
             const userBlock = document.querySelector('.user-block');
-
             if(isClosed){
                 userBlock.classList.remove('hidden');
                 isClosed = false;
@@ -631,10 +627,37 @@
         })
 
         //----------------------------------------------------------------
-        //낙찰확정
+        //낙찰 확정
         //----------------------------------------------------------------
+        const auctionCommit = document.querySelector('.auction_commit');
+        auctionCommit.addEventListener('click',()=>{
+            const formData = new FormData();
+
+            const price = document.querySelector('.auctionPrice').innerHTML;
+            const buyer = document.querySelector('.rankingUser').innerHTML;
+
+            formData.append('price',price);
+            formData.append('buyer',buyer);
+            formData.append('tradingid',tradingid);
 
 
+            console.log('/trading/image/commit');
+            axios.post('/trading/image/commit',formData,{headers: {'Content-Type': 'x-www-form-urlencoded'}})
+            .then(resp=>{
+                console.log(resp)
+                alert('낙찰완료! 매매페이지로 이동합니다.');
+                location.href='/trading/image/main';
+
+            })
+            .catch(err=>{console.log(err)});
+
+        })
+
+
+
+        //----------------------------------------------------------------
+        //시간 포맷 지정
+        //----------------------------------------------------------------
         function formatTime(seconds) {
             // 시간 계산
             let hours = Math.floor(seconds / 3600);

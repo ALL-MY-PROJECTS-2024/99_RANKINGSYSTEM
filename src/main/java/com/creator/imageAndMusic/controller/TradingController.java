@@ -11,6 +11,7 @@ import com.creator.imageAndMusic.properties.SOCKET;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -163,6 +164,8 @@ public class TradingController {
                 dto.setPaymentState(entity.isPaymentState());
                 dto.setCur(entity.getCur());
                 dto.setStartPrice(entity.getStartPrice());
+                dto.setStatus(entity.getStatus());
+
                 //채팅방
                 dto.setRoomId(entity.getRoomId());
                 dto.setMax(entity.getMax());
@@ -208,7 +211,18 @@ public class TradingController {
         ;
 
     }
+    //낙찰됨
+    @PostMapping("/image/commit")
+    public @ResponseBody ResponseEntity<String> commit(@ModelAttribute TradingImageDto tradingImageDto){
+        log.info("GET /trading/image/commmit..." +tradingImageDto);
 
+        boolean isCommit =  tradingImageService.commitTradingImage(tradingImageDto);
+        if(!isCommit){
+            return new ResponseEntity<>("fail",HttpStatus.BAD_GATEWAY);
+        }
+        return new ResponseEntity<>("success",HttpStatus.OK);
+
+    }
 
     @GetMapping("/image/del")
     public String del(@RequestParam("tradingid") Long tradingid, RedirectAttributes attrs)
@@ -217,6 +231,13 @@ public class TradingController {
         attrs.addFlashAttribute("message","경매ID : " + tradingid + " 정보를 삭제하였습니다");
         return "redirect:/trading/image/main";
     }
+    @PostMapping(value = "/image/updateStatus")
+    public @ResponseBody void update(@RequestBody TradingImageDto tradingImageDto )
+    {
+        log.info("/trading/image/updateStatus.." + tradingImageDto);
+        tradingImageService.updateTradingImageStatus(tradingImageDto);
+    }
+
     @GetMapping("/image/accept")
     public String trading_accept(TradingImageDto dto){
       log.info("GET /trading/image/accept..." + dto.getTradingid());
@@ -263,8 +284,7 @@ public class TradingController {
         model.addAttribute("wspath", SOCKET.REQ_PATH);
         model.addAttribute("room",room);
         model.addAttribute("tradingImage", tradingImage);
-
-
+        model.addAttribute("tradingid", tradingImage.getTradingid());
 
         return "trading/chat/room";
     }
@@ -283,4 +303,7 @@ public class TradingController {
 
         return "redirect:/trading/image/main";
     }
+
+
+
 }

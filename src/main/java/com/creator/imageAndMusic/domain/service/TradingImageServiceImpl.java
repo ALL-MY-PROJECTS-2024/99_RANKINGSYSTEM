@@ -52,6 +52,8 @@ public class TradingImageServiceImpl {
         tradeImage.setFileid(imagesFileInfo);
         tradeImage.setReqStartTime(LocalDateTime.now());
         tradeImage.setReqTimeout(LocalDateTime.now().plusDays(14)); //14일뒤 제거 예정
+        tradeImage.setStartPrice(dto.getStartPrice());
+        tradeImage.setStatus("경매요청");
 
         ImagesRanking imagesRanking = imageRankingRepository.findByImagesFileInfo(imagesFileInfo);
         if(imagesRanking==null){
@@ -87,6 +89,11 @@ public class TradingImageServiceImpl {
         User user = userRepository.findById(seller).get();
         return  tradingImageRepository.findAllBySeller(user);
     }
+    @Transactional(rollbackFor=Exception.class)
+    public List<TradingImage> getMyAuctionedImage(String buyer) {
+        User user = userRepository.findById(buyer).get();
+        return  tradingImageRepository.findAllByBuyer(user);
+    }
 
     @Transactional(rollbackFor=Exception.class)
     public TradingImage getTradingImage(Long tradingid){
@@ -108,6 +115,7 @@ public class TradingImageServiceImpl {
         TradingImage tradingImage = tradingImageOptional.get();
         tradingImage.setAdminAccepted(true);
         tradingImage.setAuctionStartTime(dto.getAuctionStartTime());
+        tradingImage.setStatus("경매승인");
         tradingImageRepository.save(tradingImage);
         return true;
     }
@@ -120,6 +128,7 @@ public class TradingImageServiceImpl {
         TradingImage tradingImage = tradingImageOptional.get();
         tradingImage.setAdminAccepted(false);
         tradingImage.setAuctionStartTime(null);
+        tradingImage.setStatus("");
         tradingImageRepository.save(tradingImage);
         return true;
     }
@@ -151,10 +160,10 @@ public class TradingImageServiceImpl {
 
         System.out.println("createRoom!  : " + chatRoom);
 
-
         TradingImage tradingImage =  tradingImageRepository.findById(tradingid).get();
         tradingImage.setRoomId(chatRoom.getRoomId());
         tradingImage.setMax(5L);//정원 5명
+        tradingImage.setStatus("경매중");
         tradingImageRepository.save(tradingImage);
     }
     @Transactional(rollbackFor=Exception.class)
@@ -237,6 +246,13 @@ public class TradingImageServiceImpl {
 
     @Transactional(rollbackFor=Exception.class)
     public boolean removeTradingImage(Long tradingid) {
+//        Optional<TradingImage> tradingImageOptional =tradingImageRepository.findById(tradingid);
+//
+//        if(tradingImageOptional.isEmpty())
+//            return false;
+//        if(!tradingImageOptional.get().getSeller().equals(username)){
+//            return false;
+//        }
         tradingImageRepository.deleteById(tradingid);
         return true;
     }
@@ -257,11 +273,40 @@ public class TradingImageServiceImpl {
                     tradingImage.setCur(0L);
                     tradingImage.setAuctionState("채팅방 제거");
                     tradingImage.setRoomId(null);
-                    
+                    tradingImage.setStatus("경매중지");
                 }
             }
         }
     }
 
+    @Transactional(rollbackFor=Exception.class)
+    public boolean commitTradingImage(TradingImageDto tradingImageDto) {
 
+        Optional<TradingImage> tradingImageOptional = tradingImageRepository.findById(tradingImageDto.getTradingid());
+        if(tradingImageOptional.isEmpty())
+            return false;
+
+        TradingImage tradingImage = tradingImageOptional.get();
+
+        Optional<User> buyerOptional =  userRepository.findById(tradingImageDto.getBuyer());
+        if(buyerOptional.isEmpty())
+            return false;
+
+        tradingImage.setBuyer(buyerOptional.get());
+        tradingImage.setPrice(tradingImageDto.getPrice());
+        tradingImage.setStatus("낙찰완료");
+        tradingImageRepository.save(tradingImage);
+
+        return true;
+
+    }
+
+
+    public void updateTradingImageStatus(TradingImageDto tradingImageDto) {
+        Optional<TradingImage> tradingImageOptional = tradingImageRepository.findById(tradingImageDto.getTradingid());
+        if(tradingImageOptional.isEmpty())
+            return ;
+        TradingImage tradingImage = tradingImageOptional.get();
+        tradingImage.setStatus(tradingImageDto.getStatus());
+    }
 }

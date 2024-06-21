@@ -559,15 +559,42 @@ public class UserController {
     //----------------------------------------------------------------
     // 경매상태 확인
     //----------------------------------------------------------------
-    @GetMapping("/myinfo/trading")
+    @GetMapping("/myinfo/trading/main")
     public void trade(@AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
         log.info("GET /user/myinfo/trading");
         String seller =  principalDetails.getUserDto().getUsername();
         List<TradingImage> list =  tradingImageService.getMyTradingImage(seller);
 
         model.addAttribute("list",list);
+    }
+    //----------------------------------------------------------------
+    // 낙찰받은 경매
+    //----------------------------------------------------------------
+    @GetMapping("/myinfo/trading/auctioned")
+    public void auctioned(@AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
+        log.info("GET /user/myinfo/trading/auctioned");
+        String buyer =  principalDetails.getUserDto().getUsername();
+        List<TradingImage> list =  tradingImageService.getMyAuctionedImage(buyer);
+        model.addAttribute("list",list);
+        model.addAttribute("userDto",principalDetails.getUserDto());
+    }
+    //----------------------------------------------------------------
+    // 경매 취소 - 삭제
+    //----------------------------------------------------------------
+    @GetMapping("/myinfo/trading/del")
+    public String trade_del(@RequestParam("tradingid") Long tradingId,  @AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
+        log.info("GET /user/myinfo/trading/del");
+        String seller =  principalDetails.getUserDto().getUsername();
+        boolean isDel =  tradingImageService.removeTradingImage(tradingId);
+
+        if(!isDel){
+            model.addAttribute("message","삭제 실패..");
+            return "myinfo/trading/main";
+        }
+        model.addAttribute("message","삭제성공");
+        return "myinfo/trading/main";
 
     }
-    
+
 
 }

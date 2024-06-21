@@ -8,13 +8,18 @@
 
 
 <th:block th:fragment="myasideFragment">
-    <div class="mymenu ">
-        <ul class="menus">
+    <div class="mymenu" >
+        <ul class="menu">
             <li>
                 <a href="/user/myinfo/read">구매내역 확인</a>
             </li>
             <li>
-                <a href="/user/myinfo/trading">경매상태 확인</a>
+                <a href="javascript:void(0)">경매상태 확인</a>
+                <ul class="submenu">
+                    <li><a href="/user/myinfo/trading/main">내가올린 경매</a></li>
+                    <li><a href="/user/myinfo/trading/auctioned">낙찰받은 경매</a></li>
+                    <li><a href="/user/myinfo/trading/payment">결제내역 확인</a></li>
+                </ul>
             </li>
             <li>
                 <a href="/user/myinfo/read">회원정보 조회</a>

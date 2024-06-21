@@ -43,7 +43,7 @@
         <section class="banner layout-5">
             <div>
 
-                <table class="table" >
+                <table class="table" style="font-size :.7rem;">
                     <div class="message-block" th:text="${message}"></div>
                     <thead>
                         <tr class="table-dark">
@@ -51,12 +51,14 @@
                             <th>이미지</th>
                             <th>제목</th>
                             <th>판매자</th>
+                            <th>구매자</th>
                             <th>승인여부</th>
                             <th>시작가</th>
                             <th>낙찰가</th>
                             <th>경매시작일</th>
                             <th>경매종료일</th>
                             <th>신청인원</th>
+                            <th>상태</th>
                             <th>참여하기</th>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                             <th>관리</th>
@@ -66,9 +68,9 @@
                             </th:block>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="font-size :.7rem;">
                         <th:block th:each="dto : ${list}">
-                            <div th:text="${dto}"></div>
+<!--                            <div th:text="${dto}"></div>-->
                             <tr>
                                 <td th:text="${dto.tradingid}"></td>
                                 <td >
@@ -78,35 +80,37 @@
                                 </td>
                                 <td th:text="${dto.title}"></td>
                                 <td th:text="${dto.seller}"></td>
+                                <td th:text="${dto.buyer}"></td>
                                 <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
-                                <td>0</td>
+                                <td th:text="${dto.startPrice} eq null?'0':${dto.startPrice}"></td>
                                 <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
                                 <td th:text="${dto.auctionStartTime}"></td>
                                 <td th:text="${dto.auctionEndTime}"></td>
                                 <td><span th:text="${dto.cur}">0</span>/<span th:text="${dto.max}==null ? '0':${dto.max}"></span></td>
-                                <td>
+                                <td th:text="${dto.status}"></td>
+                                <td >
                                     <!--유저-->
                                     <th:block sec:authorize="hasRole('ROLE_USER')">
                                         <th:block th:if="${dto.roomId}!=null">
                                             <th:block th:if="${dto.req}">
-                                                <a th:href="@{/trading/chat/req(tradingid=${dto.tradingid})}">신청</a>
+                                                <a th:href="@{/trading/chat/req(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">신청</a>
                                             </th:block>
                                             <th:block th:if="${dto.join}">
-                                                <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}">입장</a>
+                                                <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}" class="btn btn-secondary" style="font-size :.7rem;">입장</a>
                                             </th:block>
                                         </th:block>
                                         <th:block th:unless="${dto.roomId}!=null">
-                                            <a href="javascript:void(0)">대기</a>
+                                            <a href="javascript:void(0)" class="btn" style="font-size :.7rem;">대기</a>
                                         </th:block>
                                     </th:block>
 
                                     <!--관리자-->
                                     <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                         <th:block th:if="${dto.roomId}==null">
-                                            <a href="javascript:void(0)">대기</a>
+                                            <a href="javascript:void(0)" class="btn " style="font-size :.7rem;">대기</a>
                                         </th:block>
                                         <th:block th:unless="${dto.roomId}==null">
-                                            <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}">입장</a>
+                                            <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}" class="btn btn-secondary" style="font-size :.7rem;">입장</a>
                                         </th:block>
                                     </th:block>
                                 </td>
@@ -115,18 +119,18 @@
                                     <th:block th:if="${dto.adminAccepted}" >
                                         <th:block th:if="${dto.roomId}==null">
                                             <td>
-                                                <a th:href="@{/trading/chat/create(tradingid=${dto.tradingid})}" >채팅방 생성</a>
+                                                <a th:href="@{/trading/chat/create(tradingid=${dto.tradingid})}"  class="btn btn-secondary" style="font-size :.7rem;">경매방 생성</a>
                                             </td>
                                         </th:block>
                                         <th:block th:unless="${dto.roomId}==null">
                                             <td>
-                                                <a th:href="@{/trading/chat/del(tradingid=${dto.tradingid})}" >채팅방 제거</a>
+                                                <a th:href="@{/trading/chat/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매방 제거</a>
                                             </td>
                                         </th:block>
                                     </th:block>
                                     <th:block th:unless="${dto.adminAccepted}" >
                                         <td>
-                                            <a href="/admin/trading/main" >승인요청 필요</a>
+                                            <a href="/admin/trading/main" class="btn btn-secondary" style="font-size :.7rem;">승인</a>
                                         </td>
                                     </th:block>
 
@@ -134,7 +138,7 @@
 
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <th:block th:if="${dto.roomId}==null">
-                                        <th><a th:href="@{/trading/image/del(tradingid=${dto.tradingid})}">제거하기</a></th>
+                                        <th><a th:href="@{/trading/image/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매제거</a></th>
                                     </th:block>
                                     <th:block th:unless="${dto.roomId}==null">
                                         <th><span style="font-size : .7rem">[삭제불가]경매중</span></th>

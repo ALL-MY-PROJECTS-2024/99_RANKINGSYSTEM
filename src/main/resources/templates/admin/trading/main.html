@@ -35,7 +35,7 @@
                 <div th:text="${tradingImages}">
                 </div>
 
-                <table class="table w-100" style="text-align:center;">
+                <table class="table w-100" style="text-align:center;font-size :.7rem;">
                     <thead>
                     <th>번호</th>
                     <th>이미지</th>
@@ -44,13 +44,13 @@
                     <th>경매종료일</th>
                     <th>신청인원</th>
                     <th>관리자승인여부</th>
-                    <th>경매승인</th>
+                    <th>승인하기</th>
                     <th>승인취소</th>
-                    <th>매매로이동</th>
+                    <th>이동하기</th>
 
                     </thead>
-                    <tbody>
-                    <tbody>
+
+                    <tbody >
                     <th:block th:each="dto : ${list}">
                         <!--                                <div th:text="${dto}"></div>-->
                         <tr>
@@ -68,14 +68,14 @@
                                 <form action="/admin/trading/accept"  style="display:flex;justify-content:center;align-items:center;">
                                     <input type="hidden" class="" name="tradingid" th:value="${dto.tradingid}" readonly>
                                     <input style="width:150px;" class="form-control m-1" type="datetime-local" name="auctionStartTime"  />
-                                    <button class="btn btn-primary m-1">승인</button>
+                                    <button class="btn btn-primary m-2" style="font-size :.7rem;">승인</button>
                                 </form>
                             </td>
                             <td>
-                                <a th:href="@{/admin/trading/cancel(tradingid=${dto.tradingid})}">취소</a>
+                                <a th:href="@{/admin/trading/cancel(tradingid=${dto.tradingid})}"  class="btn btn-secondary" style="font-size :.7rem;">취소</a>
                             </td>
                             <td>
-                                <a href="/trading/image/main">이동</a>
+                                <a href="/trading/image/main" class="btn btn-secondary" style="font-size :.7rem;">이동</a>
                             </td>
                         </tr>
                     </th:block>
