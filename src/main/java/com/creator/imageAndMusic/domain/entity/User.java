@@ -32,6 +32,8 @@ public class User {
     private String addr2;
     private String phone;
 
+    private String bankname;
+    private String account;
     //OAUTH2
     private String provider;
     private String providerId;

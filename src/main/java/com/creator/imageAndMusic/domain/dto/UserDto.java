@@ -44,6 +44,8 @@ public class UserDto {
 
 	private String role;
 
+	private String bankname;
+	private String account;
 	//OAUTH2
 	private String provider;
 	private String providerId;

@@ -73,18 +73,22 @@
             <th>구매자</th>
             <th>상태</th>
             <th>결제</th>
+
             </thead>
             <tbody style="font-size :.7rem;">
 
             <th:block th:each="dto : ${list}">
-<!--              <div th:text="${dto}"></div>-->
+              <div th:text="${dto}"></div>
               <!--                                <div th:text="${dto}"></div>-->
               <tr>
                 <td th:text="${dto.tradingid}"></td>
                 <td>
-                  <a href="javascript:void(0)">
-                    <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
-                  </a>
+                  <th:block>
+                    <a href="javascript:void(0)" >
+                      <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
+                    </a>
+                  </th:block>
+
                 </td>
                 <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
                 <td th:text="${dto.auctionStartTime}"></td>
@@ -93,9 +97,16 @@
                 <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
                 <td th:text="${dto.buyer}==null?'미정':${dto.buyer.username}"></td>
                 <td th:text="${dto.status}"></td>
-                <td>
-                  <button th:onclick='requestPay( [[${dto.price}]] , [[${dto.fileid.images.title}]],[[${dto.tradingid}]] )' class="btn btn-secondary" style="font-size :.7rem;">결제</button>
-                </td>
+                <th:block>
+                  <td th:if="${dto.status=='낙찰완료'}">
+                    <button th:onclick='requestPay( [[${dto.price}]] , [[${dto.fileid.images.title}]],[[${dto.tradingid}]] )' class="btn btn-secondary" style="font-size :.7rem;">결제</button>
+                  </td>
+                  <td th:if="${dto.status=='결제완료'}">
+                    <a href="/payment/download()">
+                      <span class="material-symbols-outlined">download</span>
+                    </a>
+                  </td>
+                </th:block>
               </tr>
             </th:block>
 
@@ -138,24 +149,12 @@
       function(resp)
       {
         console.log(resp);
+        resp['tradingid'] = tradingid;
           axios.post('/payment/add',resp)
           .then(resp=>{
               console.log(resp)
-              //완료 되었으면 TradingImage의 상품상태 변경
-              const params = {
-                'tradingid':tradingid,
-                'status':'결제완료'
-              }
-              axios.post(`/trading/image/updateStatus`,params)
-              .then(resp=>{
-                  console.log(resp)
-                  alert("결제가 완료되었습니다.\n나의 구매내역 에서 확인하세요");
-                ;})
-              .catch(err=>{
-                console.log(err);
-                alert("결제 취소");
-
-              })
+              alert("결제가 완료되었습니다.\n나의 구매내역 에서 확인하세요");
+              location.href='/user/myinfo/trading/auctioned';
 
            })
           .catch(err=>{

@@ -1,0 +1,24 @@
+.remittanceBtn{
+    position:relative;
+}
+
+.remittanceBtn::after{
+    content:'송금하기 API는 사업자등록번호가 필요합니다\A어떤식으로 송금할예정인지를 지정하지않으면 \A기본무통장 입금으로 직접 입력하여 진행될것 같습니다\A현재는 아무런작업없이 송금완료 처리합니다.[참고링크-카카오송금하기]https://developers.kakaopay.com/docs/moneytransfer/sendmoney.code/sendmoney-code-common';'
+    white-space:pre;
+    display:none;
+    position:absolute;
+    top:50px;
+    left:-100px;
+    width : 350px;
+    height : 350px;
+    border : 1px solid;
+    font-size : .8rem;
+    background-color : gray;
+    z-index : 999
+    padding : 20px;
+
+}
+
+.remittanceBtn:hover::after{
+    display:block;
+}

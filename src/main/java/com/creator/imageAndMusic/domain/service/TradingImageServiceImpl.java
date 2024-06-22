@@ -292,6 +292,7 @@ public class TradingImageServiceImpl {
         if(buyerOptional.isEmpty())
             return false;
 
+        tradingImage.setAuctionEndTime(LocalDateTime.now());
         tradingImage.setBuyer(buyerOptional.get());
         tradingImage.setPrice(tradingImageDto.getPrice());
         tradingImage.setStatus("낙찰완료");
@@ -302,11 +303,5 @@ public class TradingImageServiceImpl {
     }
 
 
-    public void updateTradingImageStatus(TradingImageDto tradingImageDto) {
-        Optional<TradingImage> tradingImageOptional = tradingImageRepository.findById(tradingImageDto.getTradingid());
-        if(tradingImageOptional.isEmpty())
-            return ;
-        TradingImage tradingImage = tradingImageOptional.get();
-        tradingImage.setStatus(tradingImageDto.getStatus());
-    }
+
 }

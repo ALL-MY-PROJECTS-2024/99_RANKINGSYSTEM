@@ -19,10 +19,21 @@
         list.forEach(el=>{
             console.log(el);
             let eventObject=null;
-            if(!el.adminAccepted)
-                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'red'};
-            else
-                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'green'};
+            if(el.status=='경매승인')
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'gray'};
+            else if(el.status=='경매중'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'green'};
+            }else if(el.status=='경매중지'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'red'};
+            }else if(el.status=='낙찰완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'orange'};
+            }else if(el.status=='결제완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'blue'};
+            }else if(el.status=='송금완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'darkcyan'};
+            }else{
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'white'};
+            }
             eventList.push(eventObject)
         });
     </script>
@@ -114,7 +125,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <table class="table">
 
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

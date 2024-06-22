@@ -68,8 +68,8 @@
                             <th>신청인원</th>
                             <th>낙찰가</th>
                             <th>구매자</th>
-                            <th>상태</th>
-                            <th>취소</th>
+                            <th>경매상태</th>
+                            <th>내 상태</th>
                         </thead>
                         <tbody style="font-size :.7rem;">
 
@@ -89,7 +89,25 @@
                                     <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
                                     <td th:text="${dto.buyer}==null?'미정':${dto.buyer.username}"></td>
                                     <td th:text="${dto.status}"></td>
-                                    <td><a th:href="@{/user/myinfo/trading/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">취소</a></td>
+                                    <th:block >
+                                        <td th:if="${dto.status=='경매요청'} or ${dto.status=='경매승인'}">
+                                            <a th:href="@{/user/myinfo/trading/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">취소</a>
+                                        </td>
+                                        <td th:if="${dto.status=='경매중'}">
+                                            <span>낙찰대기</span>
+                                        </td>
+                                        <td th:if="${dto.status=='낙찰완료'}">
+                                            <span>구매자 결제대기</span>
+                                        </td>
+                                        <th th:if="${dto.status=='결제완료'}">
+                                            <span  class="btn btn-secondary modal-open" style="font-size :.7rem;">
+                                                관리자 송금대기
+                                            </span>
+                                        </th>
+                                        <th th:if="${dto.status=='송금완료'}">
+                                            <span>관리자 송금완료</span>
+                                        </th>
+                                    </th:block>
                                 </tr>
                             </th:block>
 

@@ -82,6 +82,18 @@
                                 <input name="phone" class="form-control" th:value="${dto.phone}" readonly>
                             </div>
                             <div>
+                                <label>은행</label>
+                                <div style="display:flex;">
+                                    <input name="bankname" class="form-control zipcode" th:value="${dto.bankname}" readonly>
+                                </div>
+                            </div>
+                            <div>
+                                <label>계좌번호</label>
+                                <div style="display:flex;">
+                                    <input name="account" class="form-control zipcode" th:value="${dto.account}" readonly>
+                                </div>
+                            </div>
+                            <div>
                                 <label>우편번호</label>
                                 <div style="display:flex;">
                                     <input name="zipcode" class="form-control zipcode" th:value="${dto.zipcode}" readonly>

@@ -87,12 +87,12 @@ public class TradingController {
         log.info("GET /trading/calendar/main");
         List<TradingImage> listEntity =  tradingImageService.getAllTradingImages();
 
-       List<TradingImageDto> list = new ArrayList();
+       List<TradingImageDto> list = new ArrayList<>();
 
         listEntity.forEach(entity ->{
             TradingImageDto dto = new TradingImageDto();
             dto.setTradingid(entity.getTradingid());
-            dto.setTitle( (entity.isAdminAccepted())?"[승인] 경매":"[미승인]경매" );
+            dto.setTitle("[IMAGE] " +  entity.getStatus());
             dto.setSeller((entity.getSeller()!=null)?entity.getSeller().getUsername():null);
             dto.setBuyer( (entity.getBuyer()!=null)?entity.getBuyer().getUsername():null);
             dto.setFileid(entity.getFileid().getFileid());
@@ -101,6 +101,7 @@ public class TradingController {
             dto.setAuctionEndTime(entity.getAuctionEndTime());
             dto.setPrice(entity.getPrice());
             dto.setPaymentState(entity.isPaymentState());
+            dto.setStatus(entity.getStatus());
 
             //채팅방
             String roomId = entity.getRoomId();
@@ -231,12 +232,7 @@ public class TradingController {
         attrs.addFlashAttribute("message","경매ID : " + tradingid + " 정보를 삭제하였습니다");
         return "redirect:/trading/image/main";
     }
-    @PostMapping(value = "/image/updateStatus")
-    public @ResponseBody void update(@RequestBody TradingImageDto tradingImageDto )
-    {
-        log.info("/trading/image/updateStatus.." + tradingImageDto);
-        tradingImageService.updateTradingImageStatus(tradingImageDto);
-    }
+
 
     @GetMapping("/image/accept")
     public String trading_accept(TradingImageDto dto){

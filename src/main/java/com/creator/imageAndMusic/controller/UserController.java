@@ -595,6 +595,12 @@ public class UserController {
         return "myinfo/trading/main";
 
     }
-
-
+    //----------------------------------------------------------------
+    // 송금 정보 입력
+    //----------------------------------------------------------------
+//    @PostMapping("/myinfo/receiveInfo")
+//    public void receiveInfo(ReceiveInfo receiveInfo){
+//
+//
+//    }
 }

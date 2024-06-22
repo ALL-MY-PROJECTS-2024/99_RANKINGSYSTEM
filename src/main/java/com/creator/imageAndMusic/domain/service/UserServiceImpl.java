@@ -502,6 +502,9 @@ public class UserServiceImpl implements UserService {
         user.setAddr1(userDto.getAddr1());
         user.setAddr2(userDto.getAddr2());
         user.setRole("ROLE_USER");
+
+        user.setBankname(userDto.getBankname());
+        user.setAccount(userDto.getAccount());
         userRepository.save(user);
 
         return true;

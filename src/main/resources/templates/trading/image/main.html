@@ -9,16 +9,14 @@
     <th:block th:insert="~{fragments/link :: linkFragment}" />
 
 
-    <link rel="stylesheet" href="/css/myinfo/confirm.css">
-
-    <script src="/js/myinfo/confirm.js" defer> </script>
+    <link rel="stylesheet" href="/css/trading/image/main.css">
 
     <script th:inline="javascript">
         let  list = /*[[${ list}]]*/
-
-
         console.log(list);
     </script>
+    <script src="/js/trading/image/main.js" defer> </script>
+
 </head>
 <body>
 
@@ -70,7 +68,7 @@
                     </thead>
                     <tbody style="font-size :.7rem;">
                         <th:block th:each="dto : ${list}">
-<!--                            <div th:text="${dto}"></div>-->
+                            <div th:text="${dto}"></div>
                             <tr>
                                 <td th:text="${dto.tradingid}"></td>
                                 <td >
@@ -82,16 +80,16 @@
                                 <td th:text="${dto.seller}"></td>
                                 <td th:text="${dto.buyer}"></td>
                                 <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
-                                <td th:text="${dto.startPrice} eq null?'0':${dto.startPrice}"></td>
-                                <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
+                                <td th:text="${dto.startPrice eq null} ?'0':${dto.startPrice}"></td>
+                                <td th:text="${dto.price eq null} ?'0':${dto.price}"></td>
                                 <td th:text="${dto.auctionStartTime}"></td>
                                 <td th:text="${dto.auctionEndTime}"></td>
-                                <td><span th:text="${dto.cur}">0</span>/<span th:text="${dto.max}==null ? '0':${dto.max}"></span></td>
+                                <td><span th:text="${dto.cur}">0</span>/<span th:text="${dto.max==null} ? '0':${dto.max}"></span></td>
                                 <td th:text="${dto.status}"></td>
                                 <td >
                                     <!--유저-->
                                     <th:block sec:authorize="hasRole('ROLE_USER')">
-                                        <th:block th:if="${dto.roomId}!=null">
+                                        <th:block th:if="${dto.roomId!=null}">
                                             <th:block th:if="${dto.req}">
                                                 <a th:href="@{/trading/chat/req(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">신청</a>
                                             </th:block>
@@ -99,32 +97,64 @@
                                                 <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}" class="btn btn-secondary" style="font-size :.7rem;">입장</a>
                                             </th:block>
                                         </th:block>
-                                        <th:block th:unless="${dto.roomId}!=null">
+                                        <th:block th:unless="${dto.roomId!=null}">
                                             <a href="javascript:void(0)" class="btn" style="font-size :.7rem;">대기</a>
                                         </th:block>
                                     </th:block>
 
                                     <!--관리자-->
                                     <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                        <th:block th:if="${dto.roomId}==null">
-                                            <a href="javascript:void(0)" class="btn " style="font-size :.7rem;">대기</a>
+                                        <th:block th:if="${dto.roomId==null}">
+                                                <span style="font-size :.7rem;">대기</span>
                                         </th:block>
-                                        <th:block th:unless="${dto.roomId}==null">
-                                            <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}" class="btn btn-secondary" style="font-size :.7rem;">입장</a>
-                                        </th:block>
+
+                                        <th:block th:if="${dto.roomId!=null}">
+                                            <th:block th:if="${dto.status==null } or ${dto.status=='경매승인'} or ${dto.status=='경매중지'}">
+                                                <span style="font-size :.7rem;">대기</span>
+                                            </th:block>
+                                            <th:block th:if="${dto.status=='낙찰완료'} or ${dto.status=='결제완료'}">
+                                                <span style="font-size :.7rem;">대기</span>
+                                            </th:block>
+                                            <th:block th:if="${dto.status=='경매중'}">
+                                                <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}" class="btn btn-secondary" style="font-size :.7rem;">입장</a>
+                                            </th:block>
+
                                     </th:block>
                                 </td>
 
+                                <!-- 관리 -->
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <th:block th:if="${dto.adminAccepted}" >
-                                        <th:block th:if="${dto.roomId}==null">
+                                        <th:block th:if="${dto.roomId==null}">
                                             <td>
-                                                <a th:href="@{/trading/chat/create(tradingid=${dto.tradingid})}"  class="btn btn-secondary" style="font-size :.7rem;">경매방 생성</a>
+                                                <th:block th:if="${dto.status=='경매승인'} or ${dto.status=='경매중지'}">
+                                                    <a th:href="@{/trading/chat/create(tradingid=${dto.tradingid})}"  class="btn btn-secondary" style="font-size :.7rem;">경매방 생성</a>
+                                                </th:block>
+                                                <th:block th:if="${dto.status=='경매중'}">
+                                                    <a th:href="@{/trading/chat/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매방 제거</a>
+                                                </th:block>
+                                                <th:block th:if="${dto.status=='낙찰완료'}">
+                                                    <span>판매자 결제필요</span>
+                                                </th:block>
+                                                <th:block th:if="${dto.status=='결제완료'}">
+                                                    <a href="javascript:void(0)" th:data-tradingid="${dto.tradingid}" class="btn btn-secondary remittanceBtn" style="font-size :.7rem;">관리자 송금하기</a>
+                                                </th:block>
+                                                <th:block th:if="${dto.status=='송금완료'}">
+                                                    <span>종료</span>
+                                                </th:block>
                                             </td>
                                         </th:block>
-                                        <th:block th:unless="${dto.roomId}==null">
+                                        <th:block th:if="${dto.roomId!=null}">
                                             <td>
-                                                <a th:href="@{/trading/chat/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매방 제거</a>
+                                                <th:block th:if="${dto.status=='경매중지'} or ${dto.status=='경매중'}">
+                                                    <a th:href="@{/trading/chat/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매방 제거</a>
+                                                </th:block>
+                                                <th:block th:if="${dto.status=='결제완료'}">
+                                                    <a href="javascript:void(0)" th:data-tradingid="${dto.tradingid}" class="btn btn-secondary remittanceBtn" style="font-size :.7rem;">관리자 송금하기</a>
+                                                </th:block>
+                                                <th:block th:if="${dto.status=='송금완료'}">
+                                                    <span>종료</span>
+                                                </th:block>
                                             </td>
                                         </th:block>
                                     </th:block>
@@ -133,16 +163,39 @@
                                             <a href="/admin/trading/main" class="btn btn-secondary" style="font-size :.7rem;">승인</a>
                                         </td>
                                     </th:block>
-
                                 </th:block>
 
+                                <!--  삭제-->
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <th:block th:if="${dto.roomId}==null">
-                                        <th><a th:href="@{/trading/image/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매제거</a></th>
-                                    </th:block>
-                                    <th:block th:unless="${dto.roomId}==null">
-                                        <th><span style="font-size : .7rem">[삭제불가]경매중</span></th>
-                                    </th:block>
+
+                                        <th:block th:if="${dto.roomId==null}">
+                                            <th>
+                                                <th:block th:if="${dto.status=='경매승인'} or ${dto.status=='경매중지'} or ${dto.status=='경매중'} or ${dto.status=='낙찰완료'}">
+                                                    <a th:href="@{/trading/image/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매 제거</a>
+                                                </th:block>
+
+                                                <th:block th:if="${dto.status=='결제완료'}">
+                                                    <span>송금대기</span>
+                                                </th:block>
+
+                                                <th:block th:if="${dto.status=='송금완료'}">
+                                                        <span>-</span>
+                                                </th:block>
+
+                                            </th>
+                                        </th:block>
+                                        <th:block th:if="${dto.roomId!=null}">
+                                            <th>
+                                                <th:block th:if="${dto.status=='경매승인'} or ${dto.status=='경매중지'} or ${dto.status=='낙찰완료'}">
+                                                    <a th:href="@{/trading/image/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매 제거</a>
+                                                </th:block>
+
+                                                <th:block th:if="${dto.status=='경매중'}">
+                                                    <span style="font-size : .7rem">[삭제불가]경매중</span>
+                                                </th:block>
+                                            </th>
+                                        </th:block>
+                                </th:block>
                             </tr>
                         </th:block>
                     </tbody>

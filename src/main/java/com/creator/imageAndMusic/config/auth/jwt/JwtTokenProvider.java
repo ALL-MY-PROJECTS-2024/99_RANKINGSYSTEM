@@ -92,6 +92,8 @@ public class JwtTokenProvider {
                 .claim("addr2",userDto.getAddr2())                      //정보저장
                 .claim("password",userDto.getPassword())                //정보저장
                 .claim("zipcode",userDto.getZipcode())                  //정보저장
+                .claim("bankname",userDto.getBankname())                  //정보저장
+                .claim("account",userDto.getAccount())                  //정보저장
 
                 .claim("auth", authorities)                             //정보저장
                 .claim("principal", authentication.getPrincipal())      //정보저장
@@ -209,6 +211,8 @@ public class JwtTokenProvider {
         String addr2 = (String)claims.get("addr2");
         String password = (String)claims.get("password");
         String zipcode = (String)claims.get("zipcode");
+        String bankname = (String)claims.get("bankname");
+        String account = (String)claims.get("account");
 
 
 
@@ -235,8 +239,9 @@ public class JwtTokenProvider {
         userDto.setAddr2(addr2);
         userDto.setZipcode(zipcode);
         userDto.setNickname(nickname);
-
         userDto.setRole(auth);
+        userDto.setBankname(bankname);
+        userDto.setAccount(account);
 
         PrincipalDetails principalDetails = new PrincipalDetails();
         principalDetails.setUserDto(userDto);

@@ -107,6 +107,25 @@
                             <input name="phone" class="form-control" placeholder="- 제외하고 입력" th:value="${dto.phone}">
                         </div>
                         <div>
+                            <label>은행</label>
+                            <select name="bankname">
+                                <option name="우리">우리은행</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>계좌번호</label>
+                            <div style="display:flex;">
+                                <input name="account" class="form-control zipcode" th:value="${dto.account}" >
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)" class="account_confirm">확인신청</a>
+                            </div>
+                            <div>
+                                <input name="code"><a href="javascript:void(0)" class="account_confirm">확인</a>
+                            </div>
+                        </div>
+
+                        <div>
                             <label>우편번호 검색</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${zipcode}"></span>
                             <div style="display:flex;">
                                 <input name="zipcode" class="form-control zipcode" placeholder="우편번호 입력" th:value="${dto.zipcode}">
