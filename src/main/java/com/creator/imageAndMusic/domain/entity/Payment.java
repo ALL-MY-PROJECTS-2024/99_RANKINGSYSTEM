@@ -1,8 +1,7 @@
 package com.creator.imageAndMusic.domain.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +16,13 @@ public class Payment {
     public boolean success;
     @Id
     public String imp_uid;
+
+    //구매한 이미지
+    @ManyToOne
+    @JoinColumn(name = "item_id",foreignKey = @ForeignKey(name="FK_ImagesFileInfo_Payment1",
+            foreignKeyDefinition ="FOREIGN KEY(item_id) REFERENCES images_file_info(fileid) ON DELETE CASCADE ON UPDATE CASCADE" ))
+    private ImagesFileInfo item_id;
+
     public String pay_method;
     public String merchant_uid;
     public String name;

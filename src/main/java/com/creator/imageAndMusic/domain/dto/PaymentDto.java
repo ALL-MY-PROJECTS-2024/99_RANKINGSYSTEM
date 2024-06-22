@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class PaymentDto {
     public boolean success;
     public String imp_uid;
+    public Long tradingid;
     public String pay_method;
     public String merchant_uid;
     public String name;
