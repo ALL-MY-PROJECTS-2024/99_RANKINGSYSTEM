@@ -56,7 +56,7 @@
                     <input type="hidden" name="no" th:value="${boardDto.no}">
 
                     <div class="mb-3 w-50">
-                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>&nbsp;<span class="msg" th:text="${username}"></span>
                         <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" th:value="${boardDto.username}" readonly>
                     </div>
                     <div class="mb-3 w-50">
@@ -68,24 +68,8 @@
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:text="${boardDto.content}" readonly></textarea>
                     </div>
 
-                    <!--     파일 리스트 출력               -->
-                    <div class="mb-3  w-50 items">
-
-                       <th:block th:if="${filenames!=null}">
-                           <!-- 문자열을 쉼표(,)로 분할하고 각각의 항목을 출력합니다. -->
-                           <div >
-                               <div class="item" th:each="i : ${#numbers.sequence(0, filenames.length-1)}"       style="display:flex;align-items;center;">
-                                   <a th:href="@{/board/download(filename=${filenames[i]}) }">
-                                       <span th:text="${filenames[i]}"> </span>&nbsp;&nbsp;
-                                       ( <span th:text="${filesizes[i]}"> </span><span> Byte</span> )
-                                   </a>
-                               </div>
-                           </div>
-                       </th:block>
-
-                    </div>
                     <div class="mb-3  w-50" >
-                        <a  class="btn btn-primary" th:href="@{/board/update(no=${boardDto.no})}">수정하기</a>
+                        <a  class="btn btn-primary" th:href="@{/board/update(no=${boardDto.no},pageNo=${pageNo})}">수정하기</a>
                         <a  class="btn btn-primary delete_btn" th:data-no="${boardDto.no}" >삭제하기</a>
                         <a  th:href="@{/board/list(pageNo=${pageNo})}"  class="btn btn-primary">이전으로</a>
                     </div>
@@ -112,271 +96,27 @@
 <script src="/js/common.js"></script>
 
 <script>
-    const delete_btn_el = document.querySelector('.delete_btn');
-    delete_btn_el.addEventListener('click',function(){
-        const no = delete_btn_el.dataset.no;
-        axios.delete("/board/delete?no="+no)
-        .then(
-            response=>{console.log(response);
-                if(response.status === 200){
-                    location.href="/board/list";
-                }
-            }
-        )
-        .catch(error=>console.log(error));
-    });
 
-    //----------------------------------------------------------------
-    //댓글 추가
-    //----------------------------------------------------------------
-    const reply_btn_el = document.querySelector('.reply_btn');
-
-     /*<![CDATA[*/
-            var bno = [[${boardDto.no}]];
-            let username = '[[${#authentication.name}]]';
-     /*]]>*/
-
-
-    reply_btn_el.addEventListener('click',function(){
-        const reply_contents_el = document.querySelector('.reply_contents');
-        console.log("BNO : ",bno);
-
-        axios.get("/board/reply/add?bno="+bno+"&contents="+reply_contents_el.value + "&username="+username)
-        .then(response=>{
-            console.log(response);
-
-            //기존list삭제
-            const replyBody_items = document.querySelector('.reply-body .items');
-            while(replyBody_items.firstChild){
-                 replyBody_items.firstChild.remove()
-            }
-
-            //새로list불러오기
-            getReplylist();
-
-            //댓글 개수 가져오기
-            axios.get("/board/reply/count?bno=" + bno)
-            .then(response=>{
-                let reply_count_el = document.querySelector('.reply--count');
-                reply_count_el.innerHTML = response.data;
-            })
-            .catch(error=>{});
-
-            //Input Clear
-            reply_contents_el.value="";
-
-        })
-        .catch(error=>console.log(error));
-
-    });
-    //----------------------------------------------------------------
-    //엔터키 댓글 추가
-    //----------------------------------------------------------------
-    const reply_contents_el = document.querySelector('.reply_contents');
-    reply_contents_el.addEventListener('keydown',function(e){
-
-        if(e.keyCode==13){
-
-                axios.get("/board/reply/add?bno="+bno+"&contents="+reply_contents_el.value + "&username="+username)
-                .then(response=>{
-                    console.log(response);
-
-                    //기존list삭제
-                    const replyBody_items = document.querySelector('.reply-body .items');
-                    while(replyBody_items.firstChild){
-                         replyBody_items.firstChild.remove()
-                    }
-
-                    //새로list불러오기
-                    getReplylist();
-
-                    //댓글 개수 가져오기
-                    axios.get("/board/reply/count?bno=" + bno)
-                    .then(response=>{
-                        let reply_count_el = document.querySelector('.reply--count');
-                        reply_count_el.innerHTML = response.data;
-                    })
-                    .catch(error=>{});
-
-                    //Input Clear
-                    reply_contents_el.value="";
-
-                })
-                .catch(error=>console.log(error));
-
-        }
-    });
-
-
-   //----------------------------------------------------------------
-    //댓글 리스트 가져오기
-    //----------------------------------------------------------------
-    const getReplylist = ()=>{
-
-     /*<![CDATA[*/
-            let bno = [[${boardDto.no}]];
-     /*]]>*/
-
-        console.log("getReplylist bno :",bno);
-        axios.get("/board/reply/list?bno="+bno)
-        .then(response=>{
-            console.log(response);
-            if(response.data!=null)
-            {
-
-                //댓글 Item 만들기
-                const reply_list = response.data;
-                reply_list.forEach(
-                    reply=>{
-                        CreateItem(reply);
-                    }
-                );
-
-                //댓글 개수 가져오기
-                axios.get("/board/reply/count?bno=" + bno)
-                .then(response=>{
-                    let reply_count_el = document.querySelector('.reply--count');
-                    reply_count_el.innerHTML = response.data;
-                })
-            }
-
-        })
-        .catch(error=>console.log(error));
-    };
-    getReplylist();
-
-
-    //----------------------------------------------------------------
-    // Item 만들기
-    //----------------------------------------------------------------
-    const items_el = document.querySelector(".items");
-    const CreateItem = (reply)=>{
-        console.log("reply : ",reply);
-
-        // div 엘리먼트 생성
-        var divElement = document.createElement("div");
-        divElement.className = "item";
-
-        // header div 엘리먼트 생성
-        var headerElement = document.createElement("div");
-        headerElement.className = "header";
-
-        // img 엘리먼트 생성
-        var imgElement = document.createElement("img");
-        imgElement.src = "/images/account.png";
-        imgElement.alt = "";
-
-        // header div에 img 엘리먼트 추가
-        headerElement.appendChild(imgElement);
-
-        // body div 엘리먼트 생성
-        var bodyElement = document.createElement("div");
-        bodyElement.className = "body";
-
-        // 내용 엘리먼트 생성(계정 | 날짜 )
-        var contentDiv = document.createElement("div");
-
-        var span1 = document.createElement("span");
-        span1.className = "reply_username me-2";
-        span1.textContent = reply.username;
-        var span2 = document.createElement("span");
-        span2.className = "reply_regdate";
-        span2.textContent = formatter(reply.regdate);
-
-
-        var delete_a = document.createElement("a");
-        delete_a.setAttribute("href","/board/reply/delete/"+reply.bno+"/"+reply.rno);       //DELETE HREF!!!!!!!!
-        var span3 = document.createElement("span");
-        span3.className = "reply_delete material-symbols-outlined";
-        span3.textContent = "remove";
-        delete_a.appendChild(span3);
-
-        contentDiv.appendChild(span1);
-        contentDiv.appendChild(span2);
-        contentDiv.appendChild(delete_a);
-
-        // 내용 엘리먼트 추가
-        bodyElement.appendChild(contentDiv);
-
-
-
-        // contents div 엘리먼트 생성
-        var contentsDiv = document.createElement("div");
-        contentsDiv.className = "contents";
-        contentsDiv.textContent = reply.content;
-
-        // contents div 엘리먼트 추가
-        bodyElement.appendChild(contentsDiv);
-
-        // 좋아요 및 싫어요 링크 엘리먼트 생성
-        var likeLink = document.createElement("a");
-        var dislikeLink = document.createElement("a");
-
-        likeLink.href = "/board/reply/thumbsup?bno="+reply.bno+"&rno=" + reply.rno;
-        dislikeLink.href = "/board/reply/thumbsdown?bno="+reply.bno+"&rno=" + reply.rno;
-
-        // 좋아요 아이콘과 개수 엘리먼트 생성
-        var likeIcon = document.createElement("span");
-        likeIcon.className = "material-symbols-outlined me-1";
-        likeIcon.textContent = "thumb_up";
-        var likeCount = document.createElement("span");
-        likeCount.className = "me-1";
-        likeCount.textContent = reply.likecount;
-
-        // 싫어요 아이콘과 개수 엘리먼트 생성
-        var dislikeIcon = document.createElement("span");
-        dislikeIcon.className = "material-symbols-outlined me-1";
-        dislikeIcon.textContent = "thumb_down";
-        var dislikeCount = document.createElement("span");
-        dislikeCount.className = "me-1";
-        dislikeCount.textContent = reply.unlikecount;
-
-        // 좋아요와 싫어요 엘리먼트를 좋아요 링크에 추가
-        likeLink.appendChild(likeIcon);
-        likeLink.appendChild(document.createTextNode(" "));
-        likeLink.appendChild(likeCount);
-
-        // 좋아요와 싫어요 엘리먼트를 싫어요 링크에 추가
-        dislikeLink.appendChild(dislikeIcon);
-        dislikeLink.appendChild(document.createTextNode(" "));
-        dislikeLink.appendChild(dislikeCount);
-
-        const ThumbsDiv = document.createElement("div");
-        ThumbsDiv.append(likeLink);
-        ThumbsDiv.append(dislikeLink);
-
-
-        // 좋아요와 싫어요 링크 엘리먼트를 body div에 추가
-        bodyElement.appendChild(ThumbsDiv);
-
-        // header와 body 엘리먼트를 div에 추가
-        divElement.appendChild(headerElement);
-        divElement.appendChild(bodyElement);
-
-        // div 엘리먼트를 body에 추가
-        items_el.appendChild(divElement);
-    }
 
 //----------------------------------------------------------------
-// LocalDateTime Formatter
+//
 //----------------------------------------------------------------
-const formatter = (regDate)=>{
-  // 분리한 정보를 사용하여 Date 객체를 생성합니다.
-  const year = parseInt(regDate[0]);
-  const month = parseInt(regDate[1]) - 1; // 월은 0부터 시작하므로 1을 빼줍니다.
-  const day = parseInt(regDate[2]);
-  const hours = parseInt(regDate[3]);
-  const minutes = parseInt(regDate[4]);
-  const seconds = parseInt(regDate[5]);
+const deleteBtn = document.querySelector('.delete_btn');
+deleteBtn.addEventListener('click',function(){
+    console.log("111");
+    const no = deleteBtn.getAttribute('data-no');
+    axios.delete(`/board/delete?no=${no}`)
+    .then(resp=>{
+        console.log(resp);
+        alert(resp.data.message);
+        location.href="/board/list";
+    })
+    .catch(err=>{
+        console.log(err);
+        alert(err.response.data.message);
+    });
 
-  const date = new Date(year, month, day, hours, minutes, seconds);
-
-  // Date 객체를 원하는 형식으로 포맷팅합니다.
-  const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
-
-  return formattedDate;
-
-};
+});
 
 
 

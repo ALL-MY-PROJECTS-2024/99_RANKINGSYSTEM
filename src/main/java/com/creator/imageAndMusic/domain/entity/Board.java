@@ -29,11 +29,6 @@ public class Board {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regdate;
     private Long count;
-    private String dirpath;
-    private String filename;
-    private String filesize;
-
-
 
 }
 

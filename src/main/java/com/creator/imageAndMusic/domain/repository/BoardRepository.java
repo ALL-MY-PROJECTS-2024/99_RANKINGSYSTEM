@@ -22,14 +22,12 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
 
 
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE Board b SET b.title = :title, b.content = :content, b.regdate = :regdate, b.count = :count, b.filename = :filename, b.filesize = :filesize WHERE b.no = :no")
+    @Query("UPDATE Board b SET b.title = :title, b.content = :content, b.regdate = :regdate, b.count = :count  WHERE b.no = :no")
     Integer updateBoard(
             @Param("title") String title,
             @Param("content") String content,
             @Param("regdate") LocalDateTime regdate,
             @Param("count") Long count,
-            @Param("filename") String filename,
-            @Param("filesize") String filesize,
             @Param("no") Long no
     );
 

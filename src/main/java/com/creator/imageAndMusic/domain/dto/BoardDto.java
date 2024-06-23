@@ -29,11 +29,6 @@ public class BoardDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regdate;
     private Long count;
-    private MultipartFile[] files;
-
-
-
-
 
     public static BoardDto Of(Board board) {
         BoardDto dto = new BoardDto();

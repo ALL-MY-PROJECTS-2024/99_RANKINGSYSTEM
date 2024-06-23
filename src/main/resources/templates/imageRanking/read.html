@@ -13,6 +13,7 @@
     <!-- /css/album/read.css   -->
     <link rel="stylesheet" href="/css/imageRanking/read.css">
 
+    <script src="/js/imageRanking/read.js" defer></script>
 </head>
 <body>
     
@@ -89,8 +90,10 @@
                         <div class="item" >
                             <div class="btns">
                                 <a href="javascript:history.go(-1)" class="btn btn-primary addRanking">이전으로</a>
-                                <a href="javascript:void(0)" class="btn btn-primary deleteRanking">BBB</a>
-                                <a href="javascript:void(0)" class="btn btn-primary changeCategory">CCC</a>
+                                <a href="javascript:void(0)" class="btn btn-primary thumb_up_btn" th:data-imageid="${imagesRanking.rankingId}">
+                                    <span class="material-symbols-outlined" style="font-size:1rem;">thumb_up</span>
+                                </a>
+
                             </div>
                             <div class="images">
                                 <th:block  >

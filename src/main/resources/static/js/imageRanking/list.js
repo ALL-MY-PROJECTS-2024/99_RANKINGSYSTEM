@@ -11,15 +11,14 @@ thumb_up_btn_els.forEach((el)=>{
 
         axios.get(`/favorite/image/${imageid}`)
         .then(resp=>{
-            console.log(resp);
-           const isFavorite = resp.data.favorite;
-           if(isFavorite){
-                thumbUpIcon.setAttribute('style',"font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 18");
-           }else{
-                thumbUpIcon.setAttribute('style',"font-variation-settings:'FILL' 100,'wght' 300,'GRAD' 0,'opsz' 18");
-           }
-
-           thumbUpCounter.innerHTML =  resp.data.count;
+               console.log(resp);
+               const isFavorite = resp.data.favorite;
+               if(isFavorite){
+                    thumbUpIcon.setAttribute('style',"font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 18");
+               }else{
+                    thumbUpIcon.setAttribute('style',"font-variation-settings:'FILL' 100,'wght' 300,'GRAD' 0,'opsz' 18");
+               }
+                thumbUpCounter.innerHTML =  resp.data.count;
 
          })
         .catch(err=>{console.log(err);})
@@ -42,9 +41,7 @@ favoriteBlock.forEach(el=>{
 
             const thumbUp =  el.querySelector('.favorite');
             thumbUp.setAttribute('style',"font-variation-settings:'FILL' 100,'wght' 300,'GRAD' 0,'opsz' 18");
-
         }
-
     })
 })
 
@@ -109,52 +106,55 @@ const summaryBlock = document.querySelector(".summary-block");
 
 
 countOrder.addEventListener('click',function(){
-    console.log('clicked...');
-    countOrderBlock.classList.remove('hidden');
-    likeOrderBlock.classList.add("hidden");
-    summaryBlock.classList.add('hidden');
+//    console.log('clicked...');
+//    countOrderBlock.classList.remove('hidden');
+//    likeOrderBlock.classList.add("hidden");
+//    summaryBlock.classList.add('hidden');
+//
+//    countOrder.classList.add('active');
+//    likeOrder.classList.remove('active');
+//    summary.classList.remove('active');
 
-    countOrder.classList.add('active');
-    likeOrder.classList.remove('active');
-    summary.classList.remove('active');
+    location.href="/imageRanking/list?mode=1"
 });
 
 likeOrder.addEventListener('click',function(){
-    console.log('clicked...')
-    likeOrderBlock.classList.remove("hidden");;
-    countOrderBlock.classList.add('hidden');
-    summaryBlock.classList.add('hidden');
+//    console.log('clicked...')
+//    likeOrderBlock.classList.remove("hidden");;
+//    countOrderBlock.classList.add('hidden');
+//    summaryBlock.classList.add('hidden');
+//
+//    likeOrder.classList.add('active');
+//    countOrder.classList.remove('active');
+//    summary.classList.remove('active');
 
-    likeOrder.classList.add('active');
-    countOrder.classList.remove('active');
-    summary.classList.remove('active');
+    location.href="/imageRanking/list?mode=2"
 })
 
 summary.addEventListener('click',function(){
-    summaryBlock.classList.remove('hidden');
-    countOrderBlock.classList.add('hidden');
-    likeOrderBlock.classList.add("hidden");
-
-
-    summary.classList.add('active');
-    likeOrder.classList.remove('active');
-    countOrder.classList.remove('active');
-
+//    summaryBlock.classList.remove('hidden');
+//    countOrderBlock.classList.add('hidden');
+//    likeOrderBlock.classList.add("hidden");
+//
+//
+//    summary.classList.add('active');
+//    likeOrder.classList.remove('active');
+//    countOrder.classList.remove('active');
+    location.href="/imageRanking/list?mode=3"
 })
 //----------------------------------------------------------------
 // MODE
 //----------------------------------------------------------------
     if(mode=="1"){
-
             countOrderBlock.classList.remove('hidden');
             likeOrderBlock.classList.add("hidden");
             summaryBlock.classList.add('hidden');
 
-            countOrder.classList.add('active');
+            countOrder.classList.add('active'); //조회순
             likeOrder.classList.remove('active');
             summary.classList.remove('active');
-    }else{
 
+    }else if(mode=="2"){
         likeOrderBlock.classList.remove("hidden");;
         countOrderBlock.classList.add('hidden');
         summaryBlock.classList.add('hidden');
@@ -162,4 +162,16 @@ summary.addEventListener('click',function(){
         likeOrder.classList.add('active');
         countOrder.classList.remove('active');
         summary.classList.remove('active');
+
+    }else{
+        summaryBlock.classList.remove('hidden');
+        likeOrderBlock.classList.add("hidden");;
+        countOrderBlock.classList.add('hidden');
+
+
+        summary.classList.add('active');
+        likeOrder.classList.remove('active');
+        countOrder.classList.remove('active');
+
     }
+

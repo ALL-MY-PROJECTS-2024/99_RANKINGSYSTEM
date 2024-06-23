@@ -22,21 +22,9 @@
     <!-- nav       -->
     <th:block th:insert="fragments/nav :: navFragment" />
 
-    <main>
+    <main class="layout-5">
         <section class="row">
-            <!-- aside -->
-            <div class="bd-example bg-secondary col-2" style="height:90vh;width:200px;" >
-                <div class="btn-group-vertical p-3" role="group" aria-label="Vertical button group">
-                    <!--
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU1</button>
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU2</button>
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU3</button>
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU4</button>
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU5</button>
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU6</button>
-                    -->
-                </div>
-            </div>
+
             <!-- contents -->
             <div class="col">
                 <!-- breadcrumb -->
@@ -53,7 +41,7 @@
                 <h3>BOARD UPDATE</h3>
 
 
-                <form action="/board/update" method="post" enctype="multipart/form-data">
+                <form action="/board/update" method="post" >
                     <input type="hidden" name="no" th:value="${boardDto.no}">
                     <input type="hidden" name="count" th:value="${boardDto.count}">
 
@@ -71,27 +59,6 @@
                         <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" th:text="${boardDto.content}"></textarea>
                     </div>
 
-                    <!--     파일 리스트 출력               -->
-                    <div class="mb-3  w-50" style="border : 1px solid lightgray;border-radius:5px;padding:3px;">
-                       <th:block  th:if="${filenames!=null}" >
-                           <!-- 문자열을 쉼표(,)로 분할하고 각각의 항목을 출력합니다. -->
-
-                               <div th:each="i : ${#numbers.sequence(0, filenames.length-1)}"       style="display:flex;align-items;center;">
-                                   <a th:href="@{/board/download(filename=${filenames[i]}) }">
-                                       <span th:text="${filenames[i]}"> </span>&nbsp;&nbsp;
-                                       ( <span th:text="${filesizes[i]}"> </span><span> Byte</span> )
-                                   </a>
-                                   &nbsp;&nbsp;
-                                   <a href="javascript:void(0)" style="text-decoration:none; color:black;"   >
-                                        <span class="material-symbols-outlined delete_file" th:data-filename="${filenames[i]}" th:data-no="${boardDto.no}">delete</span>
-                                   </a>
-                               </div>
-
-                       </th:block>
-                    </div>
-                    <div class="mb-3 w-50">
-                        <input type="file" name="files" multiple  class="form-control">
-                    </div>
                     <div class="mb-3  w-50" >
                         <button  class="btn btn-primary">수정요청</button>
                         <a  href="javascript:history.go(-1)"  class="btn btn-primary">이전으로</a>

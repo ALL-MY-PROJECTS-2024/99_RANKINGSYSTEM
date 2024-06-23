@@ -1,8 +1,10 @@
 package com.creator.imageAndMusic.restcontroller;
 
 
+import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.controller.BoardController;
-import com.creator.imageAndMusic.domain.service.BoardService;
+import com.creator.imageAndMusic.domain.entity.Board;
+import com.creator.imageAndMusic.domain.service.BoardServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -11,10 +13,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.StringUtils;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/board")
@@ -22,7 +28,7 @@ import java.io.UnsupportedEncodingException;
 public class BoardRestController {
 
     @Autowired
-    private BoardService boardService;
+    private BoardServiceImpl boardService;
 
     //------------------
     //FILEDOWNLOAD
@@ -54,27 +60,36 @@ public class BoardRestController {
     //-------------------
     // 수정하기
     //-------------------
-    @PutMapping("/put/{no}/{filename}")
-    public String put(@PathVariable String no, @PathVariable String filename)
-    {
-        log.info("PUT /board/put " + no + " " + filename);
-        boolean isremoved = boardService.removeFile(no,filename);
-        return "success";
-    }
+//    @PutMapping("/put/{no}/{filename}")
+//    public String put(@PathVariable String no, @PathVariable String filename)
+//    {
+//        log.info("PUT /board/put " + no + " " + filename);
+//        boolean isremoved = boardService.removeFile(no,filename);
+//        return "success";
+//    }
 
 
     //-------------------
     // 삭제하기
     //-------------------
     @DeleteMapping("/delete")
-    public String delete(Long no) throws Exception{
+    public ResponseEntity<Map<String,Object>> delete(@RequestParam("no") Long no, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
         log.info("DELETE /board/delete no " + no);
 
+
+        Map<String,Object> result = new HashMap<>();
+        Board board =  boardService.getBoardOne(no);
+        String loginedUsername = principalDetails.getUsername();
+        String writer = board.getUsername();
+        if(!StringUtils.equals(loginedUsername,writer)){
+            result.put("message","작성자만 삭제할 수 있습니다.");
+            return new ResponseEntity<>(result,HttpStatus.BAD_GATEWAY);
+        }
+
         boolean isremoved =  boardService.removeBoard(no);
-        if(isremoved)
-            return "success";
-        else
-            return "failed";
+        result.put("message","삭제완료.");
+        return new ResponseEntity<>(result,HttpStatus.OK);
+
 
     }
 
