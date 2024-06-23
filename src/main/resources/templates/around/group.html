@@ -16,6 +16,14 @@
 
     <link rel="stylesheet" href="/css/index_login.css">
 
+    <!--  MODEL 속성가져오기  -->
+    <script th:inline="javascript">
+        let list = /*[[${list}]]*/
+        let mode = /*[[${mode}]]*/
+        console.log(mode);
+        console.log(list);
+    </script>
+
 
     <!--    -->
     <link rel="stylesheet" href="/css/around/group.css">
@@ -79,14 +87,14 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Character">Character</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="City">City </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Map">Map </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="iCON">iCON</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Furniture">Furniture </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Car">Car </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Place">Place </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Others">Others </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Character'&mode=1" data-title="Character">Character</a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='City'&mode=1" data-title="City">City </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Map'&mode=1" data-title="Map">Map </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='iCON'&mode=1" data-title="iCON">iCON</a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Furniture'&mode=1" data-title="Furniture">Furniture </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Car'&mode=1" data-title="Car">Car </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Place'&mode=1" data-title="Place">Place </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Others'&mode=1" data-title="Others">Others </a>   </div>
                         </div>
 
                     </div>
@@ -98,8 +106,6 @@
                     </div>
 
                 </div>
-
-
                 <div class="music_body hidden">
 
                     <div class="swiper sub_category">
@@ -108,14 +114,14 @@
 
 
                             <!-- Slides -->
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Jazz</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Rock </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Classic</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Prgressive</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Advertisement </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Heavy Metal</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Pop</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Others </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Jazz'&mode=2">Jazz</a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Rock'&mode=2">Rock </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Classic'&mode=2">Classic</a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Prgressive'&mode=2">Prgressive</a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Advertisement'&mode=2">Advertisement </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='JaHeavy Metal'&mode=2">Heavy Metal</a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Pop'&mode=2">Pop</a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Others'&mode=2">Others </a>   </div>
 
                         </div>
                     </div>

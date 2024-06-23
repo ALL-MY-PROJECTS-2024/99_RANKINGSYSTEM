@@ -1,6 +1,7 @@
 package com.creator.imageAndMusic.domain.repository;
 
 
+import com.creator.imageAndMusic.domain.entity.Images;
 import com.creator.imageAndMusic.domain.entity.Music;
 import com.creator.imageAndMusic.domain.entity.MusicFileInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,7 @@ public interface MusicRepository extends JpaRepository<Music,Long> {
     List<Music> findAllByUsername(String username);
 
     void deleteAllByUsername(String username);
+
+    List<Music> findAllBySubCategory(String subCategory);
+
 }

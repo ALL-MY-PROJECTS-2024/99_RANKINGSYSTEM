@@ -2,14 +2,8 @@ package com.creator.imageAndMusic.domain.service;
 
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
-import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
-import com.creator.imageAndMusic.domain.entity.ImagesRanking;
-import com.creator.imageAndMusic.domain.entity.MusicFileInfo;
-import com.creator.imageAndMusic.domain.entity.MusicRanking;
-import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
-import com.creator.imageAndMusic.domain.repository.ImagesFileInfoRepository;
-import com.creator.imageAndMusic.domain.repository.MusicFileInfoRepository;
-import com.creator.imageAndMusic.domain.repository.MusicRankingRepository;
+import com.creator.imageAndMusic.domain.entity.*;
+import com.creator.imageAndMusic.domain.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -18,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +34,9 @@ public class MusicRankingServiceImpl  {
 
     @Autowired
     private MusicFileInfoRepository musicFileInfoRepository;
+
+    @Autowired
+    private MusicRepository musicRepository;
 
 
     @Transactional(rollbackFor = Exception.class)
@@ -137,6 +135,18 @@ public class MusicRankingServiceImpl  {
        return musicRankingRepository.findById(rankingId).get();
     }
 
+    @Transactional(rollbackFor = SQLException.class)
+    public List<MusicFileInfo> getAllMusicRankingByCategory(String subCategory) {
+        List<Music> list = musicRepository.findAllBySubCategory(subCategory);
 
+        List<MusicFileInfo> result = new ArrayList<MusicFileInfo>();;
 
+        if(list!=null){
+            list.forEach(music->{
+                List<MusicFileInfo> filelist =  musicFileInfoRepository.findAllByMusic(music);
+                result.addAll(filelist);
+            });
+        }
+        return result;
+    }
 }

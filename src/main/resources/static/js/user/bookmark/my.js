@@ -15,7 +15,9 @@ cancelEls.forEach(el=>{
     })
 })
 
+//--------------------------------
 //이미지 / 음악 버튼 누를시 반응
+//--------------------------------
 //음악 / 이미지 버튼
 const btnImg = document.querySelector('.my-btn.btn-img');
 const btnMusic = document.querySelector('.my-btn.btn-music');

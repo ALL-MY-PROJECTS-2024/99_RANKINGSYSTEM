@@ -56,7 +56,7 @@ bookmarkBtnEls.forEach(el=>{
     el.addEventListener('click',()=>{
 
            const rankingId =  el.getAttribute('data-id');
-           axios.get(`/bookmark/add/${rankingId}`)
+           axios.get(`/bookmark/add/music/${rankingId}`)
            .then(resp=>{
                 console.log(resp);
                 if(resp.data.exist=='true'){
@@ -106,42 +106,45 @@ const summaryBlock = document.querySelector(".summary-block");
 
 
 countOrder.addEventListener('click',function(){
-    console.log('clicked...');
-    countOrderBlock.classList.remove('hidden');
-    likeOrderBlock.classList.add("hidden");
-    summaryBlock.classList.add('hidden');
+//    console.log('clicked...');
+//    countOrderBlock.classList.remove('hidden');
+//    likeOrderBlock.classList.add("hidden");
+//    summaryBlock.classList.add('hidden');
+//
+//    countOrder.classList.add('active');
+//    likeOrder.classList.remove('active');
+//    summary.classList.remove('active');
+    location.href="/musicRanking/list?mode=1"
 
-    countOrder.classList.add('active');
-    likeOrder.classList.remove('active');
-    summary.classList.remove('active');
 });
 
 likeOrder.addEventListener('click',function(){
-    console.log('clicked...')
-    likeOrderBlock.classList.remove("hidden");;
-    countOrderBlock.classList.add('hidden');
-    summaryBlock.classList.add('hidden');
-
-    likeOrder.classList.add('active');
-    countOrder.classList.remove('active');
-    summary.classList.remove('active');
+//    console.log('clicked...')
+//    likeOrderBlock.classList.remove("hidden");;
+//    countOrderBlock.classList.add('hidden');
+//    summaryBlock.classList.add('hidden');
+//
+//    likeOrder.classList.add('active');
+//    countOrder.classList.remove('active');
+//    summary.classList.remove('active');
+    location.href="/musicRanking/list?mode=2"
 })
 
 summary.addEventListener('click',function(){
-    summaryBlock.classList.remove('hidden');
-    countOrderBlock.classList.add('hidden');
-    likeOrderBlock.classList.add("hidden");
-
-
-    summary.classList.add('active');
-    likeOrder.classList.remove('active');
-    countOrder.classList.remove('active');
-
+//    summaryBlock.classList.remove('hidden');
+//    countOrderBlock.classList.add('hidden');
+//    likeOrderBlock.classList.add("hidden");
+//
+//
+//    summary.classList.add('active');
+//    likeOrder.classList.remove('active');
+//    countOrder.classList.remove('active');
+    location.href="/musicRanking/list?mode=3"
 })
 //----------------------------------------------------------------
 // MODE
 //----------------------------------------------------------------
-    if(mode=="1"){
+if(mode=="1"){
 
             countOrderBlock.classList.remove('hidden');
             likeOrderBlock.classList.add("hidden");
@@ -150,7 +153,7 @@ summary.addEventListener('click',function(){
             countOrder.classList.add('active');
             likeOrder.classList.remove('active');
             summary.classList.remove('active');
-    }else{
+}else if(mode=="2"){
 
         likeOrderBlock.classList.remove("hidden");;
         countOrderBlock.classList.add('hidden');
@@ -159,4 +162,16 @@ summary.addEventListener('click',function(){
         likeOrder.classList.add('active');
         countOrder.classList.remove('active');
         summary.classList.remove('active');
-    }
+}else{
+
+        summaryBlock.classList.remove('hidden');
+        likeOrderBlock.classList.add("hidden");;
+        countOrderBlock.classList.add('hidden');
+
+
+        summary.classList.add('active');
+        likeOrder.classList.remove('active');
+        countOrder.classList.remove('active');
+
+}
+

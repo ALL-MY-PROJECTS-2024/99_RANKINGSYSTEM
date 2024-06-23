@@ -2,6 +2,7 @@ package com.creator.imageAndMusic.controller;
 
 
 import com.creator.imageAndMusic.domain.entity.Bookmark;
+import com.creator.imageAndMusic.domain.entity.MusicBookmark;
 import com.creator.imageAndMusic.domain.service.BookmarkServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,27 +31,29 @@ public class BookmarkController {
     public String my(Model model, Authentication authentication){
         log.info("GET /bookmark/my..");
         List<Bookmark> list =  bookmarkService.getBookmark(authentication.getName());
+        List<MusicBookmark> musicList = bookmarkService.getMusicBookmark(authentication.getName());
+
         model.addAttribute("list",list);
+        model.addAttribute("musicList",musicList);
         return "user/bookmark/my";
     }
 
     @GetMapping("/del/{id}")
     public @ResponseBody ResponseEntity<String> del(@PathVariable("id") Long id){
-
-
         bookmarkService.deleteBookmark(id);
-
         return new ResponseEntity("SUCCESS",HttpStatus.OK);
     }
     @GetMapping("/add/{rankingId}")
     public @ResponseBody ResponseEntity<String> add(@PathVariable("rankingId") Long rankingId, Authentication authentication){
-
         System.out.println("rankingId : " + rankingId);
         Map<String,Object> result=  bookmarkService.addBookmark(rankingId,authentication.getName());
-
         return new ResponseEntity(result, HttpStatus.OK);
+    }
 
-
-
+    @GetMapping("/add/music/{rankingId}")
+    public @ResponseBody ResponseEntity<String> add_music(@PathVariable("rankingId") Long rankingId, Authentication authentication){
+        System.out.println("rankingId : " + rankingId);
+        Map<String,Object> result=  bookmarkService.addMusicBookmark(rankingId,authentication.getName());
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 }

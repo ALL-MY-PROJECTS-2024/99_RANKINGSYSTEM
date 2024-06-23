@@ -17,6 +17,9 @@ imagebtn.addEventListener('click',function(){
     imagebtn.style.opacity="1";
     musicbtn.style.opacity=".8";
 
+    location.href="/around/group?mainCategory='이미지'&subCategory='Character'&mode=1";
+
+
 })
 musicbtn.addEventListener('click',function(){
     console.log("musicbtn clicked..");
@@ -26,6 +29,9 @@ musicbtn.addEventListener('click',function(){
 
     imagebtn.style.opacity=".8";
     musicbtn.style.opacity="1";
+
+    location.href="/around/group?mainCategory='음악'&subCategory='Jazz'&mode=2";
+
 })
 //---------------------------------------------------
 //이미지 / 음악 서브카테고리 이벤트 처리
@@ -58,3 +64,16 @@ musicSubButtonEls.forEach(el=>{
 //DOM INIT 시 처리 코드
 //---------------------------------------------------
 
+if(mode=="1"){
+
+    imagebody.classList.remove('hidden');
+    musicbody.classList.add('hidden');
+
+    imagebtn.style.opacity="1";
+    musicbtn.style.opacity=".8";
+}else{
+    imagebody.classList.add('hidden');
+    musicbody.classList.remove('hidden');
+    imagebtn.style.opacity=".8";
+    musicbtn.style.opacity="1";
+}

@@ -26,4 +26,6 @@ public interface ImageRankingRepository extends JpaRepository<ImagesRanking,Long
     List<ImagesRanking> findImagesRankingAmountStartOderByLike(@Param("amount") int amount, @Param("offset") int offset);
 
     ImagesRanking findByImagesFileInfo(ImagesFileInfo imagesFileInfo);
+
+
 }

@@ -2,11 +2,13 @@ package com.creator.imageAndMusic.domain.service;
 
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
+import com.creator.imageAndMusic.domain.entity.Images;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
 import com.creator.imageAndMusic.domain.entity.User;
 import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
 import com.creator.imageAndMusic.domain.repository.ImagesFileInfoRepository;
+import com.creator.imageAndMusic.domain.repository.ImagesRepository;
 import com.creator.imageAndMusic.domain.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,9 @@ public class ImageRankingServiceImpl implements ImageRankingService {
     private ImageRankingRepository imageRankingRepostiroy;
     @Autowired
     private ImagesFileInfoRepository imagesFileInfoRepository;
+
+    @Autowired
+    private ImagesRepository imagesRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -227,4 +232,20 @@ public class ImageRankingServiceImpl implements ImageRankingService {
 
     }
 
+    @Override
+    @Transactional(rollbackFor = SQLException.class)
+    public List<ImagesFileInfo> getAllImageRankingByCategory(String subCategory) {
+        List<Images> list = imagesRepository.findAllBySubCategory(subCategory);
+        System.out.println("image list size :  " +list.size());
+        List<ImagesFileInfo> result = new ArrayList<ImagesFileInfo>();;
+
+        if(list!=null){
+            list.forEach(images->{
+                System.out.println(images);
+                List<ImagesFileInfo> filelist =  imagesFileInfoRepository.findAllByImages(images);
+                result.addAll(filelist);
+            });
+        }
+        return result;
+    }
 }

@@ -2,12 +2,8 @@ package com.creator.imageAndMusic.domain.service;
 
 
 
-import com.creator.imageAndMusic.domain.entity.Bookmark;
-import com.creator.imageAndMusic.domain.entity.ImagesRanking;
-import com.creator.imageAndMusic.domain.entity.User;
-import com.creator.imageAndMusic.domain.repository.BookmarkRepository;
-import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
-import com.creator.imageAndMusic.domain.repository.UserRepository;
+import com.creator.imageAndMusic.domain.entity.*;
+import com.creator.imageAndMusic.domain.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -33,6 +29,11 @@ public class BookmarkServiceImpl {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    MusicRankingRepository musicRankingRepository;
+
+    @Autowired
+    MusicBookmarkRepository musicBookmarkRepository;
 
 
     @Transactional(rollbackFor=Exception.class)
@@ -44,8 +45,6 @@ public class BookmarkServiceImpl {
             result.put("imageranking",false);
             return result;
         }
-
-
 
         Optional<User> userOp =  userRepository.findById(username);
 
@@ -63,7 +62,32 @@ public class BookmarkServiceImpl {
         }
         return result;
     }
+    @Transactional(rollbackFor=Exception.class)
+    public Map<String,Object> addMusicBookmark(Long ranking_id, String username){
+        log.info("addBookmark() ranking_id : " + ranking_id + " username : " + username);
+        Optional<MusicRanking> musicRankingOptional = musicRankingRepository.findById(ranking_id);
+        Map<String,Object> result = new HashMap();
+        if(musicRankingOptional.isEmpty()){
+            result.put("musicranking",false);
+            return result;
+        }
 
+        Optional<User> userOp =  userRepository.findById(username);
+
+        MusicBookmark bookmark = new MusicBookmark();
+        bookmark.setUser(userOp.get());
+        bookmark.setMusicRanking(musicRankingOptional.get());
+
+        boolean isExisted =  musicBookmarkRepository.existsByMusicRanking(musicRankingOptional.get());
+        if(isExisted){
+            result.put("exist","true");
+        }
+        else{
+            result.put("exist","false");
+            musicBookmarkRepository.save(bookmark);
+        }
+        return result;
+    }
 
     @Transactional(rollbackFor=Exception.class)
     public List<Bookmark> getBookmark(String username){
@@ -73,7 +97,19 @@ public class BookmarkServiceImpl {
         return bookmarkRepository.findAllByUserOrderByIdDesc(userOptional.get());
     }
     @Transactional(rollbackFor=Exception.class)
+    public List<MusicBookmark> getMusicBookmark(String username){
+        Optional<User> userOptional =  userRepository.findById(username);
+        if(userOptional.isEmpty())
+            return null;
+        return musicBookmarkRepository.findAllByUserOrderByIdDesc(userOptional.get());
+    }
+
+    @Transactional(rollbackFor=Exception.class)
     public void deleteBookmark(Long id) {
         bookmarkRepository.deleteById(id);
+    }
+    @Transactional(rollbackFor=Exception.class)
+    public void deleteMusicBookmark(Long id) {
+        musicBookmarkRepository.deleteById(id);
     }
 }
