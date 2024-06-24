@@ -43,7 +43,7 @@
                 </div>
             </section>
 
-            <section class="myinfoblock layout-5">
+            <section class=" layout-5">
 
 <!--                &lt;!&ndash; aside                &ndash;&gt;-->
 <!--                <th:block th:insert="fragments/myaside :: myasideFragment" />-->
@@ -61,16 +61,42 @@
                     </div>
 
                     <div class="body">
-                        <div class="profileimage-block">
-                            <img src="https://img.freepik.com/free-photo/cute-puppy-sitting-in-grass-enjoying-nature-playful-beauty-generated-by-artificial-intelligence_188544-84973.jpg" alt="" />
-                        </div>
-
                         <form class="mypageform" name="mypageform" action="" method="post"
                               onsubmit="return false">
+                            <style>
+                                td,th{
+                                    border : 1px solid;
+                                }
+                            </style>
+                            <table class="table">
+                                <tr>
+                                    <td style="position:relative">이메일계정 <span style="position:absolute;top:0px;font-size:0.7rem;color:orange;"  class="username_msg"></span></td>
+                                    <td>
+                                        <input name="username" class="form-control username" placeholder="이메일 계정 입력" th:value="${dto.username}" readonly>
+                                    </td>
+                                    <td>이메일계정</td>
+                                    <td>
+                                        <input name="phone" class="form-control" th:value="${dto.nickname}" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </table>
                             <div>
-                                <label>이메일계정</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;"  class="username_msg"></span>
+                                <label>이메일계정</label>&nbsp;&nbsp;
                                 <div style="display:flex;">
-                                    <input name="username" class="form-control username" placeholder="이메일 계정 입력" th:value="${dto.username}" readonly>
                                 </div>
                             </div>
                             <div>

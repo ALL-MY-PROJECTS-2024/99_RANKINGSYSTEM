@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -136,17 +137,30 @@ public class MusicRankingServiceImpl  {
     }
 
     @Transactional(rollbackFor = SQLException.class)
-    public List<MusicFileInfo> getAllMusicRankingByCategory(String subCategory) {
-        List<Music> list = musicRepository.findAllBySubCategory(subCategory);
+    public List<MusicRanking> getAllMusicRankingByCategory(String subCategory) {
+        System.out.println(subCategory);
 
-        List<MusicFileInfo> result = new ArrayList<MusicFileInfo>();;
-
-        if(list!=null){
-            list.forEach(music->{
-                List<MusicFileInfo> filelist =  musicFileInfoRepository.findAllByMusic(music);
-                result.addAll(filelist);
-            });
+        subCategory = subCategory.replaceAll("'","");
+        List<MusicRanking> list =   musicRankingRepository.findAllByOrderByCountDesc();
+        List<MusicRanking> result = new ArrayList<>();
+        for(MusicRanking musicRanking : list){
+            String sub = musicRanking.getMusicFileInfo().getMusic().getSubCategory();
+            if(StringUtils.equals(sub,subCategory)){
+                result.add(musicRanking);
+            }
         }
+        return result;
+    }
+    @Transactional(rollbackFor = SQLException.class)
+    public Map<String, Object> getImageRankingPopular() {
+        Map<String,Object> result = new HashMap<>();
+
+
+        List<MusicRanking> musicTop10ByCount =  musicRankingRepository.findTop10ByOrderByCountDesc();
+        List<MusicRanking> musicTop10ByLike =  musicRankingRepository.findTop10ByOrderByIlikeitDesc();
+        result.put("musicTop10ByCount",musicTop10ByCount);
+        result.put("musicTop10ByLike",musicTop10ByLike);
+
         return result;
     }
 }

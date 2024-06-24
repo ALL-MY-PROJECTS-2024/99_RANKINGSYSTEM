@@ -19,9 +19,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,21 +31,25 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 @Controller
 @RequestMapping("/user")
 @Slf4j
 public class UserController {
+
+
+    //https://hyphen.im/product-api/view?seq=31
 
     @Autowired
     private UserService userService;
@@ -100,6 +104,41 @@ public class UserController {
         }
 
     }
+
+    //https://hyphen.im/product-api/view?seq=31
+    @PostMapping("/comfirm/account")
+    public @ResponseBody ResponseEntity<Map<String,Object>> confirm_account(
+            @RequestParam("bankCode") String bankCode,
+            @RequestParam("account") String account
+    ){
+        Map<String,Object> result = new HashMap<String,Object>();
+
+        //URL
+        String url="https://api.hyphen.im/hb0081000378";
+
+        //HEADER
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type","application/json");
+        headers.add("hyphen-gustation","Y");
+        headers.add("user-id","jwg8910");
+        headers.add("Hkey","97036f5338c9a0f4");
+
+        //PARAM
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        JSONObject obj = new JSONObject();
+        obj.put("inBankCode",bankCode);
+        obj.put("inAccount",account);
+
+        //ENTITY(HEADER + PARAM)
+        HttpEntity< JSONObject > entity = new HttpEntity(obj,headers);
+        //REQUEST
+        RestTemplate rt = new RestTemplate();
+        ResponseEntity<String> response =rt.exchange(url, HttpMethod.POST,entity,String.class);
+        System.out.println(response.getBody());
+
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+
 
     //PW찾기
     @GetMapping("/confirmPw")

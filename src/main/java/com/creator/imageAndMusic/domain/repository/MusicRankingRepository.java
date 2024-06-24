@@ -29,4 +29,10 @@ public interface MusicRankingRepository extends JpaRepository<MusicRanking,Long>
 
     MusicRanking findByMusicFileInfo(MusicFileInfo musicFileInfo);
 
+    List<MusicRanking> findTop10ByOrderByCountDesc();
+
+    List<MusicRanking> findTop10ByOrderByIlikeitDesc();
+
+
+
 }

@@ -2,7 +2,6 @@ package com.creator.imageAndMusic.domain.service;
 
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
-import com.creator.imageAndMusic.domain.entity.Images;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
 import com.creator.imageAndMusic.domain.entity.User;
@@ -15,13 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -234,18 +231,29 @@ public class ImageRankingServiceImpl implements ImageRankingService {
 
     @Override
     @Transactional(rollbackFor = SQLException.class)
-    public List<ImagesFileInfo> getAllImageRankingByCategory(String subCategory) {
-        List<Images> list = imagesRepository.findAllBySubCategory(subCategory);
-        System.out.println("image list size :  " +list.size());
-        List<ImagesFileInfo> result = new ArrayList<ImagesFileInfo>();;
+    public List<ImagesRanking> getAllImageRankingByCategory(String subCategory) {
+        System.out.println(subCategory);
 
-        if(list!=null){
-            list.forEach(images->{
-                System.out.println(images);
-                List<ImagesFileInfo> filelist =  imagesFileInfoRepository.findAllByImages(images);
-                result.addAll(filelist);
-            });
+        subCategory = subCategory.replaceAll("'","");
+        List<ImagesRanking> list =   imageRankingRepostiroy.findAllByOrderByCountDesc();
+        List<ImagesRanking> result = new ArrayList<>();
+        for(ImagesRanking imagesRanking : list){
+            String sub = imagesRanking.getImagesFileInfo().getImages().getSubCategory();
+            if(StringUtils.equals(sub,subCategory)){
+                result.add(imagesRanking);
+            }
         }
+        return result;
+
+    }
+    @Transactional(rollbackFor = SQLException.class)
+    public Map<String, Object> getImageRankingPopular() {
+        Map<String,Object> result = new LinkedHashMap<>();
+
+        List<ImagesRanking> imageTop10ByCount =  imageRankingRepostiroy.findTop10ByOrderByCountDesc();
+        List<ImagesRanking> imageTop10ByLike =  imageRankingRepostiroy.findTop10ByOrderByIlikeitDesc();
+        result.put("imageTop10ByCount",imageTop10ByCount);
+        result.put("imageTop10ByLike",imageTop10ByLike);
         return result;
     }
 }

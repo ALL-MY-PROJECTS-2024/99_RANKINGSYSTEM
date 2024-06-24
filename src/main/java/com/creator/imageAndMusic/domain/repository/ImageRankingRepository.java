@@ -27,5 +27,7 @@ public interface ImageRankingRepository extends JpaRepository<ImagesRanking,Long
 
     ImagesRanking findByImagesFileInfo(ImagesFileInfo imagesFileInfo);
 
+    List<ImagesRanking> findTop10ByOrderByCountDesc();
 
+    List<ImagesRanking> findTop10ByOrderByIlikeitDesc();
 }

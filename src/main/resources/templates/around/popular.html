@@ -17,6 +17,19 @@
 
 
 
+    <!--  MODEL 속성가져오기  -->
+    <script th:inline="javascript">
+        let imageTop10ByCount = [[${imageTop10ByCount}]]
+        let imageTop10ByLike = [[${imageTop10ByLike}]]
+        let musicTop10ByCount = [[${musicTop10ByCount}]]
+        let musicTop10ByLike = [[${musicTop10ByLike}]]
+        console.log("imageTop10ByCount",imageTop10ByCount);
+        console.log("imageTop10ByLike",imageTop10ByLike);
+        console.log("musicTop10ByCount",musicTop10ByCount);
+        console.log("musicTop10ByLike",musicTop10ByLike);
+
+    </script>
+
 </head>
 <body>
 
@@ -61,16 +74,13 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide"><a href="">
-                                <span class="material-symbols-outlined">military_tech</span>
-                                <img src="">
-                            </a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
-                            <div class="swiper-slide"><a href=""><img src=""></a></div>
+                            </div>
+                            <div class="swiper-slide" th:each="imageRanking :${imageTop10ByCount}">
+                                <a href="javascript:void(0)">
+                                    <img th:src="${imageRanking.imagesFileInfo.dir}+'/'+${imageRanking.imagesFileInfo.filename}" alt="">
+                                </a>
+                            </div>
+
                         </div>
                         <!-- If we need navigation buttons -->
                         <div class="swiper-button-prev">

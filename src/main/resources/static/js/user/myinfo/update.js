@@ -53,3 +53,25 @@ search_addr_btn.addEventListener('click',function(){
     }).open();
 
 });
+//  ----------------------------------
+//  account_confirm
+//  ----------------------------------
+
+const account_confirm = document.querySelector('.account_confirm');
+
+account_confirm.addEventListener('click',function(){
+    const bankCode = document.mypageform.bankname.value;
+    const account = document.mypageform.account.value;
+    const formData = new FormData();
+    formData.append("bankCode",bankCode);
+    formData.append("account",account);
+
+        axios.post('/user/comfirm/account',formData,{ headers: {'Content-Type' :'x-www.form-urlencoded' } } )
+                .then(res=>{
+                    console.log(res);
+
+                    //location.href="/user/myinfo/read";
+        })
+                .catch(err=>{console.log(err);})
+
+})

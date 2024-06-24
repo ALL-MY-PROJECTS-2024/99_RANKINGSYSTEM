@@ -46,13 +46,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler  
             String role_str =  role.getAuthority();
 
             try {
-//                if (role_str.equals("ROLE_USER")) {
-//                    response.sendRedirect("/user");
-//                } else if (role_str.equals("ROLE_MEMBER")) {
-//                    response.sendRedirect("/member");
-//                } else if (role_str.equals("ROLE_ADMIN")) {
-//                    response.sendRedirect("/admin");
-//                }
+
+                if (role_str.equals("ROLE_ADMIN")) {
+                    response.sendRedirect("/admin/main");
+                    return ;
+                }
                 response.sendRedirect("/");
             }catch(Exception e){
                 e.printStackTrace();

@@ -1,7 +1,6 @@
 package com.creator.imageAndMusic.domain.service;
 
 import com.creator.imageAndMusic.domain.dto.Criteria;
-import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,5 +27,5 @@ public interface ImageRankingService {
     Map<String,Object> getLocalImageRanking();
 
     @Transactional(rollbackFor = SQLException.class)
-    List<ImagesFileInfo> getAllImageRankingByCategory(String subCategory);
+    List<ImagesRanking> getAllImageRankingByCategory(String subCategory);
 }

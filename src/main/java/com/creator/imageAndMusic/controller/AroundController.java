@@ -4,6 +4,7 @@ package com.creator.imageAndMusic.controller;
 import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
 import com.creator.imageAndMusic.domain.entity.MusicFileInfo;
+import com.creator.imageAndMusic.domain.entity.MusicRanking;
 import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
 import com.creator.imageAndMusic.domain.service.AroundServiceImpl;
 import com.creator.imageAndMusic.domain.service.ImageRankingServiceImpl;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.DoubleToIntFunction;
 
 @Controller
@@ -36,8 +38,23 @@ public class AroundController {
     @Autowired
     private MusicRankingServiceImpl musicRankingServiceImpl;
     @GetMapping("/popular")
-    public void popular(){
+    public void popular(Model model){
         log.info("GET /around/popular");
+
+       Map<String,Object> map1 =  imageRankingServiceImpl.getImageRankingPopular();
+       List<ImagesRanking> imageTop10ByCount = (List<ImagesRanking>) map1.get("imageTop10ByCount");
+       List<ImagesRanking> imageTop10ByLike = (List<ImagesRanking>) map1.get("imageTop10ByLike");
+
+       Map<String,Object> map2 = musicRankingServiceImpl.getImageRankingPopular();
+       List<MusicRanking> musicTop10ByCount = (List<MusicRanking>) map2.get("musicTop10ByCount");
+       List<MusicRanking> musicTop10ByLike = (List<MusicRanking>) map2.get("musicTop10ByLike");
+
+
+       model.addAttribute("imageTop10ByCount",imageTop10ByCount);
+       model.addAttribute("imageTop10ByLike",imageTop10ByLike);
+       model.addAttribute("musicTop10ByCount",musicTop10ByCount);
+       model.addAttribute("musicTop10ByLike",musicTop10ByLike);
+
     }
 
     @GetMapping("/group")
@@ -49,12 +66,12 @@ public class AroundController {
     ){
         log.info("GET /around/group " + mainCategory + " " + subCategory + " " + mode);
         if(mainCategory.contains("이미지")){
-           List<ImagesFileInfo> list =   imageRankingServiceImpl.getAllImageRankingByCategory(subCategory);
-           model.addAttribute("model",model);
+           List<ImagesRanking> list =   imageRankingServiceImpl.getAllImageRankingByCategory(subCategory);
+           model.addAttribute("list",list);
         }
         else{
-            List<MusicFileInfo> list =   musicRankingServiceImpl.getAllMusicRankingByCategory(subCategory);
-            model.addAttribute("model",model);
+            List<MusicRanking> list =   musicRankingServiceImpl.getAllMusicRankingByCategory(subCategory);
+            model.addAttribute("list",list);
         }
 
         model.addAttribute("mode",mode);

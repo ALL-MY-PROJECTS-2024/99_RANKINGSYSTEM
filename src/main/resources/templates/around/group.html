@@ -67,7 +67,7 @@
         </section>
 
 
-        <section class="group-block layout-5">
+        <section  class="group-block layout-5 ">
             <div class="head">
                 <div class="">
                     <input type="radio" id="image" name="choose">
@@ -81,7 +81,7 @@
             <div class="body">
 
                 <!--   IMAGE BODY             -->
-                <div class="image_body">
+                <div th:class="${mode=='2'} ? 'image_body hidden' : 'image_body'">
 
                     <div class="swiper sub_category">
                         <!-- Additional required wrapper -->
@@ -101,12 +101,15 @@
 
                     <div class="subCategoryBody">
                         <div >
-                            <div class="title"></div>
+                            <div class="" th:each="imageRanking : ${list}">
+                                <div th:text="${imageRanking}"></div>
+                                <hr>
+                            </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="music_body hidden">
+                <div  th:class="${mode=='1'} ? 'music_body hidden' : 'music_body'" >
 
                     <div class="swiper sub_category">
                         <!-- Additional required wrapper -->
@@ -127,7 +130,11 @@
                     </div>
                     <div class="subCategoryBody ">
                         <div>
-                            <div class="title"></div>
+                            <div class="" th:each="musicRanking : ${list}">
+                                <hr>
+                                <div th:text="${musicRanking}"></div>
+                                <hr>
+                            </div>
                         </div>
                     </div>
                 </div>
