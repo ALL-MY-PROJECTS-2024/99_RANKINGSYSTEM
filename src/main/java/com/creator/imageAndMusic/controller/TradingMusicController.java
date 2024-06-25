@@ -3,19 +3,19 @@ package com.creator.imageAndMusic.controller;
 
 import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.domain.dto.ChatRoom;
+import com.creator.imageAndMusic.domain.dto.ChatRoomMusic;
 import com.creator.imageAndMusic.domain.dto.TradingImageDto;
+import com.creator.imageAndMusic.domain.dto.TradingMusicDto;
 import com.creator.imageAndMusic.domain.entity.TradingImage;
-import com.creator.imageAndMusic.domain.repository.TradingImageRepository;
+import com.creator.imageAndMusic.domain.entity.TradingMusic;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
+import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
 import com.creator.imageAndMusic.properties.SOCKET;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,24 +27,24 @@ import java.util.*;
 @Controller
 @Slf4j
 @RequestMapping("/trading")
-public class TradingController {
+public class TradingMusicController {
    
     /*
         req : 사용자 경매 요청 ->
     */
     @Autowired
-    TradingImageServiceImpl tradingImageService;
+    TradingMusicServiceImpl tradingMusicService;
 
 
-    @GetMapping("/req")
+    @GetMapping("/music/req")
     public @ResponseBody ResponseEntity<String> req(@RequestParam("fildid") Long fileId, @RequestParam("startPrice") String startPrice,@AuthenticationPrincipal PrincipalDetails principalDetails){
 
-        log.info("GET /trading/req " + fileId + " startPrice  :"+startPrice );
-        TradingImageDto tradeImageDto = new TradingImageDto();
-        tradeImageDto.setFileid(fileId);
-        tradeImageDto.setStartPrice(startPrice);
-        tradeImageDto.setSeller(principalDetails.getUsername());
-        Map<String,Object> result =  tradingImageService.requestTradingImage(tradeImageDto);
+        log.info("GET /trading/reqMusic " + fileId + " startPrice  :"+startPrice );
+        TradingMusicDto tradeMusicDto = new TradingMusicDto();
+        tradeMusicDto.setFileid(fileId);
+        tradeMusicDto.setStartPrice(startPrice);
+        tradeMusicDto.setSeller(principalDetails.getUsername());
+        Map<String,Object> result =  tradingMusicService.requestTradingIMusic(tradeMusicDto);
 
         boolean status = (boolean) result.get("status");
         String message = (String) result.get("message");
@@ -53,15 +53,15 @@ public class TradingController {
             return new ResponseEntity(message, HttpStatus.BAD_GATEWAY);
         }    return new ResponseEntity(message, HttpStatus.OK);
     }
-    @PostMapping("/my")
+    @PostMapping("/music/my")
     public void my(){
-        log.info("GET /trading/my");
+        log.info("GET /trading/music/my");
     }
 
     /*
     auction
     */
-    @GetMapping("/auction/chat")
+    @GetMapping("/music/auction/chat")
     public void auction_chat(){
         log.info("GET /trading/auction/chat");
     }
@@ -81,16 +81,16 @@ public class TradingController {
     /*
         calendar
     */
-    @GetMapping("/calendar/main")
+    @GetMapping("/music/calendar/main")
     public void trading_calendar(Model model){
 
         log.info("GET /trading/calendar/main");
-        List<TradingImage> listEntity =  tradingImageService.getAllTradingImages();
+        List<TradingMusic> listEntity =  tradingMusicService.getAllTradingMusic();
 
-       List<TradingImageDto> list = new ArrayList<>();
+       List<TradingMusicDto> list = new ArrayList<>();
 
         listEntity.forEach(entity ->{
-            TradingImageDto dto = new TradingImageDto();
+            TradingMusicDto dto = new TradingMusicDto();
             dto.setTradingid(entity.getTradingid());
             dto.setTitle("[IMAGE] " +  entity.getStatus());
             dto.setSeller((entity.getSeller()!=null)?entity.getSeller().getUsername():null);
@@ -115,27 +115,27 @@ public class TradingController {
 
     }
 
-    @GetMapping("/calendar/add")
+    @GetMapping("/music/calendar/add")
     public void trading_calendar_add(){
         log.info("GET /trading/calendar/add");
     }
-    @GetMapping("/calendar/del")
+    @GetMapping("/music/calendar/del")
     public void trading_calendar_del(){
         log.info("GET /trading/calendar/del");
     }
-    @GetMapping("/calendar/update")
+    @GetMapping("/music/calendar/update")
     public void trading_calendar_update(){
         log.info("GET /trading/calendar/update");
     }
 
 
-    @GetMapping("/image/main")
+    @GetMapping("/music/main")
     public void image_main(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model){
-        log.info("GET /trading/image/main..");
-        List<TradingImage> listEntity =  tradingImageService.getAllTradingImages();
-        List<TradingImageDto> list = new ArrayList();
+        log.info("GET /trading/music/main..");
+        List<TradingMusic> listEntity =  tradingMusicService.getAllTradingMusic();
+        List<TradingMusicDto> list = new ArrayList();
 
-        List<ChatRoom> chatRooms =  tradingImageService.findAllRoom();
+        List<ChatRoomMusic> chatRooms =  tradingMusicService.findAllRoom();
 
         listEntity.forEach(entity ->{
 
@@ -144,13 +144,13 @@ public class TradingController {
                     entity.setRoomId(null);
                     entity.setCur(0L);
                     entity.setMembers(new ArrayList<>());
-                    tradingImageService.updateTradingImage(entity);
+                    tradingMusicService.updateTradingMusic(entity);
                 }
 
 
-                TradingImageDto dto = new TradingImageDto();
+                TradingMusicDto dto = new TradingMusicDto();
                 dto.setTradingid(entity.getTradingid());
-                dto.setTitle(entity.getFileid().getImages().getTitle() );
+                dto.setTitle(entity.getFileid().getMusic().getTitle() );
 
 
                 dto.setSeller((entity.getSeller()!=null)?entity.getSeller().getUsername():null);
@@ -213,11 +213,11 @@ public class TradingController {
 
     }
     //낙찰됨
-    @PostMapping("/image/commit")
-    public @ResponseBody ResponseEntity<String> commit(@ModelAttribute TradingImageDto tradingImageDto){
-        log.info("GET /trading/image/commmit..." +tradingImageDto);
+    @PostMapping("/music/commit")
+    public @ResponseBody ResponseEntity<String> commit(@ModelAttribute TradingMusicDto tradingMusicDto){
+        log.info("GET /trading/image/commmit..." +tradingMusicDto);
 
-        boolean isCommit =  tradingImageService.commitTradingImage(tradingImageDto);
+        boolean isCommit =  tradingMusicService.commitTradingMusic(tradingMusicDto);
         if(!isCommit){
             return new ResponseEntity<>("fail",HttpStatus.BAD_GATEWAY);
         }
@@ -225,47 +225,47 @@ public class TradingController {
 
     }
 
-    @GetMapping("/image/del")
+    @GetMapping("/music/del")
     public String del(@RequestParam("tradingid") Long tradingid, RedirectAttributes attrs)
     {
-        boolean isdel = tradingImageService.removeTradingImage(tradingid);
+        boolean isdel = tradingMusicService.removeTradingMusic(tradingid);
         attrs.addFlashAttribute("message","경매ID : " + tradingid + " 정보를 삭제하였습니다");
-        return "redirect:/trading/image/main";
+        return "redirect:/trading/music/main";
     }
 
 
-    @GetMapping("/image/accept")
-    public String trading_accept(TradingImageDto dto){
+    @GetMapping("/music/accept")
+    public String trading_accept(TradingMusicDto dto){
       log.info("GET /trading/image/accept..." + dto.getTradingid());
 
-      tradingImageService.acceptTradingImages(dto);
+      tradingMusicService.acceptTradingMusic(dto);
 
-      return "redirect:/trading/image/main";
+      return "redirect:/trading/music/main";
     }
 
-    @GetMapping("/chat/create")        //방을 만들었으면 해당 방으로 가야지.
+    @GetMapping("/music/chat/create")        //방을 만들었으면 해당 방으로 가야지.
     public String createRoom(@RequestParam("tradingid") Long tradingid, Model model) {
-        log.info("POST /trading/chat/create... name : " + tradingid  );
-        tradingImageService.createRoom("이미지 경매 채팅방",tradingid);
+        log.info("POST /trading/music/chat/create... name : " + tradingid  );
+        tradingMusicService.createRoomMusic("이미지 경매 채팅방",tradingid);
         //return "redirect:/trading/chat/room?roomId="+room.getRoomId()+"&username="+username;  //만든사람이 채팅방 1빠로 들어가게 됩니다
-        return "redirect:/trading/image/main";
+        return "redirect:/trading/music/main";
     }
     
     //채팅 관련
-    @GetMapping("/chat/list")
+    @GetMapping("/music/chat/list")
     public String chatList(Model model){
-        List<ChatRoom> roomList = tradingImageService.findAllRoom();
+        List<ChatRoomMusic> roomList = tradingMusicService.findAllRoom();
         model.addAttribute("roomList",roomList);
-        return "trading/chat/list";
+        return "trading/music/chat/list";
     }
 
     private static Map<String,Object> joinMemberSession = new HashMap<String,Object>();
-    @GetMapping("/chat/enter")
+    @GetMapping("/music/chat/enter")
     public String chat_room( @RequestParam("roomId") String roomId, @AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
-        ChatRoom room = tradingImageService.findRoomById(roomId);
+        ChatRoomMusic room = tradingMusicService.findRoomById(roomId);
 
         Long tradingid = room.getTradingid();
-        TradingImage tradingImage = tradingImageService.getTradingImage(tradingid);
+        TradingMusic tradingMusic = tradingMusicService.getTradingMusic(tradingid);
 
 
         String username = principalDetails.getUserDto().getUsername();
@@ -277,27 +277,27 @@ public class TradingController {
         System.out.println("/chat/enter... username : " + username);
         model.addAttribute("username",username);
         model.addAttribute("users", users);
-        model.addAttribute("wspath", SOCKET.REQ_PATH);
+        model.addAttribute("wspath", SOCKET.MUSIC_REQ_PATH);
         model.addAttribute("room",room);
-        model.addAttribute("tradingImage", tradingImage);
-        model.addAttribute("tradingid", tradingImage.getTradingid());
+        model.addAttribute("tradingMusic", tradingMusic);
+        model.addAttribute("tradingid", tradingMusic.getTradingid());
 
-        return "trading/chat/room";
+        return "trading/chat/roomMusic";
     }
-    @GetMapping("/chat/req")
+    @GetMapping("/music/chat/req")
     public String chat_req(@RequestParam("tradingid") Long tradingid,@AuthenticationPrincipal PrincipalDetails principalDetails)
     {
         String username = principalDetails.getUserDto().getUsername();
-        tradingImageService.joinChatMember(tradingid,username);
+        tradingMusicService.joinChatMemberMusic(tradingid,username);
 
-        return "redirect:/trading/image/main";
+        return "redirect:/trading/music/main";
     }
-    @GetMapping("/chat/del")
+    @GetMapping("/music/chat/del")
     public String chat_del(@RequestParam("tradingid") Long tradingid)
     {
-        tradingImageService.deleteChat(tradingid);
+        tradingMusicService.deleteChatMusic(tradingid);
 
-        return "redirect:/trading/image/main";
+        return "redirect:/trading/music/main";
     }
 
 

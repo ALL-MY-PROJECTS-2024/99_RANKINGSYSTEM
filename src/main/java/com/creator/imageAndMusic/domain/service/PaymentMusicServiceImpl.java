@@ -1,14 +1,8 @@
 package com.creator.imageAndMusic.domain.service;
 
 import com.creator.imageAndMusic.domain.dto.PaymentDto;
-import com.creator.imageAndMusic.domain.entity.Images;
-import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
-import com.creator.imageAndMusic.domain.entity.Payment;
-import com.creator.imageAndMusic.domain.entity.TradingImage;
-import com.creator.imageAndMusic.domain.repository.ImagesFileInfoRepository;
-import com.creator.imageAndMusic.domain.repository.ImagesRepository;
-import com.creator.imageAndMusic.domain.repository.PaymentRepository;
-import com.creator.imageAndMusic.domain.repository.TradingImageRepository;
+import com.creator.imageAndMusic.domain.entity.*;
+import com.creator.imageAndMusic.domain.repository.*;
 import com.creator.imageAndMusic.properties.UPLOADPATH;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +16,23 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class PaymentServiceImpl {
+public class PaymentMusicServiceImpl {
 
     @Autowired
-    private PaymentRepository paymentRepository;
+    private PaymentMusicRepository paymentMusicRepository;
 
     @Autowired
-    private TradingImageRepository tradingImageRepository;
+    private TradingMusicRepository tradingMusicRepository;
 
     @Autowired
-    private ImagesRepository imagesRepository;
-
+    private MusicRepository musicRepository;
     @Autowired
-    private ImagesFileInfoRepository imagesFileInfoRepository;
+    private MusicFileInfoRepository musicFileInfoRepository;
 
 
     @Transactional(rollbackFor = Exception.class)
     public void addPayment(PaymentDto paymentDto) throws IOException {
-        Payment payment = new Payment();
+        PaymentMusic payment = new PaymentMusic();
         payment.setSuccess(paymentDto.isSuccess());
         payment.setImp_uid(paymentDto.getImp_uid());
         payment.setPay_method(paymentDto.getPay_method());
@@ -65,11 +58,11 @@ public class PaymentServiceImpl {
         payment.setCard_number(payment.getCard_number());
 
         //ImageFileInfo의 ID를 넣어야함
-        Optional<TradingImage> tradingImageOptional = tradingImageRepository.findById(paymentDto.getTradingid());
-        if(tradingImageOptional.isEmpty())
+        Optional<TradingMusic> tradingMusicOptional = tradingMusicRepository.findById(paymentDto.getTradingid());
+        if(tradingMusicOptional.isEmpty())
             return ;
 
-        TradingImage tradingImage = tradingImageOptional.get();
+        TradingMusic tradingMusic = tradingMusicOptional.get();
         //이미지 정보 변경
         //이미지 파일 정보 변경
 
@@ -78,57 +71,47 @@ public class PaymentServiceImpl {
 //        String oldPath= UPLOADPATH.ROOTDIRPATH+ File.separator+UPLOADPATH.UPPERDIRPATH+ File.separator;
 //        oldPath+=UPLOADPATH.IMAGEDIRPATH+ File.separator+tradingImage.getSeller().getUsername()+ File.separator+tradingImage.getFileid().getImages().getSubCategory()+File.separator+tradingImage.getFileid().getImages().getIamgeid();
 
-        String oldPath = UPLOADPATH.ROOTDIRPATH+File.separator +  tradingImage.getFileid().getDir() + File.separator ;
+        String oldPath = UPLOADPATH.ROOTDIRPATH+File.separator +  tradingMusic.getFileid().getDir() + File.separator ;
         //구매자 경로
         String newPath= UPLOADPATH.ROOTDIRPATH+ File.separator+UPLOADPATH.UPPERDIRPATH+ File.separator;
-        newPath+=UPLOADPATH.IMAGEDIRPATH+ File.separator+tradingImage.getBuyer().getUsername()+ File.separator+"payment"+File.separator +  tradingImage.getFileid().getImages().getSubCategory()+File.separator+tradingImage.getFileid().getImages().getIamgeid();
+        newPath+=UPLOADPATH.IMAGEDIRPATH+ File.separator+tradingMusic.getBuyer().getUsername()+ File.separator+"payment"+File.separator +  tradingMusic.getFileid().getMusic().getSubCategory()+File.separator+tradingMusic.getFileid().getMusic().getMusicid();
         File dir = new File(newPath);
         System.out.println("NEWPATH :  " +newPath);
         if(!dir.exists())
             dir.mkdirs();
 
         //파일 복사
-        String oldFilePath = oldPath + File.separator + tradingImage.getFileid().getFilename();
-        String newFilePath = newPath + File.separator + tradingImage.getFileid().getFilename()+"_a";
+        String oldFilePath = oldPath + File.separator + tradingMusic.getFileid().getFilename();
+        String newFilePath = newPath + File.separator + tradingMusic.getFileid().getFilename()+"_a";
 
         File in = new File(oldFilePath);
         File out =new File(newFilePath);
 
         FileCopyUtils.copy(in,out);
         
-        //섬네일 복사
-        String oldFile_thumbnal_Path = oldPath + File.separator + "s_"+tradingImage.getFileid().getFilename();
-        String newFile_thumbnal_Path = newPath + File.separator + "s_"+tradingImage.getFileid().getFilename()+"_a";
-        File in_thumb = new File(oldFile_thumbnal_Path);
-        File out_thumb =new File(newFile_thumbnal_Path);
-
-        FileCopyUtils.copy(in_thumb,out_thumb);
-
         //판매자 파일삭제
         in.delete();
-        in_thumb.delete();
-
 
         //파일 소유권 이전
-        ImagesFileInfo imagesFileInfo = tradingImage.getFileid();
-        Images images =  imagesFileInfo.getImages();
-        images.setUsername(tradingImage.getBuyer().getUsername());
+        MusicFileInfo musicFileInfo = tradingMusic.getFileid();
+        Music music =  musicFileInfo.getMusic();
+        music.setUsername(tradingMusic.getBuyer().getUsername());
 
-        imagesRepository.save(images);
+        musicRepository.save(music);
         newPath= File.separator+UPLOADPATH.UPPERDIRPATH+ File.separator;
-        newPath+=UPLOADPATH.IMAGEDIRPATH+ File.separator+tradingImage.getBuyer().getUsername()+ File.separator+"payment"+File.separator +  tradingImage.getFileid().getImages().getSubCategory()+File.separator+tradingImage.getFileid().getImages().getIamgeid();
-        imagesFileInfo.setDir(newPath);
-        imagesFileInfo.setFilename(tradingImage.getFileid().getFilename()+"_a");
-        imagesFileInfo.setImages(images);
-        imagesFileInfoRepository.save(imagesFileInfo);
-        tradingImage.setFileid(imagesFileInfo);
+        newPath+=UPLOADPATH.IMAGEDIRPATH+ File.separator+tradingMusic.getBuyer().getUsername()+ File.separator+"payment"+File.separator +  tradingMusic.getFileid().getMusic().getSubCategory()+File.separator+tradingMusic.getFileid().getMusic().getMusicid();
+        musicFileInfo.setDir(newPath);
+        musicFileInfo.setFilename(tradingMusic.getFileid().getFilename()+"_a");
+        musicFileInfo.setMusic(music);
+        musicFileInfoRepository.save(musicFileInfo);
+        tradingMusic.setFileid(musicFileInfo);
 
         //tradingImage 상태 여부 변경 - 결제 완료
-        tradingImage.setStatus("결제완료");
-        tradingImageRepository.save(tradingImage);
+        tradingMusic.setStatus("결제완료");
+        tradingMusicRepository.save(tradingMusic);
 
-        payment.setItem_id(tradingImage.getFileid());
-        paymentRepository.save(payment);
+        payment.setItem_id(tradingMusic.getFileid());
+        paymentMusicRepository.save(payment);
 
         //판매완료는 판매자가  송금요청 할때
         //송금처리후 파일 삭제
@@ -140,13 +123,12 @@ public class PaymentServiceImpl {
     public boolean remittanceUser(Long tradingid) {
         //송금 처리 하기 API 필요
 
-        Optional<TradingImage> tradingImageOptional =  tradingImageRepository.findById(tradingid);
-        if(tradingImageOptional.isEmpty())
+        Optional<TradingMusic> tradingMusicOptional =  tradingMusicRepository.findById(tradingid);
+        if(tradingMusicOptional.isEmpty())
             return false;
-        TradingImage tradingImage = tradingImageOptional.get();
-        tradingImage.setStatus("송금완료");
-        tradingImageRepository.save(tradingImage);
-
+        TradingMusic tradingMusic = tradingMusicOptional.get();
+        tradingMusic.setStatus("송금완료");
+        tradingMusicRepository.save(tradingMusic);
         return true;
     }
 }

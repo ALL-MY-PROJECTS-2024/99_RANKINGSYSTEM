@@ -45,7 +45,7 @@ public class AroundController {
        List<ImagesRanking> imageTop10ByCount = (List<ImagesRanking>) map1.get("imageTop10ByCount");
        List<ImagesRanking> imageTop10ByLike = (List<ImagesRanking>) map1.get("imageTop10ByLike");
 
-       Map<String,Object> map2 = musicRankingServiceImpl.getImageRankingPopular();
+       Map<String,Object> map2 = musicRankingServiceImpl.getMusicRankingPopular();
        List<MusicRanking> musicTop10ByCount = (List<MusicRanking>) map2.get("musicTop10ByCount");
        List<MusicRanking> musicTop10ByLike = (List<MusicRanking>) map2.get("musicTop10ByLike");
 

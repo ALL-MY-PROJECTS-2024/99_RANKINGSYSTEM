@@ -24,6 +24,103 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
+
+
+    <script th:inline="javascript">
+        let  list = /*[[${ list}]]*/
+        let  list2 = /*[[${ list2}]]*/
+        let  imageCountMap = /*[[${ imageCountMap}]]*/
+        let  musicCountMap = /*[[${ musicCountMap}]]*/
+
+        console.log("list",list);
+        console.log("list2",list2);
+        console.log("imageCountMap",imageCountMap);
+        console.log("musicCountMap",musicCountMap);
+
+
+
+        eventList = [];
+        list.forEach(el=>{
+            console.log(el);
+            let eventObject=null;
+            if(el.status=='경매승인')
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'gray'};
+            else if(el.status=='경매중'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'green'};
+            }else if(el.status=='경매중지'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'red'};
+            }else if(el.status=='낙찰완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'orange'};
+            }else if(el.status=='결제완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'blue'};
+            }else if(el.status=='송금완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'darkcyan'};
+            }else{
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'white'};
+            }
+            eventList.push(eventObject)
+        });
+        list2.forEach(el=>{
+            console.log(el);
+            let eventObject=null;
+            if(el.status=='경매승인')
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'gray'};
+            else if(el.status=='경매중'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'green'};
+            }else if(el.status=='경매중지'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'red'};
+            }else if(el.status=='낙찰완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'orange'};
+            }else if(el.status=='결제완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'blue'};
+            }else if(el.status=='송금완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'darkcyan'};
+            }else{
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'white'};
+            }
+            eventList.push(eventObject)
+        });
+
+    </script>
+    <script>
+        var calendar = null;
+        document.addEventListener('DOMContentLoaded', function() {
+
+                  var calendarEl = document.getElementById('calendar');
+                  calendar = new FullCalendar.Calendar(calendarEl, {
+                    locale: "ko",
+                    initialView: 'dayGridWeek',
+                    selectable : false,
+                    events : eventList,
+
+                    //Date 클릭시 표시
+                    dateClick : function(info){
+                        console.log(info);
+                        //addEventToCalendar({start:info.dateStr})
+                    },
+                    eventClick:function(info){
+                        console.log(info.event._def);
+                        const calenderEventModal = document.querySelector('.calenderEventModal');
+                        calenderEventModal.click();
+                        const exampleModal2= document.getElementById('exampleModal2');
+                        const modelBody =  exampleModal2.querySelector('.modal-body');
+                        modelBody.innerHTML = info.event._def;
+
+                    },
+                  });
+                  calendar.render();
+                  //기존 이벤트 업로드
+
+                  calendarEl.style.height="300px";
+
+
+        });
+
+                function addEventToCalendar(event){
+                    calendar.addEvent(event);
+                };
+    </script>
 
 
 </head>
@@ -53,137 +150,72 @@
             </section>
 
             <hr class="margin-top:15px;">
-            <h5 class="layout-5" style="color : white;text-align:center;height:45px;line-height:45px;background-color:darkcyan">AUCTION</h5>
+            <h5 class="layout-5" style="color : white;text-align:center;height:45px;line-height:45px;background-color:darkcyan">미리보기</h5>
             <hr>
+<!--            <div th:text="${imageRankingPopular}"></div>-->
             <section class="section1 ">
 
                 <div class="left layout-5">
-                    <div class="board">
-                        <div>
-                            <div style="margin-bottom:10px">
-                                공지사항 <span style="font-size:.7rem;">최신글 5</span>
-                            </div>
-                            <table class="table">
-                                <tr class="table-dark">
-                                    <th>제목</th>
-                                </tr>
-                                <tr>
-                                    <td>[공지] 공지공기</td>
-                                </tr>
-                                <tr>
-                                    <td>[공지] 공지공기</td>
-                                </tr>
-                                <tr>
-                                    <td>[공지] 공지공기</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div>
-                            <div style="margin-bottom:10px">
-                                자유게시판 <span style="font-size:.7rem;">최신글 5</span>
-                            </div>
-                            <table class="table">
-                                <tr class="table-dark">
-                                    <th>제목</th>
-                                </tr>
-                                <tr>
-                                    <td>게시글 - </td>
-                                </tr>
-                                <tr>
-                                    <td>게시글 - </td>
-                                </tr>
-                                <tr>
-                                    <td>게시글 - </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
                     <div class="ranking-summary">
-                        <div class="title">
-                            <h6>RANKING TOP 10</h6>
+                        <div class="title ">
+                            <h6>IMAGE RANKING TOP 10</h6>
                             <div>
-                                <a href="" class="" >조회순</a>
+                                <a href="" class="" >조회순</a>&nbsp;
                                 <a href="" class="" >좋아요순</a>
+
                             </div>
-
                         </div>
-
-                        <table class="table">
+                        <table class="table ">
                             <tr class="table-dark">
-                                <th>Rank</th>
-                                <th>Title</th>
-                                <th>Cat</th>
-                                <th>View</th>
-                                <th>Like</th>
+                                <th style="width:25px;">No</th>
+                                <th>Image</th>
+                                <th>Categoty</th>
+                                <th style="width:25px;">Count</th>
+                                <th style="width:25px;">Like</th>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>                      </tr>                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>                      </tr>                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>                      </tr>                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
+                            <tr class="" th:each="imageRanking,imageRankingStat : ${imageTop10ByCount}">
+
+
+                                <td th:text="${imageRankingStat.count}"></td>
+                                <td>
+                                    <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}"></img>
+                                </td>
+                                <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>
+                                <td th:text="${imageRanking.count}"></td>
+                                <td th:text="${imageRanking.ilikeit}"></td>
                             </tr>
                         </table>
                     </div>
+
                 </div>
                 <div class="right layout-5">
-                    <canvas id="section1Chart"></canvas>
+
+                    <div class="tag">
+                        IMAGE
+                    </div>
+                    <!-- Slider main container -->
+                    <div class="swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            <div class="swiper-slide"><canvas id="section1Chart"></canvas></div>
+                            <div class="swiper-slide"><canvas id="section1Chart2"></canvas></div>
+                        </div>
+
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev">
+                            <span class="material-symbols-outlined" style="font-size:3rem;">arrow_left</span>
+                        </div>
+                        <div class="swiper-button-next">
+                            <span class="material-symbols-outlined" style="font-size:3rem;">arrow_right</span>
+                        </div>
+                    </div>
+
+
+
                 </div>
+
+
             </section>
 
             <!--SECTION02-->
@@ -193,40 +225,9 @@
             <section class="section2 ">
 
                 <div class="left layout-5">
-                        <span style="font-size : 1rem;">이번주 경매일정</span> <span style="font-size : .7rem;font-weight:800;color:green">경매일정 전체보기 ></span>
+                        <span style="font-size : 1rem;">이번주 경매일정</span> <a href="/trading/calendar/main"><span style="font-size : .7rem;font-weight:800;color:green">경매일정 전체보기 ></span></a>
                         <hr>
-                        <ul>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <span>06월 10일(월)</span>
-                                    <span>22 건</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <span>06월 10일(월)</span>
-                                    <span>22 건</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <span>06월 10일(월)</span>
-                                    <span>22 건</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <span>06월 10일(월)</span>
-                                    <span>22 건</span>
-                                </a>
-                            </li>
-                            <li class="today">
-                                <a href="javascript:void(0)">
-                                    <span>06월 10일(월)</span>
-                                    <span>22 건</span>
-                                </a>
-                            </li>
-                        </ul>
+                    <div id='calendar' class="layout-5" style="height:300px;width:100%;"></div>
                 </div>
                 <div class="right layout-5">
                     <span style="font-size : 1rem;">진행중인 경매</span>
@@ -259,11 +260,6 @@
                     </div>
                 </div>
             </section>
-
-            <hr class="margin-top:15px;">
-            <h5 class="layout-5" style="color : white;text-align:center;height:45px;line-height:45px;background-color:darkcyan">TOP 10</h5>
-            <hr>
-
 
 
             <!--

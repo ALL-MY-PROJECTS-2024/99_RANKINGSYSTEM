@@ -15,7 +15,7 @@
         let  list = /*[[${ list}]]*/
         console.log(list);
     </script>
-    <script src="/js/trading/image/main.js" defer> </script>
+    <script src="/js/trading/music/main.js" defer> </script>
 
 </head>
 <body>
@@ -34,13 +34,12 @@
                 <ol class="breadcrumb mt-2">
                     <li class="breadcrumb-item"><a href="#">HOME</a></li>
                     <li class="breadcrumb-item"><a href="#">매매</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">이미지</li>
+                    <li class="breadcrumb-item active" aria-current="page">음악</li>
                 </ol>
             </nav>
         </section>
         <section class="banner layout-5">
             <div>
-
                 <table class="table" style="font-size :.7rem;">
                     <div class="message-block" th:text="${message}"></div>
                     <thead>
@@ -73,7 +72,7 @@
                                 <td th:text="${dto.tradingid}"></td>
                                 <td >
                                     <a href="javascript:void(0)">
-                                        <img  style="width:100px;height:50px;" th:src="@{${dto.fileDir}+'\s_'+${dto.filename}}"  alt="" />
+                                        <img  style="width:100px;height:50px;" src="/assets/music.jpg"  alt="" />
                                     </a>
                                 </td>
                                 <td th:text="${dto.title}"></td>
@@ -91,10 +90,10 @@
                                     <th:block sec:authorize="hasRole('ROLE_USER')">
                                         <th:block th:if="${dto.roomId!=null}">
                                             <th:block th:if="${dto.req}">
-                                                <a th:href="@{/trading/chat/req(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">신청</a>
+                                                <a th:href="@{/trading/music/chat/req(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">신청</a>
                                             </th:block>
                                             <th:block th:if="${dto.join}">
-                                                <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}" class="btn btn-secondary" style="font-size :.7rem;">입장</a>
+                                                <a th:href="@{/trading/music/chat/enter(roomId=${dto.roomId})}" class="btn btn-secondary" style="font-size :.7rem;">입장</a>
                                             </th:block>
                                         </th:block>
                                         <th:block th:unless="${dto.roomId!=null}">
@@ -116,7 +115,7 @@
                                                 <span style="font-size :.7rem;">대기</span>
                                             </th:block>
                                             <th:block th:if="${dto.status=='경매중'}">
-                                                <a th:href="@{/trading/chat/enter(roomId=${dto.roomId})}" class="btn btn-secondary" style="font-size :.7rem;">입장</a>
+                                                <a th:href="@{/trading/music/chat/enter(roomId=${dto.roomId})}" class="btn btn-secondary" style="font-size :.7rem;">입장</a>
                                             </th:block>
 
                                     </th:block>
@@ -128,10 +127,10 @@
                                         <th:block th:if="${dto.roomId==null}">
                                             <td>
                                                 <th:block th:if="${dto.status=='경매승인'} or ${dto.status=='경매중지'}">
-                                                    <a th:href="@{/trading/chat/create(tradingid=${dto.tradingid})}"  class="btn btn-secondary" style="font-size :.7rem;">경매방 생성</a>
+                                                    <a th:href="@{/trading/music/chat/create(tradingid=${dto.tradingid})}"  class="btn btn-secondary" style="font-size :.7rem;">경매방 생성</a>
                                                 </th:block>
                                                 <th:block th:if="${dto.status=='경매중'}">
-                                                    <a th:href="@{/trading/chat/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매방 제거</a>
+                                                    <a th:href="@{/trading/music/chat/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매방 제거</a>
                                                 </th:block>
                                                 <th:block th:if="${dto.status=='낙찰완료'}">
                                                     <span>판매자 결제필요</span>
@@ -147,7 +146,7 @@
                                         <th:block th:if="${dto.roomId!=null}">
                                             <td>
                                                 <th:block th:if="${dto.status=='경매중지'} or ${dto.status=='경매중'}">
-                                                    <a th:href="@{/trading/chat/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매방 제거</a>
+                                                    <a th:href="@{/trading/music/chat/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매방 제거</a>
                                                 </th:block>
                                                 <th:block th:if="${dto.status=='결제완료'}">
                                                     <a href="javascript:void(0)" th:data-tradingid="${dto.tradingid}" class="btn btn-secondary remittanceBtn" style="font-size :.7rem;">관리자 송금하기</a>
@@ -160,7 +159,7 @@
                                     </th:block>
                                     <th:block th:unless="${dto.adminAccepted}" >
                                         <td>
-                                            <a href="/admin/trading/image/main" class="btn btn-secondary" style="font-size :.7rem;">승인</a>
+                                            <a href="/admin/trading/music/main" class="btn btn-secondary" style="font-size :.7rem;">승인</a>
                                         </td>
                                     </th:block>
                                 </th:block>
@@ -171,7 +170,7 @@
                                         <th:block th:if="${dto.roomId==null}">
                                             <th>
                                                 <th:block th:if="${dto.status=='경매승인'} or ${dto.status=='경매중지'} or ${dto.status=='경매중'} or ${dto.status=='낙찰완료'}">
-                                                    <a th:href="@{/trading/image/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매 제거</a>
+                                                    <a th:href="@{/trading/music/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매 제거</a>
                                                 </th:block>
 
                                                 <th:block th:if="${dto.status=='결제완료'}">
@@ -187,7 +186,7 @@
                                         <th:block th:if="${dto.roomId!=null}">
                                             <th>
                                                 <th:block th:if="${dto.status=='경매승인'} or ${dto.status=='경매중지'} or ${dto.status=='낙찰완료'}">
-                                                    <a th:href="@{/trading/image/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매 제거</a>
+                                                    <a th:href="@{/trading/music/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">경매 제거</a>
                                                 </th:block>
 
                                                 <th:block th:if="${dto.status=='경매중'}">

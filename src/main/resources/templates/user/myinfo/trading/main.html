@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="/css/user/myinfo.css">
 
-
+    <link rel="stylesheet" href="/css/user/myinfo/trading/main.css">
 
 </head>
 <body>
@@ -52,14 +52,16 @@
 
             <th:block th:insert="fragments/myaside :: myasideFragment" />
 
-            <div class="join_block">
-                <div >
 
+            <div class="right">
 
-
-                    <!--승인된 Trading에 가격 요청-->
-                    <table class="table w-100" style="font-size :.7rem;">
-                        <thead>
+                <h4 style="background-color:darkcyan;padding:5px;color:white;">이미지</h4>
+                <hr>
+                <div class="join_block">
+                    <div  style="width : 100%;height:250px;overflow:auto;border :1px solid;margin-bottom:20px;">
+                        <!--승인된 Trading에 가격 요청-->
+                        <table class="table w-100" style="font-size :.7rem;">
+                            <thead>
                             <th>번호</th>
                             <th>이미지</th>
                             <th>관리자승인여부</th>
@@ -70,16 +72,16 @@
                             <th>구매자</th>
                             <th>경매상태</th>
                             <th>내 상태</th>
-                        </thead>
-                        <tbody style="font-size :.7rem;">
+                            </thead>
+                            <tbody style="font-size :.7rem;">
 
                             <th:block th:each="dto : ${list}">
-<!--                                <div th:text="${dto}"></div>-->
+                                <!--                                <div th:text="${dto}"></div>-->
                                 <tr>
                                     <td th:text="${dto.tradingid}"></td>
                                     <td>
                                         <a href="javascript:void(0)">
-                                              <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
+                                            <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
                                         </a>
                                     </td>
                                     <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
@@ -111,13 +113,86 @@
                                 </tr>
                             </th:block>
 
-                        </tbody>
+                            </tbody>
 
 
 
-                    </table>
+                        </table>
 
+                    </div>
                 </div>
+
+                <!--
+
+                -->
+
+                <h4 style="background-color:darkcyan;padding:5px;color:white;">음악</h4>
+                <hr>
+                <div class="join_block">
+                    <div  style="width : 100%;height:250px;overflow:auto;border :1px solid;margin-bottom:20px;">
+                        <!--승인된 Trading에 가격 요청-->
+                        <table class="table w-100" style="font-size :.7rem;">
+                            <thead>
+                            <th>번호</th>
+                            <th>이미지</th>
+                            <th>관리자승인여부</th>
+                            <th>경매시작일</th>
+                            <th>경매종료일</th>
+                            <th>신청인원</th>
+                            <th>낙찰가</th>
+                            <th>구매자</th>
+                            <th>경매상태</th>
+                            <th>내 상태</th>
+                            </thead>
+                            <tbody style="font-size :.7rem;">
+
+                            <th:block th:each="dto : ${musicList}">
+                                <!--                                <div th:text="${dto}"></div>-->
+                                <tr>
+                                    <td th:text="${dto.tradingid}"></td>
+                                    <td>
+                                        <a href="javascript:void(0)">
+                                            <img  style="width:100px;height:50px;" src="/assets/music.jpg"  alt="" />
+                                        </a>
+                                    </td>
+                                    <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
+                                    <td th:text="${dto.auctionStartTime}"></td>
+                                    <td th:text="${dto.auctionEndTime}"></td>
+                                    <td th:text="${dto.cur}"></td>
+                                    <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
+                                    <td th:text="${dto.buyer}==null?'미정':${dto.buyer.username}"></td>
+                                    <td th:text="${dto.status}"></td>
+                                    <th:block >
+                                        <td th:if="${dto.status=='경매요청'} or ${dto.status=='경매승인'}">
+                                            <a th:href="@{/user/myinfo/trading/music/del(tradingid=${dto.tradingid})}" class="btn btn-secondary" style="font-size :.7rem;">취소</a>
+                                        </td>
+                                        <td th:if="${dto.status=='경매중'}">
+                                            <span>낙찰대기</span>
+                                        </td>
+                                        <td th:if="${dto.status=='낙찰완료'}">
+                                            <span>구매자 결제대기</span>
+                                        </td>
+                                        <th th:if="${dto.status=='결제완료'}">
+                                            <span  class="btn btn-secondary modal-open" style="font-size :.7rem;">
+                                                관리자 송금대기
+                                            </span>
+                                        </th>
+                                        <th th:if="${dto.status=='송금완료'}">
+                                            <span>관리자 송금완료</span>
+                                        </th>
+                                    </th:block>
+                                </tr>
+                            </th:block>
+
+                            </tbody>
+
+
+
+                        </table>
+
+                    </div>
+                </div>
+
             </div>
         </section>
     </main>

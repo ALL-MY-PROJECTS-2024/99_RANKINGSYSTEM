@@ -10,6 +10,7 @@ import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.*;
 import com.creator.imageAndMusic.domain.repository.UserRepository;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
+import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
 import com.creator.imageAndMusic.domain.service.UserService;
 import com.creator.imageAndMusic.properties.AUTH;
 import io.jsonwebtoken.Claims;
@@ -67,6 +68,8 @@ public class UserController {
     @Autowired
     private TradingImageServiceImpl tradingImageService;
 
+    @Autowired
+    private TradingMusicServiceImpl tradingMusicService;
     @GetMapping("/join")
     public void join(){
         log.info("GET /user/join...");
@@ -603,8 +606,10 @@ public class UserController {
         log.info("GET /user/myinfo/trading");
         String seller =  principalDetails.getUserDto().getUsername();
         List<TradingImage> list =  tradingImageService.getMyTradingImage(seller);
+        List<TradingMusic> musicList = tradingMusicService.getMyTradingMusic(seller);
 
         model.addAttribute("list",list);
+        model.addAttribute("musicList",musicList);
     }
     //----------------------------------------------------------------
     // 낙찰받은 경매
@@ -614,7 +619,10 @@ public class UserController {
         log.info("GET /user/myinfo/trading/auctioned");
         String buyer =  principalDetails.getUserDto().getUsername();
         List<TradingImage> list =  tradingImageService.getMyAuctionedImage(buyer);
+        List<TradingMusic> musicList = tradingMusicService.getMyAuctionedMusic(buyer);
+
         model.addAttribute("list",list);
+        model.addAttribute("musicList",musicList);
         model.addAttribute("userDto",principalDetails.getUserDto());
     }
     //----------------------------------------------------------------
@@ -632,8 +640,24 @@ public class UserController {
         }
         model.addAttribute("message","삭제성공");
         return "myinfo/trading/main";
-
     }
+    //----------------------------------------------------------------
+    // 경매 취소 - 삭제 음악
+    //----------------------------------------------------------------
+    @GetMapping("/myinfo/trading/music/del")
+    public String trade_del_music(@RequestParam("tradingid") Long tradingId,  @AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
+        log.info("GET /user/myinfo/trading/music/del");
+        String seller =  principalDetails.getUserDto().getUsername();
+        boolean isDel =  tradingMusicService.removeTradingMusic(tradingId);
+
+        if(!isDel){
+            model.addAttribute("message","삭제 실패..");
+            return "myinfo/trading/main";
+        }
+        model.addAttribute("message","삭제성공");
+        return "myinfo/trading/main";
+    }
+
     //----------------------------------------------------------------
     // 송금 정보 입력
     //----------------------------------------------------------------

@@ -28,4 +28,6 @@ public interface ImageRankingService {
 
     @Transactional(rollbackFor = SQLException.class)
     List<ImagesRanking> getAllImageRankingByCategory(String subCategory);
+    @Transactional(rollbackFor = SQLException.class)
+    Map<String, Object> getAllImageRankingByAllCategory();
 }

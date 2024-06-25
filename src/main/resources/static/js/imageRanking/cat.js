@@ -18,15 +18,15 @@ imagebtn.addEventListener('click',function(){
     musicbtn.style.opacity=".8";
 
 })
-musicbtn.addEventListener('click',function(){
-    console.log("musicbtn clicked..");
-
-    imagebody.classList.add('hidden');
-    musicbody.classList.remove('hidden');
-
-    imagebtn.style.opacity=".8";
-    musicbtn.style.opacity="1";
-})
+//musicbtn.addEventListener('click',function(){
+//    console.log("musicbtn clicked..");
+//
+//    imagebody.classList.add('hidden');
+//    musicbody.classList.remove('hidden');
+//
+//    imagebtn.style.opacity=".8";
+//    musicbtn.style.opacity="1";
+//})
 //---------------------------------------------------
 //이미지 / 음악 서브카테고리 이벤트 처리
 //---------------------------------------------------
@@ -43,16 +43,16 @@ imageSubButtonEls.forEach(el=>{
 })
 
 
+////
+//const musicSubButtonEls = document.querySelectorAll('.music_body .swiper-slide a');
+//let subCategoryBodyMusicTitleEl = document.querySelector('.music_body .subCategoryBody .title');
 //
-const musicSubButtonEls = document.querySelectorAll('.music_body .swiper-slide a');
-let subCategoryBodyMusicTitleEl = document.querySelector('.music_body .subCategoryBody .title');
-
-musicSubButtonEls.forEach(el=>{
-    el.addEventListener('click',function(){
-        console.log(el.innerHTML);
-        subCategoryBodyMusicTitleEl.innerHTML=el.innerText;
-    })
-})
+//musicSubButtonEls.forEach(el=>{
+//    el.addEventListener('click',function(){
+//        console.log(el.innerHTML);
+//        subCategoryBodyMusicTitleEl.innerHTML=el.innerText;
+//    })
+//})
 
 //---------------------------------------------------
 //DOM INIT 시 처리 코드

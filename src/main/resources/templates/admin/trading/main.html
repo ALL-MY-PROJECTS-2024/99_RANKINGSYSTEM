@@ -9,9 +9,9 @@
     <th:block th:insert="~{fragments/link :: linkFragment}" />
 
 
-    <link rel="stylesheet" href="/css/admin/trading/main.css">
+    <link rel="stylesheet" href="/css/admin/main.css">
 
-    <script src="/js/admin/trading/main.js" defer> </script>
+    <script src="/js/admin/main.js" defer> </script>
 
 
 </head>
@@ -24,66 +24,50 @@
 
     <!-- nav       -->
     <th:block th:insert="~{fragments/nav :: navFragment}" />
+    <div>
+        //-----------
+        1 통계
+        총 접속수
+        일별 접속수
+        월별 접속수
+        접속 IP 조회
+        //-----------
+        //-----------
+        2 설정
+        이메일 key 지정
+        결제 key 설정
+        로고 변경
+        //-----------
+        3 경매
 
-    <main class="layout-5">
+        //-----------
+        //-----------
+        4 공지
+        공지사항
+        //-----------
+    </div>
 
-        <hr>
-        <span>MESSAGE : </span> <span th:text="${message}">  </span><br>
-        <section class="banner layout-5">
+    <main>
+        <section class="banner">
+            <div class="menu">
+                <div>
+                    <label for="menu01">메뉴 1</label>
+                    <input type="checkbox" class="menu-check" id="menu01" />
+                    <div>
 
-
-                <div th:text="${tradingImages}">
+                    </div>
                 </div>
+                <div>
+                    <label for="menu01">메뉴 1</label>
+                    <input type="checkbox" class="menu-check" id="menu02" />
+                    <div>
 
-                <table class="table w-100" style="text-align:center;font-size :.7rem;">
-                    <thead>
-                    <th>번호</th>
-                    <th>이미지</th>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
 
-                    <th>경매시작일</th>
-                    <th>경매종료일</th>
-                    <th>신청인원</th>
-                    <th>관리자승인여부</th>
-                    <th>승인하기</th>
-                    <th>승인취소</th>
-                    <th>이동하기</th>
-
-                    </thead>
-
-                    <tbody >
-                    <th:block th:each="dto : ${list}">
-                        <!--                                <div th:text="${dto}"></div>-->
-                        <tr>
-                            <td th:text="${dto.tradingid}"></td>
-                            <td>
-                                <a href="javascript:void(0)">
-                                    <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
-                                </a>
-                            </td>
-                            <td th:text="${dto.auctionStartTime}"></td>
-                            <td th:text="${dto.auctionEndTime}"></td>
-                            <td th:text="${dto.cur}"></td>
-                            <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
-                            <td >
-                                <form action="/admin/trading/accept"  style="display:flex;justify-content:center;align-items:center;">
-                                    <input type="hidden" class="" name="tradingid" th:value="${dto.tradingid}" readonly>
-                                    <input style="width:150px;" class="form-control m-1" type="datetime-local" name="auctionStartTime"  />
-                                    <button class="btn btn-primary m-2" style="font-size :.7rem;">승인</button>
-                                </form>
-                            </td>
-                            <td>
-                                <a th:href="@{/admin/trading/cancel(tradingid=${dto.tradingid})}"  class="btn btn-secondary" style="font-size :.7rem;">취소</a>
-                            </td>
-                            <td>
-                                <a href="/trading/image/main" class="btn btn-secondary" style="font-size :.7rem;">이동</a>
-                            </td>
-                        </tr>
-                    </th:block>
-
-                    </tbody>
-                </table>
-
-
+            </div>
         </section>
     </main>
 

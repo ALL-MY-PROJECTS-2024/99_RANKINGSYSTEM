@@ -54,10 +54,23 @@ deleteRankingEls.forEach(deleteRankingEl=>{
     })
 })
 
-//카테고리 변경
-const changeCategoryEls = document.querySelectorAll(".changeCategory");
-changeCategoryEls.forEach(changeCategory=>{
-    changeCategory.addEventListener("click",function(){
-        console.log("changeCategory")
+//경매 요청
+const requestAuctionEls = document.querySelectorAll(".requestAuction");
+requestAuctionEls.forEach(requestAuction=>{
+    requestAuction.addEventListener("click",function(){
+
+        const fileid = requestAuction.getAttribute("data-fileid");
+        console.log("requestAuction",fileid)
+
+        const startPrice = prompt("시작가격을 입력하세요 : ");
+        axios.get('/trading/music/req?fildid='+fileid+"&startPrice="+startPrice)
+        .then(resp=>{
+            console.log(resp);
+            alert(resp.data);
+        })
+        .catch(err=>{
+            console.log(err.response.data);
+            alert(err.response.data+"");
+        })
     })
 })

@@ -9,35 +9,32 @@
     <th:block th:insert="fragments/link :: linkFragment" />
 
 
-
+    <!--  MODEL 속성가져오기  -->
+    <script th:inline="javascript">
+        let Jazz = /*[[${Jazz}]]*/
+        let Rock = /*[[${Rock}]]*/
+        let Classic = /*[[${Classic}]]*/
+        let Progressive = /*[[${Progressive}]]*/
+        let Advertisement = /*[[${Advertisement}]]*/
+        let HeavyMetal = /*[[${HeavyMetal}]]*/
+        let Pop = /*[[${Pop}]]*/
+        let Others = /*[[${Others}]]*/
+        console.log("Jazz",Jazz);
+        console.log("Rock",Rock);
+        console.log("Classic",Classic);
+        console.log("Progressive",Progressive);
+        console.log("Advertisement",Advertisement);
+        console.log("Heavy Metal",HeavyMetal);
+        console.log("Pop",Pop);
+        console.log("Others",Others);
+    </script>
 
 
     <!--    -->
     <link rel="stylesheet" href="/css/imageRanking/cat.css">
 
     <!--    -->
-    <script src="/js/imageRanking/cat.js" defer></script>
-
-    <!--  MODEL 속성가져오기  -->
-    <script th:inline="javascript">
-        let Character = /*[[${Character}]]*/
-        let City = /*[[${City}]]*/
-        let Map = /*[[${Map}]]*/
-        let iCON = /*[[${iCON}]]*/
-        let Furniture = /*[[${Furniture}]]*/
-        let Car = /*[[${Car}]]*/
-        let Place = /*[[${Place}]]*/
-        let Others = /*[[${Others}]]*/
-        console.log("Character",Character);
-        console.log("City",City);
-        console.log("Map",Map);
-        console.log("iCON",iCON);
-        console.log("Furniture",Furniture);
-        console.log("Car",Car);
-        console.log("Place",Place);
-        console.log("Others",Others);
-    </script>
-
+    <script src="/js/musicRanking/cat.js" defer></script>
 </head>
 <body>
 
@@ -87,7 +84,7 @@
             <div class="body">
 
                 <!--   IMAGE BODY             -->
-                <div class="image_body">
+                <div class="image_body hidden">
 
                     <div class="swiper sub_category">
                         <!-- Additional required wrapper -->
@@ -112,7 +109,7 @@
                 </div>
 
 
-                <div class="music_body hidden">
+                <div class="music_body ">
 
                     <div class="swiper sub_category">
                         <!-- Additional required wrapper -->

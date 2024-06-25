@@ -63,20 +63,20 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/user/confirmId").permitAll();
                     authorize.requestMatchers("/user/confirmPw").permitAll();
 
-                    authorize.requestMatchers("/user/**").hasAnyRole("USER");
+                    authorize.requestMatchers("/user/**").hasAnyRole("USER","ADMIN");
 
-                    authorize.requestMatchers("/bookmark/**").hasRole("USER");
+                    authorize.requestMatchers("/bookmark/**").hasAnyRole("USER","ADMIN");
 
                     authorize.requestMatchers("/board/**").hasAnyRole("USER","ADMIN");
 
 
-                    authorize.requestMatchers("/imageRanking/add").hasAnyRole("USER");
-                    authorize.requestMatchers("/imageRanking/list").hasAnyRole("USER");
-                    authorize.requestMatchers("/imageRanking/read").hasAnyRole("USER");
+                    authorize.requestMatchers("/imageRanking/add").hasAnyRole("USER","ADMIN");
+                    authorize.requestMatchers("/imageRanking/list").hasAnyRole("USER","ADMIN");
+                    authorize.requestMatchers("/imageRanking/read").hasAnyRole("USER","ADMIN");
 
-                    authorize.requestMatchers("/lecture/list").hasAnyRole("USER");
+                    authorize.requestMatchers("/lecture/list").hasAnyRole("USER","ADMIN");
 
-                    authorize.requestMatchers("/auction/**").hasAnyRole("USER");
+                    authorize.requestMatchers("/auction/**").hasAnyRole("USER","ADMIN");
 
                     authorize.requestMatchers("/admin/**").hasAnyRole("ADMIN");
                     authorize.requestMatchers("/trading/**").hasAnyRole("USER","ADMIN");

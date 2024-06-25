@@ -2,7 +2,9 @@ package com.creator.imageAndMusic.controller;
 
 import com.creator.imageAndMusic.domain.dto.ChatMessage;
 import com.creator.imageAndMusic.domain.dto.ChatRoom;
+import com.creator.imageAndMusic.domain.dto.ChatRoomMusic;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
+import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +20,19 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
 @Slf4j
 @Component
-public class TradingSocketHandler extends TextWebSocketHandler {
+public class TradingMusicSocketHandler extends TextWebSocketHandler {
     private  ObjectMapper objectMapper;
-    public TradingSocketHandler(){
+    public TradingMusicSocketHandler(){
         objectMapper = new ObjectMapper();
     }
+
     @Autowired
-    private TradingImageServiceImpl tradingImageServiceImpl;
+    private TradingMusicServiceImpl tradingMusicServiceImpl;
+
+
     private static final ConcurrentHashMap<String, WebSocketSession> CLIENTS = new ConcurrentHashMap<String, WebSocketSession>();
 
     @Override
@@ -87,7 +93,7 @@ public class TradingSocketHandler extends TextWebSocketHandler {
 
         String payload = message.getPayload();
         ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
-        ChatRoom room = tradingImageServiceImpl.findRoomById(chatMessage.getRoomId());
+        ChatRoomMusic room = tradingMusicServiceImpl.findRoomById(chatMessage.getRoomId());
 
         Map<String,WebSocketSession> sessions=room.getSessions();      //방에 있는 현재 사용자 한명이 WebsocketSession
         System.out.println("handleTextMessage chatMessage" + chatMessage);
@@ -112,7 +118,7 @@ public class TradingSocketHandler extends TextWebSocketHandler {
 
         }else if (chatMessage.getType().equals(ChatMessage.MessageType.QUIT)) {
 
-            tradingImageServiceImpl.disconnectTradingIMageChat(session,chatMessage.getSender());
+            tradingMusicServiceImpl.disconnectTradingIMageChatMusic(session,chatMessage.getSender());
             sessions.remove(chatMessage.getSender());
             chatMessage.setMsg(chatMessage.getSender() + "님이 퇴장했습니다..");
 

@@ -14,28 +14,50 @@
 
     <script th:inline="javascript">
         let  list = /*[[${ list}]]*/
+        let  list2 = /*[[${ list2}]]*/
         console.log(list);
         eventList = [];
         list.forEach(el=>{
             console.log(el);
             let eventObject=null;
             if(el.status=='경매승인')
-                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'gray'};
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'gray'};
             else if(el.status=='경매중'){
-                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'green'};
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'green'};
             }else if(el.status=='경매중지'){
-                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'red'};
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'red'};
             }else if(el.status=='낙찰완료'){
-                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'orange'};
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'orange'};
             }else if(el.status=='결제완료'){
-                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'blue'};
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'blue'};
             }else if(el.status=='송금완료'){
-                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'darkcyan'};
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'darkcyan'};
             }else{
-                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,color:'white'};
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'white'};
             }
             eventList.push(eventObject)
         });
+        list2.forEach(el=>{
+            console.log(el);
+            let eventObject=null;
+            if(el.status=='경매승인')
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'gray'};
+            else if(el.status=='경매중'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'green'};
+            }else if(el.status=='경매중지'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'red'};
+            }else if(el.status=='낙찰완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'orange'};
+            }else if(el.status=='결제완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'blue'};
+            }else if(el.status=='송금완료'){
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'darkcyan'};
+            }else{
+                eventObject={id:el.tradingid,title:el.title,start:el.auctionStartTime,end:el.auctionEndTime,color:'white'};
+            }
+            eventList.push(eventObject)
+        });
+
     </script>
     <script>
         var calendar = null;
@@ -47,33 +69,32 @@
                     initialView: 'dayGridMonth',
                     selectable : true,
                     events : eventList,
-
                     //Date 클릭시 표시
                     dateClick : function(info){
                         console.log(info);
                         //addEventToCalendar({start:info.dateStr})
                     },
                     eventClick:function(info){
-                        console.log(info.event._def);
+                        console.log(info);
                         const calenderEventModal = document.querySelector('.calenderEventModal');
                         calenderEventModal.click();
                         const exampleModal2= document.getElementById('exampleModal2');
                         const modelBody =  exampleModal2.querySelector('.modal-body');
-                        modelBody.innerHTML = info.event._def;
+                        //modelBody.innerHTML = info.event._def;
 
                     },
                   });
                   calendar.render();
                   //기존 이벤트 업로드
-
         });
-
-
-                function addEventToCalendar(event){
+        function addEventToCalendar(event){
                     calendar.addEvent(event);
-                };
+        };
 
     </script>
+
+    <link rel="stylesheet" href="/css/trading/calendar/main.css">
+
 </head>
 <body>
 
@@ -125,8 +146,25 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table">
-
+                <table class="table w-100 p-2 m-2">
+                    <tr>
+                        <td class="bg-dark text-light">Status</td>
+                        <td>[MUSIC] 경매승인</td>
+                        <td class="bg-dark text-light">3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-dark text-light">1</td>
+                        <td>2</td>
+                        <td class="bg-dark text-light">3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-dark text-light">1</td>
+                        <td>2</td>
+                        <td class="bg-dark text-light">3</td>
+                        <td>4</td>
+                    </tr>
                 </table>
             </div>
             <div class="modal-footer">

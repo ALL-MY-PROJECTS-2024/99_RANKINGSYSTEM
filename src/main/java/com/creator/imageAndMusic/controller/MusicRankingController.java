@@ -127,5 +127,40 @@ public class MusicRankingController {
         musicRankingService.count(rankingId);
 
     }
+    @GetMapping("/local")
+    public String local(Model model){
+        log.info("GET /around/local");
 
+        Map<String,Object> result = musicRankingService.getLocalMusicRanking();
+
+        model.addAttribute("result",result);
+
+        return "musicRanking/local";
+    }
+
+    @GetMapping("/cat")
+    public void cat(Model model){
+        log.info("GET /musicRanking/cat...");
+        Map<String,Object> map = musicRankingService.getAllImageRankingByAllCategory();
+        System.out.println("MAP개수 " +map.size() );
+        List<MusicRanking> Jazz = (List<MusicRanking>)map.get("Jazz");
+        List<MusicRanking> Rock = (List<MusicRanking>)map.get("Rock");
+        List<MusicRanking> Classic = (List<MusicRanking>)map.get("Classic");
+        List<MusicRanking> Progressive = (List<MusicRanking>)map.get("Progressive");
+        List<MusicRanking> Advertisement = (List<MusicRanking>)map.get("Advertisement");
+        List<MusicRanking> HeavyMetal = (List<MusicRanking>)map.get("HeavyMetal");
+        List<MusicRanking> Pop = (List<MusicRanking>)map.get("Pop");
+        List<MusicRanking> Others = (List<MusicRanking>)map.get("Others");
+
+        model.addAttribute("Jazz",Jazz);
+        model.addAttribute("Rock",Rock);
+        model.addAttribute("Classic",Classic);
+        model.addAttribute("Progressive",Progressive);
+        model.addAttribute("Advertisement",Advertisement);
+        model.addAttribute("Advertisement",Advertisement);
+        model.addAttribute("HeavyMetal",HeavyMetal);
+        model.addAttribute("Pop",Pop);
+        model.addAttribute("Others",Others);
+
+    }
 }

@@ -8,7 +8,7 @@
     padding : 15px;
     display:flex;
     justify-content:space-between;
-    align-items : center;
+    align-items :start;
     margin-bottom : 15px;
 }
 .section1 .left{
@@ -16,15 +16,28 @@
     height : 100%;
     margin : 10px;
     padding : 5px;
-    border : 1px solid;
+
     display:flex;
     justify-content:center;
-    align-items : center;
+    align-items : start;
+    box-shadow :5px 5px 5px lightgray;
+
 
     overflow : auto;
 }
+.section1 .left table{
+    width : 300px;
+}
+.section1 .left table th{
+
+    text-align:center;
+}
+.section1 .left table img{
+    width : 100px;
+    height : 45px;
+}
 .section1 .left>div{
-    width :100%;
+
     height : 100%;
     padding : 15px;
     margin : 10px;
@@ -63,7 +76,8 @@
     color : green;
 }
 .section1 .left .ranking-summary table{
-    border : 1px solid;
+    width : 100%;
+
 }
 .section1 .left table th,
 .section1 .left table td{
@@ -74,7 +88,7 @@
 
 
 .section1 .right{
-    width : 100%;
+    width : 65vw;
     height : 100%;
     margin : 10px;
     border : 0;
@@ -86,35 +100,60 @@
     position:relative;
 }
 
-.section1 .right::before{
+.section1 .right .tag{
     position:absolute;
     left:0px;
     top : 0px;
-    content : "IMAGE";
-    font-size : 1rem;
+    content : "";
+    font-size : .8rem;
     border: 0;
 
     box-shadow :5px 5px 5px lightgray;
-    width : 100px;
-    height : 50px;
+    width : 80px;
+    height : 30px;
     display:flex;
     justify-content:center;
     align-items : center;
 }
-.section1 .right::after{
+.section1 .right .tag::after{
     position:absolute;
     left:0px;
     top : 0px;
     content : "";
     font-size : 1.2rem;
-    border-top : 10px solid white;
-    border-bottom : 10px solid darkcyan;
-    border-left : 10px solid white;
-    border-right: 10px solid darkcyan;
-
-
+    border-top : 5px solid white;
+    border-bottom : 5px solid darkcyan;
+    border-left : 5px solid white;
+    border-right: 5px solid darkcyan;
 }
 
+.section1 .right .swiper{
+   width :50vw;;
+   height : 100%;
+  /* border : 1px solid;*/
+}
+.section1 .right .swiper canvas{
+    width :100%;
+}
+.section1 .right .swiper .swiper-wrapper{
+     width :70vw;;
+}
+.section1 .right .swiper .swiper-wrapper .swiper-slide{
+    display:flex;
+    justify-content:center;
+    align-items : center;
+}
+
+.section1 .right .swiper .swiper-button-prev::after,
+.section1 .right .swiper .swiper-button-next::after{
+    content : "";
+}
+.section1 .right .swiper .swiper-button-prev{
+
+}
+.section1 .right .swiper .swiper-button-next{
+
+}
 /*
     SECTION02
 */
@@ -132,7 +171,7 @@
 
 .section2 .left{
     width : 100%;
-    padding : 5px;
+    padding : 20px;
     margin : 10px;
     border : 1px solid;
 /*    display:flex;
@@ -150,7 +189,7 @@
     margin : 5px;
     width : 100%;
     height : 50px;
-    padding : 10px;
+    padding : 5px;
     display:flex;
     justify-content:center;
     align-items : center;
@@ -258,4 +297,21 @@
     justify-content : center;
     align-items : center;
 
+}
+
+.fc-event-time,
+.fc-event-title{
+    font-size: .7em;
+}
+
+#calendar td
+{
+    height : 150px !important;
+}
+#calendar td>div{
+    height : 100% !important;
+}
+
+.fc-daygrid-day-frame.fc-scrollgrid-sync-inner{
+    height : 150px !important;
 }

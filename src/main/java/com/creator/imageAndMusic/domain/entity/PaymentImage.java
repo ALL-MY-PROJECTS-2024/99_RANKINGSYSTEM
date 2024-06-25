@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity
-public class Payment {
+public class PaymentImage {
     public boolean success;
     @Id
     public String imp_uid;
 
     //구매한 이미지
     @ManyToOne
-    @JoinColumn(name = "item_id",foreignKey = @ForeignKey(name="FK_ImagesFileInfo_Payment1",
+    @JoinColumn(name = "item_id",foreignKey = @ForeignKey(name="FK_ImagesFileInfo_PaymentImage",
             foreignKeyDefinition ="FOREIGN KEY(item_id) REFERENCES images_file_info(fileid) ON DELETE CASCADE ON UPDATE CASCADE" ))
     private ImagesFileInfo item_id;
 

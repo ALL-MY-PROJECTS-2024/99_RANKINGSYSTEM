@@ -246,6 +246,7 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         return result;
 
     }
+
     @Transactional(rollbackFor = SQLException.class)
     public Map<String, Object> getImageRankingPopular() {
         Map<String,Object> result = new LinkedHashMap<>();
@@ -256,4 +257,95 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         result.put("imageTop10ByLike",imageTop10ByLike);
         return result;
     }
+
+    @Override
+    @Transactional(rollbackFor = SQLException.class)
+    public Map<String, Object> getAllImageRankingByAllCategory() {
+
+        Map<String,Object> result = new LinkedHashMap<>();
+        List<ImagesRanking> list =   imageRankingRepostiroy.findAllByOrderByCountDesc();
+        List<ImagesRanking> Character = new ArrayList<>();
+        List<ImagesRanking> City = new ArrayList<>();
+        List<ImagesRanking> Map = new ArrayList<>();
+        List<ImagesRanking> iCON = new ArrayList<>();
+        List<ImagesRanking> Furniture = new ArrayList<>();
+        List<ImagesRanking> Car = new ArrayList<>();
+        List<ImagesRanking> Place = new ArrayList<>();
+        List<ImagesRanking> Others = new ArrayList<>();
+        for(ImagesRanking imagesRanking : list){
+            String sub = imagesRanking.getImagesFileInfo().getImages().getSubCategory();
+            if(StringUtils.equals(sub,"Character")){
+                Character.add(imagesRanking);
+            }if(StringUtils.equals(sub,"City")){
+                City.add(imagesRanking);
+            }if(StringUtils.equals(sub,"Map")){
+                Map.add(imagesRanking);
+            }if(StringUtils.equals(sub,"iCON")){
+                iCON.add(imagesRanking);
+            }if(StringUtils.equals(sub,"Furniture")){
+                Furniture.add(imagesRanking);
+            }if(StringUtils.equals(sub,"Car")){
+                Car.add(imagesRanking);
+            }if(StringUtils.equals(sub,"Place")){
+                Place.add(imagesRanking);
+            }if(StringUtils.equals(sub,"Others")){
+                Others.add(imagesRanking);
+            }
+        }
+        result.put("Character",Character);
+        result.put("City",City);
+        result.put("Map",Map);
+        result.put("iCON",iCON);
+        result.put("Furniture",Furniture);
+        result.put("Car",Car);
+        result.put("Place",Place);
+        result.put("Others",Others);
+        return result;
+    }
+
+    @Transactional(rollbackFor = SQLException.class)
+    public Map<String, Object> getAllImageRankingByAllCategoryCount()
+    {
+        Map<String,Object> result = new LinkedHashMap<>();
+        List<ImagesRanking> list =   imageRankingRepostiroy.findAllByOrderByCountDesc();
+        Integer Character =0;
+        Integer City =0;
+        Integer Map =0;
+        Integer iCON =0;
+        Integer Furniture =0;
+        Integer Car =0;
+        Integer Place =0;
+        Integer Others =0;
+        for(ImagesRanking imagesRanking : list){
+            String sub = imagesRanking.getImagesFileInfo().getImages().getSubCategory();
+            if(StringUtils.equals(sub,"Character")){
+                Character++;
+            }if(StringUtils.equals(sub,"City")){
+                City++;
+            }if(StringUtils.equals(sub,"Map")){
+                Map++;
+            }if(StringUtils.equals(sub,"iCON")){
+                iCON++;
+            }if(StringUtils.equals(sub,"Furniture")){
+                Furniture++;
+            }if(StringUtils.equals(sub,"Car")){
+                Car++;
+            }if(StringUtils.equals(sub,"Place")){
+                Place++;
+            }if(StringUtils.equals(sub,"Others")){
+                Others++;
+            }
+        }
+        result.put("Character",Character);
+        result.put("City",City);
+        result.put("Map",Map);
+        result.put("iCON",iCON);
+        result.put("Furniture",Furniture);
+        result.put("Car",Car);
+        result.put("Place",Place);
+        result.put("Others",Others);
+        return result;
+
+    }
+
 }

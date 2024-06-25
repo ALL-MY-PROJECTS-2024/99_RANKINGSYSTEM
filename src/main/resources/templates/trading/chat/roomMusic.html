@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
+
+
+    <link rel="stylesheet" href="/css/trading/chat/room.css">
+
+    <script src="/js/myinfo/confirm.js" defer> </script>
+
+    <script th:inline="javascript">
+        let  wspath = /*[[${wspath}]]*/
+        let  username = /*[[${username}]]*/
+        let  users = /*[[${users}]]*/
+        console.log(users);
+        let  tradingid = /*[[${tradingid}]]*/
+
+    </script>
+
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="~{fragments/header :: mainHeaderFragment}" />
+
+    <!-- nav       -->
+    <th:block th:insert="~{fragments/nav :: navFragment}" />
+
+    <main class="room-block layout-5">
+        <section class="layout-5 breadcrumb-block">
+            <div class="">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="material-symbols-outlined">home</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/user/album/main">
+                                <span class="">매매</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/user/album/main">
+                                <span class="">이미지</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page" style="border : 0px !important;">경매방</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="auction-block">
+<!--            <div class="left">-->
+<!--            </div>-->
+            <div class="center">
+
+                <div class="show-item">
+                    <div class="chat">
+                    </div>
+                </div>
+                <div class="image-block">
+                    <img  tsrc="assets/music.jpg"  alt="" />
+                </div>
+                <div>
+                    <table class="table  w-100">
+                        <tr>
+                            <td>제목</td>
+                            <td th:text="${tradingMusic.fileid.music.title}"></td>
+                        </tr>
+                        <tr>
+                            <td>판매자</td>
+                            <td></span><span th:text="${tradingMusic.fileid.music.username}"></span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="status">
+                    <div class="now-price">
+                        <table class="table  w-100">
+                            <thead style="height:35px;">
+                                <tr class="table-dark">
+                                    <th style="width:80px;">시작가</th>
+                                    <th style="width:80px;">낙찰가</th>
+                                    <th style="width:210px;">유저</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th><span class="startPrice" th:text="${tradingMusic.startPrice}"></span><span> 원</span></th>
+                                    <th><span class="auctionPrice"  th:text="${tradingMusic.startPrice}"></span><span> 원</span></th>
+                                    <th><span class="rankingUser"> </span></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="user-call">
+
+                        <div style="">
+                            <table class="table simple-input w-100">
+                                <tr>
+                                    <td colspan="6">간편입력</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="javascript:plusPriceMsg(500)" class="btn btn-primary">+500</a></td>
+                                    <td><a href="javascript:plusPriceMsg(1000)" class="btn btn-primary">+1000</a></td>
+                                    <td><a href="javascript:plusPriceMsg(1500)" class="btn btn-primary">+1500</a></td>
+                                    <td><a href="javascript:plusPriceMsg(3000)" class="btn btn-primary">+3000</a></td>
+                                    <td><a href="javascript:plusPriceMsg(5000)" class="btn btn-primary">+5000</a></td>
+                                    <td><a href="javascript:plusPriceMsg(10000)" class="btn btn-primary">+10000</a></td>
+                                </tr>
+                            </table>
+
+                            <table class="table w-100">
+                                <tr>
+                                    <td>계정명</td>
+                                    <td>호가</td>
+                                </tr>
+                                <tr>
+                                    <td th:text="${username}"></td>
+                                    <td>
+                                        <input class="form-control  content" placeholder="직접입력">
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                </div>
+
+            </div>
+
+            <div class="right">
+                <div class="auction_status">
+                    <span class="circle_status pending"></span> <span class="message">대기중</span>
+                </div>
+
+                <div>
+                    <div class="controller">
+                        <a href="javascript:void(0)" class="person-group-block">
+                            <span class="material-symbols-outlined">group</span>
+                            <span class="cur">0</span>
+                        </a>
+                        <a href="javascript:quit()">
+                            <span class="material-symbols-outlined">logout</span>
+                        </a>
+                    </div>
+                    <hr >
+                    <div class="timer">
+                        <table class="table">
+                            <tr>
+                                <td><span class="material-symbols-outlined">timer</span></td>
+                                <td class="timer-clock">00:00:00</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="user-block hidden"></div>
+
+                    <div class="user-call-result-block">
+<!--                        <table class="table">-->
+<!--                            <thead class="table-primary">-->
+<!--                                <tr>-->
+<!--                                    <th>순위</th>-->
+<!--                                    <th>유저명</th>-->
+<!--                                    <th>호가</th>-->
+<!--                                    <th>선택</th>-->
+<!--                                </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                                <tr>-->
+<!--                                    <td>1</td>-->
+<!--                                    <td>user1@naver.com</td>-->
+<!--                                    <td>10000</td>-->
+<!--                                    <td><a href="" class="btn btn-secondary">낙찰</a></td>-->
+<!--                                </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+                    </div>
+
+                </div>
+
+
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <div style="position:absolute;bottom:30px;right:30px;">
+                        <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2 auction_commit" style="width:100px;">낙찰확정</a>
+                        <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2 auction_start" style="width:100px;">경매시작</a>
+                        <a href="javascript:void(0)" class="commit-btn btn btn-primary m-2 auction_cancel" style="width:100px;">경매종료</a>
+                    </div>
+                </th:block>
+            </div>
+        </section>
+
+
+<!--        <div th:text="${tradingImage}"></div>-->
+    </main>
+
+    <!-- Button trigger modal -->
+    <button style="display:none;" type="button" class="modal_button" data-bs-toggle="modal" data-bs-target="#exampleModal2323">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal2323" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">경매시간 설정</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form name="auctionForm">
+                        <div class="m-2">
+                            <div id="timerDisplay">00:00:00</div>
+                        </div>
+                        <div class="m-2">
+                            <label for="timer" class="mb-2" style="font-size : .8rem;">타이머 설정 (초):</label>
+                            <input type="range" id="timer" name="timer" min="1" max="3600" step="1" class="form-control"   oninput="updateTimerDisplay(this.value)">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a  href="javascript:void(0)" class="btn btn-primary auction_time_btn" >확인</a>
+                    <button style="display:none" type="button" class="btn btn-secondary modal_exit_btn" data-bs-dismiss="modal">Close</button>
+                    <button style="display:none" type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footerFragment}" />
+    </footer>
+
+
+    <script th:inline="javascript">
+        let total=0;
+        let userList = {};
+        let intervals=[];
+        let timerAsync1=null;
+        let timerAsync2=null;
+        let rankingAsync = null;
+
+
+        const curEl =document.querySelector('.cur');
+        curEl.innerHTML = total;
+        function enterRoom(socket){
+            var enterMsg={"type" : "ENTER","roomId":[[${room.roomId}]],"sender":[[${username}]],"msg":""};
+            socket.send(JSON.stringify(enterMsg));
+        }
+
+        //연결시도를 바로하지말고 기존에 세션이 있으면 그걸 사용
+        let socket = new WebSocket(`${wspath}`);
+
+        socket.onopen = function (e) {
+            console.log('open server!')
+            enterRoom(socket);
+        };
+        socket.onclose=function(e){
+            console.log('disconnet');
+        }
+
+        socket.onerror = function (e){
+            console.log(e);
+        }
+
+        //메세지 수신했을 때 이벤트.
+        socket.onmessage = function(e){
+           console.log(e.data);
+           console.log(typeof e.data);
+           var obj = JSON.parse(e.data);
+
+            let msgArea = document.querySelector('.chat');
+            let newMsg = document.createElement('div');
+           if(obj.type=='ENTER'){
+                newMsg.innerText="--- "  + obj.msg + " ----";
+                newMsg.setAttribute("style","text-align:center;color:gray;font-size:.8rem;margin:3px;");
+
+                   //기존 접속 제거
+                   var AllUserBlock = document.querySelectorAll('.user-item');
+                   if(AllUserBlock!=null){
+                        AllUserBlock.forEach(el=>{
+                            el.remove();
+                        });
+                   }
+
+                   const userCallResultBlock = document.querySelectorAll('.user-call-result-block table');
+
+                    if(userCallResultBlock != null){
+                        userCallResultBlock.forEach(el=>{
+                            el.remove();
+                           })
+                    }
+
+
+
+                  if(obj.sender!=username){
+                      if(!users.includes(obj.sender))
+                        users.push(obj.sender);
+                  }
+                  curEl.innerHTML=users.length;
+
+
+                  //접속 유저 추가
+                  users.forEach(user=>{
+                    //createUserItem(user);
+                    createUserCallResult(user,userList[user])
+                   });
+
+
+           }
+           else if(obj.type=='TALK'){
+
+                console.log('TALK',typeof obj.msg);
+
+
+                if(obj.msg=='auction_start'){
+                    asyncRankingFunc();
+                     statusColorControl('start','경매중');
+                }
+                else if(obj.msg=='auction_cancel'){
+                    clearInterval(timerAsync1);
+                    clearInterval(timerAsync2);
+                    clearInterval(rankingAsync);
+                    statusColorControl('cancel','경매종료');
+                    alert('관리자에 의해 경매가 종료되었습니다.');
+                }
+                else if(obj.msg.toString().includes('time:'))
+                {
+                    console.log("time",obj.msg);
+                    let time = obj.msg.toString().replace('time:','');
+                    //타이머설정
+                    timerAsync1 = setInterval(() => {
+                        const timerClock = document.querySelector('.timer-clock');
+                        timerClock.innerHTML=formatTime(time)
+                        time--;
+
+                        console.log(timerAsync1);
+                        if (time < -1) {
+                            console.log(timerAsync1);
+                            clearInterval(timerAsync1);
+                            clearInterval(rankingAsync);
+                            console.log("타이머 종료!");
+                            //alert("경매 시간 종료..");
+                            statusColorControl('end','경매완료');  //알림표시
+                        }
+                    }, 1000);
+                }
+                else
+                {
+                    const userCallResultBlock = document.querySelectorAll('.user-call-result-block table');
+                    userCallResultBlock.forEach(el=>{
+                        if(el.classList.contains(obj.sender)){
+                            const priceEl =  el.querySelector('.price');
+                            priceEl.innerHTML = obj.msg;
+                        }
+                    })
+                    userList[obj.sender] = obj.msg;
+                }
+
+
+
+          }else if(obj.type=='QUIT'){
+                    newMsg.innerText="--- "  + obj.msg + " ----";
+                    newMsg.setAttribute("style","text-align:center;color:gray;font-size:.8rem;margin:5px;");
+
+                   //기존 접속 제거
+                   var AllUserBlock = document.querySelectorAll('.user-item');
+                   AllUserBlock.forEach(el=>{
+                    el.remove();
+                   });
+
+                   var deletedUser = users.filter(user=>user==obj.sender);
+                   users = users.filter(user=>user!=obj.sender);
+                   curEl.innerHTML=users.length;
+
+                   //다시 추가
+                   users.forEach(user=>{
+                    //createUserItem(user);
+                   });
+
+                   //기존 호가 테이블 제거
+                   const userCallResultBlock = document.querySelectorAll('.user-call-result-block table');
+                   userCallResultBlock.forEach(el=>{
+                        if(el.classList.contains(deletedUser))
+                            el.remove();
+                   });
+           }
+
+
+            msgArea.append(newMsg);
+
+            msgArea.scrollIntoView(false);
+        }
+
+        //메세지 보내기 버튼 눌렀을 떄..
+        let startPriceInit=true;
+        function plusPriceMsg(price) {
+           const startPrice = document.querySelector('.startPrice').innerHTML;
+           if(startPriceInit){
+                price = Number(price) + Number(startPrice);
+                startPriceInit=false;
+           }
+           const oldPrice = document.querySelector(`.user-call-result-block .table.${username} .price`).innerHTML;
+           console.log(oldPrice,price);
+           price= Number(price) +Number(oldPrice);
+           var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":price};
+           socket.send(JSON.stringify(talkMsg));
+        }
+
+        function sendMsg(price) {
+
+           var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":price};
+           socket.send(JSON.stringify(talkMsg));
+           content.value='';
+        }
+        let content=document.querySelector('.content');
+        content.addEventListener('keydown',function(e){
+            console.log(e.keyCode);
+            let price=document.querySelector('.content').value;
+
+            const regexId = /^[0-9]+$/;
+
+            if(e.keyCode==13){
+                if(!regexId.test(price)){
+                    alert("숫자만 입력가능합니다.");
+                    content.value='';
+                    return ;
+                }
+                sendMsg(price)
+                content.value='';
+            }
+        });
+
+        function quit(){
+             var quitMsg={"type" : "QUIT","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":"연결을 종료합니다."};
+            socket.send(JSON.stringify(quitMsg));
+            socket.close();
+            location.href="/trading/music/main";
+        }
+
+        //----------------------------------------------------------------
+        // 랭킹 처리
+        //----------------------------------------------------------------
+        //버튼누를때 실행으로 변경할것
+        //2초마다 순위정해서 배치 다시
+        function asyncRankingFunc(){
+                rankingAsync = setInterval(function(){
+                        console.log("TEST");
+                        const userCallResultBlock = document.querySelector('.user-call-result-block');
+                        const tables = document.querySelectorAll('.user-call-result-block table');
+                         // 각 테이블에 대해 처리합니다.
+                         const sortedTables = Array.from(tables).sort((table1, table2) => {
+                                // 각 테이블의 첫 번째 .price 값을 가져와 비교합니다.
+                                const price1 = parseInt(table1.querySelector('.price').textContent);
+                                const price2 = parseInt(table2.querySelector('.price').textContent);
+                                // 내림차순으로 정렬합니다.
+                                return price2 - price1;
+                         });
+                            // 정렬된 순서대로 부모 요소에 다시 추가합니다.
+                         sortedTables.forEach((table,index) => {
+                                    const rank = index + 1;
+                                    const rankingElement = table.querySelector('.ranking');
+                                    rankingElement.textContent = `${rank}`;
+                                    userCallResultBlock.appendChild(table);
+                                    //1순위에 있는 가격은 낙찰가에도 업로드하기
+                                    if(rank==1){
+                                        const auctionPrice = document.querySelector('.auctionPrice');
+                                        auctionPrice.innerHTML = table.querySelector('.price').innerHTML;
+                                        const rankingUser = document.querySelector('.rankingUser');
+                                        rankingUser.innerHTML = table.querySelector('.username').innerHTML;
+                                    }
+                                }
+                         );
+                    },2000);
+        }
+
+        //----------------------------------------------------------------
+        //경매시작버튼
+        //----------------------------------------------------------------
+        const auctionStart = document.querySelector('.auction_start');
+        const modalButton = document.querySelector('.modal_button');
+        auctionStart.addEventListener('click',()=>{
+            const message=document.querySelector('.auction_status .message');
+            if(message.innerHTML=='경매중'){
+                alert('경매가 진행중 입니다.');
+                return ;
+            }
+            modalButton.click();
+        })
+        const auctionTimeBtn=document.querySelector('.auction_time_btn');
+        const modalExitBtn = document.querySelector('.modal_exit_btn');
+        auctionTimeBtn.addEventListener('click',()=>{
+
+
+            if(timerAsync2!=null){
+                alert("기존 경매 시간을 초기화합니다.");
+                clearInterval(timerAsync2);
+
+            }
+            const form = document.auctionForm;
+            console.log(form.timer.value);
+            let time =  form.timer.value;
+
+            //타이머설정
+            timerAsync2 = setInterval(() => {
+                        const timerClock = document.querySelector('.timer-clock');
+                        timerClock.innerHTML=formatTime(time)
+                        time--;
+
+                        console.log(timerAsync2);
+                        if (time < -1) {
+                            console.log(timerAsync2);
+                            clearInterval(timerAsync2);
+                            clearInterval(rankingAsync);
+
+                            console.log("타이머 종료!");
+                            //alert("경매 시간 종료..");
+                            statusColorControl('end','경매종료');  //알림표시
+                        }
+            }, 1000);
+
+            modalExitBtn.click();   //모달종료
+
+            statusColorControl('start','경매중');  //알림표시
+            //경매 시작 신호를 멤버들에게 전달
+            var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":'auction_start'};
+            socket.send(JSON.stringify(talkMsg));
+            var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":'time:'+time};
+            socket.send(JSON.stringify(talkMsg));
+        })
+
+
+        function updateTimerDisplay(seconds) {
+            let hours = Math.floor(seconds / 3600);
+            let minutes = Math.floor((seconds % 3600) / 60);
+            let secs = seconds % 60;
+
+            // 시간, 분, 초를 두 자리 숫자로 포맷팅
+            let hoursStr = hours.toString().padStart(2, '0');
+            let minutesStr = minutes.toString().padStart(2, '0');
+            let secondsStr = secs.toString().padStart(2, '0');
+
+            // 시간을 hh:mm:ss 형식으로 표시
+            document.getElementById('timerDisplay').textContent = `${hoursStr}:${minutesStr}:${secondsStr}`;
+        }
+
+        function statusColorControl(color,text){
+            const circleStatus=document.querySelector('.circle_status');
+            const message=document.querySelector('.auction_status .message');
+
+            circleStatus.classList.remove('pending');
+            circleStatus.classList.remove('start');
+            circleStatus.classList.remove('end');
+            circleStatus.classList.remove('cancel');
+
+            if(color==='start'){
+                circleStatus.classList.add('start');
+            }else if(color==='end'){
+                circleStatus.classList.add('end');
+            }else if(color==='pending'){
+                circleStatus.classList.add('pending');
+            }else if(color==='cancel'){
+                circleStatus.classList.add('cancel');
+            }
+            message.innerHTML=text;
+
+        }
+        //----------------------------------------------------------------
+        //경매 취소 버튼
+        //----------------------------------------------------------------
+        const auction_cancel = document.querySelector('.auction_cancel');
+        auction_cancel.addEventListener('click',()=>{
+            clearInterval(timerAsync1);
+            clearInterval(timerAsync2);
+            clearInterval(rankingAsync);
+            statusColorControl('cancel','경매종료');
+            alert('경매 강제 종료');
+
+            //경매 종료 신호를 멤버들에게 전달
+            var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":'auction_cancel'};
+            socket.send(JSON.stringify(talkMsg));
+
+        })
+        //----------------------------------------------------------------
+        //새로고침 방지코드
+        //----------------------------------------------------------------
+        function NotReload(){
+            if( (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) || (event.keyCode == 116) ) {
+                event.keyCode = 0;
+                event.cancelBubble = true;
+                event.returnValue = false;
+            }
+        }
+        document.onkeydown = NotReload;
+
+        //----------------------------------------------------------------
+        //
+        //----------------------------------------------------------------
+        console.log("room.js...");
+        const memberBtn = document.querySelector('.person-group-block');
+        let isClosed = true
+        memberBtn.addEventListener('click',()=>{
+            const userBlock = document.querySelector('.user-block');
+            if(isClosed){
+                userBlock.classList.remove('hidden');
+                isClosed = false;
+            }else{
+                userBlock.classList.add('hidden');
+                isClosed = true;
+            }
+        })
+
+        //----------------------------------------------------------------
+        //낙찰 확정
+        //----------------------------------------------------------------
+        const auctionCommit = document.querySelector('.auction_commit');
+        auctionCommit.addEventListener('click',()=>{
+            const formData = new FormData();
+
+            const price = document.querySelector('.auctionPrice').innerHTML;
+            const buyer = document.querySelector('.rankingUser').innerHTML;
+
+            formData.append('price',price);
+            formData.append('buyer',buyer);
+            formData.append('tradingid',tradingid);
+
+
+            console.log('/trading/music/commit');
+            axios.post('/trading/music/commit',formData,{headers: {'Content-Type': 'x-www-form-urlencoded'}})
+            .then(resp=>{
+                console.log(resp)
+                alert('낙찰완료! 매매페이지로 이동합니다.');
+                location.href='/trading/music/main';
+
+            })
+            .catch(err=>{console.log(err)});
+
+        })
+
+
+
+        //----------------------------------------------------------------
+        //시간 포맷 지정
+        //----------------------------------------------------------------
+        function formatTime(seconds) {
+            // 시간 계산
+            let hours = Math.floor(seconds / 3600);
+            let minutes = Math.floor((seconds % 3600) / 60);
+            let secs = seconds % 60;
+
+            // 시간, 분, 초를 두 자리 숫자로 포맷팅
+            let hoursStr = hours.toString().padStart(2, '0');
+            let minutesStr = minutes.toString().padStart(2, '0');
+            let secondsStr = secs.toString().padStart(2, '0');
+
+            return `${hoursStr}:${minutesStr}:${secondsStr}`;
+        }
+
+        //----------------------------------------------------------------
+        //사용자 계정조회(생략)
+        //----------------------------------------------------------------
+        /*
+        function createUserItem(user){
+                        // 프로필 요소를 선택
+
+                        var userBlock = document.querySelector('.user-block');
+
+                        var profile = document.createElement('div');
+                        profile.classList.add('user-item');
+                        profile.classList.add(user);
+
+                        // 프로필 정보 설정
+                        var profileImageSrc = '/assets/anon.jpg';
+                        var usernameText = user;
+
+                        // 프로필 이미지 생성
+                        var profileImage = document.createElement('div');
+                        profileImage.classList.add('profile-image');
+                        profileImage.innerHTML = '<img src="' + profileImageSrc + '" alt="">';
+                        profile.appendChild(profileImage);
+
+                        // 사용자명 생성
+                        var username = document.createElement('div');
+                        username.classList.add('username');
+                        username.textContent = usernameText;
+                        profile.appendChild(username);
+
+                        // '낙찰' 링크 생성
+                        var acceptLink = document.createElement('div');
+                        acceptLink.classList.add('accept');
+                        acceptLink.innerHTML = '<a href="">낙찰</a>';
+                        profile.appendChild(acceptLink);
+
+                        // '1:1' 링크 생성
+                        var control1Link = document.createElement('div');
+                        control1Link.classList.add('control-1');
+                        control1Link.innerHTML = '<div><a href="">1:1</a></div>';
+                        profile.appendChild(control1Link);
+
+                        // '강퇴' 링크 생성
+                        var control2Link = document.createElement('div');
+                        control2Link.classList.add('control-2');
+                        control2Link.innerHTML = '<div><a href="">강퇴</a></div>';
+                        profile.appendChild(control2Link);
+
+
+                        userBlock.appendChild(profile);
+        }
+        */
+
+        function createUserCallResult(username,price) {
+            // 부모 요소인 user-call-result-block를 선택합니다.
+            var parentDiv = document.querySelector('.user-call-result-block');
+
+            // table 요소를 생성합니다.
+            var table = document.createElement('table');
+            table.classList.add('table');
+            table.classList.add(username);
+
+            // thead 요소를 생성합니다.
+            var thead = document.createElement('thead');
+            thead.className = 'table-primary';
+
+            // thead 내부에 tr 요소를 생성합니다.
+            var trHead = document.createElement('tr');
+
+            // 각각의 th 요소를 생성하고 내용을 설정합니다.
+            var th1 = document.createElement('th');
+            th1.textContent = '순위';
+            var th2 = document.createElement('th');
+            th2.textContent = '유저명';
+            var th3 = document.createElement('th');
+            th3.textContent = '호가';
+            //var th4 = document.createElement('th');
+            //th4.textContent = '선택';
+
+            // trHead에 th 요소들을 자식으로 추가합니다.
+            trHead.appendChild(th1);
+            trHead.appendChild(th2);
+            trHead.appendChild(th3);
+            //trHead.appendChild(th4);
+
+            // thead에 trHead를 자식으로 추가합니다.
+            thead.appendChild(trHead);
+
+            // tbody 요소를 생성합니다.
+            var tbody = document.createElement('tbody');
+
+            // tbody 내부에 tr 요소를 생성합니다.
+            var trBody = document.createElement('tr');
+
+            // 각각의 td 요소를 생성하고 내용을 설정합니다.
+            var td1 = document.createElement('td');
+            td1.textContent = 0;
+            td1.classList.add('ranking');
+            var td2 = document.createElement('td');
+            td2.textContent = username;
+            td2.classList.add('username');
+            var td3 = document.createElement('td');
+            if(price==null)
+                td3.textContent = 0;
+            else
+                td3.textContent = price;
+            td3.classList.add('price');
+
+            //var td4 = document.createElement('td');
+            // td4 내에 a 요소를 생성하고 클래스 및 텍스트를 설정합니다.
+            //var a = document.createElement('a');
+            //a.href = '#';  // 링크 URL 설정 필요
+            //a.className = 'btn btn-secondary';
+            //a.textContent = '낙찰';
+
+            // td4에 a를 자식으로 추가합니다.
+            //td4.appendChild(a);
+
+            // trBody에 td 요소들을 자식으로 추가합니다.
+            trBody.appendChild(td1);
+            trBody.appendChild(td2);
+            trBody.appendChild(td3);
+            //trBody.appendChild(td4);
+
+            // tbody에 trBody를 자식으로 추가합니다.
+            tbody.appendChild(trBody);
+
+            // table에 thead와 tbody를 자식으로 추가합니다.
+            table.appendChild(thead);
+            table.appendChild(tbody);
+
+            // parentDiv에 table을 자식으로 추가합니다.
+            parentDiv.appendChild(table);
+        }
+    </script>
+
+
+</div>
+
+
+
+
+</body>
+</html>

@@ -3,7 +3,9 @@ package com.creator.imageAndMusic.domain.service;
 
 import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.domain.dto.ChatRoom;
+import com.creator.imageAndMusic.domain.dto.ChatRoomMusic;
 import com.creator.imageAndMusic.domain.dto.TradingImageDto;
+import com.creator.imageAndMusic.domain.dto.TradingMusicDto;
 import com.creator.imageAndMusic.domain.entity.*;
 import com.creator.imageAndMusic.domain.repository.*;
 
@@ -22,12 +24,11 @@ import java.util.*;
 @Service
 @Slf4j
 public class TradingImageServiceImpl {
+
+
+
     @Autowired
     private TradingImageRepository tradingImageRepository;
-
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private ImagesFileInfoRepository imagesFileInfoRepository;
@@ -35,11 +36,22 @@ public class TradingImageServiceImpl {
     @Autowired
     private ImageRankingRepository imageRankingRepository;;
 
+    @Autowired
+    private UserRepository userRepository;
 
 
     //채팅 처리
     private  ObjectMapper objectMapper= new ObjectMapper();
     private Map<String, ChatRoom> chatRooms= new LinkedHashMap<>();
+
+    //채팅관련
+    public List<ChatRoom> findAllRoom() {
+        return new ArrayList<>(chatRooms.values());
+    }
+
+    public ChatRoom findRoomById(String roomId) {
+        return chatRooms.get(roomId);
+    }
 
     @Transactional(rollbackFor=Exception.class)
     public Map<String,Object> requestTradingImage(TradingImageDto dto){
@@ -133,16 +145,6 @@ public class TradingImageServiceImpl {
         return true;
     }
 
-    //채팅관련
-    public List<ChatRoom> findAllRoom() {
-        return new ArrayList<>(chatRooms.values());
-    }
-
-    public ChatRoom findRoomById(String roomId) {
-        return chatRooms.get(roomId);
-    }
-
-
     @Transactional(rollbackFor=Exception.class)
 
     public void createRoom(String name,Long tradingid) {
@@ -183,15 +185,10 @@ public class TradingImageServiceImpl {
             members.add(username);
             tradingImageRepository.save(tradingImage);
         }
-
-
-
-
-
     }
 
     @Transactional(rollbackFor=Exception.class)
-    public void disconnectTradingIMageChat(WebSocketSession session,String username) {
+    public void disconnectTradingIMageChat(WebSocketSession session, String username) {
         System.out.println("disconnectTradingIMageChat...");
 
         //Session이 비어이으면 모두 제거
@@ -269,7 +266,7 @@ public class TradingImageServiceImpl {
 
                 Optional<TradingImage> tradingImagOptional =  tradingImageRepository.findById(tradingid);
                 if(tradingImagOptional.isPresent()){
-                     TradingImage tradingImage =tradingImagOptional.get();
+                    TradingImage tradingImage =tradingImagOptional.get();
                     tradingImage.setCur(0L);
                     tradingImage.setAuctionState("채팅방 제거");
                     tradingImage.setRoomId(null);
@@ -301,6 +298,11 @@ public class TradingImageServiceImpl {
         return true;
 
     }
+
+
+
+
+
 
 
 

@@ -130,13 +130,32 @@ public class ImageRankingController {
         model.addAttribute("result",result);
 
 
-
         return "imageRanking/local";
     }
 
 
     @GetMapping("/cat")
-    public void cat(){
-        log.info("GET /imageRanking/cat...");
+    public void cat(Model model){
+       log.info("GET /imageRanking/cat...");
+       Map<String,Object> map = imageRankingService.getAllImageRankingByAllCategory();
+
+       List<ImagesRanking> Character = (List<ImagesRanking>)map.get("Character");
+       List<ImagesRanking> City = (List<ImagesRanking>)map.get("City");
+       List<ImagesRanking> Map = (List<ImagesRanking>)map.get("Map");
+       List<ImagesRanking> iCON = (List<ImagesRanking>)map.get("iCON");
+       List<ImagesRanking> Furniture = (List<ImagesRanking>)map.get("Furniture");
+       List<ImagesRanking> Car = (List<ImagesRanking>)map.get("Car");
+       List<ImagesRanking> Place = (List<ImagesRanking>)map.get("Place");
+       List<ImagesRanking> Others = (List<ImagesRanking>)map.get("Others");
+
+       model.addAttribute("Character",Character);
+       model.addAttribute("City",City);
+       model.addAttribute("Map",Map);
+       model.addAttribute("iCON",iCON);
+       model.addAttribute("Furniture",Furniture);
+       model.addAttribute("Car",Car);
+       model.addAttribute("Place",Place);
+       model.addAttribute("Others",Others);
+       model.addAttribute("Character",Character);
     }
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
+
+
+    <link rel="stylesheet" href="/css/admin/trading/main.css">
+
+    <script src="/js/admin/trading/main.js" defer> </script>
+
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="~{fragments/header :: mainHeaderFragment}" />
+
+    <!-- nav       -->
+    <th:block th:insert="~{fragments/nav :: navFragment}" />
+
+    <main class="layout-5">
+
+        <hr>
+        <span>MESSAGE : </span> <span th:text="${message}">  </span><br>
+        <section class="banner layout-5">
+
+
+                <div th:text="${tradingMusic}">
+                </div>
+
+                <table class="table w-100" style="text-align:center;font-size :.7rem;">
+                    <thead>
+                    <th>번호</th>
+                    <th>이미지</th>
+
+                    <th>경매시작일</th>
+                    <th>경매종료일</th>
+                    <th>신청인원</th>
+                    <th>관리자승인여부</th>
+                    <th>승인하기</th>
+                    <th>승인취소</th>
+                    <th>이동하기</th>
+
+                    </thead>
+
+                    <tbody >
+                    <th:block th:each="dto : ${list}">
+                        <!--                                <div th:text="${dto}"></div>-->
+                        <tr>
+                            <td th:text="${dto.tradingid}"></td>
+                            <td>
+                                <a href="javascript:void(0)">
+                                    <img  style="width:100px;height:50px;"src="/assets/music.jpg"  alt="" />
+                                </a>
+                            </td>
+                            <td th:text="${dto.auctionStartTime}"></td>
+                            <td th:text="${dto.auctionEndTime}"></td>
+                            <td th:text="${dto.cur}"></td>
+                            <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
+                            <td >
+                                <form action="/admin/trading/music/accept"  style="display:flex;justify-content:center;align-items:center;">
+                                    <input type="hidden" class="" name="tradingid" th:value="${dto.tradingid}" readonly>
+                                    <input style="width:150px;" class="form-control m-1" type="datetime-local" name="auctionStartTime"  />
+                                    <button class="btn btn-primary m-2" style="font-size :.7rem;">승인</button>
+                                </form>
+                            </td>
+                            <td>
+                                <a th:href="@{/admin/trading/music/cancel(tradingid=${dto.tradingid})}"  class="btn btn-secondary" style="font-size :.7rem;">취소</a>
+                            </td>
+                            <td>
+                                <a href="/trading/music/main" class="btn btn-secondary" style="font-size :.7rem;">이동</a>
+                            </td>
+                        </tr>
+                    </th:block>
+
+                    </tbody>
+                </table>
+
+
+        </section>
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footerFragment}" />
+    </footer>
+
+</div>
+
+
+
+
+</body>
+</html>

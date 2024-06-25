@@ -2,17 +2,13 @@ package com.creator.imageAndMusic.controller;
 
 
 import com.creator.imageAndMusic.domain.dto.PaymentDto;
-import com.creator.imageAndMusic.domain.service.PaymentServiceImpl;
+import com.creator.imageAndMusic.domain.service.PaymentImageServiceImpl;
+import com.creator.imageAndMusic.domain.service.PaymentMusicServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
@@ -22,24 +18,35 @@ import java.io.IOException;
 public class PaymentController {
 
     @Autowired
-    private PaymentServiceImpl paymentService;
-    @PostMapping("/add")
+    private PaymentMusicServiceImpl paymentMusicService;
+    @Autowired
+    private PaymentImageServiceImpl paymentImageService;
+    @PostMapping("/add/image")
     public ResponseEntity<String> payment_insert(@RequestBody PaymentDto paymentDto) throws IOException {
-        log.info("/payment/add..." + paymentDto);
-        paymentService.addPayment(paymentDto);
+        log.info("/payment/add/image..." + paymentDto);
+        paymentImageService.addPayment(paymentDto);
 
         return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
     }
+    @PostMapping("/add/music")
+    public ResponseEntity<String> payment_insert_music(@RequestBody PaymentDto paymentDto) throws IOException {
+        log.info("/add/music..." + paymentDto);
+        paymentMusicService.addPayment(paymentDto);
 
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+    }
     //https://hyphen.im/product-api/view?seq=100
 
     //관리자 송금하기
-    @GetMapping("/remittance")
+    @GetMapping("/remittance/image")
     public ResponseEntity<String> remittance(@RequestParam("tradingid") Long tradingid, Model model){
-
-        boolean isRemittance=paymentService.remittanceUser(tradingid);
-
+        boolean isRemittance=paymentImageService.remittanceUser(tradingid);
         return new ResponseEntity("SUCCESS",HttpStatus.OK);
     }
-
+    //관리자 송금하기
+    @GetMapping("/remittance/music")
+    public ResponseEntity<String> remittance_music(@RequestParam("tradingid") Long tradingid, Model model){
+        boolean isRemittance=paymentMusicService.remittanceUser(tradingid);
+        return new ResponseEntity("SUCCESS",HttpStatus.OK);
+    }
 }

@@ -55,67 +55,134 @@
 
       <th:block th:insert="fragments/myaside :: myasideFragment" />
 
-      <div class="join_block">
-        <div >
 
+      <div class="right">
+        <h4 style="background-color:darkcyan;padding:5px;color:white;">이미지</h4>
+        <hr>
+        <div class="join_block">
+          <div  style="width : 100%;height:250px;overflow:auto;border :1px solid;margin-bottom:20px;">
+            <!--승인된 Trading에 가격 요청-->
+            <table class="table w-100" style="font-size :.7rem;">
+              <thead>
+              <th>번호</th>
+              <th>이미지</th>
+              <th>관리자승인여부</th>
+              <th>경매시작일</th>
+              <th>경매종료일</th>
+              <th>신청인원</th>
+              <th>낙찰가</th>
+              <th>구매자</th>
+              <th>상태</th>
+              <th>결제</th>
 
+              </thead>
+              <tbody style="font-size :.7rem;">
 
-          <!--승인된 Trading에 가격 요청-->
-          <table class="table w-100" style="font-size :.7rem;">
-            <thead>
-            <th>번호</th>
-            <th>이미지</th>
-            <th>관리자승인여부</th>
-            <th>경매시작일</th>
-            <th>경매종료일</th>
-            <th>신청인원</th>
-            <th>낙찰가</th>
-            <th>구매자</th>
-            <th>상태</th>
-            <th>결제</th>
+              <th:block th:each="dto : ${list}">
+                <!--                                <div th:text="${dto}"></div>-->
+                <tr>
+                  <td th:text="${dto.tradingid}"></td>
+                  <td>
+                    <th:block>
+                      <a href="javascript:void(0)" >
+                        <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
+                      </a>
+                    </th:block>
 
-            </thead>
-            <tbody style="font-size :.7rem;">
-
-            <th:block th:each="dto : ${list}">
-              <div th:text="${dto}"></div>
-              <!--                                <div th:text="${dto}"></div>-->
-              <tr>
-                <td th:text="${dto.tradingid}"></td>
-                <td>
+                  </td>
+                  <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
+                  <td th:text="${dto.auctionStartTime}"></td>
+                  <td th:text="${dto.auctionEndTime}"></td>
+                  <td th:text="${dto.cur}"></td>
+                  <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
+                  <td th:text="${dto.buyer}==null?'미정':${dto.buyer.username}"></td>
+                  <td th:text="${dto.status}"></td>
                   <th:block>
-                    <a href="javascript:void(0)" >
-                      <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
-                    </a>
+                    <td th:if="${dto.status=='낙찰완료'}">
+                      <button th:onclick='requestImagePay( [[${dto.price}]] , [[${dto.fileid.images.title}]],[[${dto.tradingid}]] )' class="btn btn-secondary" style="font-size :.7rem;">결제</button>
+                    </td>
+                    <td th:if="${dto.status=='결제완료'}">
+                      <a href="/payment/download()">
+                        <span class="material-symbols-outlined">download</span>
+                      </a>
+                    </td>
                   </th:block>
+                </tr>
+              </th:block>
 
-                </td>
-                <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
-                <td th:text="${dto.auctionStartTime}"></td>
-                <td th:text="${dto.auctionEndTime}"></td>
-                <td th:text="${dto.cur}"></td>
-                <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
-                <td th:text="${dto.buyer}==null?'미정':${dto.buyer.username}"></td>
-                <td th:text="${dto.status}"></td>
-                <th:block>
-                  <td th:if="${dto.status=='낙찰완료'}">
-                    <button th:onclick='requestPay( [[${dto.price}]] , [[${dto.fileid.images.title}]],[[${dto.tradingid}]] )' class="btn btn-secondary" style="font-size :.7rem;">결제</button>
-                  </td>
-                  <td th:if="${dto.status=='결제완료'}">
-                    <a href="/payment/download()">
-                      <span class="material-symbols-outlined">download</span>
-                    </a>
-                  </td>
-                </th:block>
-              </tr>
-            </th:block>
+              </tbody>
 
-            </tbody>
+            </table>
 
-          </table>
-
+          </div>
         </div>
+
+        <h4 style="background-color:darkcyan;padding:5px;color:white;">음악</h4>
+        <hr>
+        <div class="join_block">
+          <div  style="width : 100%;height:250px;overflow:auto;border :1px solid;margin-bottom:20px;">
+
+            <!--승인된 Trading에 가격 요청-->
+            <table class="table w-100" style="font-size :.7rem;">
+              <thead>
+              <th>번호</th>
+              <th>이미지</th>
+              <th>관리자승인여부</th>
+              <th>경매시작일</th>
+              <th>경매종료일</th>
+              <th>신청인원</th>
+              <th>낙찰가</th>
+              <th>구매자</th>
+              <th>상태</th>
+              <th>결제</th>
+
+              </thead>
+              <tbody style="font-size :.7rem;">
+
+              <th:block th:each="dto : ${musicList}">
+                <!--                                <div th:text="${dto}"></div>-->
+                <tr>
+                  <td th:text="${dto.tradingid}"></td>
+                  <td>
+                    <th:block>
+                      <a href="javascript:void(0)" >
+                        <img  style="width:100px;height:50px;" src="/assets/music.jpg"  alt="" />
+                      </a>
+                    </th:block>
+
+                  </td>
+                  <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
+                  <td th:text="${dto.auctionStartTime}"></td>
+                  <td th:text="${dto.auctionEndTime}"></td>
+                  <td th:text="${dto.cur}"></td>
+                  <td th:text="${dto.price} eq null?'0':${dto.price}"></td>
+                  <td th:text="${dto.buyer}==null?'미정':${dto.buyer.username}"></td>
+                  <td th:text="${dto.status}"></td>
+                  <th:block>
+                    <td th:if="${dto.status=='낙찰완료'}">
+                      <button th:onclick='requestMusicPay( [[${dto.price}]] , [[${dto.fileid.music.title}]],[[${dto.tradingid}]] )' class="btn btn-secondary" style="font-size :.7rem;">결제</button>
+                    </td>
+                    <td th:if="${dto.status=='결제완료'}">
+                      <a href="/payment/download/music">
+                        <span class="material-symbols-outlined">download</span>
+                      </a>
+                    </td>
+                  </th:block>
+                </tr>
+              </th:block>
+
+              </tbody>
+
+            </table>
+
+          </div>
+        </div>
+
+
+
       </div>
+
+
     </section>
   </main>
 
@@ -131,7 +198,11 @@
 
   IMP.init("imp87380722");
 
-  function requestPay(price,title,tradingid) {
+
+  //----------------------------------------------------------------
+  //낙찰 받은 이미지 결제
+  //----------------------------------------------------------------
+  function requestImagePay(price,title,tradingid) {
 
     console.log(price,title);
     IMP.request_pay
@@ -149,25 +220,71 @@
       function(resp)
       {
         console.log(resp);
-        resp['tradingid'] = tradingid;
-          axios.post('/payment/add',resp)
-          .then(resp=>{
-              console.log(resp)
-              alert("결제가 완료되었습니다.\n나의 구매내역 에서 확인하세요");
-              location.href='/user/myinfo/trading/auctioned';
+        if(resp.success){
+            resp['tradingid'] = tradingid;
+            axios.post('/payment/add/image',resp)
+            .then(resp=>{
+                  console.log(resp)
+                  alert("결제가 완료되었습니다.\n나의 구매내역 에서 확인하세요");
+                  //location.href='/user/myinfo/trading/auctioned';
 
-           })
-          .catch(err=>{
-            console.log(err);
-            alert("결제 취소");
+            })
+            .catch(err=>{
+                console.log(err);
+                alert("결제 취소");
 
-          });
-
-
-
+            });
+        }
+        else
+        {
+            alert("결제 실패.");
+        }
       }
     );
+  }
 
+  //----------------------------------------------------------------
+  //낙찰 받은 음악 결제
+  //----------------------------------------------------------------
+  function requestMusicPay(price,title,tradingid) {
+
+    console.log(price,title);
+    IMP.request_pay
+    (
+      {
+        pg: "html5_inicis.INIpayTest",
+        pay_method: "card",
+        merchant_uid: "test_"+Date.now(),
+        name: title,
+        //amount: price,
+        amount: 100,
+        buyer_tel: userDto.phone,
+      }
+      ,
+      function(resp)
+      {
+        console.log(resp);
+        if(resp.success){
+            resp['tradingid'] = tradingid;
+            axios.post('/payment/add/music',resp)
+            .then(resp=>{
+                  console.log(resp)
+                  alert("결제가 완료되었습니다.\n나의 구매내역 에서 확인하세요");
+                  //location.href='/user/myinfo/trading/auctioned';
+
+            })
+            .catch(err=>{
+                console.log(err);
+                alert("결제 취소");
+
+            });
+        }
+        else
+        {
+            alert("결제 실패.");
+        }
+      }
+    );
   }
 </script>
 

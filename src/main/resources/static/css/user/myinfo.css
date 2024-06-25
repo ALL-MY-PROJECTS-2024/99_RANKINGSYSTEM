@@ -5,6 +5,9 @@ main{
    */
 
 }
+.right{
+    width : 100%;
+}
 .sub-menu{
     position:relative;
     width : 100%;
@@ -45,6 +48,7 @@ main{
     display:flex;
     justify-content : left;
     align-items : start;
+    width : 100%;
 }
 myinfoblock>*{
     margin-left:50px;
