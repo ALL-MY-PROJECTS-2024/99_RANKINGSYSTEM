@@ -18,8 +18,8 @@ public class TradingMusicSocketConfigure implements WebSocketConfigurer {
 현재 저희는 테스트이기때문에 * 와일드카드로 모든 도메인을 열어줍시다.(실제로 개발하실때에는 보안상의 위험으로 와일드카드는 쓰시면안됍니다.)
  */
 
-//        registry.addHandler(webSocketHandler, "/ws/music/chat").setAllowedOrigins("*");
-        registry.addHandler(webSocketHandler, "/wss/music/chat").setAllowedOrigins("https://test.wooriac.store");
+        registry.addHandler(webSocketHandler, "/ws/music/chat").setAllowedOrigins("*");
+//        registry.addHandler(webSocketHandler, "/wss/music/chat").setAllowedOrigins("https://test.wooriac.store");
 
     }
 

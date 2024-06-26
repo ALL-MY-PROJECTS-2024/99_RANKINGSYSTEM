@@ -77,11 +77,25 @@
 }
 .section1 .left .ranking-summary{
     width : 100%;
-    height : 100%;
+
     display:flex;
     justify-content : center;
     align-items : start;
     padding : 20px;
+
+    position:relative;
+}
+.section1 .left .ranking-summary .title{
+    width:100%;
+    position:absolute;
+    left:0px;
+    top:0px;
+
+}
+
+.section1 .left .ranking-summary table{
+    position:relative;
+    top:100px;
 }
 
 .section1 .left::-webkit-scrollbar{
@@ -89,7 +103,7 @@
 }
 .section1 .left .ranking-summary table{
     width : 100%;
-    height : 100%;
+
 }
 .section1 .left table th,
 .section1 .left table td{
