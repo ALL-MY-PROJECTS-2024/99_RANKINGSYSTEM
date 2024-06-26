@@ -15,6 +15,9 @@
     console.log(userDto);
   </script>
 
+
+  <script src="/js/user/myinfo/auctioned" defer></script>
+
 </head>
 <body>
 
@@ -102,7 +105,7 @@
                       <button th:onclick='requestImagePay( [[${dto.price}]] , [[${dto.fileid.images.title}]],[[${dto.tradingid}]] )' class="btn btn-secondary" style="font-size :.7rem;">결제</button>
                     </td>
                     <td th:if="${dto.status=='결제완료'}">
-                      <a href="/payment/download()">
+                      <a class="download-btn"  href="javascript:void(0)" th:data-path="${dto.fileid.dir}+'\\'+${dto.fileid.filename}">
                         <span class="material-symbols-outlined">download</span>
                       </a>
                     </td>
@@ -163,7 +166,8 @@
                       <button th:onclick='requestMusicPay( [[${dto.price}]] , [[${dto.fileid.music.title}]],[[${dto.tradingid}]] )' class="btn btn-secondary" style="font-size :.7rem;">결제</button>
                     </td>
                     <td th:if="${dto.status=='결제완료'}">
-                      <a href="/payment/download/music">
+
+                      <a class="download-btn" style="display:flex;justify-content:center;align-items:center;" href="javascript:void(0)" th:data-path="${dto.fileid.dir}+'\\'+${dto.fileid.filename}">
                         <span class="material-symbols-outlined">download</span>
                       </a>
                     </td>
@@ -225,8 +229,8 @@
             axios.post('/payment/add/image',resp)
             .then(resp=>{
                   console.log(resp)
-                  alert("결제가 완료되었습니다.\n나의 구매내역 에서 확인하세요");
-                  //location.href='/user/myinfo/trading/auctioned';
+                  alert("결제가 완료되었습니다.\n");
+                  location.href='/user/myinfo/trading/auctioned';
 
             })
             .catch(err=>{
@@ -286,6 +290,22 @@
       }
     );
   }
+
+  //----------------------------------------------------------------
+  //다운로드 처리
+  //----------------------------------------------------------------
+  const imageDownloadBtnEls=document.querySelectorAll('.download-btn');
+  imageDownloadBtnEls.forEach(el=>{
+
+      el.addEventListener('click',function(){
+
+          const path = el.getAttribute("data-path");
+          console.log('cilcked..',path);
+          location.href="/user/myinfo/trading/download?filepath="+encodeURIComponent(path);
+      })
+
+  })
+
 </script>
 
 

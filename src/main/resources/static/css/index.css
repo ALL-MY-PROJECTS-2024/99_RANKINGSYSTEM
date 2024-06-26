@@ -32,6 +32,7 @@
 
     text-align:center;
 }
+
 .section1 .left table img{
     width : 100px;
     height : 45px;
@@ -46,8 +47,8 @@
 */
 
     display:flex;
-    justify-content : center;
-    align-items : center;
+    justify-content : start;
+    align-items :start;
     flex-direction:column;
 }
 .section1 .left>div:nth-child(2){
@@ -67,6 +68,9 @@
     height : 35px;
     border : 0;
     margin : 0px;
+    position:absolute;
+    left:0px;
+    top:0px;
 }
 .section1 .left>div>.title a{
     font-size : .6rem;
@@ -94,8 +98,9 @@
 }
 
 .section1 .left .ranking-summary table{
-    position:relative;
-    top:100px;
+    position:absolute;
+    top:45px;
+    left:-10px;
 }
 
 .section1 .left::-webkit-scrollbar{
@@ -174,11 +179,20 @@
 .section1 .right .swiper .swiper-button-next::after{
     content : "";
 }
+.section1 .right .swiper .swiper-button-prev,
+.section1 .right .swiper .swiper-button-next
+{
+    text-decoration : none;
+    color : gray;
+    position:absolute;
+    ;
+    top : 50%;
+}
 .section1 .right .swiper .swiper-button-prev{
-
+    left :0px;
 }
 .section1 .right .swiper .swiper-button-next{
-
+    right : 0px;
 }
 /*
     SECTION02
@@ -186,7 +200,7 @@
 
 .section2{
     width : 100%;
-    border : 1px  solid;
+    /*border : 1px  solid;*/
 
     padding : 15px;
     display:flex;
@@ -199,7 +213,8 @@
     width : 100%;
     padding : 20px;
     margin : 10px;
-    border : 1px solid;
+
+    box-shadow : 5px 5px 5px lightgray;
 /*    display:flex;
     justify-content:center;
     align-items : center;*/
@@ -223,11 +238,11 @@
 }
 
 .section2 .right{
+    margin-top : 35px;
     width : 100%;
-
+    padding : 20px;
     margin : 10px;
-    padding : 5px;
-    border : 1px solid;
+    box-shadow : 5px 5px 5px lightgray;
 /*    display:flex;
     justify-content:center;
     align-items : center;*/
@@ -238,7 +253,7 @@
 .section2 .images-block .swiper{
     width : 95vw;;
     height : 300px;
-    border : 1px solid;
+    border : 1px solid lightgray;
     display:flex;
     justify-content : center;
     align-items : center;
@@ -340,4 +355,9 @@
 
 .fc-daygrid-day-frame.fc-scrollgrid-sync-inner{
     height : 150px !important;
+}
+
+
+.hidden{
+    display:none !important;
 }

@@ -158,14 +158,15 @@
                 <div class="left layout-5">
 
                     <div class="ranking-summary">
+
                         <div class="title">
                             <h4 style="margin-bottom : 15px;">IMAGE RANKING TOP 10</h4>
                             <div>
-                                <a href="" class="" >조회순</a>&nbsp;
-                                <a href="" class="" >좋아요순</a>
+                                <a href="javascript:void(0)" class="btn_count" >조회순</a>&nbsp;
+                                <a href="javascript:void(0)" class="btn_like" >좋아요순</a>
                             </div>
                         </div>
-                        <table class="table ">
+                        <table class="table order">
                             <tr class="table-dark">
                                 <th style="width:25px;">No</th>
                                 <th>Image</th>
@@ -173,20 +174,67 @@
                                 <th style="width:25px;">Count</th>
                                 <th style="width:25px;">Like</th>
                             </tr>
-                            <tr class="" th:each="imageRanking,imageRankingStat : ${imageTop10ByCount}">
+                            <tbody class="img-body-order">
+                                <tr class="" th:each="imageRanking,imageRankingStat : ${imageTop10ByCount}">
 
 
-                                <td th:text="${imageRankingStat.count}"></td>
-                                <td>
-                                    <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}"></img>
-                                </td>
-                                <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>
-                                <td th:text="${imageRanking.count}"></td>
-                                <td th:text="${imageRanking.ilikeit}"></td>
-                            </tr>
+                                    <td th:text="${imageRankingStat.count}"></td>
+                                    <td>
+                                        <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요"></img>
+                                    </td>
+                                    <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>
+                                    <td th:text="${imageRanking.count}"></td>
+                                    <td th:text="${imageRanking.ilikeit}"></td>
+                                </tr>
+                            </tbody>
+                            <tbody class="img-body-like hidden">
+                                <tr class="" th:each="imageRanking,imageRankingStat : ${imageTop10ByLike}">
+
+
+                                    <td th:text="${imageRankingStat.count}"></td>
+                                    <td>
+                                        <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요"></img>
+                                    </td>
+                                    <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>
+                                    <td th:text="${imageRanking.count}"></td>
+                                    <td th:text="${imageRanking.ilikeit}"></td>
+                                </tr>
+                            </tbody>
                         </table>
-                    </div>
 
+                        <table class="table like hidden">
+                            <tr class="table-dark">
+                                <th style="width:25px;">No</th>
+                                <th>Image</th>
+                                <th>Categoty</th>
+                                <th style="width:25px;">Count</th>
+                                <th style="width:25px;">Like</th>
+                            </tr>
+                            <tbody class="m-body-order">
+                                <tr class="" th:each="musicRanking,musicRankingStat : ${musicTop10ByCount}">
+                                    <td th:text="${musicRankingStat.count}"></td>
+                                    <td>
+                                        <img src="/assets/music.jpg" alt="인증필요" />
+                                    </td>
+                                    <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
+                                    <td th:text="${musicRanking.count}"></td>
+                                    <td th:text="${musicRanking.ilikeit}"></td>
+                                </tr>
+                            </tbody>
+                            <tbody class="m-body-like hidden">
+                                <tr class="" th:each="musicRanking,musicRankingStat : ${musicTop10ByLike}">
+                                    <td th:text="${musicRankingStat.count}"></td>
+                                    <td>
+                                        <img src="/assets/music.jpg" alt="인증필요" />
+                                    </td>
+                                    <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
+                                    <td th:text="${musicRanking.count}"></td>
+                                    <td th:text="${musicRanking.ilikeit}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
                 <div class="right layout-5">
 
@@ -198,16 +246,16 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide"><canvas id="section1Chart"></canvas></div>
-                            <div class="swiper-slide"><canvas id="section1Chart2"></canvas></div>
+                            <div class="swiper-slide"><canvas style="position:relative;z-index:1;" id="section1Chart"></canvas></div>
+                            <div class="swiper-slide"><canvas style="position:relative;z-index:1;"  id="section1Chart2"></canvas></div>
                         </div>
 
                         <!-- If we need navigation buttons -->
                         <div class="swiper-button-prev">
-                            <span class="material-symbols-outlined" style="font-size:3rem;">arrow_left</span>
+                            <span class="material-symbols-outlined" style="font-size:6rem;">arrow_left</span>
                         </div>
                         <div class="swiper-button-next">
-                            <span class="material-symbols-outlined" style="font-size:3rem;">arrow_right</span>
+                            <span class="material-symbols-outlined" style="font-size:6rem;">arrow_right</span>
                         </div>
                     </div>
 
@@ -225,12 +273,12 @@
             <section class="section2 ">
 
                 <div class="left layout-5">
-                        <span style="font-size : 1rem;">이번주 경매일정</span> <a href="/trading/calendar/main"><span style="font-size : .7rem;font-weight:800;color:green">경매일정 전체보기 ></span></a>
+                        <span style="font-size : 1.2rem;">이번주 경매일정</span> <a href="/trading/calendar/main"><span style="font-size : .7rem;font-weight:800;color:green">경매일정 전체보기 ></span></a>
                         <hr>
                     <div id='calendar' class="layout-5" style="height:300px;width:100%;"></div>
                 </div>
                 <div class="right layout-5">
-                    <span style="font-size : 1rem;">진행중인 경매</span>
+                    <span style="font-size : 1.2rem;">진행중인 경매</span>
                     <hr>
                     <div class="images-block">
                         <!-- Slider main container -->
@@ -238,16 +286,13 @@
                             <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
                                 <!-- Slides -->
-                                <div class="swiper-slide"><a href="">
-                                    <span class="material-symbols-outlined">military_tech</span>
-                                    <img src="">
-                                </a></div>
-                                <div class="swiper-slide"><a href=""><img src=""></a></div>
-                                <div class="swiper-slide"><a href=""><img src=""></a></div>
-                                <div class="swiper-slide"><a href=""><img src=""></a></div>
-                                <div class="swiper-slide"><a href=""><img src=""></a></div>
-                                <div class="swiper-slide"><a href=""><img src=""></a></div>
-                                <div class="swiper-slide"><a href=""><img src=""></a></div>
+                                <div class="swiper-slide" th:each="imageRanking:${list}">
+<!--                                   <div th:text="${imageRankingDto}"></div>-->
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{${imageRanking.fileDir}+'\s_'+${imageRanking.filename}}" alt="">
+                                    </a>
+                                </div>
+
                             </div>
                             <!-- If we need navigation buttons -->
                             <div class="swiper-button-prev">

@@ -76,12 +76,12 @@ myinfoblock>*{
     margin : 5px;
     box-shadow : 5px 5px 5px lightgray;
     text-align:center;
-
     border : 1px solid;
 }
 .mymenu>.menu>li>a{
     display:block;
     height : 35px;
+
 }
 .mymenu>.menu>li>.submenu{
     padding :5px;
@@ -102,36 +102,43 @@ myinfoblock>*{
     display:block;
 }
 /**/
-.myinfoblock{
+.join_block{
     width:100%;
     margin:0px auto;
     position:relative;
     z-index:2;
     flex-grow: 1;
 }
-.myinfoblock>.header{
+.join_block>.header{
     text-align:center;
     margin-bottom:20px;
 }
-.myinfoblock>.body{}
-
-.myinfoblock>.body label{
+.join_block>.body{}
+.join_block>.body label{
     font-size:0.8rem;
 }
-.myinfoblock>.body>.joinform>*{
+.join_block>.body>.joinform>*{
     margin-bottom:5px;
 }
 
-
-.mypageform label{
-    font-size : .8rem;
-    margin-bottom : 2px;
+/*              */
+.profileimage-block{
+    text-align:center;
+    position:relative;
+}
+.profileimage-block img{
+    width : 100px;
+    height : 100px;
+    border-radius : 50%;
+}
+.profileimage-block span{
+    position:absolute;
+    top:80%;
+    left:55%;
+    color:gray;
 }
 
 .btn{
     margin-top:2px;
     margin-bottom:2px;
-    font-size : .8rem;
 }
-
-

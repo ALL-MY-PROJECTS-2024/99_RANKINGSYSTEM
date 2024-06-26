@@ -89,7 +89,7 @@ public class PaymentImageServiceImpl {
 
         //파일 복사
         String oldFilePath = oldPath + File.separator + tradingImage.getFileid().getFilename();
-        String newFilePath = newPath + File.separator + tradingImage.getFileid().getFilename()+"_a";
+        String newFilePath = newPath + File.separator + "a_"+tradingImage.getFileid().getFilename();
 
         File in = new File(oldFilePath);
         File out =new File(newFilePath);
@@ -97,8 +97,8 @@ public class PaymentImageServiceImpl {
         FileCopyUtils.copy(in,out);
         
         //섬네일 복사
-        String oldFile_thumbnal_Path = oldPath + File.separator + "s_"+tradingImage.getFileid().getFilename();
-        String newFile_thumbnal_Path = newPath + File.separator + "s_"+tradingImage.getFileid().getFilename()+"_a";
+        String oldFile_thumbnal_Path = oldPath + File.separator + tradingImage.getFileid().getFilename();
+        String newFile_thumbnal_Path = newPath + File.separator + "a_"+tradingImage.getFileid().getFilename();
         File in_thumb = new File(oldFile_thumbnal_Path);
         File out_thumb =new File(newFile_thumbnal_Path);
 
@@ -118,7 +118,7 @@ public class PaymentImageServiceImpl {
         newPath= File.separator+UPLOADPATH.UPPERDIRPATH+ File.separator;
         newPath+=UPLOADPATH.IMAGEDIRPATH+ File.separator+tradingImage.getBuyer().getUsername()+ File.separator+"payment"+File.separator +  tradingImage.getFileid().getImages().getSubCategory()+File.separator+tradingImage.getFileid().getImages().getIamgeid();
         imagesFileInfo.setDir(newPath);
-        imagesFileInfo.setFilename(tradingImage.getFileid().getFilename()+"_a");
+        imagesFileInfo.setFilename("a_"+tradingImage.getFileid().getFilename());
         imagesFileInfo.setImages(images);
         imagesFileInfoRepository.save(imagesFileInfo);
         tradingImage.setFileid(imagesFileInfo);

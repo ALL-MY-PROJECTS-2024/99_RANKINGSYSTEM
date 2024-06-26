@@ -22,6 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -41,6 +43,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 
@@ -658,6 +661,21 @@ public class UserController {
         return "myinfo/trading/main";
     }
 
+
+    @GetMapping(value="/myinfo/trading/download",produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<Resource> downloadFile(@RequestParam("filepath") String filepath) throws UnsupportedEncodingException {
+        log.info("GET /user/myinfo/trading/download.." + filepath);
+        //FileSystemResource : 파일시스템의 특정 파일로부터 정보를 가져오는데 사용
+        Resource resource = new FileSystemResource(filepath);
+        //파일명 추출
+        String filename = resource.getFilename();
+        //헤더 정보 추가
+        HttpHeaders headers = new HttpHeaders();
+        //ISO-8859-1 : 라틴어(특수문자등 깨짐 방지)
+        headers.add("Content-Disposition","attachment; filename="+new String(filename.getBytes("UTF-8"),"ISO-8859-1"));
+        //리소스,파일정보가 포함된 헤더,상태정보를 전달
+        return new ResponseEntity<Resource>(resource,headers,HttpStatus.OK);
+    }
     //----------------------------------------------------------------
     // 송금 정보 입력
     //----------------------------------------------------------------

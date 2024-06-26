@@ -4,6 +4,7 @@ package com.creator.imageAndMusic.controller;
 import com.creator.imageAndMusic.domain.dto.TradingImageDto;
 import com.creator.imageAndMusic.domain.dto.TradingMusicDto;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
+import com.creator.imageAndMusic.domain.entity.MusicRanking;
 import com.creator.imageAndMusic.domain.entity.TradingImage;
 import com.creator.imageAndMusic.domain.entity.TradingMusic;
 import com.creator.imageAndMusic.domain.repository.ImagesRepository;
@@ -45,7 +46,9 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model){
         log.info("GET / ...");
-
+        //--------------------------------------------------------
+        //
+        //--------------------------------------------------------
         List<TradingImage> listEntity =  tradingImageServiceImpl.getAllTradingImages();
 
         List<TradingImageDto> list = new ArrayList<>();
@@ -63,6 +66,14 @@ public class HomeController {
             dto.setPrice(entity.getPrice());
             dto.setPaymentState(entity.isPaymentState());
             dto.setStatus(entity.getStatus());
+            dto.setFileDir(entity.getFileid().getDir());
+            dto.setFilename(entity.getFileid().getFilename());
+            dto.setCur(entity.getCur());
+            dto.setAuctionState(entity.getAuctionState());
+            dto.setMax(entity.getMax());
+            dto.setMembers(entity.getMembers());
+            dto.setRoomId(entity.getRoomId());
+            dto.setStartPrice(entity.getStartPrice());
 
             //채팅방
             String roomId = entity.getRoomId();
@@ -87,6 +98,14 @@ public class HomeController {
             dto.setPrice(entity.getPrice());
             dto.setPaymentState(entity.isPaymentState());
             dto.setStatus(entity.getStatus());
+            dto.setFileDir(entity.getFileid().getDir());
+            dto.setFilename(entity.getFileid().getFilename());
+            dto.setCur(entity.getCur());
+            dto.setAuctionState(entity.getAuctionState());
+            dto.setMax(entity.getMax());
+            dto.setMembers(entity.getMembers());
+            dto.setRoomId(entity.getRoomId());
+            dto.setStartPrice(entity.getStartPrice());
 
             //채팅방
             String roomId = entity.getRoomId();
@@ -94,9 +113,10 @@ public class HomeController {
             list2.add(dto);
         });
 
-        // 이미지 카테고리별 개수 가져오기
+        //--------------------------------------------------------
+        // 카테고리별 개수 가져오기
+        //--------------------------------------------------------
         Map<String,Object> imageCountMap =  imageRankingServiceImpl.getAllImageRankingByAllCategoryCount();
-        //
         Map<String,Object> musicCountMap =  musicRankingServiceImpl.getAllMusicRankingByAllCategoryCount();
 
 
@@ -104,8 +124,8 @@ public class HomeController {
         List<ImagesRanking> imageTop10ByCount = (List<ImagesRanking>) imageRankingPopular.get("imageTop10ByCount");
         List<ImagesRanking> imageTop10ByLike = (List<ImagesRanking>) imageRankingPopular.get("imageTop10ByLike");
         Map<String,Object> musicRankingPopular = musicRankingServiceImpl.getMusicRankingPopular();
-        List<ImagesRanking> musicTop10ByCount = (List<ImagesRanking>) musicRankingPopular.get("musicTop10ByCount");
-        List<ImagesRanking> musicTop10ByLike = (List<ImagesRanking>) musicRankingPopular.get("musicTop10ByLike");
+        List<MusicRanking> musicTop10ByCount = (List<MusicRanking>) musicRankingPopular.get("musicTop10ByCount");
+        List<MusicRanking> musicTop10ByLike = (List<MusicRanking>) musicRankingPopular.get("musicTop10ByLike");
 
         System.out.println(imageTop10ByCount);
         model.addAttribute("list",list);

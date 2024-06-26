@@ -134,21 +134,107 @@ const section2imagesBlock = new Swiper('.section2 .right .swiper', {
     });
 
 //-------------------------------
-//
+//IMAGE / MUSIC 이동
 //-------------------------------
 const rightBefore = document.querySelector('.section1 .right .tag');
-
-
 const prev = document.querySelector('.section1 .right .swiper .swiper-button-prev');
 const next = document.querySelector('.section1 .right .swiper .swiper-button-next');
+const tableOrder = document.querySelector('.table.order');
+const tableLike = document.querySelector('.table.like');
+const title = document.querySelector('.ranking-summary .title h4');
+let mode = 1;
+
+
+const imgBodyOrder = document.querySelector('.img-body-order');
+const imgBodyLike = document.querySelector('.img-body-like');
+const mBodyOrder = document.querySelector('.m-body-order');
+const mBodyLike = document.querySelector('.m-body-like');
+
+
 prev.addEventListener('click',function(){
+    //----------------------------------------------------------------
+    imgBodyOrder.classList.remove('hidden');
+    imgBodyLike.classList.remove('hidden');
+    mBodyOrder.classList.remove('hidden');
+    mBodyLike.classList.remove('hidden');
+    //----------------------------------------------------------------
+    imgBodyLike.classList.add('hidden');
+    mBodyOrder.classList.add('hidden');
+    mBodyLike.classList.add('hidden');
+    //----------------------------------------------------------------
+
+
     console.log('click');
     rightBefore.innerHTML="IMAGE";
+
+    tableOrder.classList.remove('hidden');
+    tableLike.classList.add('hidden');
+    title.innerHTML="IMAGE RANKING TOP 10";
+    mode = 1;
+
+
 })
 next.addEventListener('click',function(){
+    //----------------------------------------------------------------
+    imgBodyOrder.classList.remove('hidden');
+    imgBodyLike.classList.remove('hidden');
+    mBodyOrder.classList.remove('hidden');
+    mBodyLike.classList.remove('hidden');
+    //----------------------------------------------------------------
+    imgBodyOrder.classList.remove('hidden');
+    imgBodyLike.classList.add('hidden');
+    mBodyLike.classList.add('hidden');
+    //----------------------------------------------------------------
+
     console.log('click');
     const tagEl = document.querySelector('.section1 .right::before');
     rightBefore.innerHTML="MUSIC";
+
+    tableOrder.classList.add('hidden');
+    tableLike.classList.remove('hidden');
+    title.innerHTML="MUSIC RANKING TOP 10";
+    mode = 2;
+})
+
+
+const btn_count = document.querySelector('.btn_count');
+btn_count.addEventListener('click',function(){
+    imgBodyOrder.classList.remove('hidden');
+    imgBodyLike.classList.remove('hidden');
+    mBodyOrder.classList.remove('hidden');
+    mBodyLike.classList.remove('hidden');
+    if(mode==1)
+    {
+        //이미지 + 조회수만 켜기
+        imgBodyLike.classList.add('hidden');
+        mBodyOrder.classList.add('hidden');
+        mBodyLike.classList.add('hidden');
+    }else {
+        //음악 + 조회수만 켜기
+        imgBodyOrder.classList.add('hidden');
+        imgBodyLike.classList.add('hidden');
+        mBodyLike.classList.add('hidden');
+    }
+
+})
+
+const btn_like = document.querySelector('.btn_like');
+btn_like.addEventListener('click',function(){
+    imgBodyOrder.classList.remove('hidden');
+    imgBodyLike.classList.remove('hidden');
+    mBodyOrder.classList.remove('hidden');
+    mBodyLike.classList.remove('hidden');
+    if(mode==1){
+        //이미지 좋아요만 켜키
+        imgBodyOrder.classList.add('hidden');
+        mBodyOrder.classList.add('hidden');
+        mBodyLike.classList.add('hidden');
+    }else {
+        //음악
+        imgBodyOrder.classList.add('hidden');
+        imgBodyLike.classList.add('hidden');
+        mBodyOrder.classList.add('hidden');
+    }
 })
 
 //-------------------------------

@@ -43,7 +43,7 @@
                 </div>
             </section>
 
-            <section class=" layout-5">
+            <section class="read myinfoblock layout-5">
 
 <!--                &lt;!&ndash; aside                &ndash;&gt;-->
 <!--                <th:block th:insert="fragments/myaside :: myasideFragment" />-->
@@ -55,90 +55,51 @@
 
 
                 <div class="" style="width : 350px; margin : 0 auto;">
-                    <div class="header" style="text-align:center;">
-                        <!-- title -->
-                        <h3 th:text="${#authentication.name}"></h3>
-                    </div>
-
                     <div class="body">
-                        <form class="mypageform" name="mypageform" action="" method="post"
-                              onsubmit="return false">
-                            <style>
-                                td,th{
-                                    border : 1px solid;
-                                }
-                            </style>
-                            <table class="table">
-                                <tr>
-                                    <td style="position:relative">이메일계정 <span style="position:absolute;top:0px;font-size:0.7rem;color:orange;"  class="username_msg"></span></td>
-                                    <td>
-                                        <input name="username" class="form-control username" placeholder="이메일 계정 입력" th:value="${dto.username}" readonly>
-                                    </td>
-                                    <td>이메일계정</td>
-                                    <td>
-                                        <input name="phone" class="form-control" th:value="${dto.nickname}" readonly>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                            </table>
-                            <div>
+                        <form class="mypageform" name="mypageform" action="" method="post"  onsubmit="return false">
+                            <div class="m-1">
                                 <label>이메일계정</label>&nbsp;&nbsp;
-                                <div style="display:flex;">
-                                </div>
+                                <input name="usernmae" class="form-control" th:value="${dto.username}" readonly>
                             </div>
-                            <div>
+                            <div class="m-1">
                                 <label>이름</label>
-                                <input name="phone" class="form-control" th:value="${dto.nickname}" readonly>
+                                <input name="nickname" class="form-control" th:value="${dto.nickname}" readonly>
                             </div>
-                            <div>
+                            <div class="m-1">
                                 <label>연락처</label>
                                 <input name="phone" class="form-control" th:value="${dto.phone}" readonly>
                             </div>
-                            <div>
+                            <div class="m-1">
                                 <label>은행</label>
                                 <div style="display:flex;">
                                     <input name="bankname" class="form-control zipcode" th:value="${dto.bankname}" readonly>
                                 </div>
                             </div>
-                            <div>
+                            <div class="m-1">
                                 <label>계좌번호</label>
                                 <div style="display:flex;">
                                     <input name="account" class="form-control zipcode" th:value="${dto.account}" readonly>
                                 </div>
                             </div>
-                            <div>
+                            <div class="m-1">
                                 <label>우편번호</label>
                                 <div style="display:flex;">
                                     <input name="zipcode" class="form-control zipcode" th:value="${dto.zipcode}" readonly>
                                 </div>
                             </div>
-                            <div>
+                            <div class="m-1">
                                 <label>기본 주소</label>
                                 <input name="addr1" class="form-control addr1" th:value="${dto.addr1}" readonly>
                             </div>
-                            <div class="me-2">
-                                <label>상세 주소</label>
+                            <div class="m-1 mb-2">
+                                <label>상세 주소 </label>
                                 <input name="addr2" class="form-control" th:value="${dto.addr2}" readonly>
                             </div>
-                            <div class="me-2">
-                                <a href="/user/myinfo/update" class="btn btn-success w-100">수정요청</a>
+                            <div class="m-1" style="display:flex;justify-content : space-between;">
+                                <a href="/user/myinfo/update" class="btn btn-success w-50 me-1">수정요청</a>
+                                <a href="/" class="btn btn-secondary w-50 ms-1">메인화면</a>
                             </div>
-                            <div class="me-2">
-                                <a href="/" class="btn btn-secondary w-100">메인화면</a>
-                            </div>
+
                         </form>
                     </div>
                 </div>

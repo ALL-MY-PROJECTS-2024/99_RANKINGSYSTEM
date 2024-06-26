@@ -82,7 +82,7 @@ public class PaymentMusicServiceImpl {
 
         //파일 복사
         String oldFilePath = oldPath + File.separator + tradingMusic.getFileid().getFilename();
-        String newFilePath = newPath + File.separator + tradingMusic.getFileid().getFilename()+"_a";
+        String newFilePath = newPath + File.separator +"a_"+tradingMusic.getFileid().getFilename();
 
         File in = new File(oldFilePath);
         File out =new File(newFilePath);
@@ -101,7 +101,7 @@ public class PaymentMusicServiceImpl {
         newPath= File.separator+UPLOADPATH.UPPERDIRPATH+ File.separator;
         newPath+=UPLOADPATH.IMAGEDIRPATH+ File.separator+tradingMusic.getBuyer().getUsername()+ File.separator+"payment"+File.separator +  tradingMusic.getFileid().getMusic().getSubCategory()+File.separator+tradingMusic.getFileid().getMusic().getMusicid();
         musicFileInfo.setDir(newPath);
-        musicFileInfo.setFilename(tradingMusic.getFileid().getFilename()+"_a");
+        musicFileInfo.setFilename("a_"+tradingMusic.getFileid().getFilename());
         musicFileInfo.setMusic(music);
         musicFileInfoRepository.save(musicFileInfo);
         tradingMusic.setFileid(musicFileInfo);

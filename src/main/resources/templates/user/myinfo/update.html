@@ -54,21 +54,15 @@
 
 
             <div class="" style="width:350px;margin: 0 auto;">
-                <div class="header" style="text-align:center;">
-                    <!-- title -->
-                    <h3 th:text="${#authentication.name}"></h3>
-                </div>
-
                 <div class="body">
-
                     <form class="mypageform" name="mypageform" action="/user/myinfo/update" method="post">
-                        <div>
+                        <div class="m-1">
                             <label>이메일계정</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;"  class="username_msg"></span>
                             <div style="display:flex;">
                                 <input name="username" class="form-control username" placeholder="이메일 계정 입력" th:value="${dto.username}" readonly>
                             </div>
                         </div>
-                        <div>
+                        <div class="m-1">
                             <label>기존 패스워드 </label>&nbsp;&nbsp;<span class="pwmsg" style="font-size:0.7rem;" th:text="${oldpassword}"></span>
                             <div style="display:flex;">
                                 <input type="password" name="oldpassword" class="form-control" placeholder="패스워드 입력">
@@ -77,77 +71,75 @@
                                 </a>
                             </div>
                         </div>
-                        <div>
+                        <div class="m-1">
                             <label>새로운 패스워드 입력</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${password}"></span>
                             <div style="display:flex;">
                                 <input type="password" name="password" class="form-control" placeholder="패스워드 입력"  readonly>
                             </div>
                         </div>
-                        <div>
+                        <div class="m-1">
                             <label>패스워드 다시 입력</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${repassword}"></span>
                             <div style="display:flex;">
                                 <input type="password" name="repassword" class="form-control" placeholder="패스워드 다시 입력"  readonly>
                             </div>
                         </div>
-                        <div>
+                        <div class="m-1">
                             <label>이름</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${nickname}"></span>
                             <input name="nickname" class="form-control" th:value="${dto.nickname}" >
                         </div>
-                        <div>
+                        <div class="m-1">
                             <label>연락처</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${phone}"></span>
                             <input name="phone" class="form-control" placeholder="- 제외하고 입력" th:value="${dto.phone}">
                         </div>
-                        <div>
-                            <label>은행</label>
-                            <select name="bankname">
-                                <option value="01">한국은행</option>
-                                <option value="03">산업은행</option>
-                                <option value="04">기업은행</option>
-                                <option value="11">국민은행</option>
-                                <option value="12">수협은행</option>
-                                <option value="13">수출입은행</option>
-                                <option value="18">NH농협은행</option>
-                                <option value="19">지역 농.축협</option>
-                                <option value="21">우리은행</option>
-                                <option value="01">제일은행</option>
-                            </select>
+                        <div class="m-1">
+
                         </div>
-                        <div>
-                            <label>계좌번호</label>
-                            <div style="display:flex;">
-                                <input name="account" class="form-control zipcode" th:value="${dto.account}" >
-                            </div>
-                            <div>
-                                <a href="javascript:void(0)" class="account_confirm">확인신청</a>
-                            </div>
-                            <div>
-                                <input name="code"><a href="javascript:void(0)" class="account_confirm">확인</a>
-                            </div>
+                        <div class="m-1" style="display:flex;justify-content:space-between;align-items : center;">
+                                <div >
+                                    <label>은행</label>
+                                    <select name="bankname" class="form-select" style="width:120px;font-size : .8rem;">
+                                        <option value="한국은행">한국은행</option>
+                                        <option value="산업은행">산업은행</option>
+                                        <option value="기업은행">기업은행</option>
+                                        <option value="국민은행">국민은행</option>
+                                        <option value="수협은행">수협은행</option>
+                                        <option value="수출입은행">수출입은행</option>
+                                        <option value="NH농협은행">NH농협은행</option>
+                                        <option value="지역농축협">지역농축협</option>
+                                        <option value="우리은행" selected>우리은행</option>
+                                        <option value="제일은행">제일은행</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>계좌번호</label>
+                                    <div style="display:flex;">
+                                        <input name="account" class="form-control " th:value="${dto.account}" >
+                                    </div>
+                                </div>
                         </div>
 
-                        <div>
+                        <div class="m-1">
                             <label>우편번호 검색</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${zipcode}"></span>
                             <div style="display:flex;">
                                 <input name="zipcode" class="form-control zipcode" placeholder="우편번호 입력" th:value="${dto.zipcode}">
-                                <button class="btn btn-secondary search_addr_btn" style="width:80px;margin-left:5px;">
+                                <a href="javascript:void(0)" class="btn btn-secondary search_addr_btn" style="width:80px;margin-left:5px;">
                                     검색
-                                </button>
+                                </a>
                             </div>
                         </div>
-                        <div>
+                        <div class="m-1">
                             <label>기본 주소</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${addr1}"></span>
                             <input name="addr1" class="form-control addr1" placeholder="기본주소 입력" th:value="${dto.addr1}">
                         </div>
-                        <div class="me-2">
+                        <div class="m-1 mb-2">
                             <label>상세 주소</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${addr2}"></span>
                             <input name="addr2" class="form-control" placeholder="상세주소 입력" th:value="${dto.addr2}">
                         </div>
-                        <div class="me-2">
-                            <button onclick="isValid()" class="btn btn-success w-100">수정요청</button>
+                        <div class="me-1" style="display:flex;justify-content:space-between;">
+                            <button onclick="isValid()" class="btn btn-success w-50 me-1">수정요청</button>
+                            <button class="btn btn-secondary w-50  ms-1">이전으로</button>
                         </div>
-                        <div class="me-2">
-                            <button class="btn btn-secondary w-100">이전으로</button>
-                        </div>
+
                     </form>
                 </div>
             </div>
