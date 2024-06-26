@@ -98,7 +98,7 @@ public class PaymentImageServiceImpl {
         
         //섬네일 복사
         String oldFile_thumbnal_Path = oldPath + File.separator + tradingImage.getFileid().getFilename();
-        String newFile_thumbnal_Path = newPath + File.separator + "a_"+tradingImage.getFileid().getFilename();
+        String newFile_thumbnal_Path = newPath + File.separator + "s_a_"+tradingImage.getFileid().getFilename();
         File in_thumb = new File(oldFile_thumbnal_Path);
         File out_thumb =new File(newFile_thumbnal_Path);
 
