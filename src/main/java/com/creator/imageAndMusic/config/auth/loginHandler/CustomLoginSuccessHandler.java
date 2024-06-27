@@ -46,11 +46,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler  
             String role_str =  role.getAuthority();
 
             try {
-
-                if (role_str.equals("ROLE_ADMIN")) {
-                    response.sendRedirect("/admin/main");
-                    return ;
-                }
                 response.sendRedirect("/");
             }catch(Exception e){
                 e.printStackTrace();

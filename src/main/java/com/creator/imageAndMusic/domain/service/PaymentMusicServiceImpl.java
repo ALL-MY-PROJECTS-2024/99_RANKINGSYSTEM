@@ -12,6 +12,8 @@ import org.springframework.util.FileCopyUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -130,5 +132,17 @@ public class PaymentMusicServiceImpl {
         tradingMusic.setStatus("송금완료");
         tradingMusicRepository.save(tradingMusic);
         return true;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public Map<String, Object> getSellerAccount(Long tradingid) {
+        Optional<TradingMusic> tradingMusicOptional = tradingMusicRepository.findById(tradingid);
+        if(tradingMusicOptional.isEmpty())
+            return null;
+        Map<String,Object> result = new LinkedHashMap<String,Object>();
+        TradingMusic tradingMusic = tradingMusicOptional.get();
+        result.put("bankname",tradingMusic.getSeller().getBankname());
+        result.put("account",tradingMusic.getSeller().getAccount());
+        return result;
     }
 }

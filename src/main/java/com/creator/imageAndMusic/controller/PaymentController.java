@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -38,8 +39,21 @@ public class PaymentController {
     //https://hyphen.im/product-api/view?seq=100
 
     //관리자 송금하기
+    @GetMapping("/image/getSellerAccount")
+    public  @ResponseBody  ResponseEntity<Map<String,Object>> getSellerImageAccount(@RequestParam("tradingid") Long tradingid, Model model){
+        Map<String,Object> result=paymentImageService.getSellerAccount(tradingid);
+        return new ResponseEntity(result,HttpStatus.OK);
+    }
+    //관리자 송금하기
+    @GetMapping("/music/getSellerAccount")
+    public @ResponseBody ResponseEntity<Map<String,Object>> getSellerMusicAccount(@RequestParam("tradingid") Long tradingid, Model model){
+        Map<String,Object> result=paymentMusicService.getSellerAccount(tradingid);
+
+        return new ResponseEntity(result,HttpStatus.OK);
+    }
+    //관리자 송금하기
     @GetMapping("/remittance/image")
-    public ResponseEntity<String> remittance(@RequestParam("tradingid") Long tradingid, Model model){
+    public   ResponseEntity<String> remittance(@RequestParam("tradingid") Long tradingid, Model model){
         boolean isRemittance=paymentImageService.remittanceUser(tradingid);
         return new ResponseEntity("SUCCESS",HttpStatus.OK);
     }

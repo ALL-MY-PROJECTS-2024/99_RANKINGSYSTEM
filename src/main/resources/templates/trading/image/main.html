@@ -68,7 +68,7 @@
                     </thead>
                     <tbody style="font-size :.7rem;">
                         <th:block th:each="dto : ${list}">
-                            <div th:text="${dto}"></div>
+
                             <tr>
                                 <td th:text="${dto.tradingid}"></td>
                                 <td >
@@ -213,7 +213,43 @@
 </div>
 
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary userAccountBtn" style="display:none;" data-bs-toggle="modal" data-bs-target="#exampleModal5">
+    Launch demo modal
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                        <h6 class="modal-title" id="exampleModalLabel">판매자 계정 확인</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table w-100" >
+                    <tr>
+                        <td class="bg-dark text-light" style="font-size:.8rem;" >경매번호</td>
+                        <td class="trading_id" style="font-size:.8rem;"></td>
+                    </tr>
+                    <tr>
+                        <td class="bg-dark text-light" style="font-size:.8rem;">은행명</td>
+                        <td class="bankname"  style="font-size:.8rem;"></td>
+                    </tr>
+                    <tr>
+                        <td class="bg-dark text-light"  style="font-size:.8rem;">계좌번호</td>
+                        <td  class="account"  style="font-size:.8rem;"></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary sendMoneyBtn" data-bs-dismiss="modal"  style="font-size:.8rem;">송금 하기</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  style="font-size:.8rem;">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

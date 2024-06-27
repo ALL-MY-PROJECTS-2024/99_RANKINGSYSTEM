@@ -338,7 +338,7 @@
                     clearInterval(timerAsync2);
                     clearInterval(rankingAsync);
                     statusColorControl('cancel','경매종료');
-                    alert('관리자에 의해 경매가 종료되었습니다.');
+                    alert('관리자에 의해 경매가 종료되었습니다.\n최종낙찰 계정은 나의정보에서 확인해보시길 바랍니다');
                 }
                 else if(obj.msg.toString().includes('time:'))
                 {
@@ -365,7 +365,8 @@
                 {
                     const userCallResultBlock = document.querySelectorAll('.user-call-result-block table');
                     userCallResultBlock.forEach(el=>{
-                        if(el.classList.contains(obj.sender)){
+                        const user = obj.sender.split('@')[0];
+                        if(el.classList.contains(user)){
                             const priceEl =  el.querySelector('.price');
                             priceEl.innerHTML = obj.msg;
                         }
@@ -416,7 +417,8 @@
                 price = Number(price) + Number(startPrice);
                 startPriceInit=false;
            }
-           const oldPrice = document.querySelector(`.user-call-result-block .table.${username} .price`).innerHTML;
+           const user = username.split('@')[0];
+           const oldPrice = document.querySelector(`.user-call-result-block .table.${user} .price`).innerHTML;
            console.log(oldPrice,price);
            price= Number(price) +Number(oldPrice);
            var talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":[[${username}]],"msg":price};
@@ -731,7 +733,8 @@
             // table 요소를 생성합니다.
             var table = document.createElement('table');
             table.classList.add('table');
-            table.classList.add(username);
+            const user = username.split('@')[0];
+            table.classList.add(user);
 
             // thead 요소를 생성합니다.
             var thead = document.createElement('thead');

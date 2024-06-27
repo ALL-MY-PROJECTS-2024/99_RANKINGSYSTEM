@@ -18,6 +18,8 @@ import org.springframework.util.FileCopyUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -97,8 +99,8 @@ public class PaymentImageServiceImpl {
         FileCopyUtils.copy(in,out);
         
         //섬네일 복사
-        String oldFile_thumbnal_Path = oldPath + File.separator + tradingImage.getFileid().getFilename();
-        String newFile_thumbnal_Path = newPath + File.separator + "s_"+tradingImage.getFileid().getFilename();
+        String oldFile_thumbnal_Path = oldPath + File.separator + "s_"+tradingImage.getFileid().getFilename();
+        String newFile_thumbnal_Path = newPath + File.separator + "s_a_"+tradingImage.getFileid().getFilename();
         File in_thumb = new File(oldFile_thumbnal_Path);
         File out_thumb =new File(newFile_thumbnal_Path);
 
@@ -149,4 +151,16 @@ public class PaymentImageServiceImpl {
 
         return true;
     }
+    @Transactional(rollbackFor = Exception.class)
+    public Map<String, Object> getSellerAccount(Long tradingid) {
+        Optional<TradingImage> tradingImageOptional = tradingImageRepository.findById(tradingid);
+        if(tradingImageOptional.isEmpty())
+            return null;
+        Map<String,Object> result = new LinkedHashMap<String,Object>();
+        TradingImage tradingImage = tradingImageOptional.get();
+        result.put("bankname",tradingImage.getSeller().getBankname());
+        result.put("account",tradingImage.getSeller().getAccount());
+        return result;
+    }
+
 }

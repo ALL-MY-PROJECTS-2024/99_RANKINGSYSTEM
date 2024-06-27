@@ -639,10 +639,10 @@ public class UserController {
 
         if(!isDel){
             model.addAttribute("message","삭제 실패..");
-            return "myinfo/trading/main";
+            return "user/myinfo/trading/main";
         }
         model.addAttribute("message","삭제성공");
-        return "myinfo/trading/main";
+        return "user/myinfo/trading/main";
     }
     //----------------------------------------------------------------
     // 경매 취소 - 삭제 음악
@@ -655,10 +655,10 @@ public class UserController {
 
         if(!isDel){
             model.addAttribute("message","삭제 실패..");
-            return "myinfo/trading/main";
+            return "user/myinfo/trading/main";
         }
         model.addAttribute("message","삭제성공");
-        return "myinfo/trading/main";
+        return "user/myinfo/trading/main";
     }
 
 
