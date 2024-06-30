@@ -267,7 +267,7 @@
                     <div id='calendar' class="layout-5" style="height:300px;width:100%;"></div>
                 </div>
                 <div class="right layout-5">
-                    <span style="font-size : 1.2rem;">진행중인 경매</span>
+                    <span style="font-size : 1.2rem;">이미지 경매 현황</span>
                     <hr>
                     <div class="images-block">
                         <!-- Slider main container -->
@@ -290,6 +290,42 @@
 
                                     >
                                         <img th:src="@{${tradingImageDto.fileDir}+'\s_'+${tradingImageDto.filename}}" alt="">
+                                    </a>
+                                </div>
+
+                            </div>
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-prev">
+                                <span class="material-symbols-outlined" style="font-size :4rem;">arrow_left</span>
+                            </div>
+                            <div class="swiper-button-next">
+                                <span class="material-symbols-outlined" style="font-size :4rem;">arrow_right</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <span style="font-size : 1.2rem;">음악 경매 현황</span>
+                    <hr>
+                    <div class="images-block">
+                        <!-- Slider main container -->
+                        <div class="swiper">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Slides -->
+                                <div class="swiper-slide" th:each="tradingMusicDto:${list2}">
+                                    <!--                                   <div th:text="${imageRankingDto}"></div>-->
+                                    <a href="javascript:void(0)" class="tradingMusicBtn"
+                                       th:data-tradingid="${tradingMusicDto.tradingid}"
+                                       th:data-seller="${tradingMusicDto.seller}"
+                                       th:data-buyer="${tradingMusicDto.buyer}"
+                                       th:data-status="${tradingMusicDto.status}"
+                                       th:data-title="${tradingMusicDto.title}"
+                                       th:data-startPrice="${tradingMusicDto.startPrice}"
+                                       th:data-auctionStartTime="${tradingMusicDto.auctionStartTime}"
+                                       th:data-auctionEndTime="${tradingMusicDto.auctionEndTime}"
+                                       th:data-price="${tradingMusicDto.price}"
+                                    >
+                                        <img src="/assets/music.jpg" alt="">
                                     </a>
                                 </div>
 
@@ -345,9 +381,9 @@
 
                     <table class="table w-100" style="font-size: .7rem" >
                         <tr>
-                            <td class="bg-dark text-light" style="width:150px;">경매ID</td>
+                            <td class="bg-dark text-light" style="width:100px;">경매ID</td>
                             <td class="modal-tradingid"></td>
-                            <td class="bg-dark text-light" style="width:150px;">상태</td>
+                            <td class="bg-dark text-light" style="width:100px;">상태</td>
                             <td class="modal-status"></td>
 
                         </tr>
@@ -377,6 +413,10 @@
             </div>
         </div>
     </div>
+
+
+
+
 
 </body>
 </html>

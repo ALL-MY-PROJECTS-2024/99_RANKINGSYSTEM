@@ -273,8 +273,8 @@ tradingImageBtnEls.forEach(el=>{
         modalStatus.innerHTML = status;
         modalSeller.innerHTML = seller;
         modalBuyer.innerHTML = buyer;
-        modalStartPrice.innerHTML = startPrice+ " 원";
-        modalPrice.innerHTML = price+ " 원";
+        modalStartPrice.innerHTML = (startPrice==null)?'0':startPrice + " 원";
+        modalPrice.innerHTML = (price==null)?'0 원':price+ " 원";
         modalAuctionStartTime.innerHTML = auctionStartTime;
         modalAuctionEndTime.innerHTML = auctionEndTime;
 
@@ -285,6 +285,44 @@ tradingImageBtnEls.forEach(el=>{
 //-------------------------------
 //
 //-------------------------------
+const tradingMusicBtnEls = document.querySelectorAll('.tradingMusicBtn');
+
+tradingMusicBtnEls.forEach(el=>{
+
+     el.addEventListener('click',function(){
+        const tradingid = el.getAttribute('data-tradingid');
+        const seller = el.getAttribute('data-seller');
+        const buyer = el.getAttribute('data-buyer');
+        const status = el.getAttribute('data-status');
+        const title = el.getAttribute('data-title');
+        const startPrice = el.getAttribute('data-startPrice');
+        const auctionStartTime = el.getAttribute('data-auctionStartTime');
+        const auctionEndTime = el.getAttribute('data-auctionEndTime');
+        const price = el.getAttribute('data-price');
+        tradingImageModalBtn.click();
+
+        const modalTradingid = document.querySelector('.modal-tradingid');
+        const modalStatus = document.querySelector('.modal-status');
+        const modalSeller = document.querySelector('.modal-seller');
+        const modalBuyer = document.querySelector('.modal-buyer');
+        const modalStartPrice = document.querySelector('.modal-startPrice');
+        const modalPrice = document.querySelector('.modal-price');
+
+        const modalAuctionStartTime = document.querySelector('.modal-auctionStartTime');
+        const modalAuctionEndTime = document.querySelector('.modal-auctionEndTime');
+
+        modalTradingid.innerHTML = tradingid;
+        modalStatus.innerHTML = status;
+        modalSeller.innerHTML = seller;
+        modalBuyer.innerHTML = buyer;
+        modalStartPrice.innerHTML = (startPrice==null)?'0':startPrice + " 원";
+        modalPrice.innerHTML = (price==null)?'0 원':price+ " 원";
+        modalAuctionStartTime.innerHTML = auctionStartTime;
+        modalAuctionEndTime.innerHTML = auctionEndTime;
+
+     })
+
+})
 
 //-------------------------------
 //
