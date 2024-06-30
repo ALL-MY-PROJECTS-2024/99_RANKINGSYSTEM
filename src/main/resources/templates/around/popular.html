@@ -76,6 +76,9 @@
                             <!-- Slides -->
                             <div class="swiper-slide" th:each="imageRanking,imageRankingStat :${imageTop10ByLike}">
                                 <a href="javascript:void(0)">
+                                    <div class="rankingNo">
+                                        <span th:text="${imageRankingStat.count}"></span>
+                                    </div>
                                     <th:block th:if="${imageRankingStat.count==1}">
                                         <span class="material-symbols-outlined">military_tech</span>
                                     </th:block>
@@ -104,6 +107,9 @@
                             <!-- Slides -->
                             <div class="swiper-slide" th:each="imageRanking,imageRankingStat :${imageTop10ByCount}">
                                 <a href="javascript:void(0)">
+                                    <div class="rankingNo">
+                                        <span th:text="${imageRankingStat.count}"></span>
+                                    </div>
                                     <th:block th:if="${imageRankingStat.count==1}">
                                         <span class="material-symbols-outlined">military_tech</span>
                                     </th:block>
@@ -135,6 +141,9 @@
                             <!-- Slides -->
                             <div class="swiper-slide" th:each="musicRanking,musicRankingStat :${musicTop10ByLike}">
                                 <a href="javascript:void(0)" style="display:block;">
+                                    <div class="rankingNo">
+                                        <span th:text="${musicRankingStat.count}"></span>
+                                    </div>
                                     <th:block th:if="${musicRankingStat.count==1}">
                                         <span class="material-symbols-outlined">military_tech</span>
                                     </th:block>
@@ -182,6 +191,9 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide" th:each="musicRanking,musicRankingStat :${musicTop10ByLike}">
                                 <a href="javascript:void(0)" style="display:block;">
+                                    <div class="rankingNo">
+                                        <span th:text="${musicRankingStat.count}"></span>
+                                    </div>
                                     <th:block th:if="${musicRankingStat.count==1}">
                                         <span class="material-symbols-outlined">military_tech</span>
                                     </th:block>

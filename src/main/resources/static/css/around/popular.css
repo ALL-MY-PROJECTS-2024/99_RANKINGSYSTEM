@@ -40,7 +40,7 @@ main section{
 
 .swiper-slide .material-symbols-outlined{
     position:absolute;
-    left:0px;
+    left:22px;
     top:-25px;
     color:orange;
     display:block;
@@ -52,9 +52,21 @@ main section{
     align-items : center;
     border : 1px solid orange;
     font-size : 1rem;
-
 }
 
+.swiper-slide .rankingNo{
+    width : 20px;
+    height : 20px;
+    position:absolute;
+    left:0px;
+    top:-25px;
+    background-color:black;
+    color:white;
+    font-size : .8rem;
+    display:flex;
+    justify-content : center;
+    align-items : center;
+}
 
 .swiper-button-prev::after{
     font-size : 2rem;
