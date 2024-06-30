@@ -2,14 +2,15 @@
 // SWIPER
 //-----------------------
 const imagesBlock = new Swiper('.images-block .swiper', {
-        loop: true,
-        initialSlide: 1,
-        //centeredSlides: true,
-        speed: 10000,
+        loop: false,
+        centeredSlides: false,
+        slidesPerView : 5,
         autoplay: {
-            delay: 0,
+            delay: 10000,
             disableOnInteraction: false
         },
-        slidesPerView: 'auto',
-
-    });
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+});

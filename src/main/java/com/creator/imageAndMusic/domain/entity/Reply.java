@@ -26,11 +26,14 @@ public class Reply {
             foreignKeyDefinition = "FOREIGN KEY (bno) REFERENCES board(no) ON DELETE CASCADE ON UPDATE CASCADE") ) //FK설정\
     private Board board;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "username",foreignKey = @ForeignKey(name = "FK_user_reply",
+            foreignKeyDefinition = "FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE ON UPDATE CASCADE") ) //FK설정\
+    private User user;
 
-    private String username;
+
     private String content;
     private Long likecount;       //좋아요 Count
-    private Long unlikecount;     //싫어요 Count
     private LocalDateTime regdate;  // 등록날자
 
 

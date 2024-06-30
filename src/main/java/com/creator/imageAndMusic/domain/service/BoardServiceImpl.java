@@ -5,10 +5,16 @@ import com.creator.imageAndMusic.controller.BoardController;
 import com.creator.imageAndMusic.domain.dto.BoardDto;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
+import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.Board;
+import com.creator.imageAndMusic.domain.entity.Reply;
+import com.creator.imageAndMusic.domain.entity.User;
 import com.creator.imageAndMusic.domain.repository.BoardRepository;
+import com.creator.imageAndMusic.domain.repository.ReplyRepository;
+import com.creator.imageAndMusic.domain.repository.UserRepository;
 import com.creator.imageAndMusic.properties.UPLOADPATH;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +23,7 @@ import org.thymeleaf.util.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;
@@ -29,9 +36,12 @@ public class BoardServiceImpl {
     @Autowired
     private BoardRepository boardRepository;
 
-    //@Autowired
-    //private ReplyRepository replyRepository;
 
+    @Autowired
+    private UserRepository userRepository;;
+
+    @Autowired
+    private ReplyRepository replyRepository;
 
     //모든 게시물 가져오기
     
@@ -172,6 +182,22 @@ public class BoardServiceImpl {
         boardRepository.save(board);
     }
 
+    @Transactional(rollbackFor = SQLException.class)
+    public boolean addReply(Long bno, String content, UserDto userDto) {
+        Reply reply = new Reply();
+        reply.setContent(content);
+        reply.setRegdate(LocalDateTime.now());
+        reply.setLikecount(0L);
 
-
+        Board board =  boardRepository.findById(bno).get();
+        reply.setBoard(board);
+        User user = userRepository.findById(userDto.getUsername()).get();
+        reply.setUser(user);
+        replyRepository.save(reply);
+        return true;
+    }
+    @Transactional(rollbackFor = SQLException.class)
+    public List<Reply> findByReply(Board board) {
+        return  replyRepository.findAllByBoardOrderByRnoDesc(board);
+    }
 }

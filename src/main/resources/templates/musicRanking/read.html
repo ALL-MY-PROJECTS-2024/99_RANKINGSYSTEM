@@ -13,6 +13,8 @@
     <!-- /css/album/read.css   -->
     <link rel="stylesheet" href="/css/musicRanking/read.css">
 
+    <script src="/js/musicRanking/read.js" defer></script>
+
 </head>
 <body>
     
@@ -25,6 +27,30 @@
         <!-- nav       -->
         <th:block th:insert="fragments/nav :: navFragment" />
 
+        <section class="layout-5 breadcrumb-block">
+            <div class="">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="">홈</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="">이달의 콘텐츠 RANKING</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="">전체 음악 랭킹</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">읽기</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
 
 
         <main class="layout-5" >
@@ -60,8 +86,10 @@
                         <div class="item" >
                             <div class="btns">
                                 <a href="javascript:history.go(-1)" class="btn btn-primary addRanking">이전으로</a>
-                                <a href="javascript:void(0)" class="btn btn-primary deleteRanking">BBB</a>
-                                <a href="javascript:void(0)" class="btn btn-primary changeCategory">CCC</a>
+                                <a href="javascript:void(0)" class="btn btn-primary thumb_up_btn" th:data-musicid="${musicRanking.rankingId}">
+                                    <span class="material-symbols-outlined" style="font-size:1rem;">thumb_up</span>
+                                </a>
+
                             </div>
                             <div class="images">
                                 <th:block  >

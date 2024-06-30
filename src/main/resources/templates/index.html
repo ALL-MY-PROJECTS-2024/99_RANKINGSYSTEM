@@ -136,21 +136,10 @@
 
 
         <main>
-            <!--SECTION01-->
-            <section class="layout-5 breadcrumb-block">
-                <div class="">
-                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page" style="border : 0px !important;">
-                                <span class="material-symbols-outlined">home</span>
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
-            </section>
+
 
             <hr class="margin-top:15px;">
-            <h5 class="layout-5" style="color : white;text-align:center;height:45px;line-height:45px;background-color:darkcyan">미리보기</h5>
+            <h5 class="layout-5" style="color : white;text-align:center;height:45px;line-height:45px;background-color:darkcyan">미리 보기</h5>
             <hr>
 <!--            <div th:text="${imageRankingPopular}"></div>-->
             <section class="section1 ">
@@ -268,7 +257,7 @@
 
             <!--SECTION02-->
             <hr class="margin-top:15px;">
-            <h5 class="layout-5" style="color : white;text-align:center;height:45px;line-height:45px;background-color:darkcyan">경매</h5>
+            <h5 class="layout-5" style="color : white;text-align:center;height:45px;line-height:45px;background-color:darkcyan">경매 현황</h5>
             <hr>
             <section class="section2 ">
 
@@ -286,20 +275,31 @@
                             <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
                                 <!-- Slides -->
-                                <div class="swiper-slide" th:each="imageRanking:${list}">
+                                <div class="swiper-slide" th:each="tradingImageDto:${list}">
 <!--                                   <div th:text="${imageRankingDto}"></div>-->
-                                    <a href="javascript:void(0)">
-                                        <img th:src="@{${imageRanking.fileDir}+'\s_'+${imageRanking.filename}}" alt="">
+                                    <a href="javascript:void(0)" class="tradingImageBtn"
+                                       th:data-tradingid="${tradingImageDto.tradingid}"
+                                       th:data-seller="${tradingImageDto.seller}"
+                                       th:data-buyer="${tradingImageDto.buyer}"
+                                       th:data-status="${tradingImageDto.status}"
+                                       th:data-title="${tradingImageDto.title}"
+                                       th:data-startPrice="${tradingImageDto.startPrice}"
+                                       th:data-auctionStartTime="${tradingImageDto.auctionStartTime}"
+                                       th:data-auctionEndTime="${tradingImageDto.auctionEndTime}"
+                                       th:data-price="${tradingImageDto.price}"
+
+                                    >
+                                        <img th:src="@{${tradingImageDto.fileDir}+'\s_'+${tradingImageDto.filename}}" alt="">
                                     </a>
                                 </div>
 
                             </div>
                             <!-- If we need navigation buttons -->
                             <div class="swiper-button-prev">
-                                <span class="material-symbols-outlined">arrow_left</span>
+                                <span class="material-symbols-outlined" style="font-size :4rem;">arrow_left</span>
                             </div>
                             <div class="swiper-button-next">
-                                <span class="material-symbols-outlined">arrow_right</span>
+                                <span class="material-symbols-outlined" style="font-size :4rem;">arrow_right</span>
                             </div>
                         </div>
                     </div>
@@ -328,7 +328,55 @@
     </div>
 
 
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary tradingImageModalBtn"  style="display:none;" data-bs-toggle="modal" data-bs-target="#tradingImageModal">
+        Launch demo modal
+    </button>
 
+    <!-- Modal -->
+    <div   class="modal fade" id="tradingImageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">경매정보 확인</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <table class="table w-100" style="font-size: .7rem" >
+                        <tr>
+                            <td class="bg-dark text-light" style="width:150px;">경매ID</td>
+                            <td class="modal-tradingid"></td>
+                            <td class="bg-dark text-light" style="width:150px;">상태</td>
+                            <td class="modal-status"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="bg-dark text-light">판매자</td>
+                            <td class="modal-seller"></td>
+                            <td class="bg-dark text-light">구매자</td>
+                            <td class="modal-buyer"></td>
+                        </tr>
+                        <tr>
+                            <td class="bg-dark text-light">시작가</td>
+                            <td class="modal-startPrice"></td>
+                            <td class="bg-dark text-light">낙찰가</td>
+                            <td class="modal-price"></td>
+                        </tr>
+                        <tr>
+                            <td class="bg-dark text-light">경매시작 시간</td>
+                            <td class="modal-auctionStartTime"></td>
+                            <td class="bg-dark text-light">경매종료 시간</td>
+                            <td class="modal-auctionEndTime"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="font-size: .7rem"  class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

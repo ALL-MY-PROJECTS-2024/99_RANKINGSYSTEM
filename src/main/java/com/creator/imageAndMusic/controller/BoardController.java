@@ -6,6 +6,7 @@ import com.creator.imageAndMusic.domain.dto.BoardDto;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
 import com.creator.imageAndMusic.domain.entity.Board;
+import com.creator.imageAndMusic.domain.entity.Reply;
 import com.creator.imageAndMusic.domain.service.BoardServiceImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -156,6 +159,9 @@ public class BoardController {
        dto.setUsername(board.getUsername());
        dto.setCount(board.getCount());
 
+        List<Reply> replyList =  boardService.findByReply(board);
+
+        int replyCount = replyList.size();
 
         //-------------------
         // COUNTUP
@@ -183,6 +189,8 @@ public class BoardController {
 
         model.addAttribute("boardDto",dto);
         model.addAttribute("pageNo",pageNo);
+        model.addAttribute("replyList",replyList);
+        model.addAttribute("replyCount",replyCount);
 
         return "board/read";
 
@@ -237,6 +245,14 @@ public class BoardController {
     }
 
 
+
+    @GetMapping("/reply/add")
+    public @ResponseBody ResponseEntity<String> reply_add(@RequestParam("bno")Long bno ,@RequestParam("content") String content, @AuthenticationPrincipal PrincipalDetails principalDetails){
+
+        boolean iadded =boardService.addReply(bno,content,principalDetails.getUserDto());
+
+        return new ResponseEntity("SUCCESS", HttpStatus.OK);
+    }
 
     //--------------------------------
 //    // /Board/reply/delete

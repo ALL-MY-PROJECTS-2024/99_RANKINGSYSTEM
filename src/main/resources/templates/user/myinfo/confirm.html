@@ -26,7 +26,25 @@
 
     <!-- nav       -->
     <th:block th:insert="~{fragments/nav :: albumNavFragment}" />
-
+    <section class="layout-5 breadcrumb-block">
+        <div class="">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <span >홈</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/user/album/main">
+                            <span class="">내이미지</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">내정보</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
     <main>
         <section class="banner">
             <form action="/user/myinfo/confirm" method="post" style="width:500px;margin:50px auto;">

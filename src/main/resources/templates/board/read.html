@@ -7,6 +7,9 @@
     <!--  link   -->
     <th:block th:insert="fragments/link :: linkFragment" />
 
+    <link rel="stylesheet" href="/css/board/read.css">
+
+    <script src="/js/board/reply.js" defer></script>
 </head>
 <body>
 
@@ -19,7 +22,18 @@
     <!-- nav       -->
     <th:block th:insert="fragments/nav :: navFragment" />
 
-
+    <div class="layout-5">
+        <!-- breadcrumb -->
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb  mt-2">
+                <li class="breadcrumb-item"><a href="#">홈</a></li>
+                <li class="breadcrumb-item"><a href="#">자유게시판</a></li>
+                <li class="breadcrumb-item"><a href="#">리스트</a></li>
+                <li class="breadcrumb-item active" aria-current="page">읽기</li>
+            </ol>
+        </nav>
+        <!-- title -->
+    </div>
     <main class="layout-5">
         <section class="row">
 
@@ -38,52 +52,82 @@
             -->
 
             <!-- contents -->
+            <h3 style="margin-bottom:10px;">자유게시판</h3>
+
             <div class="col contents">
-                <!-- breadcrumb -->
-                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                    <ol class="breadcrumb  mt-2">
-                        <li class="breadcrumb-item"><a href="#">HOME</a></li>
-                        <li class="breadcrumb-item"><a href="#">BOARD</a></li>
-                        <li class="breadcrumb-item"><a href="#">LIST</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">READ</li>
-                    </ol>
-                </nav>
-                <!-- title -->
-                <h3>BOARD READ</h3>
 
+                <table class="table w-100" style="font-size :.8rem;text-align:center;">
+                    <tbody>
+                    <input type="hidden" name="no" class="bno" th:value="${boardDto.no}">
+                        <tr>
+                            <td class="bg-secondary text-light" style="width:200px;">제목</td>
+                            <td   th:text="${boardDto.title}"  style="width:400px;"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="bg-secondary text-light">작성자</td>
+                            <td th:text="${boardDto.username}"></td>
+                            <td class="bg-secondary text-light" style="width:200px;">조회수</td>
+                            <td th:text="${boardDto.count}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="bg-secondary text-light">내용</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <textarea name="" id="" cols="30" rows="10" readonly th:text="${boardDto.content}" class="form-control w-100"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
 
-                <div>
-                    <input type="hidden" name="no" th:value="${boardDto.no}">
+                            <td colspan="4">
+                                <a  class="btn btn-secondary update_btn m-1" style="font-size:.8rem;background-color:darkcyan" th:href="@{/board/update(no=${boardDto.no},pageNo=${pageNo})}">수정하기</a>
+                                <a  class="btn btn-secondary delete_btn m-1"  style="font-size:.8rem;background-color:darkcyan" th:data-no="${boardDto.no}" >삭제하기</a>
+                                <a  th:href="@{/board/list(pageNo=${pageNo})}"  style="font-size:.8rem"  class="btn btn-secondary m-1">이전으로</a>
+                            </td>
 
-                    <div class="mb-3 w-50">
-                        <label for="exampleFormControlInput1" class="form-label">Email address</label>&nbsp;<span class="msg" th:text="${username}"></span>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" th:value="${boardDto.username}" readonly>
-                    </div>
-                    <div class="mb-3 w-50">
-                        <label for="ex2" class="form-label">Title</label>&nbsp;&nbsp;<span class="msg" th:text="${title}"></span>
-                        <input type="text" class="form-control" id="ex2" placeholder="Title" name="title" th:value="${boardDto.title}" readonly>
-                    </div>
-                    <div class="mb-3 w-50">
-                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:text="${boardDto.content}" readonly></textarea>
-                    </div>
-
-                    <div class="mb-3  w-50" >
-                        <a  class="btn btn-primary" th:href="@{/board/update(no=${boardDto.no},pageNo=${pageNo})}">수정하기</a>
-                        <a  class="btn btn-primary delete_btn" th:data-no="${boardDto.no}" >삭제하기</a>
-                        <a  th:href="@{/board/list(pageNo=${pageNo})}"  class="btn btn-primary">이전으로</a>
-                    </div>
-                </div>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-
         </section>
 
+        <section class="right">
+            <div>
+                <h5>댓글 <span style="font-size  :1rem;" th:text="${replyCount}">  </span> <span style="font-size  :1rem;"> 건</span></h5>
+            </div>
+            <div class="control">
+                <div><textarea class="form-control content-area" name="" placeholder="입력하세요" ></textarea></div>
+                <div><a href="javascript:void(0)" class="btn reply_add_btn" style="background-color:darkcyan;color:white;" >등록</a></div>
 
+
+            </div>
+            <hr>
+            <div>
+                <div class="reply-block">
+                    <div class="item mb-3" th:each="reply:${replyList}">
+                        <div  class="header">
+                            <div  style="font-size:.8rem;" th:text="${reply.user.username}"></div>
+                            <div  style="font-size:.6rem;" th:text="${#temporals.format(reply.regdate, 'yyyy-MM-dd HH:mm:ss')}"></div>
+
+                        </div>
+                        <hr>
+                        <div>
+                            <div style="font-size:.6rem;">내용 : </div>
+                            <div style="margin-top : 5px;" th:text="${reply.content}">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
     </main>
+
+    <!-- Footer        -->
     <footer>
-
-
+        <th:block th:insert="fragments/footer :: footerFragment" />
     </footer>
 
 </div>
@@ -115,8 +159,8 @@ deleteBtn.addEventListener('click',function(){
         console.log(err);
         alert(err.response.data.message);
     });
-
 });
+
 
 
 

@@ -99,6 +99,7 @@ public class TradingImageController {
             dto.setAdminAccepted(entity.isAdminAccepted());
             dto.setAuctionStartTime(entity.getAuctionStartTime());
             dto.setAuctionEndTime(entity.getAuctionEndTime());
+            dto.setStartPrice(entity.getStartPrice());
             dto.setPrice(entity.getPrice());
             dto.setPaymentState(entity.isPaymentState());
             dto.setStatus(entity.getStatus());
@@ -122,6 +123,7 @@ public class TradingImageController {
             dto.setAuctionStartTime(entity.getAuctionStartTime());
             dto.setAuctionEndTime(entity.getAuctionEndTime());
             dto.setPrice(entity.getPrice());
+            dto.setStartPrice(entity.getStartPrice());
             dto.setPaymentState(entity.isPaymentState());
             dto.setStatus(entity.getStatus());
 

@@ -121,17 +121,19 @@ new Chart(ctx2, {
 // section2
 //-------------------------------
 const section2imagesBlock = new Swiper('.section2 .right .swiper', {
-        loop: true,
-        initialSlide: 1,
-        //centeredSlides: true,
-        speed: 10000,
+        loop: false,
+        centeredSlides: false,
+        slidesPerView : 5,
         autoplay: {
-            delay: 0,
+            delay: 10000,
             disableOnInteraction: false
         },
-        slidesPerView: 'auto',
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
 
-    });
+});
 
 //-------------------------------
 //IMAGE / MUSIC 이동
@@ -238,9 +240,48 @@ btn_like.addEventListener('click',function(){
 })
 
 //-------------------------------
-//
+// 진행중인 경매 보기
 //-------------------------------
+const tradingImageBtnEls = document.querySelectorAll('.tradingImageBtn');
+const tradingImageModalBtn= document.querySelector('.tradingImageModalBtn');
 
+tradingImageBtnEls.forEach(el=>{
+        el.addEventListener('click',function(){
+        console.log('clicked...');
+
+        const tradingid = el.getAttribute('data-tradingid');
+        const seller = el.getAttribute('data-seller');
+        const buyer = el.getAttribute('data-buyer');
+        const status = el.getAttribute('data-status');
+        const title = el.getAttribute('data-title');
+        const startPrice = el.getAttribute('data-startPrice');
+        const auctionStartTime = el.getAttribute('data-auctionStartTime');
+        const auctionEndTime = el.getAttribute('data-auctionEndTime');
+        const price = el.getAttribute('data-price');
+        tradingImageModalBtn.click();
+
+        const modalTradingid = document.querySelector('.modal-tradingid');
+        const modalStatus = document.querySelector('.modal-status');
+        const modalSeller = document.querySelector('.modal-seller');
+        const modalBuyer = document.querySelector('.modal-buyer');
+        const modalStartPrice = document.querySelector('.modal-startPrice');
+        const modalPrice = document.querySelector('.modal-price');
+        const modalAuctionStartTime = document.querySelector('.modal-auctionStartTime');
+        const modalAuctionEndTime = document.querySelector('.modal-auctionEndTime');
+
+        modalTradingid.innerHTML = tradingid;
+        modalStatus.innerHTML = status;
+        modalSeller.innerHTML = seller;
+        modalBuyer.innerHTML = buyer;
+        modalStartPrice.innerHTML = startPrice+ " 원";
+        modalPrice.innerHTML = price+ " 원";
+        modalAuctionStartTime.innerHTML = auctionStartTime;
+        modalAuctionEndTime.innerHTML = auctionEndTime;
+
+        console.log("auctionEndTime",auctionEndTime);
+
+    })
+})
 //-------------------------------
 //
 //-------------------------------

@@ -31,7 +31,7 @@
 
 
     <!--    -->
-    <link rel="stylesheet" href="/css/imageRanking/cat.css">
+    <link rel="stylesheet" href="/css/musicRanking/cat.css">
 
     <!--    -->
     <script src="/js/musicRanking/cat.js" defer></script>
@@ -46,6 +46,26 @@
     <!-- nav       -->
     <th:block th:insert="fragments/nav :: navFragment" />
 
+
+    <section class="layout-5 breadcrumb-block">
+        <div class="">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <span class="">홈</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <span class="">이달의 콘텐츠 RANKING</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">장르별 랭킹</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
 
     <main>
 
@@ -83,32 +103,6 @@
             </div>
             <div class="body">
 
-                <!--   IMAGE BODY             -->
-                <div class="image_body hidden">
-
-                    <div class="swiper sub_category">
-                        <!-- Additional required wrapper -->
-                        <div class="swiper-wrapper">
-                            <!-- Slides -->
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Character">Character</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="City">City </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Map">Map </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="iCON">iCON</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Furniture">Furniture </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Car">Car </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Place">Place </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Others">Others </a>   </div>
-                        </div>
-                    </div>
-                    <div class="subCategoryBody">
-                        <div >
-                            <div class="title"></div>
-                        </div>
-                    </div>
-
-                </div>
-
-
                 <div class="music_body ">
 
                     <div class="swiper sub_category">
@@ -118,20 +112,25 @@
 
                             <!-- Slides -->
                             <div class="swiper-slide">  <a href="javascript:void(0)">Jazz</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Rock </a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Rock</a>   </div>
                             <div class="swiper-slide">  <a href="javascript:void(0)">Classic</a>   </div>
                             <div class="swiper-slide">  <a href="javascript:void(0)">Prgressive</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Advertisement </a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Heavy Metal</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Advertisement</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">HeavyMetal</a>   </div>
                             <div class="swiper-slide">  <a href="javascript:void(0)">Pop</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Others </a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Others</a>   </div>
 
                         </div>
                     </div>
                     <div class="subCategoryBody ">
-                        <div>
-                            <div class="title"></div>
-                        </div>
+                            <div class="items  Jazz-block active"></div>
+                            <div class="items  Rock-block "></div>
+                            <div class="items  Classic-block "></div>
+                            <div class="items  Progressive-block "></div>
+                            <div class="items  Advertisement-block "></div>
+                            <div class="items  HeavyMetal-block "></div>
+                            <div class="items  Pop-block "></div>
+                            <div class="items  Others-block "></div>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,6 @@
         console.log(list);
     </script>
 
-
     <!--    -->
     <link rel="stylesheet" href="/css/around/group.css">
 
@@ -52,12 +51,12 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="/">
-                                <span class="material-symbols-outlined">home</span>
+                                <span class="">홈</span>
                             </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a href="/">
-                                <span class="">둘러 보기</span>
+                                <span class="">둘러보기</span>
                             </a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">그룹</li>
@@ -101,9 +100,42 @@
 
                     <div class="subCategoryBody">
                         <div >
-                            <div class="" th:each="imageRanking : ${list}">
+                            <div class="" >
+<!--
                                 <div th:text="${imageRanking}"></div>
-                                <hr>
+-->
+                                <table class="table w-100">
+                                   <thead class="bg-dark text-light">
+                                       <tr>
+                                           <th>No</th>
+                                           <th>Image</th>
+                                           <th>Title</th>
+                                           <th>Owner</th>
+                                           <th>Cat_01</th>
+                                           <th>Cat_02</th>
+                                           <th>Count</th>
+                                           <th>Like</th>
+                                           <th>CreatedAt</th>
+                                       </tr>
+                                   </thead>
+
+                                    <tr th:each="imageRanking,imageRankingStat : ${imageList}">
+                                        <td th:text="${imageRankingStat.count}"></td>
+                                        <td>
+                                            <a href="javascript:void(0)">
+                                                <img style="width:150px;height:55px;" th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요">
+                                            </a>
+                                            
+                                        </td>
+                                        <td th:text="${imageRanking.ImagesFileInfo.Images.title}"></td>
+                                        <td th:text="${imageRanking.ImagesFileInfo.Images.username}"></td>
+                                        <td th:text="${imageRanking.ImagesFileInfo.Images.mainCategory}"></td>
+                                        <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>
+                                        <td th:text="${imageRanking.count}"></td>
+                                        <td th:text="${imageRanking.ilikeit}"></td>
+                                        <td th:text="${#temporals.format(imageRanking.ImagesFileInfo.Images.createAt, 'yyyy.MM.dd HH:mm:ss')}"></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -130,10 +162,41 @@
                     </div>
                     <div class="subCategoryBody ">
                         <div>
-                            <div class="" th:each="musicRanking : ${list}">
+                            <div class="" >
                                 <hr>
-                                <div th:text="${musicRanking}"></div>
-                                <hr>
+
+                                <table class="table w-100">
+                                    <thead class="bg-dark text-light">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Image</th>
+                                        <th>Title</th>
+                                        <th>Owner</th>
+                                        <th>Cat_01</th>
+                                        <th>Cat_02</th>
+                                        <th>Count</th>
+                                        <th>Like</th>
+                                        <th>CreatedAt</th>
+                                    </tr>
+                                    </thead>
+                                    <tr th:each="musicRanking,musicRankingStat : ${musicList}">
+                                        <td th:text="${musicRankingStat.count}"></td>
+                                        <td>
+                                            <a href="javascript:void(0)">
+                                                <img style="width:150px;height:55px;" src="/assets/music.jpg" alt="인증필요">
+                                            </a>
+
+                                        </td>
+                                        <td th:text="${musicRanking.MusicFileInfo.Music.title}"></td>
+                                        <td th:text="${musicRanking.MusicFileInfo.Music.username}"></td>
+                                        <td th:text="${musicRanking.MusicFileInfo.Music.mainCategory}"></td>
+                                        <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
+                                        <td th:text="${musicRanking.count}"></td>
+                                        <td th:text="${musicRanking.ilikeit}"></td>
+                                        <td th:text="${#temporals.format(musicRanking.MusicFileInfo.Music.createAt, 'yyyy.MM.dd HH:mm:ss')}"></td>
+                                    </tr>
+
+                                </table>
                             </div>
                         </div>
                     </div>

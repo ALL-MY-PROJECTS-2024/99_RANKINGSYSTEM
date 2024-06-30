@@ -67,11 +67,13 @@ public class AroundController {
         log.info("GET /around/group " + mainCategory + " " + subCategory + " " + mode);
         if(mainCategory.contains("이미지")){
            List<ImagesRanking> list =   imageRankingServiceImpl.getAllImageRankingByCategory(subCategory);
-           model.addAttribute("list",list);
+           System.out.println("개수 : " + list.size());
+           model.addAttribute("imageList",list);
         }
         else{
             List<MusicRanking> list =   musicRankingServiceImpl.getAllMusicRankingByCategory(subCategory);
-            model.addAttribute("list",list);
+            System.out.println("개수 : " + list.size());
+            model.addAttribute("musicList",list);
         }
 
         model.addAttribute("mode",mode);
