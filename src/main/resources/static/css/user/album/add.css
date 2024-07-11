@@ -89,11 +89,13 @@
 
 
 .product_info_block{
-    width:300px;
-    height : 300px;
-    position:relivate;
-}
 
+
+    position:relative;
+}
+section form{
+    width : 500px;
+}
 .product_info_block>form>*{
     margin-bottom:5px;
 }

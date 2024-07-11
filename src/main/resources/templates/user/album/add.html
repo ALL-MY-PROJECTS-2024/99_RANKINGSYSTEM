@@ -56,8 +56,6 @@
 
     <main  class="">
 
-
-
         <section class="content_block layout-5">
             <div style="font-size:1rem;margin-bottom : 5px;">반드시 사용자의 위치 파악 팝업창의 <span style="color:red;">'허용'</span> 버튼을 눌러주세요!</div>
             <div class="head">
@@ -71,6 +69,7 @@
                 </div>
             </div>
             <div class="body">
+
                 <div class="image_body">
                     <!-- LEFT -->
                     <section class="product_img_block">
@@ -79,6 +78,7 @@
                                 <div class="plus">+</div>
                             </div>
                         </div>
+<!--
 
                         <div class="preview_img_block">
                             <label>PREVIEW</label>
@@ -86,24 +86,26 @@
 
                             </div>
                         </div>
+-->
+
                     </section>
 
 
                     <section class="product_info_block">
                         <form  onsubmit="return false"  method="post" name="albumform" action="/user/album/add" enctype="multipart/form-data" >
-                            <div>
+                            <div  class="m-2">
                                 <label>계정명 : </label>
                                 <input name="username" placeholder="example@example.com"  th:value="${#authentication.name}"  class="form-control"  required readonly>
                             </div>
-                            <div>
+                            <div class="m-2">
                                 <label>제목 : </label>
                                 <input name="title" class="form-control" placeholder="이미지이름" required>
                             </div>
-                            <div class="">
+                            <div  class="m-2">
                                 <label>메인 카테고리 : </label>
                                 <input name="main_category" value="image" class="form-control" placeholder="제품명" readonly>
                             </div>
-                            <div class="sub_category image-cat">
+                            <div class="sub_category image-cat m-2"  >
                                 <label>세부 카테고리 : </label>
                                 <select name="sub_category"  class="form-select">
                                     <option value="Character" selected>Character</option>
@@ -116,20 +118,15 @@
                                     <option value="Others">Others</option>
                                 </select>
                             </div>
-
-                            <div>
+                            <div class="m-2">
                                 <label>설명 : </label>
                                 <textarea name="description" class="form-control" required></textarea>
                             </div>
-                            <div style="display:flex;justify-content: space-between;">
-
-                            </div>
-                            <div>
+                            <div  class="m-2">
                                 <button  class="btn  add_album_btn w-100" style="background-color:darkcyan;color : white;">등록</button>
                             </div>
                         </form>
                     </section>
-
                 </div>
 
                 <div class="music_body">
@@ -149,7 +146,7 @@
                             </div>
                             <div class="m-2">
                                 <label>제목 : </label>
-                                <input name="title" class="form-control" placeholder="제목" required>
+                                <input name="title" class="form-control" placeholder="음악 제목" required>
                             </div>
                             <div class="m-2">
                                 <label>메인 카테고리 : </label>

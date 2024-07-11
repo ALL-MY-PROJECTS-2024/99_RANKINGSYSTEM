@@ -16,5 +16,6 @@ public class AlbumDto {
     private int like;
     private double lat;
     private double lng;
+    private MultipartFile imageFile;
 
 }

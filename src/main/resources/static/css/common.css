@@ -234,12 +234,12 @@ ul{
     font-size:1.5rem;
     font-style: italic;
 
-    margin-right : 50px;
+   /* margin-right : 50px;*/
 
     border-radius : 7px;
 /*    border-right : 3px solid darkcyan;
     border-bottom : 3px solid darkcyan;*/
-
+    position:relative;
 }
 .wrapper>nav>.left>a>span:nth-child(1){
     color:black;
@@ -251,15 +251,15 @@ ul{
 
 .wrapper>nav>.left img{
     position:absolute;
-    left:3vw;
-    top:3vh;
-    border : 1px solid lightgray;
+    left:0vw;
+    top:-1.7vh;
+    border:3px solid darkcyan;
     padding : 10px;
 }
 
 
 .wrapper>nav>.right{
-    width:100%;
+    width:78.917vw;
     border-top: 3px solid darkcyan ;
     border-bottom: 3px solid darkcyan;
 }
@@ -276,6 +276,7 @@ ul{
     justify-content: center;
     align-items: center;
     text-align:center;
+
 }
 .wrapper>nav>.right>ul.mainmenu>li{
     width : 9.375vw;
@@ -299,9 +300,12 @@ ul{
     /* border-right: 1px solid; */
 
     position:relative;
+    color:black;
 
 }
-
+.wrapper>nav>.right>ul.mainmenu>li>a:hover{
+    color:gray;
+}
 
 
 .wrapper>nav>.right>ul.mainmenu>li>ul{
