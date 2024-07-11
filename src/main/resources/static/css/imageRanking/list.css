@@ -179,14 +179,15 @@
     margin : auto;
     transition:.5s;
 }
+
 .main-container>.right>.items>.item>.image-block a{
     display:block;
     padding : 2px;
 
 }
 .main-container>.right>.items>.item>.image-block img{
-    width : 200px;
-    height : 130px;
+    width : 15.021vw;
+    height : 15vh;
 
     object-fit : contain;
 }
@@ -314,13 +315,6 @@ th,td{
     display:none !important;
 }
 
-.active{
-    background-color :white !important;
-    border : 1px solid !important;
-    border-bottom: 1px solid white !important;
-    z-index : 3;
-    position:relative;
-}
 
 .items.summary-block {
     display:flex;

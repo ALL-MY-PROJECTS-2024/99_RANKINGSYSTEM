@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                       document.querySelector('.username_msg').innerHTML=res.data.message;
 
                               }else{
-                                      alert('기존 인증쿠키값을 제거합니다.');
+                                      //alert('기존 인증쿠키값을 제거합니다.');
                                       //해당 쿠키 제거
                                       document.cookie = email_auth_cookie + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                                       location.reload();
@@ -101,11 +101,23 @@ email_auth_btn.addEventListener("click",function(){
         axios.get('/user/sendMail/' + username)
             .then(resp=>{
                     console.log(resp);
-                    //인증 성공시에
-                    const email_auth_block = document.querySelector(".email_auth_block");
-                    email_auth_block.style.display = "flex";
+                    if(!resp.data.isSuccess){
+                         alert(resp.data.message);
+                         join_block_bg.style.display='none';
 
-                    join_block_bg.style.display='none';
+                    }else{
+                        //인증 성공시에
+                        const emailConfirm = document.querySelector('.emailConfirm');
+                        emailConfirm.disabled  = false;
+
+                        const username_msg = document.querySelector('.username_msg');
+                        username_msg.style.color="green";
+                        username_msg.innerHTML = '인증코드가 발송되었습니다.';
+                        const email_code_msg = document.querySelector('.email_code_msg');
+                        email_code_msg.innerHTML = '인증코드를 입력하세요.';
+
+                        join_block_bg.style.display='none';
+                    }
             })
             .catch(err=>{console.log(err);});
 
@@ -121,13 +133,13 @@ email_auth_btn.addEventListener("click",function(){
 const emailCodeForm_btn = document.querySelector('.emailCodeForm_btn');
         emailCodeForm_btn.addEventListener('click', function(){
 
-
                 const join_block_bg = document.querySelector('.join_block_bg');
                 join_block_bg.style.display='flex';
 
-
                 const username = document.joinform.username.value;
                 const emailCode = document.querySelector('.email_code').value;
+                const email_code_msg= document.querySelector('.email_code_msg');
+                const username_msg = document.querySelector('.username_msg');
 
                 console.log('emailCodeForm_btn clicked..');
                 axios
@@ -135,19 +147,19 @@ const emailCodeForm_btn = document.querySelector('.emailCodeForm_btn');
                 .then(res =>{
                               console.log(res);
                               if(res.data.success){
-                                      //인증완료 -> 다음 입력을 할 준비~
-                                      document.querySelector('.username_msg').style.color='green';
-                                      document.joinform.username.value = username;
-                                      document.joinform.username.readonly = true;
-                                      document.querySelector('.username_msg').innerHTML=res.data.message;
+                                      join_block_bg.style.display='none';
 
-                                        const email_auth_block = document.querySelector(".email_auth_block");
-                                        email_auth_block.style.display = "none";
-
-                                     join_block_bg.style.display='none';
+                                      email_code_msg.innerHTML=res.data.message;
+                                      email_code_msg.style.color="green";
+                                        //인증완료 -> 다음 입력을 할 준비~
+                                       username_msg.innerHTML = '이메일 확인 완료';
+                                       document.querySelector('.username_msg').style.color='green';
+                                       document.joinform.username.value = username;
+                                       document.joinform.username.readonly = true;
+                                       document.joinForm.emailConfirm.disabled = true;
                               }else{
                                       //인증X -> 인증이 안된 내용을 표시
-                                      alert('이메일 인증 실패!');
+                                      alert(res.data.message);
                                       location.href="/";
                               }
 
@@ -171,13 +183,40 @@ join_btn.addEventListener("click",function(){
 
             console.log('Validation Check Success..!')
             //유효성 체크 완료
+            const form = document.joinform;
+            const formData = new FormData();
+            formData.append('username',form.username.value);
+            formData.append('password',form.password.value);
+            formData.append('repassword',form.repassword.value);
+            formData.append('nickname',form.nickname.value);
+            formData.append('phone',form.phone.value);
+            formData.append('zipcode',form.zipcode.value);
+            formData.append('addr1',form.addr1.value);
+            formData.append('addr2',form.addr2.value);
 
-            document.joinform.submit();
+            axios.post('/user/join',formData)
+            .then(resp=>{
+                console.log(resp)
+
+                if(resp.data.type=='isJoin'){
+
+                    if(resp.data.isJoin){
+                        alert('회원가입을 완료했습니다.\n메인페이지로 이동합니다.');
+                        location.href="/";
+                    }
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+                alert(err.response.data.message);
+            })
+
+            //document.joinform.submit();
 
         }
         else
         {
-            alert("Validation Check Error");
+            alert("올바르게 입력되지 않은 항목이 있습니다.\n확인해주세요!");
         }
 });
 
@@ -635,13 +674,23 @@ phone.addEventListener('input',function(e){
            return true;
         }
 
-    //---------------------------------------------
-    //---------------------------------------------
-    //---------------------------------------------
-    //---------------------------------------------
 
+//----------------------------------------------------------
+//
+//----------------------------------------------------------
 
+//----------------------------------------------------------
+//
+//----------------------------------------------------------
 
+//----------------------------------------------------------
+//
+//----------------------------------------------------------
 
+//----------------------------------------------------------
+//
+//----------------------------------------------------------
 
-
+//----------------------------------------------------------
+//
+//----------------------------------------------------------

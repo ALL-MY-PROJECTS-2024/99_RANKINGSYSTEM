@@ -52,30 +52,7 @@
             </div>
         </section>
         <main class="" >
-            <section class="layout-5 breadcrumb-block">
-                <div class="">
-                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="/">
-                                    <span class="material-symbols-outlined">home</span>
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a href="/user/album/main">
-                                    <span class="">IMAGERANKING</span>
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a href="/user/album/main">
-                                    <span class="">LIST</span>
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page" style="border : 0px !important;">READ</li>
-                        </ol>
-                    </nav>
-                </div>
-            </section>
+
 
             <section>
 
@@ -85,23 +62,23 @@
                             <thead></thead>
                             <tbody>
                                 <tr>
-                                    <td style="width:200px;" >TITLE</td>
+                                    <td style="width:200px;" >제목</td>
                                     <td class="title"  th:text="${imagesRanking.ImagesFileInfo.Images.title}" style="width:500px;"></td>
-                                    <td  style="width:200px;" >DATE</td>
+                                    <td  style="width:200px;" >등록날짜</td>
                                     <td class="date" th:text="${#temporals.format(imagesRanking.ImagesFileInfo.Images.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 </tr>
                                 <tr>
-                                    <td>USER</td>
+                                    <td>소유자 계정</td>
                                     <td  class="username" th:text="${imagesRanking.ImagesFileInfo.Images.username}" colspan="3"></td>
                                 </tr>
                                 <tr>
-                                    <td>MAIN CATEGORY</td>
+                                    <td>기본 카테고리</td>
                                     <td  class="mainCategory" th:text="${imagesRanking.ImagesFileInfo.Images.mainCategory}"></td>
-                                    <td>SUB CATEGORY</td>
+                                    <td>세부 카테고리</td>
                                     <td class="subCategory" th:text="${imagesRanking.ImagesFileInfo.Images.subCategory}"></td>
                                 </tr>
                                 <tr>
-                                    <td>DESCRIPTION</td>
+                                    <td>설명</td>
                                     <td class="description" th:text="${imagesRanking.ImagesFileInfo.Images.description}"  colspan="3"></td>
                                 </tr>
                            </tbody>

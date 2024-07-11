@@ -1,10 +1,11 @@
+:root{
+
+}
 *{
-    font-family: "Poor Story", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    
     box-sizing: border-box;
 }
+
+
 .gugi-regular {
     font-family: "Gugi", sans-serif;
     font-weight: 400;
@@ -35,6 +36,10 @@
 
 }
 body{
+  font-family: "Jua", sans-serif;
+  font-weight: 0;
+  font-style: normal;
+
     margin: 0;
     width: 100%;
 }
@@ -71,6 +76,7 @@ ul{
     align-items: center;
 
     positionL:relative;
+    /*letter-spacing: 0.1em;*/
 }
 
 .wrapper>.top-header>.center{

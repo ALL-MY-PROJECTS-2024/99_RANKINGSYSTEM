@@ -3,6 +3,12 @@
     top:-18px;
 }
 
+.offcanvas-body::-webkit-scrollbar{
+    display:none;
+}
+
+
+
 .join_block{
     width : 300px;
     height : 100%;
@@ -163,18 +169,20 @@
     top:0px;
     left: 0px;
 }
+offcanvas-body{
 
+}
 .offcanvas .body {
     height : 90vh;
     padding : 10px;
-    border: 1px solid lightgray;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     position: relative;
     margin: auto;
-    border-radius: 15px;
+
 }
 
 .offcanvas .body::-webkit-scrollbar{
@@ -235,8 +243,11 @@
 }
 
 .offcanvas{
-
+    height : 100vh;
 }
+
+
+
 .join_block_bg{
     position : absolute;
     left : 0px;

@@ -193,40 +193,58 @@ public class UserController {
     }
 
 
+
+
     @PostMapping("/join")
-    public String join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request,HttpServletResponse response,RedirectAttributes redirectAttributes) throws Exception {
+    public  @ResponseBody  ResponseEntity<JSONObject> join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request,HttpServletResponse response,RedirectAttributes redirectAttributes) throws Exception {
         UserController.log.info("POST /join...dto " + dto);
         //파라미터 받기
             //
+        JSONObject jsonObject = new JSONObject();
+
+
+       Optional<User> userOptional =  userRepository.findById(dto.getUsername());
+       if(userOptional.isPresent()){
+           jsonObject.put("message","동일 계정이 존재합니다.");
+           jsonObject.put("type","user");
+
+           return new ResponseEntity<>(jsonObject,HttpStatus.BAD_GATEWAY);
+       }
+
         //입력값 검증(유효성체크)
         //System.out.println(bindingResult);
         if(bindingResult.hasFieldErrors()){
             for(FieldError error :bindingResult.getFieldErrors()){
                 log.info(error.getField() +" : " + error.getDefaultMessage());
                 model.addAttribute(error.getField(),error.getDefaultMessage());
+                jsonObject.put(error.getField(),error.getDefaultMessage());
             }
-            return "/";
+            jsonObject.put("type","validation");
+            jsonObject.put("message","잘못입력된 항목이 존재합니다.\n확인해보세요.");
+            return new ResponseEntity<>(jsonObject,HttpStatus.BAD_GATEWAY);
         }
 
         //서비스 실행
-
         boolean isJoin =  userService.memberJoin(dto,model,request);
         log.info("isJoin : "+isJoin);
         //View로 속성등등 전달
         if(isJoin) {
+            jsonObject.put("type","isJoin");
+            jsonObject.put("isJoin",true);
 
             //JWT 토큰 쿠키 삭제후 response 전송
             Cookie newCookie = new Cookie(AUTH.EMAIL_COOKIE_NAME,null);
-
             newCookie.setMaxAge(0);
             newCookie.setPath("/");
             response.addCookie(newCookie);
-            redirectAttributes.addAttribute("message","JOIN SUCCESS");
-            return "redirect:login";
+            return new ResponseEntity<>(jsonObject,HttpStatus.OK);
         }
         else {
-            return "/";
-            //+a 예외처리
+            jsonObject.put("type","isJoin");
+            jsonObject.put("isJoin",true);
+            String message = (String)model.getAttribute(("message"));
+            jsonObject.put("message",message);
+            return new ResponseEntity<>(jsonObject,HttpStatus.BAD_GATEWAY);
         }
 
     }
@@ -236,42 +254,59 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<JSONObject> sendmailFunc(@PathVariable("email") String email, HttpServletResponse response){
         UserController.log.info("GET /user/sendMail.." + email);
-        //넣을 값 지정
-        //메일 메시지 만들기
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("[EMAIL AUTHENTICATION] CODE ");
-        //난수코드 전달로 변경
-        Random rand =new Random();
-        int value = (int)(rand.nextDouble()*100000) ;
 
-        message.setText(value+"");
-        javaMailSender.send(message);
+        JSONObject result = new JSONObject();
+
+        //1 가입된 계정인지 확인
+        Optional<User> userOptional =  userRepository.findById(email);
+        if(userOptional.isPresent()){
+            result.put("isSuccess",false);
+            result.put("message","동일 계정이 존재합니다.");
+            return new ResponseEntity<>(result , HttpStatus.OK);
+
+        }else{
+            //메일 메시지 만들기
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(email);
+            message.setSubject("[WEB발신] 이메일인증코드 발송 ");
+            //난수코드 전달로 변경
+            Random rand =new Random();
+            int value = (int)(rand.nextDouble()*100000) ;
+
+            message.setText(value+"");
+            javaMailSender.send(message);
+
+            //Token에 난수Value전달
+            TokenInfo tokenInfo =  jwtTokenProvider.generateToken(AUTH.EMAIL_COOKIE_NAME,value+"",false,email);
+            Cookie cookie  = new Cookie(AUTH.EMAIL_COOKIE_NAME,tokenInfo.getAccessToken());
+            cookie.setPath("/");
+            cookie.setMaxAge(60*15);
+            response.addCookie(cookie);
+
+            result.put("isSuccess",true);
+            result.put("message","인증코드 발송을 완료하였습니다.");
+            return new ResponseEntity<>(result , HttpStatus.OK);
+
+        }
 
 
-        //Token에 난수Value전달
-        TokenInfo tokenInfo =  jwtTokenProvider.generateToken(AUTH.EMAIL_COOKIE_NAME,value+"",false,email);
-        Cookie cookie  = new Cookie(AUTH.EMAIL_COOKIE_NAME,tokenInfo.getAccessToken());
-        cookie.setPath("/");
-        cookie.setMaxAge(60*15);
-        response.addCookie(cookie);
-
-        return new ResponseEntity(new JSONObject().put("success", true) , HttpStatus.OK);
     }
 
     @GetMapping("/emailConfirm")
     public @ResponseBody JSONObject emailConfirmFunc(@RequestParam(value = "emailCode" ,defaultValue = "0") String emailCode,HttpServletRequest request , HttpServletResponse response){
         UserController.log.info("GET /user/emailConfirm... code : " + emailCode);
 
-
-
+        JSONObject result = new JSONObject();
 
         //JWT 토큰 쿠키중에 Email인증 토큰 쿠키 찾기
         Cookie c =  Arrays.stream(request.getCookies())
                 .filter(cookie -> cookie.getName().startsWith(AUTH.EMAIL_COOKIE_NAME)).findFirst().orElse(null);
 
-        if(c==null)
-            return null;
+        if(c==null){
+            result.put("message","유효한 이메일주소를 입력한 뒤 인증버튼을 클릭해주세요");
+            return result;
+        }
+
 
 
         System.out.println(c.getName() + " | " + c.getValue());
@@ -310,14 +345,13 @@ public class UserController {
                 obj.put("success",true);
                 obj.put("username",username);
                 obj.put("message","이메일 인증을 성공하셨습니다.");
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!" +username);
                 return obj;
             }
             else {
 
                 //받은 이메일코드랑 다르면
                 obj.put("success",false);
-                obj.put("message","이메일 인증을 실패했습니다.");
+                obj.put("message","이메일 인증코드값이 잘못입력되었습니다.");
                 return obj;
 
             }
@@ -327,7 +361,7 @@ public class UserController {
         {
             obj.put("success",true);
             obj.put("username",username);
-            obj.put("message","이메일 인증을 성공하셨습니다.");
+            obj.put("message","이메일 인증을 성공!.");
             return obj;
 
         }

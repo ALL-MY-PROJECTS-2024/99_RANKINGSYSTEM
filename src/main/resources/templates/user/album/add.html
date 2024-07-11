@@ -92,19 +92,19 @@
                     <section class="product_info_block">
                         <form  onsubmit="return false"  method="post" name="albumform" action="/user/album/add" enctype="multipart/form-data" >
                             <div>
-                                <label>USER : </label>
+                                <label>계정명 : </label>
                                 <input name="username" placeholder="example@example.com"  th:value="${#authentication.name}"  class="form-control"  required readonly>
                             </div>
                             <div>
-                                <label>TITLE : </label>
+                                <label>제목 : </label>
                                 <input name="title" class="form-control" placeholder="이미지이름" required>
                             </div>
                             <div class="">
-                                <label>MAIN_CATEGORY : </label>
+                                <label>메인 카테고리 : </label>
                                 <input name="main_category" value="image" class="form-control" placeholder="제품명" readonly>
                             </div>
                             <div class="sub_category image-cat">
-                                <label>SUB_CATEGORY(IMAGE) : </label>
+                                <label>세부 카테고리 : </label>
                                 <select name="sub_category"  class="form-select">
                                     <option value="Character" selected>Character</option>
                                     <option value="City">City</option>
@@ -118,7 +118,7 @@
                             </div>
 
                             <div>
-                                <label>DESCRIPTION : </label>
+                                <label>설명 : </label>
                                 <textarea name="description" class="form-control" required></textarea>
                             </div>
                             <div style="display:flex;justify-content: space-between;">
@@ -131,50 +131,60 @@
                     </section>
 
                 </div>
-                <div class="music_body hidden">
 
-                    <form onsubmit="return false" method="post" name="musicForm" action="/user/music/add" enctype="multipart/form-data" >
-                        <div class="m-2">
-                            <label>USER : </label>
-                            <input name="username" placeholder="example@example.com"  th:value="${#authentication.name}"  class="form-control"  required readonly>
+                <div class="music_body">
+                    <!-- LEFT -->
+                    <section class="product_music_block">
+                        <div class="product_music">
+                            <div class="upload-box">
+                                <div class="plus">+</div>
+                            </div>
                         </div>
-                        <div class="m-2">
-                            <label>MAIN_CATEGORY : </label>
-                            <input name="mainCategory" value="music" class="form-control" placeholder="제품명" readonly>
-                        </div>
-                        <div class="m-2">
-                            <label>TITLE : </label>
-                            <input name="title" class="form-control" placeholder="이미지이름" required>
-                        </div>
+                    </section>
+                    <section class="">
+                        <form onsubmit="return false" method="post" name="musicForm" action="/user/music/add" enctype="multipart/form-data" >
+                            <div class="m-2">
+                                <label>계정명 : </label>
+                                <input name="username" placeholder="example@example.com"  th:value="${#authentication.name}"  class="form-control"  required readonly>
+                            </div>
+                            <div class="m-2">
+                                <label>제목 : </label>
+                                <input name="title" class="form-control" placeholder="제목" required>
+                            </div>
+                            <div class="m-2">
+                                <label>메인 카테고리 : </label>
+                                <input name="mainCategory" value="music" class="form-control" readonly>
+                            </div>
 
-                        <div class="m-2">
-                            <label>FILE : </label>
-                            <input name="files" type="file" class="form-control">
-                        </div>
 
+                            <div class="m-2">
+                                <label>음악파일 : </label>
+                                <input name="files" type="file" class="form-control">
+                            </div>
 
-                        <div class="sub_category music-cat  m-2">
-                            <label>SUB_CAT : </label>
-                            <select name="subCategory"  class="form-select">
-                                <option value="Jazz" selected>Jazz</option>
-                                <option value="Rock">Rock</option>
-                                <option value="Classic">Classic</option>
-                                <option value="Progressive">Progressive</option>
-                                <option value="Advertisement">Advertisement</option>
-                                <option value="HeavyMetal">HeavyMetal</option>
-                                <option value="Pop">Pop</option>
-                                <option value="Others">Others</option>
-                            </select>
-                        </div>
+                            <div class="sub_category music-cat  m-2">
+                                <label>세부 카테고리 : </label>
+                                <select name="subCategory"  class="form-select">
+                                    <option value="Jazz" selected>Jazz</option>
+                                    <option value="Rock">Rock</option>
+                                    <option value="Classic">Classic</option>
+                                    <option value="Progressive">Progressive</option>
+                                    <option value="Advertisement">Advertisement</option>
+                                    <option value="HeavyMetal">HeavyMetal</option>
+                                    <option value="Pop">Pop</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </div>
 
-                        <input type="hidden" name="lat" />
-                        <input type="hidden" name="lng" />
-                        <div class="btn-block m-2">
-                            <button class="add-music-btn btn  w-100" style="">등록</button>
-                        </div>
-                    </form>
-
+                            <input type="hidden" name="lat" />
+                            <input type="hidden" name="lng" />
+                            <div class="btn-block m-2">
+                                <button class="add-music-btn btn  w-100" style="">등록</button>
+                            </div>
+                        </form>
+                    </section>
                 </div>
+
             </div>
 
         </section>

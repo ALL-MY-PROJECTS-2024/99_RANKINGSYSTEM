@@ -75,14 +75,14 @@ public class UserServiceImpl implements UserService {
 
         //password vs repassword 일치여부
         if(!dto.getPassword().equals(dto.getRepassword()) ){
-            model.addAttribute("password","패스워드 입력이 상이합니다 다시 입력하세요");
+            model.addAttribute("message","패스워드 입력이 상이합니다 다시 입력하세요");
             System.out.println("UserServiceImpl's memberJoin .. 패스워드 불일치");
             return false;
         }
 
         //동일 계정이 있는지 여부 확인
         if(userRepository.existsById(dto.getUsername())){
-            model.addAttribute("username","동일한 계정명이 존재합니다.");
+            model.addAttribute("message","동일한 계정명이 존재합니다.");
             System.out.println("UserServiceImpl's memberJoin .. 동일한 계정명이 존재");
             return false;
         }
@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
 //        // JWT토큰의 만료여부 확인
 //        //---
         if( !jwtTokenProvider.validateToken(jwtAccessToken)){
-            model.addAttribute("username","이메일 인증 유효시간을 초과했습니다");
+            model.addAttribute("message","이메일 인증 유효시간을 초과했습니다");
             System.out.println("UserServiceImpl's memberJoin .. 이메일 인증 유효시간을 초과");
             return false;
         }
@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
 
             if(isEmailAuth==null || isEmailAuth!=true){
                 //이메일인증실패!!
-                model.addAttribute("username","해당 계정의 이메일 인증이 되어있지 않습니다.");
+                model.addAttribute("message","해당 계정의 이메일 인증이 되어있지 않습니다.");
                 System.out.println("UserServiceImpl's memberJoin .. 해당 계정의 이메일 인증이 되어있지 않습니다.");
                 return false;
             }
