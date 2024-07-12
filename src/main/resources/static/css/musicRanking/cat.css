@@ -2,7 +2,7 @@
 
 section.content_block{}
 section.group-block>.head{
-    height : 8vh;
+    height : 5vh;
     display:flex;
     align-items : center;
     justify-content : center;
@@ -46,6 +46,7 @@ section.group-block>.head>* label:hover{
 
 section.group-block>.body{
     padding : 15px;
+    padding-top : 0;
 }
 
 section.group-block>.body>.image_body,
@@ -144,7 +145,6 @@ section.group-block .body .swiper .swiper-button-next::after{
 
 
 .subCategoryBody{
-    height : 800px;
     overflow : auto;
     padding : 15px;
     box-shadow : 5px 5px 5px lightgray;
@@ -160,14 +160,15 @@ section.group-block .body .swiper .swiper-button-next::after{
     justify-content : left;
     align-items : center;
     flex-wrap : wrap;
-
+    gap:10px;
+    height :100%;
     display:none;
 }
 
 .subCategoryBody .item{
-    width : 200px;
+    width : calc(20% - 20px);
     height : 200px;
-    margin : 15px;
+    margin : 0px;
     padding : 5px;
     box-shadow : 5px 5px 5px lightgray;
 

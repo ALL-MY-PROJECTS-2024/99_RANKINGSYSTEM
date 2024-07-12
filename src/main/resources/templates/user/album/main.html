@@ -63,7 +63,7 @@
                             <div class="contents">
                                 <div>
                                     <a href="javascript:void(0)">
-                                        <span class="material-symbols-outlined favorite">favorite</span>
+<!--                                        <span class="material-symbols-outlined favorite">favorite</span>-->
                                     </a>
                                 </div>
                                 <div><th:span th:text="${#temporals.format(item.images.createAt, 'yyyy-MM-dd HH:mm:ss')}"></th:span></div>
@@ -82,14 +82,14 @@
                             <div class="image-block">
 
                                 <a th:href="@{/user/album/readmusic(musicid=${item.music.musicid})}">
-                                    <img src="/assets/music.jpg" class="card-img-top" alt="...">
+                                    <img th:src="@{${item.dir}+'\\'+${item.albumImageName}}" class="card-img-top" alt="...">
                                 </a>
 
                             </div>
                             <div class="contents">
                                 <div>
                                     <a href="javascript:void(0)">
-                                        <span class="material-symbols-outlined favorite">favorite</span>
+<!--                                        <span class="material-symbols-outlined favorite">favorite</span>-->
                                     </a>
                                 </div>
                                 <div><th:span th:text="${#temporals.format(item.music.createAt, 'yyyy-MM-dd HH:mm:ss')}" style="color:black"></th:span></div>

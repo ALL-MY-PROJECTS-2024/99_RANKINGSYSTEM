@@ -189,10 +189,10 @@
     top : 50%;
 }
 .section1 .right .swiper .swiper-button-prev{
-    left :0px;
+    left :5px;
 }
 .section1 .right .swiper .swiper-button-next{
-    right : 0px;
+    right : 5px;
 }
 /*
     SECTION02

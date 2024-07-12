@@ -76,7 +76,7 @@
                     <div class="cat" th:text="${bookmark.musicRanking.musicFileInfo.music.subCategory}"></div>
                     <div class="image" >
                         <a href="">
-                            <img src="/assets/music.jpg" alt="" />
+                            <img th:src="${bookmark.musicRanking.musicFileInfo.dir}+'/'+${bookmark.musicRanking.musicFileInfo.albumImageName}" alt="" />
                         </a>
                     </div>
                     <div class="createdAt" th:text="${bookmark.musicRanking.musicFileInfo.music.createAt}"></div>

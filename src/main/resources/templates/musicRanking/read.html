@@ -91,8 +91,11 @@
                                 </a>
 
                             </div>
-                            <div class="images">
+                            <div class="images" style="display:flex; justify-content:center;align-items:center; flex-direction:column">
                                 <th:block  >
+                                    <div>
+                                        <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
+                                    </div>
                                     <audio controls>
                                         <source th:src="@{${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.filename}}" type="audio/mp3">
                                         <source th:src="@{${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.filename}}" type="audio/wav">

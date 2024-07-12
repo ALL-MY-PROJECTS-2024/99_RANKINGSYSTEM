@@ -104,18 +104,22 @@
 <!--
                                 <div th:text="${imageRanking}"></div>
 -->
-                                <table class="table w-100">
+                                <div th:if="${mode=='1'}">
+                                    <span>TOTAL : </span><span th:text="${#lists.size(imageList)}"> </span>
+                                </div>
+                                <hr>
+                                <table class="table w-100" style="text-align:center;">
                                    <thead class="bg-dark text-light">
                                        <tr>
                                            <th>No</th>
-                                           <th>Image</th>
-                                           <th>Title</th>
-                                           <th>Owner</th>
-                                           <th>Cat_01</th>
-                                           <th>Cat_02</th>
-                                           <th>Count</th>
-                                           <th>Like</th>
-                                           <th>CreatedAt</th>
+                                           <th>이미지</th>
+                                           <th>제목</th>
+                                           <th>소유계정</th>
+                                           <th>기본카테고리</th>
+                                           <th>세부카테고리</th>
+                                           <th>조회수</th>
+                                           <th>좋아요수</th>
+                                           <th>등록날짜</th>
                                        </tr>
                                    </thead>
 
@@ -123,7 +127,7 @@
                                         <td th:text="${imageRankingStat.count}"></td>
                                         <td>
                                             <a href="javascript:void(0)">
-                                                <img style="width:150px;height:55px;" th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요">
+                                                <img style="width:150px;height:55px;;object-fit:contain;" th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요">
                                             </a>
                                             
                                         </td>
@@ -154,7 +158,7 @@
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Classic'&mode=2">Classic</a>   </div>
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Prgressive'&mode=2">Prgressive</a>   </div>
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Advertisement'&mode=2">Advertisement </a>   </div>
-                            <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='JaHeavy Metal'&mode=2">Heavy Metal</a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='HeavyMetal'&mode=2">HeavyMetal</a>   </div>
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Pop'&mode=2">Pop</a>   </div>
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Others'&mode=2">Others </a>   </div>
 
@@ -163,27 +167,30 @@
                     <div class="subCategoryBody ">
                         <div>
                             <div class="" >
-                                <hr>
 
-                                <table class="table w-100">
+                                <div th:if="${mode=='2'}">
+                                    <span>TOTAL : </span><span th:text="${#lists.size(musicList)}"> </span>
+                                </div>
+                                <hr>
+                                <table class="table w-100" style="text-align:center;">
                                     <thead class="bg-dark text-light">
                                     <tr>
                                         <th>No</th>
-                                        <th>Image</th>
-                                        <th>Title</th>
-                                        <th>Owner</th>
-                                        <th>Cat_01</th>
-                                        <th>Cat_02</th>
-                                        <th>Count</th>
-                                        <th>Like</th>
-                                        <th>CreatedAt</th>
+                                        <th>이미지</th>
+                                        <th>제목</th>
+                                        <th>소유계정</th>
+                                        <th>기본카테고리</th>
+                                        <th>세부카테고리</th>
+                                        <th>조회수</th>
+                                        <th>좋아요수</th>
+                                        <th>등록날짜</th>
                                     </tr>
                                     </thead>
                                     <tr th:each="musicRanking,musicRankingStat : ${musicList}">
                                         <td th:text="${musicRankingStat.count}"></td>
                                         <td>
                                             <a href="javascript:void(0)">
-                                                <img style="width:150px;height:55px;" src="/assets/music.jpg" alt="인증필요">
+                                                <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" style="width:100%;height:50px;box-shadow:0;object-fit:contain">
                                             </a>
 
                                         </td>

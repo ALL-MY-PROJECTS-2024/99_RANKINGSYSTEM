@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @AllArgsConstructor
@@ -24,5 +25,7 @@ public class MusicFileInfo {
     private Music music;
     private String dir;
     private String filename;
+    private String albumImageName;
+
 
 }

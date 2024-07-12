@@ -2,7 +2,7 @@
 
 section.content_block{}
 section.group-block>.head{
-    height : 8vh;
+    height : 5vh;
     display:flex;
     align-items : center;
     justify-content : center;

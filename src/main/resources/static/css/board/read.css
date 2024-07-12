@@ -64,3 +64,8 @@ main .right .item .header{
     justify-content : space-between;
     align-items : end;
 }
+
+table th,
+table td{
+    border : 1px solid lightgray;
+}

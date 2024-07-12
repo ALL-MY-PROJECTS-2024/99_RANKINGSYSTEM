@@ -58,7 +58,7 @@
               <span class="">이달의 콘텐츠 RANKING</span>
             </a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">전체 음악 랭킹</li>
+          <li class="breadcrumb-item active" aria-current="page" style="border:0 !important">전체 음악 랭킹</li>
         </ol>
       </nav>
     </div>
@@ -95,7 +95,7 @@
 
                 <div class="image-block">
                   <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId} )}">
-                    <img src="/assets/music.jpg"  alt="" />
+                    <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
                   </a>
                 </div>
                 <div class="favorite-block" th:data-rankingid="${musicRanking.rankingId}">
@@ -181,7 +181,7 @@
 
                 <div class="image-block">
                   <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId})}">
-                    <img  src="/assets/music.jpg"  alt="" />
+                    <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
                   </a>
                 </div>
                 <div class="favorite-block" th:data-rankingid="${musicRanking.rankingId}">
@@ -258,17 +258,21 @@
 
                   <thead>
                   <tr>
-                    <th style="width:45px !important;">순위</th>
-                    <th>제목</th>
-                    <th style="width:50px !important;">CAT</th>
+                    <th>순위</th>
+                    <th>이미지</th>
+                    <th >제목</th>
+                    <th>CAT</th>
                     <th>계정</th>
-                    <th style="width:40px !important;"><span class="material-symbols-outlined">visibility</span></th>
-                    <th style="width:40px !important;"><span class="material-symbols-outlined">thumb_up</span></th>
+                    <th >조회수</th>
+                    <th>좋아요</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr th:each="musicRanking,obj : ${rankingList}">
                     <td th:text="${obj.count}"></td>
+                    <td>
+                      <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" style="width:100px;height:50px;">
+                    </td>
                     <td th:text="${musicRanking.MusicFileInfo.Music.title}"></td>
                     <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
                     <td th:text="${musicRanking.MusicFileInfo.Music.username}"></td>
@@ -288,17 +292,21 @@
                 <table class="table w-100">
                   <thead>
                   <tr>
-                    <th style="width:45px !important;">순위</th>
-                    <th>제목</th>
-                    <th style="width:50px !important;">CAT</th>
+                    <th>순위</th>
+                    <th>이미지</th>
+                    <th >제목</th>
+                    <th>CAT</th>
                     <th>계정</th>
-                    <th style="width:40px !important;"><span class="material-symbols-outlined">visibility</span></th>
-                    <th style="width:40px !important;"><span class="material-symbols-outlined">thumb_up</span></th>
+                    <th >조회수</th>
+                    <th>좋아요</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr th:each="musicRanking,obj : ${rankingLikeList}">
                     <td th:text="${obj.count}"></td>
+                    <td>
+                      <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" style="width:100px;height:50px;">
+                    </td>
                     <td th:text="${musicRanking.MusicFileInfo.Music.title}"></td>
                     <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
                     <td th:text="${musicRanking.MusicFileInfo.Music.username}"></td>

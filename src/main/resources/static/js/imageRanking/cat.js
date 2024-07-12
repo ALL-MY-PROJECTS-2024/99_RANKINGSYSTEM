@@ -8,11 +8,8 @@ musicbtn.style.opacity=".8";
 
 
 //---------------------------------------------------
-//이미지 / 음악 서브카테고리 이벤트 처리
+//
 //---------------------------------------------------
-
-
-
 
 const CharacterBlock = document.querySelector('.items.Character-block');
 const CityBlock = document.querySelector('.items.City-block');
@@ -43,6 +40,11 @@ function createElement(parent,array){
         parent.appendChild(itemEl);
     })
 }
+
+const objectCnt = document.querySelector('.object-cnt');
+objectCnt.innerHTML=Character.length;
+
+
 //---------------------------------------------------
 //서브버튼 이벤트 처리
 //---------------------------------------------------
@@ -66,22 +68,33 @@ function ElementHidden(except){
          CarBlock.classList.remove('active');
          PlaceBlock.classList.remove('active');
          OthersBlock.classList.remove('active');
-         if(except==="Character")
+
+         const objectCnt = document.querySelector('.object-cnt');
+         if(except==="Character"){
             CharacterBlock.classList.add('active');
-         else if(except==="City")
+            objectCnt.innerHTML=Character.length;
+         }else if(except==="City"){
             CityBlock.classList.add('active');
-          else  if(except==="Map")
+            objectCnt.innerHTML=City.length;
+         }else if(except==="Map"){
              MapBlock.classList.add('active');
-          else  if(except==="iCON")
+             objectCnt.innerHTML=Map.length;
+         }else  if(except==="iCON"){
              iCONBlock.classList.add('active');
-          else if(except==="Furniture")
+            objectCnt.innerHTML=iCON.length;
+         }else if(except==="Furniture"){
              FurnitureBlock.classList.add('active');
-          else if(except==="Car")
+            objectCnt.innerHTML=Furniture.length;
+         }else if(except==="Car"){
              CarBlock.classList.add('active');
-          else if(except==="Place")
+             objectCnt.innerHTML=Car.length;
+         }else if(except==="Place"){
              PlaceBlock.classList.add('active');
-          else if(except==="Others")
-             OthersBlock.classList.add('active');
+             objectCnt.innerHTML=Place.length;
+         }else if(except==="Others"){
+            OthersBlock.classList.add('active');
+            objectCnt.innerHTML=Others.length;
+         }
 
 }
 

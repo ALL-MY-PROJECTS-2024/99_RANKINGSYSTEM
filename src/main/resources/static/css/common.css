@@ -17,29 +17,36 @@
     font-style: normal;
   }
 @font-face {
-    font-family: 'TAEBAEKmilkyway';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKmilkyway.woff2') format('woff2');
+    font-family: '나눔손글씨암스테르담';
+    src: url("/font/나눔손글씨암스테르담.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
-
 @font-face {
-    font-family: 'SUITE-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
-    font-weight: 400;
+    font-family: 'CuteFont-Regular';
+    src: url("/font/CuteFont-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Dongle-Light';
+    src: url("/font/Dongle-Light.ttf") format("truetype");
+    font-style: normal;
+}@font-face {
+    font-family: 'Dongle-Regular';
+    src: url("/font/Dongle-Regular.ttf") format("truetype");
     font-style: normal;
 }
 
 
-:root{
-    font-size : 1rem;
 
+:root{
+    font-size : 1.5rem;
 }
 body{
-  font-family: "Jua", sans-serif;
-  font-weight: 0;
-  font-style: normal;
-
+    font-family: "Dongle-Light", sans-serif;
+    font-style: normal;
+    font-weight:600;
     margin: 0;
     width: 100%;
 }
@@ -281,7 +288,7 @@ ul{
 .wrapper>nav>.right>ul.mainmenu>li{
     width : 9.375vw;
     /*border : 1px solid;*/
-    font-size : 0.8333vw;
+    font-size : 1.3333vw;
     min-font-size: 0.5vw;
     height:80px;
     opacity: .8;
@@ -684,8 +691,8 @@ ul{
 
 /*  */
 .wrapper>footer{
-    height: 300px;
-    margin-top: 0px;
+
+    margin-top: 100px;
     position: relative;
 }
 

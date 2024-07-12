@@ -265,7 +265,7 @@ public class UserServiceImpl implements UserService {
                 + dto.getSubCategory() + File.separator + music.getMusicid();
         musicFileInfo.setDir(dirPath);
         musicFileInfo.setFilename(fileobj.getName());
-
+        musicFileInfo.setAlbumImageName(dto.getImageFile().getOriginalFilename());
         musicFileInfoRepository.save(musicFileInfo);
     }
 
@@ -550,6 +550,11 @@ public class UserServiceImpl implements UserService {
                 // DB에 파일경로 저장
                 saveFileInfoMusic(music, dto, fileobj);
             }
+            //앨범이미지파일 추가
+            File albumImageFile = new File(dir,dto.getImageFile().getOriginalFilename());
+            dto.getImageFile().transferTo(albumImageFile);
+
+
         }catch(IOException e){
             e.printStackTrace();
         }

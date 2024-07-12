@@ -58,6 +58,11 @@ function createElement(parent,array){
         parent.appendChild(itemEl);
     })
 }
+
+const objectCnt = document.querySelector('.object-cnt');
+objectCnt.innerHTML=Jazz.length;
+
+
 //---------------------------------------------------
 //서브버튼 이벤트 처리
 //---------------------------------------------------
@@ -81,22 +86,33 @@ function ElementHidden(except){
          HeavyMetalBlock.classList.remove('active');
          PopBlock.classList.remove('active');
          OthersBlock.classList.remove('active');
-         if(except==="Jazz")
+         const objectCnt = document.querySelector('.object-cnt');
+
+         if(except==="Jazz"){
             JazzBlock.classList.add('active');
-         else if(except==="Rock")
+            objectCnt.innerHTML=Jazz.length;
+        }else if(except==="Rock"){
             RockBlock.classList.add('active');
-          else  if(except==="Classic")
+            objectCnt.innerHTML=Rock.length;
+         }else  if(except==="Classic"){
              ClassicBlock.classList.add('active');
-          else  if(except==="Progressive")
+            objectCnt.innerHTML=Classic.length;
+        }else  if(except==="Progressive"){
              ProgressiveBlock.classList.add('active');
-          else if(except==="Advertisement")
+            objectCnt.innerHTML=Progressive.length;
+        }else if(except==="Advertisement"){
              AdvertisementBlock.classList.add('active');
-          else if(except==="HeavyMetal")
+            objectCnt.innerHTML=Advertisement.length;
+       }else if(except==="HeavyMetal"){
              HeavyMetalBlock.classList.add('active');
-          else if(except==="Pop")
+            objectCnt.innerHTML=HeavyMetal.length;
+       } else if(except==="Pop"){
              PopBlock.classList.add('active');
-          else if(except==="Others")
-             OthersBlock.classList.add('active');
+            objectCnt.innerHTML=Pop.length;
+         }else if(except==="Others"){
+            OthersBlock.classList.add('active');
+            objectCnt.innerHTML=Others.length;
+         }
 }
 
 

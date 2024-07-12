@@ -54,7 +54,7 @@ public class SecurityConfig  {
         http.authorizeHttpRequests(
                 authorize->{
 
-                    authorize.requestMatchers("/js/**","/css/**","/images/**","/templates","/assets/**").permitAll();
+                    authorize.requestMatchers("/js/**","/css/**","/images/**","/font/**","/templates","/assets/**").permitAll();
                     authorize.requestMatchers("/upload/**").permitAll();
 
                     authorize.requestMatchers("/").permitAll();

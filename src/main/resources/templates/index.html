@@ -158,10 +158,10 @@
                         <table class="table order">
                             <tr class="table-dark">
                                 <th style="width:25px;">No</th>
-                                <th>Image</th>
-                                <th>Categoty</th>
-                                <th style="width:25px;">Count</th>
-                                <th style="width:25px;">Like</th>
+                                <th>이미지</th>
+                                <th>카테고리</th>
+                                <th style="width:60px;">조회수</th>
+                                <th style="width:60px;">좋아요수</th>
                             </tr>
                             <tbody class="img-body-order">
                                 <tr class="" th:each="imageRanking,imageRankingStat : ${imageTop10ByCount}">
@@ -194,10 +194,10 @@
                         <table class="table like hidden">
                             <tr class="table-dark">
                                 <th style="width:25px;">No</th>
-                                <th>Image</th>
-                                <th>Categoty</th>
-                                <th style="width:25px;">Count</th>
-                                <th style="width:25px;">Like</th>
+                                <th>이미지</th>
+                                <th>카테고리</th>
+                                <th style="width:60px;">조회수</th>
+                                <th style="width:60px;">좋아요수</th>
                             </tr>
                             <tbody class="m-body-order">
                                 <tr class="" th:each="musicRanking,musicRankingStat : ${musicTop10ByCount}">
@@ -275,6 +275,9 @@
                             <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
                                 <!-- Slides -->
+                                <div class="swiper-slide" th:if="${#lists.size(list)==0}" style="display:flex;align-items:center;justify-content:center;">
+                                    경매진행중인 내용이 없습니다.
+                                </div>
                                 <div class="swiper-slide" th:each="tradingImageDto:${list}">
 <!--                                   <div th:text="${imageRankingDto}"></div>-->
                                     <a href="javascript:void(0)" class="tradingImageBtn"
@@ -311,6 +314,9 @@
                         <div class="swiper">
                             <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
+                                <div class="swiper-slide" th:if="${#lists.size(list2)==0}" style="display:flex;align-items:center;justify-content:center;">
+                                    경매진행중인 내용이 없습니다.
+                                </div>
                                 <!-- Slides -->
                                 <div class="swiper-slide" th:each="tradingMusicDto:${list2}">
                                     <!--                                   <div th:text="${imageRankingDto}"></div>-->

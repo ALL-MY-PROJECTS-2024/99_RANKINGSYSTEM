@@ -33,15 +33,49 @@
     justify-content:right;
     align-items : center;
 }
-.main-container>.right>.items{
+.main-container>.right>.items.count-order-block,
+.main-container>.right>.items.like-order-block
+{
     width : 100%;
-    height : 800px;
-    padding : 10px;
+    height : 100%;
+    padding : 20px;
     border : 1px solid;
 
     display:flex;
     justify-content:center;
     align-items : center;
+    flex-wrap : wrap;
+    gap: 0px; /* 각 줄의 요소 사이의 간격을 좁힘 */
+
+    overflow : auto;
+    /*position:relative;*/
+    z-index : 2;
+}
+.main-container>.right>.items.count-order-block .item,
+.main-container>.right>.items.like-order-block .item
+{
+    width:20%; /* 너비를 계산하여 간격을 고려한 크기 지정 */
+
+    height : 150px;
+
+    position:relative;
+    opacity :.7;
+
+    padding : 10px;
+    margin-bottom : 100px;
+
+}
+
+.main-container>.right>.items.summary-block
+{
+    width : 100%;
+    height : 800px;
+    padding : 0px;
+    border : 1px solid;
+
+    display:flex;
+    justify-content:center;
+    align-items : start;
     flex-wrap : wrap;
 
     overflow : auto;
@@ -76,7 +110,7 @@
 
 
 .main-container>.right>.items>.item{
-    margin : 10px;
+/*    margin : 10px;
 
 
     width : 250px;
@@ -85,7 +119,7 @@
     position:relative;
     opacity :.7;
 
-    padding : 10px;
+    padding : 10px;*/
 }
 .main-container>.right>.items>.item:hover{
     opacity :1;
@@ -230,10 +264,15 @@
 .main-container>.right>.items>.item>.extra .title{
     font-size : .8rem;
     color :black;
+    width : 70%;
+    overflow: hidden; /* 내용을 넘어가는 부분을 숨김 처리 */
+    white-space: nowrap; /* 한 줄로 텍스트를 표시 */
+    text-overflow: ellipsis; /* 너무 긴 텍스트를 줄임표(...)로 표시 */
 
 }
 .main-container>.right>.items>.item:hover .title{
     display:block;
+
 }
 .main-container>.right>.items>.item>.extra>div{
     display:flex;
@@ -245,12 +284,11 @@
     margin-top : 10px;
     opacity : 1;
     border : 1px solid lightgray;
-    height :50px;
-    width : 100%:
-    position:absolute;
+    height :60px;
+    width : 100%;
+    position:relative;
     bottom:0;
-    left:-8px;
-    width : 245px;
+
     background-color : white;
 
 }
@@ -324,23 +362,27 @@ th,td{
 }
 
 .items.summary-block {
+    width : 100%;
     display:flex;
-    justify-content:space-between;
+    justify-content:center !important;
     align-items:start;
-    height : 800px;
+    height : 100%;
     margin :0px;;
     position:relative;
+    border : 5px solid;
 }
 .items.summary-block .item {
     margin : 20px;
-    width : 500px !important;
-    height : 600px;
+    min-width : 600px;
+    height : 100%;
     position:relative;
-    top:-280px;
+
+
 
 }
 .items.summary-block .item .table{
-
+    width : 100%;
+    position:relative !important;
 
 }
 
@@ -351,7 +393,8 @@ th,td{
 }
 th,td{
     font-size : .8rem;
-
+    overflow:hidden;text-overflow: ellipsis;white-space: nowrap;
+    max-width:100px;
 }
 td{
     font-size : .7rem;
@@ -370,6 +413,7 @@ td{
 
  .paging{
     position:absolute;
-    top:20px;
-    left : 20px;
+    top : calc(100% + 10px);
+    margin : auto;
+    z-index : 5;
 }

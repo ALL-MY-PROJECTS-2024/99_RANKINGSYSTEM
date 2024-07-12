@@ -18,7 +18,6 @@ public class Images {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long iamgeid;
 
-
     private String username;
     private String title;
     private String mainCategory;
