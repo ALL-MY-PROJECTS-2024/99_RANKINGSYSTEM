@@ -32,6 +32,7 @@ public class TradingMusicDto {
     String status;
     String fileDir;
     String filename;
+    String albumImageName;
 
     //채팅방
     String roomId;

@@ -166,7 +166,7 @@ public class TradingMusicController {
                 dto.setCur(entity.getCur());
                 dto.setStartPrice(entity.getStartPrice());
                 dto.setStatus(entity.getStatus());
-
+                dto.setAlbumImageName(entity.getFileid().getAlbumImageName());
                 //채팅방
                 dto.setRoomId(entity.getRoomId());
                 dto.setMax(entity.getMax());

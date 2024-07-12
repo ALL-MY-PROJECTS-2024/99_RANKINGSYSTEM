@@ -71,7 +71,7 @@
                                 <td th:text="${dto.tradingid}"></td>
                                 <td >
                                     <a href="javascript:void(0)">
-                                        <img  style="width:100px;height:50px;" src="/assets/music.jpg"  alt="" />
+                                        <img  th:src="${dto.fileDir}+'/'+${dto.albumImageName}" alt="인증필요" style="width:100px;height:45px;object-fit:contain;"></img>
                                     </a>
                                 </td>
                                 <td th:text="${dto.title}"></td>

@@ -100,12 +100,14 @@ public class HomeController {
             dto.setStatus(entity.getStatus());
             dto.setFileDir(entity.getFileid().getDir());
             dto.setFilename(entity.getFileid().getFilename());
+            dto.setAlbumImageName(entity.getFileid().getAlbumImageName());
             dto.setCur(entity.getCur());
             dto.setAuctionState(entity.getAuctionState());
             dto.setMax(entity.getMax());
             dto.setMembers(entity.getMembers());
             dto.setRoomId(entity.getRoomId());
             dto.setStartPrice(entity.getStartPrice());
+
 
             //채팅방
             String roomId = entity.getRoomId();

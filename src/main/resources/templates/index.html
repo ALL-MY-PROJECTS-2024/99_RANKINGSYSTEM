@@ -203,7 +203,7 @@
                                 <tr class="" th:each="musicRanking,musicRankingStat : ${musicTop10ByCount}">
                                     <td th:text="${musicRankingStat.count}"></td>
                                     <td>
-                                        <img src="/assets/music.jpg" alt="인증필요" />
+                                        <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요"></img>
                                     </td>
                                     <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
                                     <td th:text="${musicRanking.count}"></td>
@@ -214,7 +214,7 @@
                                 <tr class="" th:each="musicRanking,musicRankingStat : ${musicTop10ByLike}">
                                     <td th:text="${musicRankingStat.count}"></td>
                                     <td>
-                                        <img src="/assets/music.jpg" alt="인증필요" />
+                                        <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요"></img>
                                     </td>
                                     <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
                                     <td th:text="${musicRanking.count}"></td>
@@ -331,7 +331,7 @@
                                        th:data-auctionEndTime="${tradingMusicDto.auctionEndTime}"
                                        th:data-price="${tradingMusicDto.price}"
                                     >
-                                        <img src="/assets/music.jpg" alt="">
+                                        <img  th:src="${tradingMusicDto.fileDir}+'/'+${tradingMusicDto.albumImageName}" alt="인증필요"></img>
                                     </a>
                                 </div>
 
