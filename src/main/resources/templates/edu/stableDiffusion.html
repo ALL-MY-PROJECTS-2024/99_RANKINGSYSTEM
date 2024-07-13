@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
+
+
+    <link rel="stylesheet" href="/css/myinfo/confirm.css">
+
+    <script src="/js/myinfo/confirm.js" defer> </script>
+
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="~{fragments/header :: mainHeaderFragment}" />
+
+    <!-- nav       -->
+    <th:block th:insert="~{fragments/nav :: navFragment}" />
+
+    <main>
+        <section class="banner">
+
+        </section>
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footerFragment}" />
+    </footer>
+
+</div>
+
+
+
+
+</body>
+</html>
