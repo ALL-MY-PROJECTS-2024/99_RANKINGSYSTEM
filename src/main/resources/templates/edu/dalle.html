@@ -9,10 +9,17 @@
     <th:block th:insert="~{fragments/link :: linkFragment}" />
 
 
-    <link rel="stylesheet" href="/css/myinfo/confirm.css">
+    <link rel="stylesheet" href="/css/edu/dalle.css">
 
-    <script src="/js/myinfo/confirm.js" defer> </script>
+    <script src="/js/edu/dalle.js" defer> </script>
 
+
+    <script th:inline="javascript">
+        const message = [[${message}]];
+        if(message!==null)
+            alert(message);
+
+    </script>
 
 </head>
 <body>
@@ -26,8 +33,65 @@
     <th:block th:insert="~{fragments/nav :: navFragment}" />
 
     <main>
-        <section class="banner">
+        <section class="banner layout-5 edu-section">
+            <!-- breadcrumb -->
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb mt-2">
+                    <li class="breadcrumb-item"><a href="#">홈</a></li>
+                    <li class="breadcrumb-item"><a href="#">교육</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dalle-E</li>
+                </ol>
+            </nav>
 
+            <div class="title">
+                <h3>Dalle-e</h3>
+                <div class="description">
+                    "댈리(Dalle)"는 최신 인공지능 이미지 생성 기술로, 다양한 스타일과 연령대에 해당하는 이미지를 생성할 수 있습니다.
+                    이 기술은 이미지 생성적 적대 신경망(GAN)의 발전된 형태로, 다양한 이미지를 만들고 기존 콘텐츠를 창의적으로 조합하여
+                    새로운 시각적 콘텐츠를 제작할 수 있습니다.
+                </div>
+            </div>
+            <div class="admin-menu layout-5">
+                <div class="m-2">
+                    <a href="javascript:void(0)" class="btn btn-secondary add-lecture" style="background-color:darkcyan;">강의등록</a>
+                </div>
+                <div class="m-2 me-0">
+                    <a href="javascript:void(0)" class="btn btn-secondary delete-lecture">강의삭제</a>
+                </div>
+            </div>
+            <hr>
+            <div class="show-block">
+                <div class="left">
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div th:if="${#lists.isEmpty(list)}" style='position:absolute;left:0;top:0;bottom:0;right:0;margin:auto;'>
+                                표시할 교육 자료가 없습니다.
+                            </div>
+
+                            <div class="accordion-item" th:each="education,educationStat : ${list}">
+
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button th:text="${educationStat.count} +'. '+${education.title}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <video width="100%;" height="500px" controls>
+                                            <source th:src="@{${education.filepath}}" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+                <div class="right">
+                    <div>
+                        강의 목차를 클릭할때마다 설명이 들어갑니다.
+
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -39,6 +103,98 @@
 
 </div>
 
+
+
+<!-- Button trigger modal -->
+<button style="display:none" type="button" class="btn btn-primary modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal-edu">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-edu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">강의등록하기</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" name="addLectureForm" action="/edu/add"  enctype="multipart/form-data">
+                    <input type="hidden" name="category" value="dalle" />
+                    <div class="m-2">
+                        <label>강의명 : </label>
+                        <input type="text" name="title" class="form-control">
+                    </div>
+                    <div class="m-2">
+                        <label>업로드 유형 :</label>
+                        <div>
+                            <select name="type"  class="form-select">
+                                <option value="link" selected>링크</option>
+                                <option value="file" >파일</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="m-2">
+                        <label>링크 : </label>
+                        <input type="text" name="link" class="form-control">
+                    </div>
+                    <div class="m-2">
+                        <label>영상파일 : </label>
+                        <input type="file" name="file" class="form-control" disabled>
+                    </div>
+                    <div class="m-2">
+                        <label>설명 : </label>
+                        <textarea name="description" class="form-control"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary add-modal-btn">등록</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+   강의 삭제 모달
+-->
+
+<!-- Button trigger modal -->
+<button style="display:none" type="button" class="btn btn-primary modal-btn-delete" data-bs-toggle="modal" data-bs-target="#exampleModal-edu-delete">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-edu-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="">강의 삭제하기</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <table class="table">
+                   <tr>
+                       <td>강의제목</td>
+                       <td><button class="delete-modal-btn btn btn-secondary">삭제</button></td>
+                   </tr>
+                   <tr>
+                       <td>강의제목</td>
+                       <td><button class="delete-modal-btn btn btn-secondary">삭제</button></td>
+                   </tr>
+                   <tr>
+                       <td>강의제목</td>
+                       <td><button class="delete-modal-btn btn btn-secondary">삭제</button></td>
+                   </tr>
+               </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
