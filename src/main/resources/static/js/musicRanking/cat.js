@@ -10,10 +10,6 @@ imagebtn.style.opacity=".8";
 //---------------------------------------------------
 //이미지 / 음악 서브카테고리 이벤트 처리
 //---------------------------------------------------
-
-
-
-
 const JazzBlock = document.querySelector('.items.Jazz-block');
 const RockBlock = document.querySelector('.items.Rock-block');
 const ClassicBlock = document.querySelector('.items.Classic-block');
@@ -37,7 +33,7 @@ function createElement(parent,array){
         const itemEl = document.createElement('div');
         itemEl.classList.add('item');
         const img = document.createElement('img');
-        img.setAttribute('src','/assets/music.jpg');
+        img.setAttribute('src',el.musicFileInfo.dir+"/"+el.musicFileInfo.albumImageName);
         img.setAttribute('style','height:100px;')
 
         const com1El = document.createElement('div');
@@ -91,27 +87,51 @@ function ElementHidden(except){
          if(except==="Jazz"){
             JazzBlock.classList.add('active');
             objectCnt.innerHTML=Jazz.length;
+           if(Jazz.length=='0'){
+                JazzBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
         }else if(except==="Rock"){
             RockBlock.classList.add('active');
             objectCnt.innerHTML=Rock.length;
+           if(Rock.length=='0'){
+                RockBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
          }else  if(except==="Classic"){
-             ClassicBlock.classList.add('active');
+            ClassicBlock.classList.add('active');
             objectCnt.innerHTML=Classic.length;
-        }else  if(except==="Progressive"){
-             ProgressiveBlock.classList.add('active');
+           if(Classic.length=='0'){
+                ClassicBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
+        }else if(except==="Progressive"){
+            ProgressiveBlock.classList.add('active');
             objectCnt.innerHTML=Progressive.length;
+            if(Progressive.length=='0'){
+                ProgressiveBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
         }else if(except==="Advertisement"){
              AdvertisementBlock.classList.add('active');
             objectCnt.innerHTML=Advertisement.length;
+           if(Advertisement.length=='0'){
+                AdvertisementBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
        }else if(except==="HeavyMetal"){
              HeavyMetalBlock.classList.add('active');
             objectCnt.innerHTML=HeavyMetal.length;
+           if(Others.length=='0'){
+                OthersBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
        } else if(except==="Pop"){
              PopBlock.classList.add('active');
             objectCnt.innerHTML=Pop.length;
+           if(Pop.length=='0'){
+                PopBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
          }else if(except==="Others"){
             OthersBlock.classList.add('active');
             objectCnt.innerHTML=Others.length;
+           if(Others.length=='0'){
+                OthersBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
          }
 }
 

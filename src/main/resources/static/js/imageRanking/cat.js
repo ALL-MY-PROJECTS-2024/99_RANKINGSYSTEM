@@ -73,27 +73,51 @@ function ElementHidden(except){
          if(except==="Character"){
             CharacterBlock.classList.add('active');
             objectCnt.innerHTML=Character.length;
+           if(Character.length=='0'){
+                CharacterBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
          }else if(except==="City"){
             CityBlock.classList.add('active');
             objectCnt.innerHTML=City.length;
+           if(City.length=='0'){
+                CityBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
          }else if(except==="Map"){
              MapBlock.classList.add('active');
              objectCnt.innerHTML=Map.length;
+            if(Map.length=='0'){
+                 MapBlock.innerHTML="표시할 이미지가 없습니다.";
+             }
          }else  if(except==="iCON"){
              iCONBlock.classList.add('active');
-            objectCnt.innerHTML=iCON.length;
+             objectCnt.innerHTML=iCON.length;
+            if(iCON.length=='0'){
+                iCONBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
          }else if(except==="Furniture"){
              FurnitureBlock.classList.add('active');
             objectCnt.innerHTML=Furniture.length;
+           if(Furniture.length=='0'){
+                FurnitureBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
          }else if(except==="Car"){
              CarBlock.classList.add('active');
              objectCnt.innerHTML=Car.length;
+           if(Car.length=='0'){
+                CarBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
          }else if(except==="Place"){
              PlaceBlock.classList.add('active');
              objectCnt.innerHTML=Place.length;
+           if(Place.length=='0'){
+                PlaceBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
          }else if(except==="Others"){
             OthersBlock.classList.add('active');
             objectCnt.innerHTML=Others.length;
+           if(Others.length=='0'){
+                OthersBlock.innerHTML="표시할 이미지가 없습니다.";
+            }
          }
 
 }

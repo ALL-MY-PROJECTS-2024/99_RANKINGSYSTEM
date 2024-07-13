@@ -98,8 +98,8 @@
                 <h5>댓글 <span style="font-size  :1rem;" th:text="${replyCount}">  </span> <span style="font-size  :1rem;"> 건</span></h5>
             </div>
             <div class="control">
-                <div style="width : 90vw;"><textarea class="form-control content-area" name="" placeholder="입력하세요" ></textarea></div>
-                <div style="width : 20vw;"><a href="javascript:void(0)" class="btn reply_add_btn" style="background-color:darkcyan;color:white;" >등록</a></div>
+                <div style="width : 580px;"><textarea class="form-control content-area" name="" placeholder="입력하세요" ></textarea></div>
+                <div style=""><a href="javascript:void(0)" class="btn reply_add_btn" style="background-color:darkcyan;color:white;" >등록</a></div>
             </div>
             <hr>
             <div>
@@ -113,8 +113,7 @@
                         <hr>
                         <div>
                             <div style="font-size:.6rem;">내용 : </div>
-                            <div style="margin-top : 5px;" th:text="${reply.content}">
-                            </div>
+                            <div style="margin-top : 5px;" th:text="${reply.content}"></div>
                         </div>
                     </div>
 
