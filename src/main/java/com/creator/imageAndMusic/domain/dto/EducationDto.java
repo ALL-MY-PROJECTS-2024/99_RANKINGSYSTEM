@@ -16,4 +16,5 @@ public class EducationDto {
     private String type;
     private String link;
     private MultipartFile file;
+    private String description;
 }

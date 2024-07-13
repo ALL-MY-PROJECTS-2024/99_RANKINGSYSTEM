@@ -1,10 +1,7 @@
 package com.creator.imageAndMusic.domain.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,9 +22,10 @@ public class Education {
     private String category;
     private String title;
     private String type;
+    @Column(length = 4096)
     private String link;
     private String filepath;
-
+    private String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regdate;
 }

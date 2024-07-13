@@ -70,6 +70,7 @@ public class EducationController {
     @DeleteMapping("/delete")
     public @ResponseBody void delete(EducationDto dto){
         log.info("/edu/add...dto : " + dto);
+        boolean isDeleted =  educationServiceImpl.deleteEducation(dto);
 
     }
 

@@ -33,6 +33,7 @@ public class EducationServiceImpl {
         education.setType(dto.getType());
         education.setLink(dto.getLink());
         education.setRegdate(LocalDateTime.now());
+        education.setDescription(dto.getDescription());
         education.setFilepath(null);
         educationRepository.save(education);
 
@@ -62,5 +63,11 @@ public class EducationServiceImpl {
     @Transactional(rollbackFor=Exception.class)
     public List<Education> getEducations(String dalle) {
         return  educationRepository.findAllByCategory(dalle);
+    }
+
+    @Transactional(rollbackFor=Exception.class)
+    public boolean deleteEducation(EducationDto dto) {
+        educationRepository.deleteById(dto.getId());
+        return true;
     }
 }

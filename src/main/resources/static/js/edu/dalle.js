@@ -61,6 +61,20 @@ document.addLectureForm.type.addEventListener('change',function(){
 })
 
 
+const accordionItemBtnEls = document.querySelectorAll('.accordion-item h2>button');
+
+accordionItemBtnEls.forEach(btn=>{
+    btn.addEventListener('click',function(){
+        const description = this.getAttribute('data-description');
+        console.log("description",description);
+        const descriptionBlock = document.querySelector('.descriptionBlock');
+        descriptionBlock.innerHTML=description;
+    })
+
+});
+
+
+
 //--------------------------------------
 //강의삭제
 //--------------------------------------
@@ -78,9 +92,13 @@ deleteLecture.addEventListener('click',function(){
 deleteModalEls.forEach(el=>{
     el.addEventListener('click',function(){
         console.log('clicked');
-
-        axios.delete('url')
-            .then(res=>{console.log(resp)})
+        const id = this.getAttribute('data-id');
+        axios.delete('/edu/delete?id='+id)
+            .then(resp=>{
+                console.log(resp);
+                alert('삭제 완료');
+                location.reload();
+            })
             .catch(err=>{console.log(err)});
     });
 

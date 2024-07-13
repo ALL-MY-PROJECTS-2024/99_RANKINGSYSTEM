@@ -70,15 +70,20 @@
                             <div class="accordion-item" th:each="education,educationStat : ${list}">
 
                                 <h2 class="accordion-header" id="flush-headingOne">
-                                    <button th:text="${educationStat.count} +'. '+${education.title}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <button th:text="${educationStat.count} +'. '+${education.title}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="@{'#flush-collapse'+${educationStat.count}}" th:data-description="${education.description}" aria-expanded="false" aria-controls="flush-collapseOne">
 
                                     </button>
                                 </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div th:id="'flush-collapse'+${educationStat.count}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
-                                        <video width="100%;" height="500px" controls>
-                                            <source th:src="@{${education.filepath}}" type="video/mp4">
-                                        </video>
+                                        <th:block th:if="${education.type=='file'}">
+                                            <video width="100%;" height="500px" controls>
+                                                <source th:src="@{${education.filepath}}" type="video/mp4">
+                                            </video>
+                                        </th:block>
+                                        <th:block th:unless="${education.type=='file'}">
+                                            <iframe width="100%;" height="500" th:src="@{${education.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                        </th:block>
                                     </div>
                                 </div>
                             </div>
@@ -87,8 +92,11 @@
                 </div>
                 <div class="right">
                     <div>
-                        강의 목차를 클릭할때마다 설명이 들어갑니다.
+                        <h4>강의 설명 : </h4>
+                        <hr>
+                        <div class="descriptionBlock">
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,7 +130,7 @@
                 <form method="post" name="addLectureForm" action="/edu/add"  enctype="multipart/form-data">
                     <input type="hidden" name="category" value="dalle" />
                     <div class="m-2">
-                        <label>강의명 : </label>
+                        <label>강의명  : </label>
                         <input type="text" name="title" class="form-control">
                     </div>
                     <div class="m-2">
@@ -135,11 +143,12 @@
                         </div>
                     </div>
                     <div class="m-2">
-                        <label>링크 : </label>
+                        <label>링크(YOUTUBE 동영상) <a href="/assets/guide.png" target="_blank" style="font-size:.8rem;color:green;font-weight:400;">참고</a> : </label>
+
                         <input type="text" name="link" class="form-control">
                     </div>
                     <div class="m-2">
-                        <label>영상파일 : </label>
+                        <label>영상파일(*.mp4,50MB이하만 업로드 가능) : </label>
                         <input type="file" name="file" class="form-control" disabled>
                     </div>
                     <div class="m-2">
@@ -174,19 +183,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               <table class="table">
+               <table class="table" style="font-size : .8rem; font-weight:400;">
                    <tr>
-                       <td>강의제목</td>
-                       <td><button class="delete-modal-btn btn btn-secondary">삭제</button></td>
+                       <th style="background-color:darkcyan;color:white;font-size : 1rem; font-weight:400;">강의제목</th>
+                       <th style="background-color:darkcyan;color:white;text-align:right;font-size : 1rem; font-weight:400;">삭제하기</th>
                    </tr>
-                   <tr>
-                       <td>강의제목</td>
-                       <td><button class="delete-modal-btn btn btn-secondary">삭제</button></td>
+                   <tr th:each="education:${list}">
+                       <td th:text="${education.title}"></td>
+                       <td style="text-align:right;"><button class="delete-modal-btn btn btn-secondary" th:data-id="${education.id}" style="font-size : .8rem; font-weight:400;">삭제</button></td>
                    </tr>
-                   <tr>
-                       <td>강의제목</td>
-                       <td><button class="delete-modal-btn btn btn-secondary">삭제</button></td>
-                   </tr>
+
                </table>
             </div>
             <div class="modal-footer">
