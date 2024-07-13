@@ -105,6 +105,7 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
+
                             <div class="swiper-slide" th:each="imageRanking,imageRankingStat :${imageTop10ByCount}">
                                 <a href="javascript:void(0)">
                                     <div class="rankingNo">
@@ -114,7 +115,6 @@
                                         <span class="material-symbols-outlined">military_tech</span>
                                     </th:block>
                                     <img th:src="${imageRanking.imagesFileInfo.dir}+'/'+${imageRanking.imagesFileInfo.filename}" alt="">
-
                                 </a>
                             </div>
                         </div>
@@ -189,6 +189,13 @@
                     <div class="swiper">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
+
+
+                            <div class="swiper-slide" th:if="${#lists.size(musicTop10ByLike) > 0}">
+                                표시할 항목이 없습니다.
+                            </div>
+
+
                             <div class="swiper-slide" th:each="musicRanking,musicRankingStat :${musicTop10ByLike}">
                                 <a href="javascript:void(0)" style="display:block;">
                                     <div class="rankingNo">
