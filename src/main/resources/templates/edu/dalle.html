@@ -51,14 +51,16 @@
                     새로운 시각적 콘텐츠를 제작할 수 있습니다.
                 </div>
             </div>
-            <div class="admin-menu layout-5">
-                <div class="m-2">
-                    <a href="javascript:void(0)" class="btn btn-secondary add-lecture" style="background-color:darkcyan;">강의등록</a>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="admin-menu layout-5">
+                    <div class="m-2">
+                        <a href="javascript:void(0)" class="btn btn-secondary add-lecture" style="background-color:darkcyan;">강의등록</a>
+                    </div>
+                    <div class="m-2 me-0">
+                        <a href="javascript:void(0)" class="btn btn-secondary delete-lecture">강의삭제</a>
+                    </div>
                 </div>
-                <div class="m-2 me-0">
-                    <a href="javascript:void(0)" class="btn btn-secondary delete-lecture">강의삭제</a>
-                </div>
-            </div>
+            </th:block>
             <hr>
             <div class="show-block">
                 <div class="left">
