@@ -6,9 +6,12 @@ const addModal = document.querySelector('.add-modal-btn');
 //강의추가
 //--------------------------------------
 //관리자 모달창 활성화
-addLecture.addEventListener('click',function(){
-    modalBtn.click();
-})
+if(addLecture!=null){
+    addLecture.addEventListener('click',function(){
+        modalBtn.click();
+    })
+}
+
 
 //관리자가 등록
 addModal.addEventListener('click',function(){
@@ -83,9 +86,12 @@ const deleteLecture = document.querySelector('.delete-lecture');
 const deleteModalEls = document.querySelectorAll('.delete-modal-btn');
 
 //관리자 모달창 활성화
-deleteLecture.addEventListener('click',function(){
-    deleteModalBtn.click();
-})
+if(deleteLecture!=null){
+    deleteLecture.addEventListener('click',function(){
+        deleteModalBtn.click();
+    })
+}
+
 
 
 //관리자가 삭제

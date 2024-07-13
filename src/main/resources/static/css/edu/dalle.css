@@ -44,3 +44,14 @@
     font-weight:400;
     font-size:1.5rem;
 }
+.accordion-item .accordion-header{
+
+}
+.accordion-item{
+
+}
+.accordion-header{
+}
+.accordion-header button{
+    padding-left : 15px !important;
+}

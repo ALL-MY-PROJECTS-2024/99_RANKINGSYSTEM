@@ -9,10 +9,17 @@
     <th:block th:insert="~{fragments/link :: linkFragment}" />
 
 
-    <link rel="stylesheet" href="/css/myinfo/confirm.css">
+    <link rel="stylesheet" href="/css/edu/dalle.css">
 
-    <script src="/js/myinfo/confirm.js" defer> </script>
+    <script src="/js/edu/dalle.js" defer> </script>
 
+
+    <script th:inline="javascript">
+        const message = [[${message}]];
+        if(message!==null)
+            alert(message);
+
+    </script>
 
 </head>
 <body>
@@ -26,8 +33,74 @@
     <th:block th:insert="~{fragments/nav :: navFragment}" />
 
     <main>
-        <section class="banner">
+        <section class="banner layout-5 edu-section">
+            <!-- breadcrumb -->
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb mt-2">
+                    <li class="breadcrumb-item"><a href="#">홈</a></li>
+                    <li class="breadcrumb-item"><a href="#">교육</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dalle-E</li>
+                </ol>
+            </nav>
 
+            <div class="title">
+                <h3>Mid Journey</h3>
+                <div class="description" style="border : 1px solid darkcyan;padding : 15px;">
+                    "Mid Journey"는 최근에 발표된 생성적 모델링 기술로, 이미지 생성과 관련된 과제에서 중요한 역할을 하는 방법론입니다.<br>
+                    이 기술은 확률적 딥러닝 모델을 기반으로 하며, 특히 이미지의 잠재 공간에서 원하는 방향으로 데이터를 수정하거나 조작하는 데 <br>
+                    사용됩니다.<br>
+                </div>
+            </div>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="admin-menu layout-5">
+                    <div class="m-2">
+                        <a href="javascript:void(0)" class="btn btn-secondary add-lecture" style="background-color:darkcyan;">강의등록</a>
+                    </div>
+                    <div class="m-2 me-0">
+                        <a href="javascript:void(0)" class="btn btn-secondary delete-lecture">강의삭제</a>
+                    </div>
+                </div>
+            </th:block>
+            <br><br>
+            <div class="show-block">
+                <div class="left">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div th:if="${#lists.isEmpty(list)}" style='position:absolute;left:0;top:0;bottom:0;right:0;margin:auto;'>
+                            표시할 교육 자료가 없습니다.
+                        </div>
+
+                        <div class="accordion-item" th:each="education,educationStat : ${list}" >
+
+                            <h2 class="accordion-header" id="flush-headingOne" >
+                                <button style="border : 1px solid !important;" th:text="${educationStat.count} +'. '+${education.title}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="@{'#flush-collapse'+${educationStat.count}}" th:data-description="${education.description}" aria-expanded="false" aria-controls="flush-collapseOne">
+                                </button>
+                            </h2>
+                            <div th:id="'flush-collapse'+${educationStat.count}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <th:block th:if="${education.type=='file'}">
+                                        <video width="100%;" height="500px" controls>
+                                            <source th:src="@{${education.filepath}}" type="video/mp4">
+                                        </video>
+                                    </th:block>
+                                    <th:block th:unless="${education.type=='file'}">
+                                        <iframe width="100%;" height="500" th:src="@{${education.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="right">
+                    <div>
+                        <h4>강의 설명 : </h4>
+                        <hr>
+                        <div class="descriptionBlock">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -39,6 +112,96 @@
 
 </div>
 
+
+
+<!-- Button trigger modal -->
+<button style="display:none" type="button" class="btn btn-primary modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal-edu">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-edu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">강의등록하기</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" name="addLectureForm" action="/edu/add"  enctype="multipart/form-data">
+                    <input type="hidden" name="category" value="mid" />
+                    <div class="m-2">
+                        <label>강의명  : </label>
+                        <input type="text" name="title" class="form-control">
+                    </div>
+                    <div class="m-2">
+                        <label>업로드 유형 :</label>
+                        <div>
+                            <select name="type"  class="form-select">
+                                <option value="link" selected>링크</option>
+                                <option value="file" >파일</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="m-2">
+                        <label>링크(YOUTUBE 동영상) <a href="/assets/guide.png" target="_blank" style="font-size:.8rem;color:green;font-weight:400;">참고</a> : </label>
+
+                        <input type="text" name="link" class="form-control">
+                    </div>
+                    <div class="m-2">
+                        <label>영상파일(*.mp4,50MB이하만 업로드 가능) : </label>
+                        <input type="file" name="file" class="form-control" disabled>
+                    </div>
+                    <div class="m-2">
+                        <label>설명 : </label>
+                        <textarea name="description" class="form-control"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary add-modal-btn">등록</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+   강의 삭제 모달
+-->
+
+<!-- Button trigger modal -->
+<button style="display:none" type="button" class="btn btn-primary modal-btn-delete" data-bs-toggle="modal" data-bs-target="#exampleModal-edu-delete">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-edu-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="">강의 삭제하기</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table" style="font-size : .8rem; font-weight:400;">
+                    <tr>
+                        <th style="background-color:darkcyan;color:white;font-size : 1rem; font-weight:400;text-align:center;">강의제목</th>
+                        <th style="background-color:darkcyan;color:white;text-align:right;font-size : 1rem; font-weight:400;text-align:center;">삭제하기</th>
+                    </tr>
+                    <tr th:each="education:${list}">
+                        <td th:text="${education.title}" style="text-align:center;"></td>
+                        <td style="text-align:center;"><button class="delete-modal-btn btn btn-secondary" th:data-id="${education.id}" style="font-size : .8rem; font-weight:400;">삭제</button></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

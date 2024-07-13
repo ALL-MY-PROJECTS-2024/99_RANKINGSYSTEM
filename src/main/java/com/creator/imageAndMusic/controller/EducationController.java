@@ -23,8 +23,10 @@ public class EducationController {
     private EducationServiceImpl educationServiceImpl;
 
     @GetMapping("/stableDiffusion")
-    public void t1(){
+    public void t1(Model model){
         log.info("/edu/stableDiffusion");
+        List<Education> list =  educationServiceImpl.getEducations("stableDiffusion");
+        model.addAttribute("list" , list);
     }
     @GetMapping("/dalle")
     public void t2(Model model){
@@ -35,16 +37,22 @@ public class EducationController {
 
     }
     @GetMapping("/mid")
-    public void t3(){
+    public void t3(Model model){
         log.info("/edu/mid");
+        List<Education> list =  educationServiceImpl.getEducations("mid");
+        model.addAttribute("list" , list);
     }
     @GetMapping("/genAi")
-    public void t4(){
+    public void t4(Model model){
         log.info("/edu/genAi");
+        List<Education> list =  educationServiceImpl.getEducations("genAi");
+        model.addAttribute("list" , list);
     }
     @GetMapping("/lecture")
-    public void t5(){
+    public void t5(Model model){
         log.info("/edu/lecture");
+        List<Education> list =  educationServiceImpl.getEducations("lecture");
+        model.addAttribute("list" , list);
     }
 
 

@@ -45,10 +45,10 @@
 
             <div class="title">
                 <h3>Dalle-e</h3>
-                <div class="description">
-                    "댈리(Dalle)"는 최신 인공지능 이미지 생성 기술로, 다양한 스타일과 연령대에 해당하는 이미지를 생성할 수 있습니다.
-                    이 기술은 이미지 생성적 적대 신경망(GAN)의 발전된 형태로, 다양한 이미지를 만들고 기존 콘텐츠를 창의적으로 조합하여
-                    새로운 시각적 콘텐츠를 제작할 수 있습니다.
+                <div class="description" style="border : 1px solid darkcyan;padding : 15px;">
+                    "댈리(Dalle)"는 최신 인공지능 이미지 생성 기술로, 다양한 스타일과 연령대에 해당하는 이미지를 생성할 수 있습니다.<br>
+                    이 기술은 이미지 생성적 적대 신경망(GAN)의 발전된 형태로, 다양한 이미지를 만들고 기존 콘텐츠를 창의적으로 조합하여<br>
+                    새로운 시각적 콘텐츠를 제작할 수 있습니다.<br>
                 </div>
             </div>
             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </th:block>
-            <hr>
+            <br><br>
             <div class="show-block">
                 <div class="left">
                         <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -69,11 +69,10 @@
                                 표시할 교육 자료가 없습니다.
                             </div>
 
-                            <div class="accordion-item" th:each="education,educationStat : ${list}">
+                            <div class="accordion-item" th:each="education,educationStat : ${list}" >
 
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                    <button th:text="${educationStat.count} +'. '+${education.title}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="@{'#flush-collapse'+${educationStat.count}}" th:data-description="${education.description}" aria-expanded="false" aria-controls="flush-collapseOne">
-
+                                <h2 class="accordion-header" id="flush-headingOne" >
+                                    <button style="border : 1px solid !important;" th:text="${educationStat.count} +'. '+${education.title}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="@{'#flush-collapse'+${educationStat.count}}" th:data-description="${education.description}" aria-expanded="false" aria-controls="flush-collapseOne">
                                     </button>
                                 </h2>
                                 <div th:id="'flush-collapse'+${educationStat.count}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -187,12 +186,12 @@
             <div class="modal-body">
                <table class="table" style="font-size : .8rem; font-weight:400;">
                    <tr>
-                       <th style="background-color:darkcyan;color:white;font-size : 1rem; font-weight:400;">강의제목</th>
-                       <th style="background-color:darkcyan;color:white;text-align:right;font-size : 1rem; font-weight:400;">삭제하기</th>
+                       <th style="background-color:darkcyan;color:white;font-size : 1rem; font-weight:400;text-align:center;">강의제목</th>
+                       <th style="background-color:darkcyan;color:white;text-align:right;font-size : 1rem; font-weight:400;text-align:center;">삭제하기</th>
                    </tr>
                    <tr th:each="education:${list}">
-                       <td th:text="${education.title}"></td>
-                       <td style="text-align:right;"><button class="delete-modal-btn btn btn-secondary" th:data-id="${education.id}" style="font-size : .8rem; font-weight:400;">삭제</button></td>
+                       <td th:text="${education.title}" style="text-align:center;"></td>
+                       <td style="text-align:center;"><button class="delete-modal-btn btn btn-secondary" th:data-id="${education.id}" style="font-size : .8rem; font-weight:400;">삭제</button></td>
                    </tr>
 
                </table>

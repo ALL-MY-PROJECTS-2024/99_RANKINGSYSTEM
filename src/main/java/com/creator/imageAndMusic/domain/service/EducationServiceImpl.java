@@ -61,12 +61,20 @@ public class EducationServiceImpl {
         return true;
     }
     @Transactional(rollbackFor=Exception.class)
-    public List<Education> getEducations(String dalle) {
-        return  educationRepository.findAllByCategory(dalle);
+    public List<Education> getEducations(String category) {
+        return  educationRepository.findAllByCategory(category);
     }
 
     @Transactional(rollbackFor=Exception.class)
     public boolean deleteEducation(EducationDto dto) {
+        //파일삭제
+        Education education =  educationRepository.findById(dto.getId()).get();
+        if(education.getType().equals("file")){
+            File file = new File(education.getFilepath());
+            file.delete();
+        }
+
+        //삭제
         educationRepository.deleteById(dto.getId());
         return true;
     }
