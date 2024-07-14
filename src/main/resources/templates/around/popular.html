@@ -192,11 +192,6 @@
                         <div class="swiper-wrapper">
 
 
-                            <div class="swiper-slide" th:if="${#lists.size(musicTop10ByLike) > 0}">
-                                표시할 항목이 없습니다.
-                            </div>
-
-
                             <div class="swiper-slide" th:each="musicRanking,musicRankingStat :${musicTop10ByLike}">
                                 <a href="javascript:void(0)" style="display:block;">
                                     <div class="rankingNo">
