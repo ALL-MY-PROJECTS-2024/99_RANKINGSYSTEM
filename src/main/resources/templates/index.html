@@ -2,7 +2,10 @@
 <html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+-->
     <title>Document</title>
 
     <!--  link   -->
@@ -12,12 +15,18 @@
     <link rel="stylesheet" href="/css/user/index_join.css">
 
     <link rel="stylesheet" href="/css/index_login.css">
+
+
     <!-- index.css-->
+
     <link rel="stylesheet" href="/css/index.css">
+
+    <link rel="stylesheet" href="/css/mobile/index.css" media="all and (max-width:450px)">
 
 
     <!-- index.js   -->
     <script src="/js/index.js" defer> </script>
+
     <script src="/js/user/index_join.js" defer> </script>
 
     <!-- chart.js    -->
@@ -149,8 +158,8 @@
                     <div class="ranking-summary">
 
                         <div class="title">
-                            <h4 style="margin-bottom : 15px;">IMAGE RANKING TOP 10</h4>
-                            <div>
+                            <h4 style="font-size:1.5vw !important;width:70vw;">IMAGE RANKING TOP 10</h4>
+                            <div style="display:flex;justify-content:right;width:30vw;">
                                 <a href="javascript:void(0)" class="btn_count" >조회순</a>&nbsp;
                                 <a href="javascript:void(0)" class="btn_like" >좋아요순</a>
                             </div>
@@ -160,8 +169,8 @@
                                 <th style="width:25px;">No</th>
                                 <th>이미지</th>
                                 <th>카테고리</th>
-                                <th style="width:60px;">조회수</th>
-                                <th style="width:60px;">좋아요수</th>
+                                <th style="width:80px;">조회수</th>
+                                <th style="width:80px;">좋아요수</th>
                             </tr>
                             <tbody class="img-body-order">
                                 <tr class="" th:each="imageRanking,imageRankingStat : ${imageTop10ByCount}">
@@ -239,15 +248,18 @@
                             <div class="swiper-slide"><canvas style="position:relative;z-index:1;"  id="section1Chart2"></canvas></div>
                         </div>
 
-                        <!-- If we need navigation buttons -->
-                        <div class="swiper-button-prev">
-                            <span class="material-symbols-outlined" style="font-size:6rem;">arrow_left</span>
-                        </div>
-                        <div class="swiper-button-next">
-                            <span class="material-symbols-outlined" style="font-size:6rem;">arrow_right</span>
-                        </div>
+
+
+
                     </div>
 
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev">
+                        <span class="material-symbols-outlined" >arrow_left</span>
+                    </div>
+                    <div class="swiper-button-next">
+                        <span class="material-symbols-outlined" >arrow_right</span>
+                    </div>
 
 
                 </div>
@@ -295,15 +307,16 @@
                                         <img th:src="@{${tradingImageDto.fileDir}+'\s_'+${tradingImageDto.filename}}" alt="">
                                     </a>
                                 </div>
+                                <!-- If we need navigation buttons -->
+                                <div class="swiper-button-prev">
+                                    <span class="material-symbols-outlined" style="">arrow_left</span>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <span class="material-symbols-outlined" style="">arrow_right</span>
+                                </div>
 
                             </div>
-                            <!-- If we need navigation buttons -->
-                            <div class="swiper-button-prev">
-                                <span class="material-symbols-outlined" style="font-size :4rem;">arrow_left</span>
-                            </div>
-                            <div class="swiper-button-next">
-                                <span class="material-symbols-outlined" style="font-size :4rem;">arrow_right</span>
-                            </div>
+
                         </div>
                     </div>
                     <br><br>
@@ -334,15 +347,15 @@
                                         <img  th:src="${tradingMusicDto.fileDir}+'/'+${tradingMusicDto.albumImageName}" alt="인증필요"></img>
                                     </a>
                                 </div>
+                                <!-- If we need navigation buttons -->
+                                <div class="swiper-button-prev">
+                                    <span class="material-symbols-outlined" style="font-size :4rem;">arrow_left</span>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <span class="material-symbols-outlined" style="font-size :4rem;">arrow_right</span>
+                                </div>
+                            </div>
 
-                            </div>
-                            <!-- If we need navigation buttons -->
-                            <div class="swiper-button-prev">
-                                <span class="material-symbols-outlined" style="font-size :4rem;">arrow_left</span>
-                            </div>
-                            <div class="swiper-button-next">
-                                <span class="material-symbols-outlined" style="font-size :4rem;">arrow_right</span>
-                            </div>
                         </div>
                     </div>
                 </div>
