@@ -5,7 +5,6 @@
 <!--
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 -->
-    <title>Document</title>
 
 
     <!--  link   -->
@@ -64,45 +63,47 @@
                             <thead></thead>
                             <tbody>
                                 <tr>
-                                    <td style="width:200px;" >제목</td>
+                                    <td style="width:200px;background-color:darkcyan;color:white;" >제목</td>
                                     <td class="title"  th:text="${imagesRanking.ImagesFileInfo.Images.title}" style="width:500px;"></td>
-                                    <td  style="width:200px;" >등록날짜</td>
+                                    <td  style="width:200px;background-color:darkcyan;color:white;" >등록날짜</td>
                                     <td class="date" th:text="${#temporals.format(imagesRanking.ImagesFileInfo.Images.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 </tr>
                                 <tr>
-                                    <td>소유자 계정</td>
+                                    <td style="background-color:darkcyan;color:white;">소유자 계정</td>
                                     <td  class="username" th:text="${imagesRanking.ImagesFileInfo.Images.username}" colspan="3"></td>
                                 </tr>
                                 <tr>
-                                    <td>기본 카테고리</td>
+                                    <td style="background-color:darkcyan;color:white;">기본 카테고리</td>
                                     <td  class="mainCategory" th:text="${imagesRanking.ImagesFileInfo.Images.mainCategory}"></td>
-                                    <td>세부 카테고리</td>
+                                    <td style="background-color:darkcyan;color:white;">세부 카테고리</td>
                                     <td class="subCategory" th:text="${imagesRanking.ImagesFileInfo.Images.subCategory}"></td>
                                 </tr>
                                 <tr>
-                                    <td>설명</td>
+                                    <td style="background-color:darkcyan;color:white;">설명</td>
                                     <td class="description" th:text="${imagesRanking.ImagesFileInfo.Images.description}"  colspan="3"></td>
                                 </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td class="btns" style="text-align:right;">
+                                        <a href="javascript:history.go(-1)" class="btn  addRanking" style="background-color:darkcyan;color:white;">
+                                            <span class="material-symbols-outlined" style="font-size:.8rem;">logout</span>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn  thumb_up_btn"  style="background-color:darkcyan;color:white;" th:data-imageid="${imagesRanking.rankingId}">
+                                            <span class="material-symbols-outlined" style="font-size:.8rem;">thumb_up</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="images">
+                                    <td colspan="4" style="text-align:center">
+                                        <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'/'+${imagesRanking.ImagesFileInfo.filename}}" alt="" style="object-fit:contain;max-width:800px;max-height:800px;" />
+                                    </td>
+                                </tr>
                            </tbody>
-                            <tfoot></tfoot>
+
                         </table>
                     </div>
                     <div class="image-block " >
 
-                        <div class="item" >
-                            <div class="btns">
-                                <a href="javascript:history.go(-1)" class="btn btn-primary addRanking">이전으로</a>
-                                <a href="javascript:void(0)" class="btn btn-primary thumb_up_btn" th:data-imageid="${imagesRanking.rankingId}">
-                                    <span class="material-symbols-outlined" style="font-size:1rem;">thumb_up</span>
-                                </a>
-
-                            </div>
-                            <div class="images">
-                                <th:block  >
-                                    <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'/'+${imagesRanking.ImagesFileInfo.filename}}" alt="" />
-                                </th:block>
-                            </div>
-                        </div>
                     </div>
 
 <!--                    <div class="contents-block">-->

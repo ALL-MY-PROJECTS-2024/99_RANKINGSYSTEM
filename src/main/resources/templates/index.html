@@ -6,7 +6,6 @@
 <!--
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 -->
-    <title>Document</title>
 
     <!--  link   -->
     <th:block th:insert="fragments/link :: linkFragment" />
@@ -178,7 +177,7 @@
 
                                     <td th:text="${imageRankingStat.count}"></td>
                                     <td>
-                                        <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요"></img>
+                                        <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
                                     </td>
                                     <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>
                                     <td th:text="${imageRanking.count}"></td>
@@ -191,7 +190,7 @@
 
                                     <td th:text="${imageRankingStat.count}"></td>
                                     <td>
-                                        <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요"></img>
+                                        <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
                                     </td>
                                     <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>
                                     <td th:text="${imageRanking.count}"></td>
@@ -212,7 +211,7 @@
                                 <tr class="" th:each="musicRanking,musicRankingStat : ${musicTop10ByCount}">
                                     <td th:text="${musicRankingStat.count}"></td>
                                     <td>
-                                        <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요"></img>
+                                        <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
                                     </td>
                                     <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
                                     <td th:text="${musicRanking.count}"></td>
@@ -223,7 +222,7 @@
                                 <tr class="" th:each="musicRanking,musicRankingStat : ${musicTop10ByLike}">
                                     <td th:text="${musicRankingStat.count}"></td>
                                     <td>
-                                        <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요"></img>
+                                        <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
                                     </td>
                                     <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
                                     <td th:text="${musicRanking.count}"></td>

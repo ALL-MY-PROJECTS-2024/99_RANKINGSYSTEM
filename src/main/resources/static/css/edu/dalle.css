@@ -13,6 +13,7 @@
     display:flex;
     justify-content: right;
     align-items : start;
+
 }
 
 .show-block{
@@ -54,4 +55,28 @@
 }
 .accordion-header button{
     padding-left : 15px !important;
+}
+
+
+.admin-menu a{
+    font-size : .8rem;
+}
+
+td,th {
+    font-size:.8rem !important;
+}
+td,th a{
+    font-size:.8rem !important;
+}
+.m-2 label{
+    font-size : .8rem !important;
+}
+modal a{
+    font-size : .8rem !important;
+}
+.modal-footer button{
+    font-size : .8rem !important;
+}
+modal input {
+    font-size : .8rem !important;
 }

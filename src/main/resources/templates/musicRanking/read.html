@@ -5,7 +5,6 @@
 <!--
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 -->
-    <title>Document</title>
 
 
     <!--  link   -->
@@ -64,52 +63,51 @@
                             <thead></thead>
                             <tbody>
                                 <tr>
-                                    <td style="width:200px;" >TITLE</td>
+                                    <td style="width:200px;background-color:darkcyan;color:white;" >제목</td>
                                     <td class="title"  th:text="${musicRanking.MusicFileInfo.Music.title}" style="width:500px;"></td>
-                                    <td  style="width:200px;" >DATE</td>
+                                    <td style="width:200px;background-color:darkcyan;color:white;" >등록날짜</td>
                                     <td class="date" th:text="${#temporals.format(musicRanking.MusicFileInfo.Music.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 </tr>
                                 <tr>
-                                    <td>USER</td>
+                                    <td style="width:200px;background-color:darkcyan;color:white;">소유자 계정</td>
                                     <td  class="username" th:text="${musicRanking.MusicFileInfo.Music.username}" colspan="3"></td>
                                 </tr>
                                 <tr>
-                                    <td>MAIN CATEGORY</td>
-                                    <td  class="mainCategory" th:text="${musicRanking.MusicFileInfo.Music.mainCategory}"></td>
-                                    <td>SUB CATEGORY</td>
+                                    <td style="width:200px;background-color:darkcyan;color:white;">기본 카테고리</td>
+                                    <td class="mainCategory" th:text="${musicRanking.MusicFileInfo.Music.mainCategory}"></td>
+                                    <td style="width:200px;background-color:darkcyan;color:white;">세부 카테고리</td>
                                     <td class="subCategory" th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
                                 </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td class="btns" style="text-align:right;">
+                                        <a href="javascript:history.go(-1)" class="btn  addRanking" style="background-color:darkcyan;color:white;">
+                                            <span class="material-symbols-outlined" style="font-size:.8rem;">logout</span>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn  thumb_up_btn"  style="background-color:darkcyan;color:white;" th:data-musicid="${musicRanking.rankingId}">
+                                            <span class="material-symbols-outlined" style="font-size:.8rem;">thumb_up</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="images">
+                                    <td colspan="4" style="text-align:center">
+                                        <div>
+                                            <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
+                                        </div>
+                                        <audio controls>
+                                            <source th:src="@{${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.filename}}" type="audio/mp3">
+                                            <source th:src="@{${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.filename}}" type="audio/wav">
+                                            이 문장은 여러분의 브라우저가 audio 태그를 지원하지 않을 때 화면에 표시됩니다!
+                                        </audio>                                    </td>
+                                </tr>
+
                            </tbody>
-                            <tfoot></tfoot>
+
                         </table>
                     </div>
                     <div class="image-block layout-5" >
-
-                        <div class="item" >
-                            <div class="btns">
-                                <a href="javascript:history.go(-1)" class="btn btn-primary addRanking">이전으로</a>
-                                <a href="javascript:void(0)" class="btn btn-primary thumb_up_btn" th:data-musicid="${musicRanking.rankingId}">
-                                    <span class="material-symbols-outlined" style="font-size:1rem;">thumb_up</span>
-                                </a>
-
-                            </div>
-                            <div class="images" style="display:flex; justify-content:center;align-items:center; flex-direction:column">
-                                <th:block  >
-                                    <div>
-                                        <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
-                                    </div>
-                                    <audio controls>
-                                        <source th:src="@{${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.filename}}" type="audio/mp3">
-                                        <source th:src="@{${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.filename}}" type="audio/wav">
-                                        이 문장은 여러분의 브라우저가 audio 태그를 지원하지 않을 때 화면에 표시됩니다!
-                                    </audio>
-                                </th:block>
-                            </div>
-                        </div>
                     </div>
-
 <!--                    <div class="contents-block">-->
-
 <!--                    </div>-->
 
                 </div>
