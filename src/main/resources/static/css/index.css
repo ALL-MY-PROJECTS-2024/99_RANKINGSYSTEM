@@ -20,9 +20,8 @@
     display:flex;
     justify-content:center;
     align-items : start;
-    box-shadow :5px 5px 5px lightgray;
 
-
+    background-color:black;
     overflow : auto;
 }
 .section1 .left table{
