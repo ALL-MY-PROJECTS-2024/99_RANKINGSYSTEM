@@ -9,13 +9,22 @@
     font-family: 'TmoneyRoundWindRegular';
     src: url("/font/TmoneyRoundWindRegular.ttf") format("truetype");
     font-style: normal;
+}@font-face {
+    font-family: 'GothicA1-Regular';
+    src: url("/font/GothicA1-Regular.ttf") format("truetype");
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GothicA1-Medium';
+    src: url("/font/GothicA1-Medium.ttf") format("truetype");
+    font-style: normal;
 }
 
 
 
 
 body{
-    font-family: "TmoneyRoundWindRegular", sans-serif;
+    font-family: "GothicA1-Medium", sans-serif;
     font-style: normal;
     font-weight:400;
     margin: 0;
@@ -176,23 +185,20 @@ ul{
 }
 
 .wrapper>.top-header>.center>ul>li>a,
-.wrapper>.top-header>.center>ul>li>button
+.wrapper>.top-header>.center>ul>li button
 {
     color : white;
-
+    font-weight : 400;
     display:flex;
     justify-content: center;
     align-items : center;
 
-    height : 30px;
-
+    height : 40px;
    /* border : 1px solid;*/
-    min-width:30px;
+
     width : 45px;
     border-radius :2px;
     position:relative;
-
-
 }
 .naming{
     position:absolute;
