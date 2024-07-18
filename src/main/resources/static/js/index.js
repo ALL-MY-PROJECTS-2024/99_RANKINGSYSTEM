@@ -448,17 +448,17 @@ window.addEventListener('DOMContentLoaded',function(){
 //------------------------
 // JavaScript 코드
 window.addEventListener('scroll', function() {
-    var header = document.querySelector('.top-header');
+    var top = document.querySelector('.top-header');
     var nav = document.querySelector('nav');
     var scrollPosition = window.scrollY;
     console.log('scroll',scrollPosition);
     // header의 초기 상태 (relative)에서 fixed로 변경하기 위한 조건
     if (scrollPosition > 30) { // 스크롤이 80px 이상 내려갔을 때
-        header.classList.add('fixed');
-        nav.classList.add('fixed');
+        top.classList.add('fixed-top');
+        nav.classList.add('fixed-nav');
     } else { // 스크롤이 80px 이하로 올라갔을 때
-        header.classList.remove('fixed');
-        nav.classList.remove('fixed');
+        top.classList.remove('fixed-top');
+        nav.classList.remove('fixed-nav');
 
     }
 });
