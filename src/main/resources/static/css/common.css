@@ -260,8 +260,8 @@ ul{
 
     display:flex;
     justify-content: left;;
-
-
+    position:relative;
+    z-index : 50;
 }
 
 .wrapper>nav>.left{
@@ -428,7 +428,7 @@ ul{
 }
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu{
     display:none;
-    border: 1px solid black;
+    border: 2px solid black;
     /*border-top: none;*/
     /*border-bottom: none;*/
     position: relative;

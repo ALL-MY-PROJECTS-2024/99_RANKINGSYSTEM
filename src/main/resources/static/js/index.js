@@ -111,7 +111,7 @@ window.addEventListener('DOMContentLoaded',function(){
               legend: {
                 display: false,  // Display legend
                 labels: {
-                    usePointStyle: true,
+                  //usePointStyle: true,
                   // This defines the legend labels for each dataset
                   generateLabels: function(chart) {
                     const data = chart.data;
@@ -177,7 +177,7 @@ window.addEventListener('DOMContentLoaded',function(){
             },
             plugins: {
               legend: {
-                display: false,  // Display legend
+                //display: false,  // Display legend
                 labels: {
                  usePointStyle: true,
                   // This defines the legend labels for each dataset
