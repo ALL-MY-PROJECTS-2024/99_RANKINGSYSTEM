@@ -40,7 +40,7 @@ body::-webkit-scrollbar{
 }
 a{
     text-decoration: none;
-    color: lightgray;
+    color: black;
 }
 ul{
     padding : 0px;
@@ -76,7 +76,9 @@ ul{
     /*letter-spacing: 0.1em;*/
      color : white;
 
-     background-color :rgb(15, 15, 15);;
+     background-color :rgb(25, 25, 25);;
+
+
 }
 
 .wrapper>.top-header>.center{
@@ -176,7 +178,7 @@ ul{
 .wrapper>.top-header>.center>ul>li>a,
 .wrapper>.top-header>.center>ul>li>button
 {
-    color : lightgray;
+    color : white;
 
     display:flex;
     justify-content: center;
@@ -244,6 +246,14 @@ ul{
 
 
 }
+.fixed{
+    position:fixed !important;
+    width:100%;
+    height : 80px;
+    top:0;
+    left:0;
+    z-index:9999;
+}
 
 .wrapper>nav{
     height:80px;
@@ -252,7 +262,7 @@ ul{
 
     display:flex;
     justify-content: left;;
-    border-bottom : 1px solid gray;
+
 
 }
 
@@ -307,7 +317,7 @@ ul{
     display:block;
     width : 50px;
     height : 52px;
-    border: 1px solid white;
+    border: 1px solid gray;
     border-radius:2px;
 }
 
@@ -372,7 +382,7 @@ ul{
     opacity: 1;
     position:relative;
     z-index:9999;
-
+    background-color: white;
 }
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu>li{
     line-height: 35px;
@@ -386,6 +396,7 @@ ul{
     height:100%;
     display:block;
     font-size:   clamp(6px,.8vw,24px);
+    color : black;
 
 }
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu>li>.submenu2{
@@ -401,7 +412,7 @@ ul{
 
 
 .wrapper>nav>.right>ul.mainmenu>li.ranking-menu>.submenu>li>a{
-    background-color: darkcyan;
+    background-color :rgb(25, 25, 25);
     color:white;
     display:block;
     width : 98.5%;
@@ -419,7 +430,7 @@ ul{
 }
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu{
     display:none;
-    border: 1px solid darkcyan;
+    border: 1px solid black;
     /*border-top: none;*/
     /*border-bottom: none;*/
     position: relative;
@@ -435,6 +446,10 @@ ul{
     opacity: 1;
     transition: opacity 0.5s ease;
     background-color: white;
+}
+
+a:hover{
+    opacity:.8;
 }
 
 /* main */
@@ -758,7 +773,7 @@ ul{
     width: 100%;
     height :200px;
     /* margin-top: 100px; */
-    background-color: darkcyan;
+    background-color :rgb(25, 25, 25);;
     color: white;
 }
 .wrapper>footer>.footer-info>.footer-link{
@@ -768,8 +783,10 @@ ul{
 
 }
 .wrapper>footer>.footer-info>.footer-link>a{
-    width: 130px;
-    color: white;
+    padding : 10px;
+    padding-left : 15px;
+    padding-right : 15px;
+    color: lightgray;
     margin-top: 15px;
     margin-bottom: 5px;
     font-size: 0.8rem;

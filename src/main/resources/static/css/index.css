@@ -120,9 +120,10 @@
     position:relative;
     z-index:1;
     background-color:white;
-
+    border-radius : 3px;
     width : 600px;
     height : 100%;
+    padding : 10px;
 }
 /*
     SECTION02
@@ -132,19 +133,19 @@
     width : 100%;
     /*border : 1px  solid;*/
 
-    padding : 15px;
     display:flex;
     justify-content:space-between;
     align-items : center;
     flex-direction:column;
 }
+.section2 td,th{
+    background-color : white;
+}
 
 .section2 .left{
     width : 100%;
-    padding : 20px;
     margin : 10px;
 
-    box-shadow : 5px 5px 5px lightgray;
 /*    display:flex;
     justify-content:center;
     align-items : center;*/
@@ -156,7 +157,6 @@
     align-items : center;
 }
 .section2 .left ul li{
-    border : 1px solid;
     margin : 5px;
     width : 100%;
     height : 50px;
@@ -170,20 +170,17 @@
 .section2 .right{
     margin-top : 35px;
     width : 100%;
-    padding : 20px;
     margin : 10px;
-    box-shadow : 5px 5px 5px lightgray;
 /*    display:flex;
     justify-content:center;
     align-items : center;*/
-    background-color : white;
     overflow : hidden;
 }
 
 .section2 .images-block .swiper{
-    width : 95vw;;
+    width : 100%;;
     height : 300px;
-    border : 1px solid lightgray;
+
     display:flex;
     justify-content : center;
     align-items : center;
@@ -294,7 +291,7 @@
 
     color:white;
     font-size : 5rem;
-    background-color:darkcyan;
+    background-color:black;
     height:100%;
     position:absolute;
     top:21.5px;
@@ -308,4 +305,11 @@
 
 .modal-dialog{
     width : 600px !important;
+}
+.modal-content{
+    color : black;
+}
+
+.modal-content th,td{
+    color :black;
 }

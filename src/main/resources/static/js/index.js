@@ -118,7 +118,7 @@ window.addEventListener('DOMContentLoaded',function(){
                     if (data.labels.length && data.datasets.length) {
                       return data.labels.map(function(label, i) {
                         return {
-                            text: '개수 : ' + data.datasets[0].data[i],  // label: value
+                            text: label + ': ' + data.datasets[0].data[i],  // label: value
                             fillStyle: data.datasets[0].backgroundColor[i],
                             //pointStyle: 'circle',  // Point style for legend
                             radius: 4  // Point radius for legend
@@ -177,16 +177,16 @@ window.addEventListener('DOMContentLoaded',function(){
             },
             plugins: {
               legend: {
-                display: true,  // Display legend
+                display: false,  // Display legend
                 labels: {
-                 //usePointStyle: true,
+                 usePointStyle: true,
                   // This defines the legend labels for each dataset
                   generateLabels: function(chart) {
                     const data = chart.data;
                     if (data.labels.length && data.datasets.length) {
                       return data.labels.map(function(label, i) {
                         return {
-                          text: '개수 : ' + data.datasets[0].data[i],  // label: value
+                          text: label + ': ' + data.datasets[0].data[i],  // label: value
                           fillStyle: data.datasets[0].backgroundColor[i]
                         };
                       });
@@ -281,45 +281,45 @@ window.addEventListener('DOMContentLoaded',function(){
         })
 
 
-        const btn_count = document.querySelector('.btn_count');
-        btn_count.addEventListener('click',function(){
-            imgBodyOrder.classList.remove('hidden');
-            imgBodyLike.classList.remove('hidden');
-            mBodyOrder.classList.remove('hidden');
-            mBodyLike.classList.remove('hidden');
-            if(mode==1)
-            {
-                //이미지 + 조회수만 켜기
-                imgBodyLike.classList.add('hidden');
-                mBodyOrder.classList.add('hidden');
-                mBodyLike.classList.add('hidden');
-            }else {
-                //음악 + 조회수만 켜기
-                imgBodyOrder.classList.add('hidden');
-                imgBodyLike.classList.add('hidden');
-                mBodyLike.classList.add('hidden');
-            }
-
-        })
-
-        const btn_like = document.querySelector('.btn_like');
-        btn_like.addEventListener('click',function(){
-            imgBodyOrder.classList.remove('hidden');
-            imgBodyLike.classList.remove('hidden');
-            mBodyOrder.classList.remove('hidden');
-            mBodyLike.classList.remove('hidden');
-            if(mode==1){
-                //이미지 좋아요만 켜키
-                imgBodyOrder.classList.add('hidden');
-                mBodyOrder.classList.add('hidden');
-                mBodyLike.classList.add('hidden');
-            }else {
-                //음악
-                imgBodyOrder.classList.add('hidden');
-                imgBodyLike.classList.add('hidden');
-                mBodyOrder.classList.add('hidden');
-            }
-        })
+//        const btn_count = document.querySelector('.btn_count');
+//        btn_count.addEventListener('click',function(){
+//            imgBodyOrder.classList.remove('hidden');
+//            imgBodyLike.classList.remove('hidden');
+//            mBodyOrder.classList.remove('hidden');
+//            mBodyLike.classList.remove('hidden');
+//            if(mode==1)
+//            {
+//                //이미지 + 조회수만 켜기
+//                imgBodyLike.classList.add('hidden');
+//                mBodyOrder.classList.add('hidden');
+//                mBodyLike.classList.add('hidden');
+//            }else {
+//                //음악 + 조회수만 켜기
+//                imgBodyOrder.classList.add('hidden');
+//                imgBodyLike.classList.add('hidden');
+//                mBodyLike.classList.add('hidden');
+//            }
+//
+//        })
+//
+//        const btn_like = document.querySelector('.btn_like');
+//        btn_like.addEventListener('click',function(){
+//            imgBodyOrder.classList.remove('hidden');
+//            imgBodyLike.classList.remove('hidden');
+//            mBodyOrder.classList.remove('hidden');
+//            mBodyLike.classList.remove('hidden');
+//            if(mode==1){
+//                //이미지 좋아요만 켜키
+//                imgBodyOrder.classList.add('hidden');
+//                mBodyOrder.classList.add('hidden');
+//                mBodyLike.classList.add('hidden');
+//            }else {
+//                //음악
+//                imgBodyOrder.classList.add('hidden');
+//                imgBodyLike.classList.add('hidden');
+//                mBodyOrder.classList.add('hidden');
+//            }
+//        })
 
         //-------------------------------
         // 진행중인 경매 보기
@@ -440,6 +440,28 @@ window.addEventListener('DOMContentLoaded',function(){
 
 });
 
+
+
+
+//------------------------
+// 스크롤이벤트 lodash 나중에 추가할것
+//------------------------
+// JavaScript 코드
+window.addEventListener('scroll', function() {
+    var header = document.querySelector('.top-header');
+    var nav = document.querySelector('nav');
+    var scrollPosition = window.scrollY;
+    console.log('scroll',scrollPosition);
+    // header의 초기 상태 (relative)에서 fixed로 변경하기 위한 조건
+    if (scrollPosition > 30) { // 스크롤이 80px 이상 내려갔을 때
+        header.classList.add('fixed');
+        nav.classList.add('fixed');
+    } else { // 스크롤이 80px 이하로 올라갔을 때
+        header.classList.remove('fixed');
+        nav.classList.remove('fixed');
+
+    }
+});
 
 
 

@@ -25,13 +25,6 @@
                 </th:block>
 
 
-<!--                <li class="item notification">-->
-<!--                    <a href="/">-->
-<!--                        <span class="material-symbols-outlined ">notifications</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                -->
-
                 <li class="item">
                     <a href="/">HOME</a>
                 </li>
@@ -57,23 +50,9 @@
                     </li>
                 </th:block>
 
-
-<!--                <li>-->
-<!--                    <a href="">-->
-<!--                        <span class="material-symbols-outlined">MENU</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-
-<!--                -->
             </ul>
         </div>
-        <!--
-        <div class="right">
-            <a href="/index.html">
-               <img src="assets/top-header-left.jpg" alt="">
-            </a>
-        </div>
-         -->
+
     </div>
 </th:block>
 
@@ -81,68 +60,10 @@
 
 <th:block th:fragment="mainHeaderFragment" >
     <div class="top-header layout-5">
-        <!--
-              <div class="left">
-
-                  <div class="swiper">
-
-                      <div class="swiper-wrapper">
-
-                          <div class="swiper-slide">
-                              <a href="">
-                                  [공지사항] 01관리자입니다.
-                              </a>
-                          </div>
-                          <div class="swiper-slide">
-                              <a href="">
-                                  <span>
-                                  [공지사항] 02관리자입니다.---------------------------------------
-                                  </span>
-                              </a>
-                          </div>
-                          <div class="swiper-slide">
-                              <a href="">
-                                  [공지사항] 03관리자입니다.
-                              </a>
-                          </div>
-                      </div>
-
-                  </div>
-
-
-              </div>
-               -->
         <div class="center">
             <div class="top-banner">
-
             </div>
             <ul>
-
-<!--
-
-                <th:block class="" sec:authorize="isAuthenticated()" >
-                    <li class="item" style="padding:15px 15px;">
-                        <span sec:authentication="principal.username"></span>
-                        <span>님</span>
-                    </li>
-                </th:block>
-
--->
-
-
-<!--                -->
-<!--                <li class="item notification">-->
-<!--                    <a href="/">-->
-<!--                        <span class="material-symbols-outlined ">notifications</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                -->
-
-                <!--
-                <li class="item">
-                    <a href="/">HOME</a>
-                </li>
--->
 
                 <th:block class="top-header-menu" sec:authorize="!isAuthenticated()" >
                     <li class="item">
@@ -300,15 +221,15 @@
         -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content" style="width:350px;margin:0 auto;">
 
-                    <div class="modal-body">
+                    <div class="modal-body modal-login">
                             <div style="text-align:right;">
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <main>
-                                <section>
+                                <section class="login-modal-body">
                                     <div>
                                         <form action="/login" method="post" >
                                             <div class="item image">
@@ -327,8 +248,8 @@
                                             </div>
                                             <div class="item submenu">
                                                 <div>
-                                                    <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me">
-                                                    <label for="rememberMe">로그인 상태 유지</label>
+                                                    <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me" style="font-size : .8rem">
+                                                    <label for="rememberMe" style="font-size : .8rem">로그인 상태 유지</label>
                                                 </div>
                                                 <div>
                                                 </div>
@@ -337,9 +258,9 @@
                                                 <div>
 
                                                 </div>
-                                                <div>
-                                                    <a href="/user/confirmId">아이디 분실</a> |
-                                                    <a href="/user/confirmPw">패스워드 분실</a>
+                                                <div  >
+                                                    <a href="/user/confirmId" style="font-size : .8rem">아이디 분실</a> |
+                                                    <a href="/user/confirmPw" style="font-size : .8rem">패스워드 분실</a>
                                                 </div>
                                             </div>
                                             <div class="item">
