@@ -1,6 +1,77 @@
 
 
 window.addEventListener('DOMContentLoaded',function(){
+
+        //
+        var section1_1 = new Swiper('.section1 .img-body-order  .swiper', {
+                        slidesPerView: 5,
+                        spaceBetween: 10, // 슬라이드 사이의 간격 설정
+                        navigation: {
+                          nextEl: '.section1 .left .img-body-order  .swiper-button-next',
+                          prevEl: '.section1 .left .img-body-order  .swiper-button-prev',
+                        },
+        });
+        var section1_2 = new Swiper('.section1 .img-body-like  .swiper', {
+                        slidesPerView: 5,
+                        spaceBetween: 10, // 슬라이드 사이의 간격 설정
+                        navigation: {
+                          nextEl: '.section1 .left .img-body-like   .swiper-button-next',
+                          prevEl: '.section1 .left .img-body-like   .swiper-button-prev',
+                        },
+        });
+        var section1_3 = new Swiper('.section1 .m-body-order  .swiper', {
+                        slidesPerView: 5,
+                        spaceBetween: 10, // 슬라이드 사이의 간격 설정
+                        navigation: {
+                          nextEl: '.section1 .left .m-body-order   .swiper-button-next',
+                          prevEl: '.section1 .left .m-body-order   .swiper-button-prev',
+                        },
+        });
+        var section1_4 = new Swiper('.section1 .m-body-like  .swiper', {
+                        slidesPerView: 5,
+                        spaceBetween: 10, // 슬라이드 사이의 간격 설정
+                        navigation: {
+                          nextEl: '.section1 .left .m-body-like   .swiper-button-next',
+                          prevEl: '.section1 .left .m-body-like   .swiper-button-prev',
+                        },
+        });
+
+
+        //이미지 좋아요/조회순 버튼
+        const imageCountBtn = document.querySelector('.image-block .title-header .count-btn');
+        const imageLikeBtn = document.querySelector('.image-block .title-header .like-btn');
+        const imageCountOrderBlock = document.querySelector('.image-block .count-order');
+        const imageLikeOrderBlock = document.querySelector('.image-block .like-order');
+
+        imageCountBtn.addEventListener('click',function(){
+            console.log('imageCountBtn clicked...');
+            imageCountOrderBlock.classList.remove('hidden');
+            imageLikeOrderBlock.classList.add('hidden');
+        })
+        imageLikeBtn.addEventListener('click',function(){
+            console.log('imageLikeBtn clicked...');
+            imageCountOrderBlock.classList.add('hidden');
+            imageLikeOrderBlock.classList.remove('hidden');
+        })
+
+
+        //음악 좋아요/조회순 버튼
+        const musicCountBtn = document.querySelector('.music-block .title-header .count-btn');
+        const musicLikeBtn = document.querySelector('.music-block .title-header .like-btn');
+        const musicCountOrderBlock = document.querySelector('.music-block .count-order');
+        const musicLikeOrderBlock = document.querySelector('.music-block .like-order');
+
+        musicCountBtn.addEventListener('click',function(){
+            console.log('imageCountBtn clicked...');
+            musicCountOrderBlock.classList.remove('hidden');
+            musicLikeOrderBlock.classList.add('hidden');
+        })
+        musicLikeBtn.addEventListener('click',function(){
+            console.log('imageLikeBtn clicked...');
+            musicCountOrderBlock.classList.add('hidden');
+            musicLikeOrderBlock.classList.remove('hidden');
+        })
+
         //-------------------------------
         // section1
         //-------------------------------
@@ -25,31 +96,32 @@ window.addEventListener('DOMContentLoaded',function(){
                 'rgba(255, 99, 132, 0.6)',    // Place - Red (You can change to another color)
                 'rgba(54, 162, 235, 0.6)'     // Others - Blue (You can change to another color)
               ],
-              borderWidth: 1,
-
+                borderWidth: 1,
+                borderColor:'black',
+                pointRadius: 6  // 각 점의 반지름 설정
             }]
           },
           options: {
             scales: {
               y: {
                 beginAtZero: true
-              }
+              },
             },
             plugins: {
               legend: {
-                display: true,  // Display legend
+                display: false,  // Display legend
                 labels: {
                     usePointStyle: true,
-
                   // This defines the legend labels for each dataset
                   generateLabels: function(chart) {
                     const data = chart.data;
                     if (data.labels.length && data.datasets.length) {
                       return data.labels.map(function(label, i) {
                         return {
-                          text: label + ': ' + data.datasets[0].data[i],  // label: value
-                          fillStyle: data.datasets[0].backgroundColor[i],
-
+                            text: '개수 : ' + data.datasets[0].data[i],  // label: value
+                            fillStyle: data.datasets[0].backgroundColor[i],
+                            //pointStyle: 'circle',  // Point style for legend
+                            radius: 4  // Point radius for legend
                         };
                       });
                     }
@@ -92,7 +164,9 @@ window.addEventListener('DOMContentLoaded',function(){
                 'rgba(255, 99, 132, 0.6)',    // Place - Red (You can change to another color)
                 'rgba(54, 162, 235, 0.6)'     // Others - Blue (You can change to another color)
               ],
-              borderWidth: 1
+                borderWidth: 1,
+                borderColor:'black',
+                pointRadius: 6  // 각 점의 반지름 설정
             }]
           },
           options: {
@@ -105,14 +179,14 @@ window.addEventListener('DOMContentLoaded',function(){
               legend: {
                 display: true,  // Display legend
                 labels: {
-                 usePointStyle: true,
+                 //usePointStyle: true,
                   // This defines the legend labels for each dataset
                   generateLabels: function(chart) {
                     const data = chart.data;
                     if (data.labels.length && data.datasets.length) {
                       return data.labels.map(function(label, i) {
                         return {
-                          text: label + ': ' + data.datasets[0].data[i],  // label: value
+                          text: '개수 : ' + data.datasets[0].data[i],  // label: value
                           fillStyle: data.datasets[0].backgroundColor[i]
                         };
                       });

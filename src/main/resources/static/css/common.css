@@ -59,6 +59,8 @@ ul{
 }
 
 /*  */
+
+
 .wrapper>.top-header{
     height:80px;
     /* border : 1px solid; */
@@ -73,6 +75,8 @@ ul{
     width : 100%;
     /*letter-spacing: 0.1em;*/
      color : white;
+
+     background-color :rgb(15, 15, 15);;
 }
 
 .wrapper>.top-header>.center{
@@ -85,6 +89,7 @@ ul{
     display: flex;
     justify-content: right;
     align-items: center;
+
 }
 
 .wrapper>.top-header>.center>ul{
@@ -94,6 +99,8 @@ ul{
     display:flex;
     justify-content: space-between;
     align-items: center;
+    padding : 0px 15px;
+    background-color:#0a0b17;;
 }
 
 .wrapper>.top-header>.center>ul>li{
@@ -178,10 +185,12 @@ ul{
     height : 30px;
 
    /* border : 1px solid;*/
-    min-width:45px;
+    min-width:30px;
     width : 45px;
     border-radius :2px;
     position:relative;
+
+
 }
 .naming{
     position:absolute;
@@ -243,6 +252,7 @@ ul{
 
     display:flex;
     justify-content: left;;
+    border-bottom : 1px solid gray;
 
 }
 
@@ -435,7 +445,7 @@ ul{
 
 
 .wrapper>main>.section-1 {
-    height: 600px;
+
     background: url('/assets/water.jpg');
     /* opacity: 0.5; */
     background-repeat: no-repeat;

@@ -146,119 +146,245 @@
         <main>
 
 
-            <hr class="margin-top:15px;">
+<!--            <hr class="margin-top:15px;">
             <h5 class="layout-5" style="color : white;text-align:center;height:45px;line-height:45px;background-color:darkcyan">미리 보기</h5>
             <hr>
+            -->
+
 <!--            <div th:text="${imageRankingPopular}"></div>-->
             <section class="section1 ">
+                <div class="bg">
 
-                <div class="left layout-5">
+                </div>
+                <div class="left layout-5 mb-5">
 
-                    <div class="ranking-summary">
-
-                        <div class="title">
-                            <h4 style="font-size:1.5vw !important;width:70vw;">IMAGE RANKING TOP 10</h4>
-                            <div style="display:flex;justify-content:right;width:30vw;">
-                                <a href="javascript:void(0)" class="btn_count" >조회순</a>&nbsp;
-                                <a href="javascript:void(0)" class="btn_like" >좋아요순</a>
+                    <!--이미지 블록-->
+                    <div class="image-block">
+                        <div class="title-header mb-4">
+                            <h4 class="">이미지 순위</h4>
+                            <div class="ms-1">
+                                <a href="javascript:void(0)" class="me-1 count-btn"><span>조회</span></a>
+                                <a href="javascript:void(0)" class="like-btn"><span>좋아요</span></a>
                             </div>
                         </div>
-                        <table class="table order">
-                            <tr>
-                                <th style="width:25px;">No</th>
-                                <th>이미지</th>
-                                <th>카테고리</th>
-                                <th style="width:80px;">조회수</th>
-                                <th style="width:80px;">좋아요수</th>
-                            </tr>
-                            <tbody class="img-body-order">
-                                <tr class="" th:each="imageRanking,imageRankingStat : ${imageTop10ByCount}">
 
+                        <!--조회순-->
+                        <div class="count-order mb-3">
+                            <div class="title mb-3">
+                                <h6>조회순 TOP 10</h6>
+                            </div>
+                            <div class="show-block img-body-order">
+                                <!-- Slider main container -->
+                                <div class="swiper ">
+                                    <!-- Additional required wrapper -->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides -->
+                                        <div class="swiper-slide" th:each="imageRanking,imageRankingStat : ${imageTop10ByCount}">
+                                            <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            <div class="item-title" style="" th:text="${imageRanking.ImagesFileInfo.Images.title}"></div>
+                                            <div class="item-count" >
+                                                <span class="material-symbols-outlined" style="font-size:.6rem">visibility</span>
+                                                <span th:text="${imageRanking.count}"></span>
+                                            </div>
+                                            <div class="imageInfo hidden">
+                                                <div th:text="${imageRankingStat.count}"></div>
+                                                <div th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></div>
+                                                <div th:text="${imageRanking.count}"></div>
+                                                <div ></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                    <td th:text="${imageRankingStat.count}"></td>
-                                    <td>
-                                        <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
-                                    </td>
-                                    <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>
-                                    <td th:text="${imageRanking.count}"></td>
-                                    <td th:text="${imageRanking.ilikeit}"></td>
-                                </tr>
-                            </tbody>
-                            <tbody class="img-body-like hidden">
-                                <tr class="" th:each="imageRanking,imageRankingStat : ${imageTop10ByLike}">
+                                </div>
+                                <!-- If we need navigation buttons -->
+                                <div class="swiper-button-prev">
+                                    <span class="material-symbols-outlined" >arrow_left</span>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <span class="material-symbols-outlined" >arrow_right</span>
+                                </div>
 
-
-                                    <td th:text="${imageRankingStat.count}"></td>
-                                    <td>
-                                        <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
-                                    </td>
-                                    <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>
-                                    <td th:text="${imageRanking.count}"></td>
-                                    <td th:text="${imageRanking.ilikeit}"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <table class="table like hidden">
-                            <tr class="table-dark">
-                                <th style="width:25px;">No</th>
-                                <th>이미지</th>
-                                <th>카테고리</th>
-                                <th style="width:60px;">조회수</th>
-                                <th style="width:60px;">좋아요수</th>
-                            </tr>
-                            <tbody class="m-body-order">
-                                <tr class="" th:each="musicRanking,musicRankingStat : ${musicTop10ByCount}">
-                                    <td th:text="${musicRankingStat.count}"></td>
-                                    <td>
-                                        <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
-                                    </td>
-                                    <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
-                                    <td th:text="${musicRanking.count}"></td>
-                                    <td th:text="${musicRanking.ilikeit}"></td>
-                                </tr>
-                            </tbody>
-                            <tbody class="m-body-like hidden">
-                                <tr class="" th:each="musicRanking,musicRankingStat : ${musicTop10ByLike}">
-                                    <td th:text="${musicRankingStat.count}"></td>
-                                    <td>
-                                        <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
-                                    </td>
-                                    <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
-                                    <td th:text="${musicRanking.count}"></td>
-                                    <td th:text="${musicRanking.ilikeit}"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-                <div class="right layout-5">
-
-                    <div class="tag">
-                        IMAGE
-                    </div>
-                    <!-- Slider main container -->
-                    <div class="swiper">
-                        <!-- Additional required wrapper -->
-                        <div class="swiper-wrapper">
-                            <!-- Slides -->
-                            <div class="swiper-slide"><canvas style="position:relative;z-index:1;" id="section1Chart"></canvas></div>
-                            <div class="swiper-slide"><canvas style="position:relative;z-index:1;"  id="section1Chart2"></canvas></div>
+                            </div>
                         </div>
 
+                        <div class="like-order mb-3 hidden">
+                            <div class="title  mb-3">
+                                <h6>좋아요 순  TOP 10</h6>
+                            </div>
+                            <div class="show-block img-body-like">
+                                <!-- Slider main container -->
+                                <div class="swiper ">
+                                    <!-- Additional required wrapper -->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides -->
+                                        <div class="swiper-slide" th:each="imageRanking,imageRankingStat : ${imageTop10ByLike}">
+                                            <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            <div class="item-title" style="" th:text="${imageRanking.ImagesFileInfo.Images.title}"></div>
+                                            <div class="item-count" >
+                                                <span class="material-symbols-outlined" style="font-size:.6rem">thumb_up</span>
+                                                <span th:text="${imageRanking.ilikeit}"></span>
+                                            </div>
+                                            <div class="imageInfo hidden">
+                                                <div th:text="${imageRankingStat.count}"></div>
+                                                <div th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></div>
+                                                <div th:text="${imageRanking.count}"></div>
+                                                <div th:text="${imageRanking.ilikeit}"></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                </div>
+                                <!-- If we need navigation buttons -->
+                                <div class="swiper-button-prev">
+                                    <span class="material-symbols-outlined" >arrow_left</span>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <span class="material-symbols-outlined" >arrow_right</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <!-- MUSIC -->
+                    <div class="music-block">
+                        <div class="title-header mb-4 mt-4">
+                            <h4 class="">음악 순위</h4>
+                            <div class="ms-1">
+                                <a href="javascript:void(0)" class="me-1 count-btn"><span>조회</span></a>
+                                <a href="javascript:void(0)" class="like-btn"><span>좋아요</span></a>
+                            </div>
+                        </div>
+                        <!--조회순-->
+                        <div class="mb-3 count-order">
+                            <div class="title mb-3">
+                                <h6>조회순 TOP 10</h6>
+                            </div>
+                            <div class="show-block m-body-order">
+                                <!-- Slider main container -->
+                                <div class="swiper ">
+                                    <!-- Additional required wrapper -->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides -->
+                                        <div class="swiper-slide" th:each="musicRanking,musicRankingStat : ${musicTop10ByCount}">
+                                            <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            <div class="item-title" style="" th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
+                                            <div class="item-count" >
+                                                <span class="material-symbols-outlined" style="font-size:.6rem">visibility</span>
+                                                <span th:text="${musicRanking.count}"></span>
+                                            </div>
+                                            <div class="musicinfo hidden">
+                                                <div th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></div>
+                                                <div th:text="${musicRanking.count}"></div>
+                                                <div th:text="${musicRanking.ilikeit}"></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- If we need navigation buttons -->
+                                <div class="swiper-button-prev">
+                                    <span class="material-symbols-outlined" >arrow_left</span>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <span class="material-symbols-outlined" >arrow_right</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--좋아요순-->
+                        <div class="mb-3 hidden like-order">
+                            <div class="title mb-3">
+                                <h6 >좋아요 순 TOP 10</h6>
+                            </div>
+                            <div class="show-block m-body-like">
+                                <!-- Slider main container -->
+                                <div class="swiper ">
+                                    <!-- Additional required wrapper -->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides -->
+                                        <div class="swiper-slide" th:each="musicRanking,musicRankingStat : ${musicTop10ByLike}">
+                                            <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            <div class="item-title" style="" th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
+                                            <div class="item-count" >
+                                                <span class="material-symbols-outlined" style="font-size:.6rem">thumb_up</span>
+                                                <span th:text="${musicRanking.ilikeit}"></span>
+                                            </div>
+                                            <div class="musicinfo hidden">
+                                                <div th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></div>
+                                                <div th:text="${musicRanking.count}"></div>
+                                                <div th:text="${musicRanking.ilikeit}"></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- If we need navigation buttons -->
+                                <div class="swiper-button-prev">
+                                    <span class="material-symbols-outlined" >arrow_left</span>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <span class="material-symbols-outlined" >arrow_right</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <hr>
+
+                <div class="right layout-5">
+                    <div class="title-header mb-4 mt-4">
+                        <h4 class="">CHART</h4>
+                        <!--
+                            <div class="ms-1">
+                            <a href="javascript:void(0)" class="me-1"><span>이미지</span></a>
+                            <a href="javascript:void(0)" class=""><span>음악</span></a>
+                        </div>
+                        -->
+                    </div>
+
+                    <div class="chart-show-block">
+                            <div>
+                                <h6>이미지 CHART</h6>
+                                <div class="swiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <canvas style="" id="section1Chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-button-prev">
+                                    <span class="material-symbols-outlined" >arrow_left</span>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <span class="material-symbols-outlined" >arrow_right</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h6>음악 CHART</h6>
+                                <div class="swiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide"><canvas style="position:relative;z-index:1;background-color:white;"  id="section1Chart2"></canvas></div>
+                                    </div>
+                                </div>
+                                <div class="swiper-button-prev">
+                                    <span class="material-symbols-outlined" >arrow_left</span>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <span class="material-symbols-outlined" >arrow_right</span>
+                                </div>
+                            </div>
 
 
                     </div>
 
-                    <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev">
-                        <span class="material-symbols-outlined" >arrow_left</span>
-                    </div>
-                    <div class="swiper-button-next">
-                        <span class="material-symbols-outlined" >arrow_right</span>
-                    </div>
 
 
                 </div>
@@ -266,12 +392,15 @@
 
             </section>
 
-            <!--SECTION02-->
-            <hr class="margin-top:15px;">
-            <h5 class="layout-5" style="color : white;text-align:center;height:45px;line-height:45px;background-color:darkcyan">경매 현황</h5>
-            <hr>
-            <section class="section2 ">
 
+
+
+            <!--SECTION02-->
+            <hr>
+            <section class="section2 layout-5">
+                <div class="title-header mb-4 mt-4">
+                    <h4 class="" style="text-align:left;">경매 현황</h4>
+                </div>
                 <div class="left layout-5">
                         <span style="font-size : 1.2rem;">이번주 경매일정</span> <a href="/trading/calendar/main"><span style="font-size : .7rem;font-weight:800;color:green">경매일정 전체보기 ></span></a>
                         <hr>
