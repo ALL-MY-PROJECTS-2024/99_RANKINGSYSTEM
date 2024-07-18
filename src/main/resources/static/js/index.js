@@ -80,8 +80,9 @@ window.addEventListener('DOMContentLoaded',function(){
           type: 'line',
           data: {
             labels: ['Character', 'City', 'Map', 'iCON', 'Furniture', 'Car', 'Place', 'Others'],
+
             datasets: [{
-              label: 'COUNT',
+              label: '개수 ',
               data: [
                 imageCountMap.Character, imageCountMap.City, imageCountMap.Map, imageCountMap.iCON, imageCountMap.Furniture,
                 imageCountMap.Car, imageCountMap.Place, imageCountMap.Others
@@ -97,7 +98,7 @@ window.addEventListener('DOMContentLoaded',function(){
                 'rgba(54, 162, 235, 0.6)'     // Others - Blue (You can change to another color)
               ],
                 borderWidth: 1,
-                borderColor:'black',
+                borderColor:'white',
                 pointRadius: 6  // 각 점의 반지름 설정
             }]
           },
@@ -149,7 +150,7 @@ window.addEventListener('DOMContentLoaded',function(){
           data: {
             labels: ['Jazz', 'Rock', 'Classic', 'Progressive', 'Advertisement', 'HeavyMetal', 'Pop', 'Others'],
             datasets: [{
-              label: 'COUNT',
+              label: '개수 ',
               data: [
                 musicCountMap.Jazz, musicCountMap.Rock, musicCountMap.Classic, musicCountMap.Progressive, musicCountMap.Advertisement,
                 musicCountMap.HeavyMetal, musicCountMap.Pop, musicCountMap.Others
@@ -165,7 +166,7 @@ window.addEventListener('DOMContentLoaded',function(){
                 'rgba(54, 162, 235, 0.6)'     // Others - Blue (You can change to another color)
               ],
                 borderWidth: 1,
-                borderColor:'black',
+                borderColor:'white',
                 pointRadius: 6  // 각 점의 반지름 설정
             }]
           },
@@ -177,7 +178,7 @@ window.addEventListener('DOMContentLoaded',function(){
             },
             plugins: {
               legend: {
-                //display: false,  // Display legend
+                display: false,  // Display legend
                 labels: {
                  usePointStyle: true,
                   // This defines the legend labels for each dataset

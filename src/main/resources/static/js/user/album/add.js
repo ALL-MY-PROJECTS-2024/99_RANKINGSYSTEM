@@ -68,7 +68,7 @@ uploadBoxEl.addEventListener('drop',function(e){
                 const imgEl =  document.createElement('img');
     //          console.log("reader.onload",e)
                 imgEl.setAttribute('src',e.target.result);
-                imgEl.setAttribute('style','position:absolute;width:100%;height:100%;left:0;top:0;');
+                imgEl.setAttribute('style','position:absolute;width:100%;height:100%;left:0;top:0;object-fit:contain;z-index:10');
                 preview.appendChild(imgEl);
             }
             formData.append('files',file);
