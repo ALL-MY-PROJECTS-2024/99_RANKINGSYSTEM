@@ -74,6 +74,9 @@
                     <div class="swiper">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
+                            <div class="swiper-slide" th:if="${#lists.size(imageTop10ByLike)==0}" style="display:flex;align-items:center;justify-content:center;">
+                                표시할 이미지가 없습니다.
+                            </div>
                             <!-- Slides -->
                             <div class="swiper-slide" th:each="imageRanking,imageRankingStat :${imageTop10ByLike}">
                                 <a href="javascript:void(0)">
@@ -106,7 +109,9 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-
+                            <div class="swiper-slide" th:if="${#lists.size(imageTop10ByCount)==0}" style="display:flex;align-items:center;justify-content:center;">
+                                표시할 이미지가 없습니다.
+                            </div>
                             <div class="swiper-slide" th:each="imageRanking,imageRankingStat :${imageTop10ByCount}">
                                 <a href="javascript:void(0)">
                                     <div class="rankingNo">
@@ -139,6 +144,9 @@
                     <div class="swiper">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
+                            <div class="swiper-slide" th:if="${#lists.size(musicTop10ByLike)==0}" style="display:flex;align-items:center;justify-content:center;">
+                                표시할 음악 이미지가 없습니다.
+                            </div>
                             <!-- Slides -->
                             <div class="swiper-slide" th:each="musicRanking,musicRankingStat :${musicTop10ByLike}">
                                 <a href="javascript:void(0)" style="display:block;">
@@ -190,8 +198,9 @@
                     <div class="swiper">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
-
-
+                            <div class="swiper-slide" th:if="${#lists.size(musicTop10ByLike)==0}" style="display:flex;align-items:center;justify-content:center;">
+                                표시할 음악 이미지가 없습니다.
+                            </div>
                             <div class="swiper-slide" th:each="musicRanking,musicRankingStat :${musicTop10ByLike}">
                                 <a href="javascript:void(0)" style="display:block;">
                                     <div class="rankingNo">
