@@ -78,7 +78,7 @@ ul{
 
      background-color :rgb(25, 25, 25);;
 
-
+    z-index : 50;
 }
 
 .wrapper>.top-header>.center{
@@ -243,8 +243,6 @@ ul{
     width:50px;
     height:100%;
     object-fit: contain;
-
-
 }
 .fixed{
     position:fixed !important;
@@ -252,7 +250,7 @@ ul{
     height : 80px;
     top:0;
     left:0;
-    z-index:9999;
+    z-index:10;
 }
 
 .wrapper>nav{
