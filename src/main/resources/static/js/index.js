@@ -413,7 +413,7 @@ window.addEventListener('DOMContentLoaded',function(){
             //-------------------------------
             togglePagination();
 
-            // Call togglePagination function on window resize
+      /*      // Call togglePagination function on window resize
             window.addEventListener('resize',togglePagination);
 
             // Function to toggle pagination based on window size
@@ -424,7 +424,6 @@ window.addEventListener('DOMContentLoaded',function(){
                         const legend2 =  section1Chart2.options.plugins.legend;
                         console.log(legend1.display);
                         if (windowWidth <= 450) {
-                             console.log("!!!!!!!!");
                              legend1.display = false; // Hide legend
                              legend2.display = false; // Hide legend
                              section1Chart1.update();
@@ -434,7 +433,7 @@ window.addEventListener('DOMContentLoaded',function(){
                              legend2.display = true; // Hide legend
                         }
             }
-
+*/
             // Initial call to togglePagination function
             togglePagination();
 
