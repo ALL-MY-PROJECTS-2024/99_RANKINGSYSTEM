@@ -286,7 +286,7 @@ ul{
     justify-content: left;;
     position:relative;
     background-color :rgb(25, 25, 25);;
-    z-index : 50;
+    z-index :  50;
 }
 
 .wrapper>nav>.left{

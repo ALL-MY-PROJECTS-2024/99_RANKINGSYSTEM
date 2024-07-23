@@ -75,7 +75,7 @@ public class AroundController {
             System.out.println("개수 : " + list.size());
             model.addAttribute("musicList",list);
         }
-
+        model.addAttribute("subCategory",subCategory);
         model.addAttribute("mode",mode);
     }
     @GetMapping("/local")

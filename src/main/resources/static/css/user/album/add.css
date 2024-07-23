@@ -7,21 +7,24 @@
    
 }
 .product_img{
-    width : 500px;
-    height: 350px;
+    width : 26.042vw;
+    height: 45vh;
+    max-height : 500px;
     position: relative;
 }
 .product_music{
-    width : 500px;
-    height: 350px;
+    width : 26.042vw;
+    height: 45vh;
+    max-height : 500px;
     position: relative;
 }
 .upload-box {
   width: 100%;
-  height : 350px;
+  height: 45vh;
+  max-height : 500px;
   margin: 10px auto;
   border: 3px dashed lightgray;
-  padding: 10px;
+  padding: 5px !important;
   position: relative;
 
 
@@ -31,9 +34,10 @@
     display:block;
     position:absolute;
     left:0px;
-    top:40px;
+    top:50px;
     width : 100%;
-    height : 450px;
+    height : 45vh;
+    max-height : 500px;
     text-align:center;
     color:lightgray;
     margin-top:10px;
@@ -89,8 +93,6 @@
 
 
 .product_info_block{
-
-
     position:relative;
 }
 section form{
@@ -115,38 +117,61 @@ section.content_block *{
 }
 section.content_block{}
 section.content_block>.head{
-    height : 5vh;
+    height : 50px;
     display:flex;
     align-items : center;
-    justify-content : center;
+    justify-content : left;
+    position: relative;
 }
 section.content_block>.head>*{
-    width : 100%;
+
     height : 100%;
     display:flex;
     align-items : center;
-    justify-content : center;
+    justify-content : left;
+
 }
 section.content_block>.head>* input{
     display:none;
 }
 section.content_block>.head>* label{
-    display:block;
+    display:flex;
     width : 100%;
     height : 100%;
-    display:flex;
     align-items : center;
     justify-content : center;
     cursor : pointer;
-    font-size :1.2rem;
-    border : 1px solid;
-    background-color : darkcyan;
+    font-size :1rem;
+
+    background-color: #0a0b17 ;
     color : white;
     opacity : .6;
+    border : 1px solid;
+    padding :15px;
 }
 section.content_block>.head>*:nth-child(1) label{
     opacity : 1;
 }
+section.content_block>.head>* label:hover{
+    opacity : 1;
+}
+section.content_block>.head>*:nth-child(1) label{
+   border-radius :5px 0 0 0 ;
+}
+section.content_block>.head>*:nth-child(2) label{
+    border-radius : 0 5px 0 0;
+}
+
+.head .line{
+    position:absolute;
+    left:0;
+    top:49px;
+    padding : 0;
+    width : 100%;
+    height : 0px;
+    border-top : 1px solid gray;
+}
+
 
 section.content_block>.head>* label:hover{
     opacity : 1;
@@ -192,4 +217,7 @@ section.content_block>.body>.music_body button{
    color : white;
 }
 
-
+.content_block .active{
+    background-color : gray;
+    color : white;
+}

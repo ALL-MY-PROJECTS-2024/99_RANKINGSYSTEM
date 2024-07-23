@@ -43,6 +43,11 @@ public class BookmarkController {
         bookmarkService.deleteBookmark(id);
         return new ResponseEntity("SUCCESS",HttpStatus.OK);
     }
+    @GetMapping("/del/music/{id}")
+    public @ResponseBody ResponseEntity<String> del_music(@PathVariable("id") Long id){
+        bookmarkService.deleteMusicBookmark(id);
+        return new ResponseEntity("SUCCESS",HttpStatus.OK);
+    }
     @GetMapping("/add/{rankingId}")
     public @ResponseBody ResponseEntity<String> add(@PathVariable("rankingId") Long rankingId, Authentication authentication){
         System.out.println("rankingId : " + rankingId);

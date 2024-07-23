@@ -1,4 +1,36 @@
 //---------------------------------------------------
+//초기모드
+//---------------------------------------------------
+const imageSubButtonInitEls = document.querySelectorAll('.image_body .swiper-slide a');
+const musicSubButtonInitEls = document.querySelectorAll('.music_body .swiper-slide a');
+subCategory = subCategory.replaceAll('\'','').trim();
+console.log("!!",subCategory);
+if(mode=='1'){
+    imageSubButtonInitEls.forEach(el=>{
+            el.classList.remove('active');
+            const title = el.getAttribute('data-title');
+
+            if(subCategory==null && title=='Character'){
+                el.classList.add('active')
+            }else if(title == subCategory){
+                el.classList.add('active')
+            }
+    })
+}else{
+    musicSubButtonInitEls.forEach(el=>{
+            el.classList.remove('active');
+            const title = el.getAttribute('data-title');
+
+            if(subCategory==null && title=='Jazz'){
+                el.classList.add('active')
+            }else if(title == subCategory){
+                el.classList.add('active')
+            }
+    })
+}
+
+
+//---------------------------------------------------
 //이미지 / 음악  라벨 변경시 효과 적용
 //---------------------------------------------------
 const imagebtn = document.querySelector('.group-block>.head>div:nth-child(1) label');
@@ -18,8 +50,6 @@ imagebtn.addEventListener('click',function(){
     musicbtn.style.opacity=".8";
 
     location.href="/around/group?mainCategory='이미지'&subCategory=Character&mode=1";
-
-
 })
 musicbtn.addEventListener('click',function(){
     console.log("musicbtn clicked..");
@@ -42,8 +72,9 @@ let subCategoryBodyImgTitleEl = document.querySelector('.image_body .subCategory
 
 imageSubButtonEls.forEach(el=>{
     el.addEventListener('click',function(){
-        console.log(el.innerHTML);
 
+
+        console.log(el.innerHTML);
         subCategoryBodyImgTitleEl.innerHTML=el.innerText;
     })
 })
@@ -59,6 +90,7 @@ musicSubButtonEls.forEach(el=>{
         subCategoryBodyMusicTitleEl.innerHTML=el.innerText;
     })
 })
+
 
 //---------------------------------------------------
 //DOM INIT 시 처리 코드

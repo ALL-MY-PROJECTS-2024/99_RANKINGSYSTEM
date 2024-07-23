@@ -25,10 +25,12 @@ const uploadBoxEl = document.querySelector('.image_body .upload-box');
 uploadBoxEl.addEventListener('dragover',function(event){
         console.log('dragover')
         event.preventDefault();
+        uploadBoxEl.style.opacity = '.5';
 });
 uploadBoxEl.addEventListener('dragleave',function(event){
         console.log('dragleave')
         event.preventDefault();
+        uploadBoxEl.style.opacity = '1';
 });
 
 uploadBoxEl.addEventListener('drop',function(e){
@@ -68,13 +70,17 @@ uploadBoxEl.addEventListener('drop',function(e){
                 const imgEl =  document.createElement('img');
     //          console.log("reader.onload",e)
                 imgEl.setAttribute('src',e.target.result);
-                imgEl.setAttribute('style','position:absolute;width:100%;height:100%;left:0;top:0;object-fit:contain;z-index:10');
+                imgEl.setAttribute('style','position:absolute;width:100%;height:100%;left:0;top:0;z-index:10');
                 preview.appendChild(imgEl);
             }
             formData.append('files',file);
             console.log("formData",formData);
+            uploadBoxEl.style.opacity='1';
         }
 });
+
+
+
 
 
 // 좌표 가져오기 및 사용하기
@@ -173,6 +179,7 @@ musicbtn.addEventListener('click',function(){
 
     imagebtn.style.opacity=".8";
     musicbtn.style.opacity="1";
+
 })
 //---------------------------------------------------
 //음악 앨범 이미지
@@ -183,10 +190,14 @@ const musicUploadBoxEl = document.querySelector('.music_body .upload-box');
 musicUploadBoxEl.addEventListener('dragover',function(event){
         console.log('dragover')
         event.preventDefault();
+        musicUploadBoxEl.style.opacity='.5';
+
 });
 musicUploadBoxEl.addEventListener('dragleave',function(event){
         console.log('dragleave')
         event.preventDefault();
+        musicUploadBoxEl.style.opacity='1';
+
 });
 
 musicUploadBoxEl.addEventListener('drop',function(e){
@@ -230,7 +241,7 @@ musicUploadBoxEl.addEventListener('drop',function(e){
                 preview.appendChild(imgEl);
             }
             music_form_data.append('imageFile',file);
-
+            musicUploadBoxEl.style.opacity='1';
         }
 });
 

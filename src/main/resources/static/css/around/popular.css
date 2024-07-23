@@ -24,6 +24,10 @@ main section{
 .swiper-slide{
     width : 200px;
     height : 200px;
+    display:flex;
+    justify-content : center;
+    align-items : center;
+    overflow : hidden;
 }
 .swiper-slide a{
     display:block;
@@ -37,7 +41,11 @@ main section{
 /*
     box-shadow : 5px 5px 5px lightgrey;
 */
+    transition:.3s;
+}
 
+.swiper-slide::hover img{
+    transform : scale(1.2);
 }
 
 .swiper-slide .material-symbols-outlined{
@@ -71,15 +79,32 @@ main section{
 }
 
 .swiper-button-prev::after{
-    font-size : 2rem;
-    color : darkcyan;
+    font-size : .8rem;
     font-weight:800;
+    width : 27px ;
+    height : 27px;
+    background-color : gray;
+    color : white;
+    border-radius : 50%;
+
+    display:flex;
+    justify-content : center;
+    align-items : center;
 
 }
 .swiper-button-next::after{
-     font-size : 2rem;
-     color : darkcyan;
-     font-weight:800;
+    font-size : .8rem;
+    font-weight:800;
+    width : 27px ;
+    height : 27px ;
+    background-color : gray;
+    color : white;
+    border-radius : 50%;
+
+    display:flex;
+    justify-content : center;
+    align-items : center;
+
 }
 
 table{

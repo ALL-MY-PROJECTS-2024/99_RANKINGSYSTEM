@@ -138,6 +138,14 @@ section.group-block .body .swiper-wrapper .swiper-slide a{
     align-items : center;
     font-size : 1vw;;
 }
+section.group-block .body .swiper-wrapper .swiper-slide a:hover{
+    background-color:gray;
+    color:white;
+}
+section .active{
+    background-color:gray;
+    color:white;
+}
 
 section.group-block .body .swiper {
     position:relative;
