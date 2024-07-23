@@ -24,28 +24,35 @@
                     </li>
                 </th:block>
 
-
-                <li class="item">
-                    <a href="/">HOME</a>
-                </li>
-
                 <th:block class="top-header-menu" sec:authorize="!isAuthenticated()" >
                     <li class="item">
-                        <a href="/login">LOGIN</a>
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <span class="material-symbols-outlined">login</span>
+                            <span class="naming">로그인</span>
+                        </a>
                     </li>
                     <li class="item">
-                        <a href="/user/join">JOIN</a>
+                        <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                            <span class="material-symbols-outlined">person_add</span>
+                            <span class="naming">회원가입</span>
+                        </a>
                     </li>
                 </th:block>
 
                 <th:block class="" sec:authorize="isAuthenticated()" >
                     <li class="item">
-                        <a  href="/user/myinfo/confirm">MYINFO</a>
+                        <a  href="/user/myinfo/confirm">
+                            <span class="material-symbols-outlined">person</span>
+                            <span class="naming">나의정보</span>
+                        </a>
                     </li>
 
                     <li class="item">
                         <form method="post" action="/logout" name="logoutForm">
-                            <button style="font-weight:600;color:gray;">LOGOUT</button>
+                            <button>
+                                <span class="material-symbols-outlined">logout</span>
+                                <span class="naming">로그아웃</span>
+                            </button>
                         </form>
                     </li>
                 </th:block>
@@ -64,7 +71,12 @@
             <div class="top-banner">
             </div>
             <ul>
-
+                <th:block class="" sec:authorize="isAuthenticated()" >
+                    <li class="item" style="">
+                        <span sec:authentication="principal.username"></span>
+                        <span>님</span>
+                    </li>
+                </th:block>
                 <th:block class="top-header-menu" sec:authorize="!isAuthenticated()" >
                     <li class="item">
                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">

@@ -1,72 +1,149 @@
 
 .items {
     width : 100%;
-    height : 800px;
+    height : 100%;
+    min-height : 800px;
     overflow : auto;
-    border : 1px solid lightgrey;
-
+    border-top : 1px solid lightgrey;
+    padding-top : 20px;
     display:flex;
     justify-content : left;
     align-items : start;
-    padding : 20px;
+    gap : 20px;
     position:relative;
     top:35px;
+    flex-wrap : wrap;
 }
 
 .items .item{
     padding : 10px;
-    border : 1px solid darkcyan;
-    width : 250px;
-    margin : 5px;
-    position:relative;
+    width : calc(20% - 20px);
 
+    height : 100%;
+    max-height : 320px;
+
+    position:relative;
+    opacity : 0.7;
+
+    border-radius:5px;
 }
+
+
 .items .item>*{
     margin-bottom : 5px;
-    border : 1px solid darkcyan;
     text-align:center;
 }
 .items .item .cancel{
-    display:flex;
-    justify-content : right;
-    align-items : center;
     color :white;
-    background-color : darkcyan;
-    padding-right : 5px;
+    background-color :gray;
+    width : 25px;
+    height : 25px;
+    border-radius : 50%;
+    position:absolute;
+    right:20px;
+    top:20px;
+
+    display:flex;
+    justify-content : center;
+    align-items : center;
+    font-size : 1rem;
+    z-index: 100;
 }
+
+
 .items .item .cancel a{
     color : white;
 
 }
+.items .item .image{
+    width : 100%;
+    height : 100%;
+    max-height : 300px;
+    overflow : hidden;
+}
 .items .item img{
     width : 100%;
+    height : 100%;
+    max-height : 280px;
+    object-fit : center;
+
+    transition :.3s;
+    border-radius : 5px;
 }
+
+.items .item:hover{
+    opacity : 1;
+    border-radius:5px;
+}
+
+.items .item:hover img{
+    transform : scale(1.2);
+    border-radius:5px;
+
+}
+
 .show-block {
     position:relative;
 }
 .my-btn{
     position:absolute;
-    left:5%;
+    left:0px;
     top:0px;
     width : 150px;
     height:35px;
-    border : 1px solid black;
+    border : 1px solid;
 
     display:flex;
     justify-content : center;
     align-items : center;
-    background-color : lightgray;
+    background-color: #0a0b17;
+    color : white;
     cursor : pointer;
+    border-radius : 5px 5px 0 0 ;
+    left : 5%;
 }
 .my-btn:nth-child(2)
 {
-    margin-left:5%;
-    left:150px;
+    left:calc(5% + 150px);
+
 }
 
 .hidden{
     display: none;
 }
-.active{
-    background-color : white !important;
+.show-block .active{
+    background-color : gray !important;
+}
+
+.items  .contents{
+    display:flex;
+    justify-content : space-between;
+    align-items : center;
+    position:relative;
+    bottom : 0px;
+    left:0;
+    width : 100%;
+    height : 35px;
+    z-index : 500;
+    font-size : .7rem;
+    color :white;
+}
+
+.items  .contents .title{
+    width : 50%;
+    font-size : .7rem;
+    color : white !important;
+    white-space: nowrap;   /* 텍스트가 한 줄로 유지되도록 설정합니다. */
+    overflow: hidden;      /* 넘치는 텍스트를 숨깁니다. */
+    text-overflow: ellipsis;
+    text-align:left;
+}
+.items  .contents .count-block{
+    display:flex;
+    justify-content:space-between;
+}
+
+.items  .contents .count-block .material-symbols-outlined
+{
+    font-size : .7rem;
 }

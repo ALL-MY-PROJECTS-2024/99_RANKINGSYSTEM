@@ -47,63 +47,68 @@
             </section>
             <section class="myalbumblock layout-5">
 
-                <div class="image-block show-block layout-5">
+                <div class="image-block show-block ">
                     <div class="my-btn btn-img active" style="">이미지</div>
                     <div class="my-btn btn-music" style="">음악</div>
-                    <div class="items image-block">
 
+                    <div class="items image-block">
                         <div class="item" th:each="item : ${list}">
-                            <div class="title">
-                                <span th:text="${item.images.title}"></span>
-                            </div>
+
                             <div class="image-block">
                                 <a th:href="@{/user/album/read(iamgeid=${item.images.iamgeid})}">
-                                    <img th:src="@{${item.dir}+'\s_'+${item.filename}}" class="card-img-top" alt="...">
+                                    <img th:src="@{${item.dir}+'\\'+${item.filename}}" class="card-img-top" alt="...">
                                 </a>
                             </div>
                             <div class="contents">
-                                <div>
-                                    <a href="javascript:void(0)">
-<!--                                        <span class="material-symbols-outlined favorite">favorite</span>-->
-                                    </a>
+                                <div class="title">
+                                    <span th:text="${item.images.title}"></span>
                                 </div>
-                                <div><th:span th:text="${#temporals.format(item.images.createAt, 'yyyy-MM-dd HH:mm:ss')}"></th:span></div>
+                                <div class="date">
+                                    <th:span th:text="${#temporals.format(item.images.createAt, 'yyyy-MM-dd HH:mm:ss')}" >
+                                    </th:span>
+                                </div>
                             </div>
                         </div>
-
                     </div>
 
 
 <!--                    -->
-                    <div class="items music-block hidden">
+                    <div class="items music-block  hidden">
                         <div class="item" th:each="item : ${musicList}">
-                            <div class="title">
+ <!--                           <div class="title">
                                 <span th:text="${item.music.title}">이미지 제목</span>
-                            </div>
-                            <div class="image-block">
-
+                            </div>-->
+                            <div class="music-block">
                                 <a th:href="@{/user/album/readmusic(musicid=${item.music.musicid})}">
                                     <img th:src="@{${item.dir}+'\\'+${item.albumImageName}}" class="card-img-top" alt="...">
                                 </a>
 
+
                             </div>
+                            <div class="contents">
+                                <div class="title">
+                                    <span th:text="${item.music.title}"></span>
+                                </div>
+                                <div class="date">
+                                    <th:span th:text="${#temporals.format(item.music.createAt, 'yyyy-MM-dd HH:mm:ss')}" >
+                                    </th:span>
+                                </div>
+                            </div>
+                    <!--
                             <div class="contents">
                                 <div>
                                     <a href="javascript:void(0)">
-<!--                                        <span class="material-symbols-outlined favorite">favorite</span>-->
+&lt;!&ndash;                                        <span class="material-symbols-outlined favorite">favorite</span>&ndash;&gt;
                                     </a>
                                 </div>
                                 <div><th:span th:text="${#temporals.format(item.music.createAt, 'yyyy-MM-dd HH:mm:ss')}" style="color:black"></th:span></div>
                             </div>
+                            -->
                         </div>
                     </div>
 
                     <div class="footer-block">
                        
-                       
-
-
-
                     </div>
 
                 </div>

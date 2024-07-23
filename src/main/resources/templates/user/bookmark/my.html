@@ -40,7 +40,7 @@
         </section>
 
         <section class="layout-5 show-block ">
-            <div class="my-btn btn-img active" style="">이미지</div>
+            <div class="my-btn btn-img active " style="">이미지</div>
             <div class="my-btn btn-music" style="">음악</div>
 
             <div class="items image-block" >
@@ -51,39 +51,47 @@
                             x
                         </a>
                     </div>
-                    <div class="title" >TITLE [<span th:text="${bookmark.imagesRanking.imagesFileInfo.images.title}"></span>]</div>
-                    <div class="cat" th:text="${bookmark.imagesRanking.imagesFileInfo.images.subCategory}"></div>
                     <div class="image" >
                         <a href="">
-                            <img th:src="@{${bookmark.imagesRanking.imagesFileInfo.dir}+'\s_'+${bookmark.imagesRanking.imagesFileInfo.filename}}" alt="" />
+                            <img th:src="@{${bookmark.imagesRanking.imagesFileInfo.dir}+'\\'+${bookmark.imagesRanking.imagesFileInfo.filename}}" alt="" />
                         </a>
                     </div>
-                    <div class="createdAt" th:text="${bookmark.imagesRanking.imagesFileInfo.images.createAt}"></div>
-                    <div class="ilikeit" >좋아요 수 [<span th:text="${bookmark.imagesRanking.ilikeit}"></span>]</div>
-                    <div class="count" > 조회수 [<span th:text="${bookmark.imagesRanking.count}"></span>]</div>
+                    <div class="contents">
+                        <div class="title" >
+                            <span th:text="${bookmark.imagesRanking.imagesFileInfo.images.title}"></span>
+                        </div>
+                        <div class="count-block">
+                            <div class="ilikeit" ><span class="material-symbols-outlined">thumb_up</span>&nbsp;&nbsp;<span th:text="${bookmark.imagesRanking.ilikeit}"></span></div>
+                            <div class="count" > &nbsp;&nbsp;&nbsp;<span class="material-symbols-outlined">visibility</span>&nbsp;&nbsp;<span th:text="${bookmark.imagesRanking.count}"></span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
         <!--            -->
             <div class="items music-block hidden" >
-<!--                <div th:text="${musicList}"></div>-->
                 <div class="item" th:each="bookmark :${musicList}">
                     <div class="cancel">
                         <a href="javascript:void(0)" th:data-id="${bookmark.id}">
                             x
                         </a>
                     </div>
-                    <div class="title" >TITLE [<span th:text="${bookmark.musicRanking.musicFileInfo.music.title}"></span>]</div>
-                    <div class="cat" th:text="${bookmark.musicRanking.musicFileInfo.music.subCategory}"></div>
                     <div class="image" >
                         <a href="">
                             <img th:src="${bookmark.musicRanking.musicFileInfo.dir}+'/'+${bookmark.musicRanking.musicFileInfo.albumImageName}" alt="" />
                         </a>
                     </div>
-                    <div class="createdAt" th:text="${bookmark.musicRanking.musicFileInfo.music.createAt}"></div>
-                    <div class="ilikeit" >좋아요 수 [<span th:text="${bookmark.musicRanking.ilikeit}"></span>]</div>
-                    <div class="count" > 조회수 [<span th:text="${bookmark.musicRanking.count}"></span>]</div>
+                    <div class="contents">
+                        <div class="title" >
+                            <span th:text="${bookmark.musicRanking.musicFileInfo.music.title}"></span>
+                        </div>
+                        <div class="count-block">
+                            <div class="ilikeit" ><span class="material-symbols-outlined">thumb_up</span>&nbsp;&nbsp;<span th:text="${bookmark.musicRanking.ilikeit}"></span></div>
+                            <div class="count" > &nbsp;&nbsp;&nbsp;<span class="material-symbols-outlined">visibility</span>&nbsp;&nbsp;<span th:text="${bookmark.musicRanking.count}"></span></div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </section>
     </main>

@@ -19,7 +19,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 public class ChatRoom {
     private String roomId;
     private String name;

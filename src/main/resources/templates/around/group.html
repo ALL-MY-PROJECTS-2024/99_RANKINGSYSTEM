@@ -75,9 +75,10 @@
                     <input type="radio" id="music" name="choose">
                     <label for="music">음악</label>
                 </div>
+                <div class="line"></div>
             </div>
-            <div class="body">
 
+            <div class="body">
                 <!--   IMAGE BODY             -->
                 <div th:class="${mode=='2'} ? 'image_body hidden' : 'image_body'">
 
@@ -107,38 +108,21 @@
                                     <span>TOTAL : </span><span th:text="${#lists.size(imageList)}"> </span>
                                 </div>
                                 <hr>
-                                <table class="table w-100" style="text-align:center;">
-                                   <thead class="bg-dark text-light">
-                                       <tr>
-                                           <th>No</th>
-                                           <th>이미지</th>
-                                           <th>제목</th>
-                                           <th>소유계정</th>
-                                           <th>기본카테고리</th>
-                                           <th>세부카테고리</th>
-                                           <th>조회수</th>
-                                           <th>좋아요수</th>
-                                           <th>등록날짜</th>
-                                       </tr>
-                                   </thead>
-
-                                    <tr th:each="imageRanking,imageRankingStat : ${imageList}">
-                                        <td th:text="${imageRankingStat.count}"></td>
-                                        <td>
+                                <div class="show-block">
+                                    <div class="show-image-block" th:each="imageRanking,imageRankingStat : ${imageList}">
+<!--                                        <td th:text="${imageRankingStat.count}"></td>-->
                                             <a href="javascript:void(0)">
-                                                <img style="width:150px;height:55px;;object-fit:contain;" th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요">
+                                                <img style="" th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요">
                                             </a>
-                                            
-                                        </td>
-                                        <td th:text="${imageRanking.ImagesFileInfo.Images.title}"></td>
-                                        <td th:text="${imageRanking.ImagesFileInfo.Images.username}"></td>
-                                        <td th:text="${imageRanking.ImagesFileInfo.Images.mainCategory}"></td>
-                                        <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>
-                                        <td th:text="${imageRanking.count}"></td>
-                                        <td th:text="${imageRanking.ilikeit}"></td>
-                                        <td th:text="${#temporals.format(imageRanking.ImagesFileInfo.Images.createAt, 'yyyy.MM.dd HH:mm:ss')}"></td>
-                                    </tr>
-                                </table>
+<!--                                        <td th:text="${imageRanking.ImagesFileInfo.Images.title}"></td>-->
+<!--                                        <td th:text="${imageRanking.ImagesFileInfo.Images.username}"></td>-->
+<!--                                        <td th:text="${imageRanking.ImagesFileInfo.Images.mainCategory}"></td>-->
+<!--                                        <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>-->
+<!--                                        <td th:text="${imageRanking.count}"></td>-->
+<!--                                        <td th:text="${imageRanking.ilikeit}"></td>-->
+<!--                                        <td th:text="${#temporals.format(imageRanking.ImagesFileInfo.Images.createAt, 'yyyy.MM.dd HH:mm:ss')}"></td>-->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -149,8 +133,6 @@
                     <div class="swiper sub_category">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
-
-
                             <!-- Slides -->
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Jazz'&mode=2">Jazz</a>   </div>
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='음악'&subCategory='Rock'&mode=2">Rock </a>   </div>
@@ -171,38 +153,22 @@
                                     <span>TOTAL : </span><span th:text="${#lists.size(musicList)}"> </span>
                                 </div>
                                 <hr>
-                                <table class="table w-100" style="text-align:center;">
-                                    <thead class="bg-dark text-light">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>이미지</th>
-                                        <th>제목</th>
-                                        <th>소유계정</th>
-                                        <th>기본카테고리</th>
-                                        <th>세부카테고리</th>
-                                        <th>조회수</th>
-                                        <th>좋아요수</th>
-                                        <th>등록날짜</th>
-                                    </tr>
-                                    </thead>
-                                    <tr th:each="musicRanking,musicRankingStat : ${musicList}">
-                                        <td th:text="${musicRankingStat.count}"></td>
-                                        <td>
+                                <div  class="show-block" style="text-align:center;">
+
+                                    <div  class="show-image-block" th:each="musicRanking,musicRankingStat : ${musicList}">
+<!--                                        <td th:text="${musicRankingStat.count}"></td>-->
                                             <a href="javascript:void(0)">
-                                                <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" style="width:100%;height:50px;box-shadow:0;object-fit:contain">
+                                                <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
                                             </a>
-
-                                        </td>
-                                        <td th:text="${musicRanking.MusicFileInfo.Music.title}"></td>
-                                        <td th:text="${musicRanking.MusicFileInfo.Music.username}"></td>
-                                        <td th:text="${musicRanking.MusicFileInfo.Music.mainCategory}"></td>
-                                        <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
-                                        <td th:text="${musicRanking.count}"></td>
-                                        <td th:text="${musicRanking.ilikeit}"></td>
-                                        <td th:text="${#temporals.format(musicRanking.MusicFileInfo.Music.createAt, 'yyyy.MM.dd HH:mm:ss')}"></td>
-                                    </tr>
-
-                                </table>
+<!--                                        <td th:text="${musicRanking.MusicFileInfo.Music.title}"></td>-->
+<!--                                        <td th:text="${musicRanking.MusicFileInfo.Music.username}"></td>-->
+<!--                                        <td th:text="${musicRanking.MusicFileInfo.Music.mainCategory}"></td>-->
+<!--                                        <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>-->
+<!--                                        <td th:text="${musicRanking.count}"></td>-->
+<!--                                        <td th:text="${musicRanking.ilikeit}"></td>-->
+<!--                                        <td th:text="${#temporals.format(musicRanking.MusicFileInfo.Music.createAt, 'yyyy.MM.dd HH:mm:ss')}"></td>-->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
