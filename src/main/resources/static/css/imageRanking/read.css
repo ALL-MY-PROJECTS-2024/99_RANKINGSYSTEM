@@ -1,22 +1,119 @@
-main>section{}
+main>section{
+    position:relative;
+}
+
+main>section>.title{
+
+    position:absolute;
+    left :calc(50vw - 440px);
+    top : 0px;
+    display:flex;
+    justify-content:center;
+    align-items : center;
+}
 main>section>.read-block{
 
     /*height : 100vh;*/
+    display:flex;
+    justify-content : center;
+    align-items : center;
+
+    padding-top : 45px;
+    position:relative;
+
+}
+main>section>.read-block>.cancel{
+    position:absolute;
+    left:5%;
+    top:10px;
+    width : 50px;
+    height : 50px;
+    border-radius :50%;
+    color : white;
+    background-color: #1e1f2b;
+
+    display:flex;
+    justify-content : center;
+    align-items : center;
+    cursor : pointer;
+
 }
 
 main>section>.read-block .info-block{
     /*border : 1px solid;*/
     /*height : 200px;*/
+    width : 100vw;
+    max-width : 440px;
+    min-width : 200px;
+
+    height  :100vh;
+    max-height : 575px;
+    min-height : 200px;
+
+    background-color :rgb(10, 10, 10);;
+    border-radius :0px 25px 25px 0;
+
+    padding : 15px;
+    padding-top :25px;
+
 }
 main>section>.read-block>.image-block{
     display:flex;
     justify-content : center;
-    align-items : start;
+    align-items : center;
+    width : 100vw;
+    max-width : 440px;
+    min-width : 200px;
+
+    height  : 100vh;
+    max-height : 575px;
+    min-height : 200px;
+  /*  border : 1px solid;*/
+    border-radius :25px 0 0 25px;
+
+    display:flex;
+    justify-content : center;
+    align-items : center;
+    background-color :rgb(10, 10, 10);;
+    padding : 5px;
+
+    position:relative;
+
+}
+main>section>.read-block>.info-block h5{
+    display:flex;
+    justify-content : left;
+    align-items : center;
+    gap : 15px;
+}
+main>section>.read-block>.image-block img{
+    width : 100%;
+    height : 100%;
+    object-fit : cover;
+
+}
+
+main>section>.read-block>.image-block .bg{
+    width : 100%;
+    height :100%;
+    position:absolute;
+    left : 0px;
+    bottom : 0px;
+    background: linear-gradient(to top, rgba(15, 15, 15, 1), rgba(15, 15, 15, 0));
+    z-index :551;
+    display:none;
+    transition:.2s;
+
+}
+main>section>.read-block>.image-block:hover .bg{
+    display:block;
+
 }
 
 main>section>.read-block>.image-block>.item{
     margin : 10px;
     border : 1px solid;
+
     height : 100%;
 }
 main>section>.read-block>.image-block>.item .btns{

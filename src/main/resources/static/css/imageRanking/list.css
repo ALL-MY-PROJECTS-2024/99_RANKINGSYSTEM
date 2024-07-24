@@ -134,10 +134,16 @@
     font-size : .7rem;
     opacity: 1;
     color : lightgray;
+    min-width:25px;
 
 }
 .main-container>.right>.items>.item .thumb-up{
+    min-width:25px;
+
     font-size : .7rem;
+     display:flex;
+     justify-content: right;
+     align-items: center;
 }
 .main-container>.right>.items>.item .thumb-up .material-symbols-outlined{
    font-size : .7rem;

@@ -54,56 +54,100 @@
         </section>
         <main class="" >
             <section>
-                <div class="read-block layout-5" >
+                <h2 class="title"  th:text="${imagesRanking.ImagesFileInfo.Images.title}" ></h2>
+                <div class="read-block" >
+                    <div class="cancel">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                    </div>
+                    <div class="image-block" >
+                        <div class="bg"></div>
+                        <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'/'+${imagesRanking.ImagesFileInfo.filename}}" alt="" style="object-fit:contain;max-width:800px;max-height:800px;" />
+                    </div>
                     <div class="info-block">
-
-
-                        <table class="table">
-                            <thead></thead>
-                            <tbody>
-                                <tr>
-                                    <td style="width:200px;background-color:darkcyan;color:white;" >제목</td>
-                                    <td class="title"  th:text="${imagesRanking.ImagesFileInfo.Images.title}" style="width:500px;"></td>
-                                    <td  style="width:200px;background-color:darkcyan;color:white;" >등록날짜</td>
-                                    <td class="date" th:text="${#temporals.format(imagesRanking.ImagesFileInfo.Images.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                </tr>
-                                <tr>
-                                    <td style="background-color:darkcyan;color:white;">소유자 계정</td>
-                                    <td  class="username" th:text="${imagesRanking.ImagesFileInfo.Images.username}" colspan="3"></td>
-                                </tr>
-                                <tr>
-                                    <td style="background-color:darkcyan;color:white;">기본 카테고리</td>
-                                    <td  class="mainCategory" th:text="${imagesRanking.ImagesFileInfo.Images.mainCategory}"></td>
-                                    <td style="background-color:darkcyan;color:white;">세부 카테고리</td>
-                                    <td class="subCategory" th:text="${imagesRanking.ImagesFileInfo.Images.subCategory}"></td>
-                                </tr>
-                                <tr>
-                                    <td style="background-color:darkcyan;color:white;">설명</td>
-                                    <td class="description" th:text="${imagesRanking.ImagesFileInfo.Images.description}"  colspan="3"></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"></td>
-                                    <td class="btns" style="text-align:right;">
-                                        <a href="javascript:history.go(-1)" class="btn  addRanking" style="background-color:darkcyan;color:white;">
-                                            <span class="material-symbols-outlined" style="font-size:.8rem;">logout</span>
-                                        </a>
-                                        <a href="javascript:void(0)" class="btn  thumb_up_btn"  style="background-color:darkcyan;color:white;" th:data-imageid="${imagesRanking.rankingId}">
-                                            <span class="material-symbols-outlined" style="font-size:.8rem;">thumb_up</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="images">
-                                    <td colspan="4" style="text-align:center">
-                                        <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'/'+${imagesRanking.ImagesFileInfo.filename}}" alt="" style="object-fit:contain;max-width:800px;max-height:800px;" />
-                                    </td>
-                                </tr>
-                           </tbody>
-                        </table>
-
-
+                        <div>
+                            <h5>
+                                <span class="material-symbols-outlined">person</span>
+                                <span th:text="${imagesRanking.ImagesFileInfo.Images.username}"></span>
+                            </h5>
+                        </div>
+                        <hr>
+                        <div>
+                            <div class="mb-2">설명 : </div>
+                            <div style="p-2 w-100">
+                                <textarea readonly class="w-100"  style="height : 100px;background-color:rgb(25,25,25);color : white;" th:value="${imagesRanking.ImagesFileInfo.Images.description}"></textarea>
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <div>정보 : </div>
+                            <div>
+                                <table class="table" style="text-align:center;font-size : .8rem;">
+                                    <tr>
+                                        <td>가로x세로</td>
+                                        <td>기본 카테고리</td>
+                                        <td>세부 카테고리</td>
+                                        <td>날짜</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>24</td>
+                                        <td>12</td>
+                                        <td>14</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <hr>
+                            <div>
+                                좋아요 조회수
+                            </div>
+                        </div>
                     </div>
-                    <div class="image-block " >
-                    </div>
+
+                    <!--                        <table class="table">-->
+<!--                            <thead></thead>-->
+<!--                            <tbody>-->
+<!--                                <tr>-->
+<!--                                    <td style="width:200px;background-color:darkcyan;color:white;" >제목</td>-->
+<!--                                    <td class="title"  th:text="${imagesRanking.ImagesFileInfo.Images.title}" style="width:500px;"></td>-->
+<!--                                    <td  style="width:200px;background-color:darkcyan;color:white;" >등록날짜</td>-->
+<!--                                    <td class="date" th:text="${#temporals.format(imagesRanking.ImagesFileInfo.Images.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td style="background-color:darkcyan;color:white;">소유자 계정</td>-->
+<!--                                    <td  class="username" th:text="${imagesRanking.ImagesFileInfo.Images.username}" colspan="3"></td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td style="background-color:darkcyan;color:white;">기본 카테고리</td>-->
+<!--                                    <td  class="mainCategory" th:text="${imagesRanking.ImagesFileInfo.Images.mainCategory}"></td>-->
+<!--                                    <td style="background-color:darkcyan;color:white;">세부 카테고리</td>-->
+<!--                                    <td class="subCategory" th:text="${imagesRanking.ImagesFileInfo.Images.subCategory}"></td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td style="background-color:darkcyan;color:white;">설명</td>-->
+<!--                                    <td class="description" th:text="${imagesRanking.ImagesFileInfo.Images.description}"  colspan="3"></td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3"></td>-->
+<!--                                    <td class="btns" style="text-align:right;">-->
+<!--                                        <a href="javascript:history.go(-1)" class="btn  addRanking" style="background-color:darkcyan;color:white;">-->
+<!--                                            <span class="material-symbols-outlined" style="font-size:.8rem;">logout</span>-->
+<!--                                        </a>-->
+<!--                                        <a href="javascript:void(0)" class="btn  thumb_up_btn"  style="background-color:darkcyan;color:white;" th:data-imageid="${imagesRanking.rankingId}">-->
+<!--                                            <span class="material-symbols-outlined" style="font-size:.8rem;">thumb_up</span>-->
+<!--                                        </a>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                <tr class="images">-->
+<!--                                    <td colspan="4" style="text-align:center">-->
+<!--                                        <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'/'+${imagesRanking.ImagesFileInfo.filename}}" alt="" style="object-fit:contain;max-width:800px;max-height:800px;" />-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                           </tbody>-->
+<!--                        </table>-->
+
+
+
+
                 </div>
 
             </section>
