@@ -18,13 +18,15 @@
 
   <!--  MODEL 속성가져오기  -->
   <script th:inline="javascript">
-    let  favoriteList = /*[[${ favoriteList}]]*/
+    let  favoriteList = /*[[${favoriteList}]]*/
+    let  bookmarkList = /*[[${bookmarkList}]]*/
     console.log(favoriteList);
     let pageDto = /*[[${pageDto}]]*/
     let listpageDto = /*[[${listpageDto}]]*/
     let mode = /*[[${mode}]]*/
     console.log(pageDto);
     console.log("mode",mode);
+    console.log("bookmarkList",bookmarkList);
   </script>
 
 
@@ -72,44 +74,10 @@
 
         <div class="main-container">
 
-          <!--
-                    <div class="left">
-                        <div class="ranking">
-                          <div>
-                            <h3>RANKING<span th:text="${title}"></span></h3>
-                          </div>
-
-                          <table class="table">
-                            <thead>
-                            <tr>
-                              <th>NO</th>
-                              <th>TITLE</th>
-                              <th>CAT</th>
-                              <th>USER</th>
-                              <th>조회수</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                              <tr th:each="imagesRanking,obj : ${rankingList}">
-                                <td th:text="${obj.count}"></td>
-                                <td th:text="${imagesRanking.ImagesFileInfo.Images.title}"></td>
-                                <td th:text="${imagesRanking.ImagesFileInfo.Images.subCategory}"></td>
-                                <td th:text="${imagesRanking.ImagesFileInfo.Images.username}"></td>
-                                <td th:text="${imagesRanking.count}"></td>
-                              </tr>
-                            </tbody>
-
-                            <tfoot></tfoot>
-                          </table>
-                        </div>
-                    </div>
-              -->
-
           <div class="right">
             <div class="btn-group">
               <span class="countOrder active">조회순</span>
               <span class="likeOrder">좋아요순</span>
-              <span class="summary">요약보기</span>
             </div>
 
             <div class="items count-order-block">
@@ -117,7 +85,7 @@
               <div class="item" th:each="imagesRanking,i:${list}">
                 <div class="ranking-block">
                     <div class="rank"></div>
-                    <div class="bookmark">
+                    <div class="bookmark-block" th:data-id="${imagesRanking.rankingId}">
                       <a href="javascript:void(0)" class="bookmark_btn" th:data-id="${imagesRanking.rankingId}">
                         <span class="material-symbols-outlined bookmark">bookmark</span>
                       </a>
@@ -126,14 +94,14 @@
 
                 <div class="image-block">
                   <a th:href="@{/imageRanking/read(rankingId=${imagesRanking.rankingId} )}">
-                    <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'\s_'+${imagesRanking.ImagesFileInfo.filename}}"  alt="" />
+                    <img th:src="@{${imagesRanking.ImagesFileInfo.dir}+'\\'+${imagesRanking.ImagesFileInfo.filename}}"  alt="" />
                   </a>
                 </div>
                 <div class="favorite-block" th:data-rankingid="${imagesRanking.rankingId}">
                   <input type="hidden"  />
                   <a href="javascript:void(0)" th:data-imageid="${imagesRanking.rankingId}" class="thumb_up_btn">
                       <span class="material-symbols-outlined favorite">thumb_up</span>&nbsp;
-                    <span style="font-size : .8rem;color:black;font-weight:800" class="thumb-up-counter" th:text="${imagesRanking.ilikeit}"></span>
+                    </span>
                   </a>
                 </div>
 
@@ -141,13 +109,15 @@
                   <!--    -->
                   <div>
                     <div class="title">
-
                       <div>
-                        <span>제목 : </span><span th:text="${imagesRanking.ImagesFileInfo.Images.title}"></span>
+                        <span th:text="${imagesRanking.ImagesFileInfo.Images.title}"></span>
                       </div>
                     </div>
                     <div class="count">
-                      <span>조회 : </span><span th:text="${imagesRanking.count}"></span>
+                      <span class="material-symbols-outlined" style="font-size:.6rem;">visibility</span>&nbsp;&nbsp;<span th:text="${imagesRanking.count}"></span>
+                    </div>
+                    <div class="thumb-up">
+                      <span class="material-symbols-outlined" style="font-size:.6rem;">thumb_up</span>&nbsp;&nbsp;&nbsp;<span style="" class="thumb-up-counter" th:text="${imagesRanking.ilikeit}"></span>
                     </div>
                   </div>
                     <!--      -->
@@ -203,7 +173,7 @@
               <div class="item" th:each="imagesRanking,i:${likelist}">
                 <div class="ranking-block">
                   <div class="rank" ></div>
-                  <div class="bookmark">
+                  <div class="bookmark-block" th:data-id="${imagesRanking.rankingId}">
                     <a href="javascript:void(0)" class="bookmark_btn" th:data-id="${imagesRanking.rankingId}">
                       <span class="material-symbols-outlined bookmark">bookmark</span>
                     </a>
@@ -219,7 +189,6 @@
                   <input type="hidden"  />
                   <a href="javascript:void(0)" th:data-imageid="${imagesRanking.rankingId}" class="thumb_up_btn">
                     <span class="material-symbols-outlined favorite">thumb_up</span>&nbsp;
-                    <span style="font-size : .8rem;color:black;font-weight:800" class="thumb-up-counter" th:text="${imagesRanking.ilikeit}"></span>
                   </a>
                 </div>
 
@@ -229,11 +198,14 @@
                     <div class="title">
 
                       <div>
-                        <span>제목 : </span><span th:text="${imagesRanking.ImagesFileInfo.Images.title}"></span>
+                       <span th:text="${imagesRanking.ImagesFileInfo.Images.title}"></span>
                       </div>
                     </div>
                     <div class="count">
-                      <span>조회 : </span><span th:text="${imagesRanking.count}"></span>
+                      <span class="material-symbols-outlined" style="font-size:.6rem; ">visibility</span>&nbsp;&nbsp;<span th:text="${imagesRanking.count}"></span>
+                    </div>
+                    <div class="thumb-up">
+                      <span class="material-symbols-outlined" style="font-size:.6rem;">thumb_up</span>&nbsp;&nbsp;&nbsp;<span style="" class="thumb-up-counter" th:text="${imagesRanking.ilikeit}"></span>
                     </div>
                   </div>
                   <!--      -->

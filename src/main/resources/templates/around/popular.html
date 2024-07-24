@@ -147,35 +147,15 @@
                             <div class="swiper-slide" th:if="${#lists.size(musicTop10ByLike)==0}" style="display:flex;align-items:center;justify-content:center;">
                                 표시할 음악 이미지가 없습니다.
                             </div>
-                            <!-- Slides -->
                             <div class="swiper-slide" th:each="musicRanking,musicRankingStat :${musicTop10ByLike}">
-                                <a href="javascript:void(0)" style="display:block;">
+                                <a href="javascript:void(0)">
                                     <div class="rankingNo">
                                         <span th:text="${musicRankingStat.count}"></span>
                                     </div>
                                     <th:block th:if="${musicRankingStat.count==1}">
                                         <span class="material-symbols-outlined">military_tech</span>
                                     </th:block>
-
-                                    <table class="table w-100" style="font-size:.7rem; border : 1px solid lightgray ;">
-                                        <tr>
-                                            <td class=" text-light" style="width:50%;background-color:darkcyan;opacity:.8">제목</td>
-                                            <td th:text="${musicRanking.musicFileInfo.music.title}"></td>
-                                        </tr>
-                                        <tr>
-                                           <td colspan="2">
-                                               <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" style="width:100%;height:50px;box-shadow:0;">
-                                           </td>
-                                        </tr>
-                                        <tr >
-                                            <td class=" text-light" style="!important; width:50%;background-color:darkcyan;opacity:.8">좋아요 수</td>
-                                            <td th:text="${musicRanking.ilikeit}"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class=" text-light" style="width:50%;background-color:darkcyan;opacity:.8">조회수</td>
-                                            <td th:text="${musicRanking.count}"></td>
-                                        </tr>
-                                    </table>
+                                    <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
                                 </a>
                             </div>
                         </div>
@@ -198,39 +178,51 @@
                     <div class="swiper">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" th:if="${#lists.size(musicTop10ByLike)==0}" style="display:flex;align-items:center;justify-content:center;">
+                            <div class="swiper-slide" th:if="${#lists.size(musicTop10ByCount)==0}" style="display:flex;align-items:center;justify-content:center;">
                                 표시할 음악 이미지가 없습니다.
                             </div>
-                            <div class="swiper-slide" th:each="musicRanking,musicRankingStat :${musicTop10ByLike}">
-                                <a href="javascript:void(0)" style="display:block;">
+                            <div class="swiper-slide" th:each="musicRanking,musicRankingStat :${musicTop10ByCount}">
+                                <a href="javascript:void(0)">
                                     <div class="rankingNo">
                                         <span th:text="${musicRankingStat.count}"></span>
                                     </div>
                                     <th:block th:if="${musicRankingStat.count==1}">
                                         <span class="material-symbols-outlined">military_tech</span>
                                     </th:block>
-
-                                    <table class="table w-100" style="font-size:.7rem; border : 1px solid lightgray ;">
-                                        <tr>
-                                            <td class=" text-light" style="width:50%;background-color:darkcyan;opacity:.8">제목</td>
-                                            <td th:text="${musicRanking.musicFileInfo.music.title}"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" style="width:100%;height:50px;box-shadow:0;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class=" text-light" style="width:50%;background-color:darkcyan;opacity:.8">좋아요 수</td>
-                                            <td th:text="${musicRanking.ilikeit}"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class=" text-light" style="width:50%;background-color:darkcyan;opacity:.8">조회수 </td>
-                                            <td th:text="${musicRanking.count}"></td>
-                                        </tr>
-                                    </table>
+                                    <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
                                 </a>
                             </div>
+
+<!--                            <div class="swiper-slide" th:each="musicRanking,musicRankingStat :${musicTop10ByLike}">-->
+<!--                                <a href="javascript:void(0)" style="display:block;">-->
+<!--                                    <div class="rankingNo">-->
+<!--                                        <span th:text="${musicRankingStat.count}"></span>-->
+<!--                                    </div>-->
+<!--                                    <th:block th:if="${musicRankingStat.count==1}">-->
+<!--                                        <span class="material-symbols-outlined">military_tech</span>-->
+<!--                                    </th:block>-->
+
+<!--                                    <table class="table w-100" style="font-size:.7rem; border : 1px solid lightgray ;">-->
+<!--                                        <tr>-->
+<!--                                            <td class=" text-light" style="width:50%;background-color:darkcyan;opacity:.8">제목</td>-->
+<!--                                            <td th:text="${musicRanking.musicFileInfo.music.title}"></td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td colspan="2">-->
+<!--                                                <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" style="width:100%;height:50px;box-shadow:0;">-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td class=" text-light" style="width:50%;background-color:darkcyan;opacity:.8">좋아요 수</td>-->
+<!--                                            <td th:text="${musicRanking.ilikeit}"></td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td class=" text-light" style="width:50%;background-color:darkcyan;opacity:.8">조회수 </td>-->
+<!--                                            <td th:text="${musicRanking.count}"></td>-->
+<!--                                        </tr>-->
+<!--                                    </table>-->
+<!--                                </a>-->
+<!--                            </div>-->
                         </div>
                         <!-- If we need navigation buttons -->
                         <div class="swiper-button-prev">

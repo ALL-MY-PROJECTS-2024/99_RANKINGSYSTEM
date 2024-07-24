@@ -112,4 +112,9 @@ public class BookmarkServiceImpl {
     public void deleteMusicBookmark(Long id) {
         musicBookmarkRepository.deleteById(id);
     }
+    @Transactional(rollbackFor=Exception.class)
+    public List<Bookmark> getMyBookmark(String name) {
+        Optional<User> userOptional = userRepository.findById(name);
+        return userOptional.map(user -> bookmarkRepository.findAllByUser(user)).orElse(null);
+    }
 }

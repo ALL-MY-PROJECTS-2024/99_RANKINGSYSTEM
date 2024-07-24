@@ -6,7 +6,7 @@ thumb_up_btn_els.forEach((el)=>{
         console.log("clicked..thumb_up");
 
         const imageid = el.getAttribute('data-imageid');
-        const thumbUpCounter = el.querySelector('.thumb-up-counter');
+        const thumbUpCounter = el.parentNode.parentNode.querySelector('.thumb-up-counter');
         const thumbUpIcon = el.querySelector('.material-symbols-outlined.favorite')
 
         axios.get(`/favorite/image/${imageid}`)
@@ -28,7 +28,7 @@ thumb_up_btn_els.forEach((el)=>{
 
 
 //----------------------------------------------------------------
-// 내가 누른 좋아요 확인
+// 내가 누른 좋아요 확인 - 채우기
 //----------------------------------------------------------------
 const favoriteBlock = document.querySelectorAll('.favorite-block');
 
@@ -38,12 +38,25 @@ favoriteBlock.forEach(el=>{
     favoriteList.forEach(myFavorite=>{
 
         if(rankingId==myFavorite.imagesRanking.rankingId){
-
             const thumbUp =  el.querySelector('.favorite');
             thumbUp.setAttribute('style',"font-variation-settings:'FILL' 100,'wght' 300,'GRAD' 0,'opsz' 18");
         }
     })
 })
+//----------------------------------------------------------------
+// 내가 누른 북마크 확인 - 채우기
+//----------------------------------------------------------------
+const bookmarkBlock = document.querySelectorAll('.bookmark-block');
+bookmarkBlock.forEach(el=>{
+    const rankingId =  el.getAttribute('data-id');
+    bookmarkList.forEach(myBookmark=>{
+        if(rankingId==myBookmark.imagesRanking.rankingId){
+            const bookmark =  el.querySelector('.bookmark');
+            bookmark.setAttribute('style',"font-variation-settings:'FILL' 100,'wght' 300,'GRAD' 0,'opsz' 18");
+        }
+    })
+})
+
 
 //----------------------------------------------------------------
 // 즐겨찾기 추가
@@ -63,6 +76,7 @@ bookmarkBtnEls.forEach(el=>{
                 }
                 else if(resp.data.exist=='false'){
                     alert("즐겨찾기에 추가했습니다.");
+                    location.reload();
                 }
            })
            .catch(err=>{console.log(err)});
@@ -98,11 +112,11 @@ likerankEls.forEach(el=>{
 
 const countOrder = document.querySelector(".countOrder");
 const likeOrder = document.querySelector(".likeOrder");
-const summary = document.querySelector(".summary");
+//const summary = document.querySelector(".summary");
 
 const countOrderBlock = document.querySelector(".count-order-block");
 const likeOrderBlock = document.querySelector(".like-order-block");
-const summaryBlock = document.querySelector(".summary-block");
+//const summaryBlock = document.querySelector(".summary-block");
 
 
 countOrder.addEventListener('click',function(){
@@ -131,7 +145,7 @@ likeOrder.addEventListener('click',function(){
     location.href="/imageRanking/list?mode=2"
 })
 
-summary.addEventListener('click',function(){
+//summary.addEventListener('click',function(){
 //    summaryBlock.classList.remove('hidden');
 //    countOrderBlock.classList.add('hidden');
 //    likeOrderBlock.classList.add("hidden");
@@ -140,36 +154,36 @@ summary.addEventListener('click',function(){
 //    summary.classList.add('active');
 //    likeOrder.classList.remove('active');
 //    countOrder.classList.remove('active');
-    location.href="/imageRanking/list?mode=3"
-})
+//    location.href="/imageRanking/list?mode=3"
+//})
 //----------------------------------------------------------------
 // MODE
 //----------------------------------------------------------------
     if(mode=="1"){
             countOrderBlock.classList.remove('hidden');
             likeOrderBlock.classList.add("hidden");
-            summaryBlock.classList.add('hidden');
+            //summaryBlock.classList.add('hidden');
 
             countOrder.classList.add('active'); //조회순
             likeOrder.classList.remove('active');
-            summary.classList.remove('active');
+            //summary.classList.remove('active');
 
     }else if(mode=="2"){
         likeOrderBlock.classList.remove("hidden");;
         countOrderBlock.classList.add('hidden');
-        summaryBlock.classList.add('hidden');
+        //summaryBlock.classList.add('hidden');
 
         likeOrder.classList.add('active');
         countOrder.classList.remove('active');
-        summary.classList.remove('active');
+        //summary.classList.remove('active');
 
     }else{
-        summaryBlock.classList.remove('hidden');
+        //summaryBlock.classList.remove('hidden');
         likeOrderBlock.classList.add("hidden");;
         countOrderBlock.classList.add('hidden');
 
 
-        summary.classList.add('active');
+        //summary.classList.add('active');
         likeOrder.classList.remove('active');
         countOrder.classList.remove('active');
 

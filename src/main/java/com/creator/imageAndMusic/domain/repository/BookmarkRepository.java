@@ -5,7 +5,6 @@ import com.creator.imageAndMusic.domain.entity.Bookmark;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
 import com.creator.imageAndMusic.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +17,6 @@ public interface BookmarkRepository extends JpaRepository<Bookmark,Long> {
 //    List<Bookmark> findAllByOrderByIdDesc();
 
     List<Bookmark> findAllByUserOrderByIdDesc(User user);
+
+    List<Bookmark> findAllByUser(User user);
 }

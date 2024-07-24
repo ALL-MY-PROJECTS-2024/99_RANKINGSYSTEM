@@ -5,8 +5,10 @@ import com.creator.imageAndMusic.domain.dto.BoardDto;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
 import com.creator.imageAndMusic.domain.entity.Board;
+import com.creator.imageAndMusic.domain.entity.Bookmark;
 import com.creator.imageAndMusic.domain.entity.FavoriteImage;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
+import com.creator.imageAndMusic.domain.service.BookmarkServiceImpl;
 import com.creator.imageAndMusic.domain.service.FavoriteImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.ImageRankingService;
 import jakarta.servlet.http.Cookie;
@@ -39,6 +41,9 @@ public class ImageRankingController {
 
     @Autowired
     private FavoriteImageServiceImpl favoriteImageService;
+
+    @Autowired
+    private BookmarkServiceImpl bookmarkService;
 
     @GetMapping("/add")
     public @ResponseBody ResponseEntity<String> addRanking(@RequestParam("fileid") Long fileid,Model model) throws Exception {
@@ -100,7 +105,9 @@ public class ImageRankingController {
         //ThumbUp 찾기
         List<FavoriteImage> favoriteImageList  = favoriteImageService.getMyfavoriteImage(authentication.getName());
         model.addAttribute("favoriteList",favoriteImageList);
-
+        //Bookmark 찾기
+        List<Bookmark> bookmarkList  =bookmarkService.getMyBookmark(authentication.getName());
+        model.addAttribute("bookmarkList",bookmarkList);
 
         //좋아요 순서
 

@@ -18,7 +18,7 @@ main section{
 
     display:flex;
     justify-content : space-between;
-    align-items : center;
+    align-items : start;
 
 }
 .swiper-slide{
@@ -28,11 +28,14 @@ main section{
     justify-content : center;
     align-items : center;
     overflow : hidden;
+
+    position:relative;
 }
 .swiper-slide a{
     display:block;
     width : 200px;
     height : 200px;
+    overflow : hidden;
 }
 .swiper-slide a img{
     width : 100%;
@@ -44,14 +47,15 @@ main section{
     transition:.3s;
 }
 
-.swiper-slide::hover img{
+.swiper-slide:hover img{
     transform : scale(1.2);
 }
 
+
 .swiper-slide .material-symbols-outlined{
     position:absolute;
-    left:22px;
-    top:-25px;
+    left:0px;
+    top:25px;
     color:orange;
     display:block;
     width : 20px;
@@ -69,13 +73,14 @@ main section{
     height : 20px;
     position:absolute;
     left:0px;
-    top:-25px;
+    top:0px;
     background-color:black;
-    color:white;
+    color:white !important;
     font-size : .7rem;
     display:flex;
     justify-content : center;
     align-items : center;
+
 }
 
 .swiper-button-prev::after{
