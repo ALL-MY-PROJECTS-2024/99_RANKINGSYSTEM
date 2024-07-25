@@ -142,27 +142,14 @@ public class ImageRankingController {
 
 
     @GetMapping("/cat")
-    public void cat(Model model){
+    public void cat(
+            @RequestParam(value = "subCategory",defaultValue = "Character") String subCategory,
+            Model model
+    ){
        log.info("GET /imageRanking/cat...");
-       Map<String,Object> map = imageRankingService.getAllImageRankingByAllCategory();
-
-       List<ImagesRanking> Character = (List<ImagesRanking>)map.get("Character");
-       List<ImagesRanking> City = (List<ImagesRanking>)map.get("City");
-       List<ImagesRanking> Map = (List<ImagesRanking>)map.get("Map");
-       List<ImagesRanking> iCON = (List<ImagesRanking>)map.get("iCON");
-       List<ImagesRanking> Furniture = (List<ImagesRanking>)map.get("Furniture");
-       List<ImagesRanking> Car = (List<ImagesRanking>)map.get("Car");
-       List<ImagesRanking> Place = (List<ImagesRanking>)map.get("Place");
-       List<ImagesRanking> Others = (List<ImagesRanking>)map.get("Others");
-
-       model.addAttribute("Character",Character);
-       model.addAttribute("City",City);
-       model.addAttribute("Map",Map);
-       model.addAttribute("iCON",iCON);
-       model.addAttribute("Furniture",Furniture);
-       model.addAttribute("Car",Car);
-       model.addAttribute("Place",Place);
-       model.addAttribute("Others",Others);
-       model.addAttribute("Character",Character);
+        List<ImagesRanking> list =   imageRankingService.getAllImageRankingByCategory(subCategory);
+        System.out.println("개수 : " + list.size());
+        model.addAttribute("imageList",list);
+        model.addAttribute("subCategory",subCategory);
     }
 }

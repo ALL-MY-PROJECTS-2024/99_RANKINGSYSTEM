@@ -72,8 +72,6 @@ let subCategoryBodyImgTitleEl = document.querySelector('.image_body .subCategory
 
 imageSubButtonEls.forEach(el=>{
     el.addEventListener('click',function(){
-
-
         console.log(el.innerHTML);
         subCategoryBodyImgTitleEl.innerHTML=el.innerText;
     })

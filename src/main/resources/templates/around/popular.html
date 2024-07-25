@@ -79,7 +79,7 @@
                             </div>
                             <!-- Slides -->
                             <div class="swiper-slide" th:each="imageRanking,imageRankingStat :${imageTop10ByLike}">
-                                <a href="javascript:void(0)">
+                                <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
                                     <div class="rankingNo">
                                         <span th:text="${imageRankingStat.count}"></span>
                                     </div>
@@ -113,7 +113,7 @@
                                 표시할 이미지가 없습니다.
                             </div>
                             <div class="swiper-slide" th:each="imageRanking,imageRankingStat :${imageTop10ByCount}">
-                                <a href="javascript:void(0)">
+                                <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
                                     <div class="rankingNo">
                                         <span th:text="${imageRankingStat.count}"></span>
                                     </div>

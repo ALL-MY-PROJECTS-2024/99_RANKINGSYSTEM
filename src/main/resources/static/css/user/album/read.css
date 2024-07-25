@@ -1,50 +1,148 @@
-main>section{}
+main>section{
+    position:relative;
+}
+
+main>section>.title{
+
+    position:absolute;
+    left :calc(50vw - 440px);
+    top : 0px;
+    display:flex;
+    justify-content:center;
+    align-items : center;
+}
 main>section>.read-block{
 
     /*height : 100vh;*/
+    display:flex;
+    justify-content : center;
+    align-items : center;
+
+    padding-top : 45px;
+    position:relative;
+
+}
+.cancel{
+    position:absolute;
+    left:5%;
+    top:10px;
+    width : 50px;
+    height : 50px;
+    border-radius :50%;
+    color : white;
+    background-color: #1e1f2b;
+    z-index : 100;
+    display:flex;
+    justify-content : center;
+    align-items : center;
+    cursor : pointer;
+
 }
 
 main>section>.read-block .info-block{
     /*border : 1px solid;*/
     /*height : 200px;*/
+    width : 100vw;
+    max-width : 440px;
+    min-width : 200px;
+
+    height  :100vh;
+    max-height : 575px;
+    min-height : 200px;
+
+    background-color :rgb(10, 10, 10);;
+    border-radius :0px 25px 25px 0;
+
+    padding : 15px;
+    padding-top :25px;
+    color : lightgray;
+
+    position:relative;
+
 }
 main>section>.read-block>.image-block{
     display:flex;
     justify-content : center;
-    align-items : start;
+    align-items : center;
+    width : 100vw;
+    max-width : 440px;
+    min-width : 200px;
+
+    height  : 100vh;
+    max-height : 575px;
+    min-height : 200px;
+  /*  border : 1px solid;*/
+    border-radius :25px 0 0 25px;
 
     display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap:wrap;
+    justify-content : center;
+    align-items : center;
+    background-color :rgb(10, 10, 10);;
+    padding : 5px;
 
-    overflow : auto;
+    position:relative;
 
+}
+main>section>.read-block>.info-block h5{
+    display:flex;
+    justify-content : left;
+    align-items : center;
+    gap : 15px;
+}
+main>section>.read-block>.image-block img{
+    width : 100%;
+    height : 100%;
+    object-fit : cover;
+    border-radius : 10px;
+}
+
+main>section>.read-block>.image-block .bg{
+    width : 100%;
+    height :80%;
+    position:absolute;
+    left : 0px;
+    bottom : 0px;
+    background: linear-gradient(to top, rgba(15, 15, 15, 1), rgba(15, 15, 15, 0));
+    z-index :551;
+    display:none;
+    transition:.2s;
+
+    display:none;
+    justify-content : space-evenly;
+    align-items : end;
+
+}
+main>section>.read-block>.image-block .bg>div{
+    margin : 15px;
+}
+main>section>.read-block>.image-block:hover .bg{
+    display:flex;
 
 }
 
 main>section>.read-block>.image-block>.item{
     margin : 10px;
     border : 1px solid;
+
     height : 100%;
 }
-main>section>.read-block>.image-block>.item .btns{
-    margin : 5px;
-    font-size : .8rem;
-    border : 1px solid;
-
+.btns{
+    width : 100%;
+    font-size : .7rem;
     display:flex;
-    justify-content: center;
-    align-items: center;
+    justify-content : right;
+    align-items : center;
+    gap : 10px;
 }
-main>section>.read-block>.image-block>.item .btns a{
-    width : 150px;
-    margin : 10px;
-    font-size : .8rem;
+.btns a{
+    font-size : .7rem;
+    padding : 10px;
+    display:block;;
+    display:flex;
+    justify-content : center;
+    align-items : center;
 }
-main>section>.read-block>.image-block>.item .btns a:last-child{
-    width : 180px;
-}
+
 main>section>.read-block>.image-block>.item>.images{
 
 
@@ -53,9 +151,41 @@ main>section>.read-block>.image-block>.item>.images{
 
 main>section>.read-block>.image-block>.item>.images{
     padding : 10px;
+
+
 }
 main>section>.read-block>.image-block>.item>div:nth-child(2) img{
     object-fit : contain;
     display:block;
     margin : 0 auto;
+
 }
+
+.table{
+    border :0;
+}
+.table th,
+.table td
+{
+    border : 0;
+}
+.thumb-up-visibility{
+    display:flex;
+    justify-content:right;
+    align-items:center;
+    font-size : .9rem;
+    position:absolute;
+    bottom:10px;
+    right:10px;
+    width : 100%;
+}
+.thumb-up-visibility .material-symbols-outlined{
+    font-size : .9rem;
+}
+.thumb_up_bookmark {
+    display:flex;
+    justify-content:right;
+    align-items:center;
+    gap : 10px;
+}
+

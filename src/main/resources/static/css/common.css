@@ -33,6 +33,7 @@ body{
     background-color: #0a0b17;
     z-index : -1;
     color : lightgray;
+    height : 100%;
 }
 th,td{
     color : lightgray;
@@ -480,6 +481,7 @@ a:hover{
 /* main */
 .wrapper>main{
     z-index: 1;
+    padding-bottom : 100px;
 }
 
 
@@ -786,10 +788,10 @@ a:hover{
 
 /*  */
 .wrapper>footer{
-
-    margin-top: 100px;
     position: relative;
+    width : 100%;
     bottom :0;
+    left:0;
 }
 
 

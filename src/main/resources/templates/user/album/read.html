@@ -2,99 +2,140 @@
 <html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-<!--
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
--->
+    <!--
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    -->
 
 
     <!--  link   -->
     <th:block th:insert="fragments/link :: linkFragment" />
+
 
     <!-- /css/album/read.css   -->
     <link rel="stylesheet" href="/css/user/album/read.css">
 
     <!-- read.js -->
     <script src="/js/user/album/read.js" defer></script>
-
 </head>
 <body>
-    
-    <div class="wrapper">
 
-        <!-- header   -->
-        <th:block th:insert="fragments/header :: headerFragment" />
-
-        <!-- albumNav       -->
-        <th:block th:insert="fragments/nav ::albumNavFragment" />
+<div class="wrapper">
 
 
-        <main class="layout-5" >
-            <section>
+    <!-- header   -->
+    <th:block th:insert="fragments/header :: headerFragment" />
 
-                <div class="read-block" >
-                    <div class="info-block">
-                        <table class="table">
-                            <thead></thead>
-                            <tbody>
-                                <tr>
-                                    <td style="width:200px;" >TITLE</td>
-                                    <td class="title"  th:text="${images.title}" style="width:500px;"></td>
-                                    <td  style="width:200px;" >DATE</td>
-                                    <td class="date" th:text="${#temporals.format(images.createAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                </tr>
-                                <tr>
-                                    <td>USER</td>
-                                    <td  class="username" th:text="${images.username}" colspan="3"></td>
-                                </tr>
-                                <tr>
-                                    <td>MAIN CATEGORY</td>
-                                    <td  class="mainCategory" th:text="${images.mainCategory}"></td>
-                                    <td>SUB CATEGORY</td>
-                                    <td class="subCategory" th:text="${images.subCategory}"></td>
-                                </tr>
-                                <tr>
-                                    <td>DESCRIPTION</td>
-                                    <td class="description" th:text="${images.description}"  colspan="3"></td>
-                                </tr>
-                           </tbody>
-                            <tfoot></tfoot>
-                        </table>
+    <!-- nav       -->
+    <th:block th:insert="fragments/nav :: navFragment" />
+
+
+    <section class="layout-5 breadcrumb-block">
+        <div class="">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <span class="">홈</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <span class="">내 이미지</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <span class="">갤러리</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">읽기</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <main class="" >
+        <section >
+            <h2 class="title"  th:text="${images.title}" ></h2>
+            <div class="cancel">
+                <a href="javascript:history.back()">
+                    <span class="material-symbols-outlined" style="color:white;">arrow_back</span>
+                </a>
+            </div>
+            <div class="read-block" th:each="imagesFileInfo : ${filelist}">
+
+                <div class="image-block" >
+                    <div class="bg">
+
+                        <!--                 <div>A</div>
+                                         <div>A</div>
+                                         <div>A</div>-->
+
                     </div>
-                    <div class="image-block">
-
-                        <div class="item" th:each="imagesFileInfo : ${filelist}">
+                    <img th:src="@{${imagesFileInfo.dir}+'/'+${imagesFileInfo.filename}}" alt="" />
+                </div>
+                <div class="info-block">
+                    <div>
+                        <h5>
+                            <span class="material-symbols-outlined">person</span>
+                            <span th:text="${imagesFileInfo.Images.username}"></span>
+                        </h5>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="mb-2">설명 : </div>
+                        <div style="p-2 w-100">
+                            <textarea readonly class="w-100"  style="height : 100px;background-color:rgb(25,25,25);color :gray;" th:text="${images.description}"></textarea>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <div>정보 : </div>
+                        <div>
+                            <table class="table mt-2" style="text-align:center;font-size : .7rem;">
+                                <tr>
+                                    <td >세부 카테고리</td>
+                                    <td>사이즈(가로x세로)</td>
+                                    <td >파일 크기</td>
+                                    <td >등록 날짜</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-secondary" th:text="${imagesFileInfo.Images.subCategory}"></td>
+                                    <td class="text-secondary" ><span th:text="${imagesFileInfo.width}"></span> x <span th:text="${imagesFileInfo.height}"></span></td>
+                                    <td class="text-secondary" ><span th:text="${#numbers.formatInteger(imagesFileInfo.fileSize/1024, 3, 'COMMA')} "></span> <span> K</span></td>
+                                    <td class="text-secondary" th:text="${#temporals.format(imagesFileInfo.Images.createAt, 'yyyy-MM-dd')}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <hr>
+                        <div>
+                            <div class="mb-2">생성도구 : </div>
+                            <div class="text-secondary"  style="font-size : .8rem;" th:text="${imagesFileInfo.tool}">></div>
+                        </div>
+                        <hr>
+                        <div class="thumb-up-visibility mt-3 mb-3">
                             <div class="btns">
                                 <a href="javascript:void(0)" class="btn btn-primary addRanking" th:data-fileid="${imagesFileInfo.fileid}">
                                     <span class="material-symbols-outlined" style="font-size : .8rem">add</span>
-                                    <span>ADD RANKING</span>
+                                    <span style="font-size : .7rem">랭킹페이지로 추가</span>
                                 </a>
                                 <a href="javascript:void(0)" class="btn btn-primary deleteRanking" th:data-fileid="${imagesFileInfo.fileid}">
                                     <span class="material-symbols-outlined" style="font-size : .8rem">delete</span>
-                                    <span>DELETE IMAGE</span>
+                                    <span style="font-size : .7rem">이미지 삭제</span>
                                 </a>
                                 <a href="javascript:void(0)" class="btn btn-primary requestAuction" th:data-fileid="${imagesFileInfo.fileid}">
                                     <span class="material-symbols-outlined" style="font-size : .8rem">sell</span>
-                                    <span>REQUEST AUCTION</span>
+                                    <span style="font-size : .7rem">경매 요청</span>
                                 </a>
-                            </div>
-                            <div class="images">
-                                <th:block  >
-                                    <img th:src="@{${imagesFileInfo.dir}+'/'+${imagesFileInfo.filename}}" alt="" />
-                                </th:block>
                             </div>
                         </div>
                     </div>
-
-<!--                    <div class="contents-block">-->
-
-<!--                    </div>-->
-
                 </div>
+            </div>
 
-            </section>
-        </main>
-        <footer></footer>
-    </div>
-    
+        </section>
+    </main>
+    <footer></footer>
+</div>
+
 </body>
 </html>

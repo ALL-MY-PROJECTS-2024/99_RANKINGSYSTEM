@@ -38,6 +38,8 @@ deleteRankingEls.forEach(deleteRankingEl=>{
                 console.log(resp.data);
                 if(confirm(resp.data)){
                     location.href="/user/album/main";
+                }else{
+                    location.reload();
                 }
             })
             .catch(err=>{

@@ -183,7 +183,9 @@
                                     <div class="swiper-wrapper">
                                         <!-- Slides -->
                                         <div class="swiper-slide" th:each="imageRanking,imageRankingStat : ${imageTop10ByCount}">
-                                            <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
+                                                <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            </a>
                                             <div class="item-title" style="" th:text="${imageRanking.ImagesFileInfo.Images.title}"></div>
                                             <div class="item-count" >
                                                 <span class="material-symbols-outlined" style="font-size:.6rem">visibility</span>
@@ -224,7 +226,9 @@
                                         </div>
                                         <!-- Slides -->
                                         <div class="swiper-slide" th:each="imageRanking,imageRankingStat : ${imageTop10ByLike}">
-                                            <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
+                                                <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            </a>
                                             <div class="item-title" style="" th:text="${imageRanking.ImagesFileInfo.Images.title}"></div>
                                             <div class="item-count" >
                                                 <span class="material-symbols-outlined" style="font-size:.6rem">thumb_up</span>

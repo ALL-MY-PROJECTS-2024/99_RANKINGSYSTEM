@@ -219,7 +219,7 @@ public class UserServiceImpl implements UserService {
             createThumbnail(fileobj, dir);
 
             // DB에 파일경로 저장
-            saveFileInfo(images, dto, fileobj);
+            saveFileInfo(images, dto, fileobj,file);
 
 
         }
@@ -244,7 +244,7 @@ public class UserServiceImpl implements UserService {
         ImageIO.write(bt_image, "jpeg", thumbnailFile); // 섬네일 포맷 변경 및 이미지 품질 조정
     }
 
-    private void saveFileInfo(Images images, AlbumDto dto, File fileobj) {
+    private void saveFileInfo(Images images, AlbumDto dto, File fileobj,MultipartFile file) throws IOException {
         ImagesFileInfo imageBoardFileInfo = new ImagesFileInfo();
         imageBoardFileInfo.setImages(images);
         String dirPath = File.separator + UPLOADPATH.UPPERDIRPATH + File.separator;
@@ -252,6 +252,13 @@ public class UserServiceImpl implements UserService {
                 + dto.getSubCategory() + File.separator + images.getIamgeid();
         imageBoardFileInfo.setDir(dirPath);
         imageBoardFileInfo.setFilename(fileobj.getName());
+        imageBoardFileInfo.setFileSize(file.getSize());
+        BufferedImage image = ImageIO.read(fileobj);
+        long width = image.getWidth();
+        long height = image.getHeight();
+        imageBoardFileInfo.setWidth(width);
+        imageBoardFileInfo.setHeight(height);
+        imageBoardFileInfo.setTool(dto.getTool());
         imagesFileInfoRepository.save(imageBoardFileInfo);
     }
 

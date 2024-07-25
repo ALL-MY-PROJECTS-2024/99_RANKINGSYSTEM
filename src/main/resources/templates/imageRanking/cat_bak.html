@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+<!--
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-->
+
+    <!--  link   -->
+    <th:block th:insert="fragments/link :: linkFragment" />
+
+
+
+    <!--    -->
+    <link rel="stylesheet" href="/css/imageRanking/cat.css">
+
+    <!--    -->
+    <script src="/js/imageRanking/cat.js" defer></script>
+
+    <!--  MODEL 속성가져오기  -->
+    <script th:inline="javascript">
+        let Character = /*[[${Character}]]*/
+        let City = /*[[${City}]]*/
+        let Map = /*[[${Map}]]*/
+        let iCON = /*[[${iCON}]]*/
+        let Furniture = /*[[${Furniture}]]*/
+        let Car = /*[[${Car}]]*/
+        let Place = /*[[${Place}]]*/
+        let Others = /*[[${Others}]]*/
+        console.log("Character",Character);
+        console.log("City",City);
+        console.log("Map",Map);
+        console.log("iCON",iCON);
+        console.log("Furniture",Furniture);
+        console.log("Car",Car);
+        console.log("Place",Place);
+        console.log("Others",Others);
+    </script>
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="fragments/header :: mainHeaderFragment" />
+
+    <!-- nav       -->
+    <th:block th:insert="fragments/nav :: navFragment" />
+
+
+    <main>
+
+        <section class="layout-5 breadcrumb-block">
+            <div class="">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="">홈</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="">이달의 콘텐츠 RANKING</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">분야별 랭킹</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+
+        <section class="group-block layout-5">
+            <div class="head">
+                <div class="">
+                    <input type="radio" id="image" name="choose">
+                    <label for="image">이미지</label>
+                </div>
+                <div class="">
+                    <input type="radio" id="music" name="choose">
+                    <label for="music">음악</label>
+                </div>
+            </div>
+            <div class="body">
+
+                <!--   IMAGE BODY             -->
+                <div class="image_body">
+
+                    <div class="swiper sub_category">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Character">Character</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="City">City</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Map">Map</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="iCON">iCON</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Furniture">Furniture</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Car">Car</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Place">Place</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Others">Others</a>   </div>
+                        </div>
+                    </div>
+                    <div class="subCategoryBody">
+                        <div>TOTAL : <span class="object-cnt"></span></div>
+                        <hr>
+                        <div class="items  Character-block active"></div>
+                        <div class="items  City-block "></div>
+                        <div class="items  Map-block "></div>
+                        <div class="items  iCON-block "></div>
+                        <div class="items  Furniture-block "></div>
+                        <div class="items  Car-block "></div>
+                        <div class="items  Place-block "></div>
+                        <div class="items  Others-block "></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="fragments/footer :: footerFragment" />
+    </footer>
+
+</div>
+
+
+
+
+</body>
+</html>

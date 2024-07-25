@@ -52,7 +52,7 @@
                         </a>
                     </div>
                     <div class="image" >
-                        <a href="">
+                        <a th:href="@{/imageRanking/read(rankingId=${bookmark.imagesRanking.rankingId})}">
                             <img th:src="@{${bookmark.imagesRanking.imagesFileInfo.dir}+'\\'+${bookmark.imagesRanking.imagesFileInfo.filename}}" alt="" />
                         </a>
                     </div>

@@ -99,7 +99,6 @@ const add_product_btn_el = document.querySelector('.add_album_btn');
         const main_category = document.albumform.main_category.value;
 
         //선택되어진 sub_category 를 확인
-
         const sub_categoryEls = document.querySelectorAll('.sub_category.image-cat');
         let sub_category = '';
         sub_categoryEls.forEach(el=>{
@@ -109,13 +108,19 @@ const add_product_btn_el = document.querySelector('.add_album_btn');
         const description = document.albumform.description.value;
 
 
+       //선택되어진 tool 를 확인
+        const tool = document.albumform.tool.value;
+
+
         formData.append('username',username);
         formData.append('title',title);
         formData.append('mainCategory',main_category);
         formData.append('subCategory',sub_category);
         formData.append('description',description);
+        formData.append('tool',tool);
         formData.append('lat',lat);
         formData.append('lng',lng);
+
 
         axios.post('/user/album/add',formData,{ headers: {'Content-Type' :'multipart/form-data' } } )
                 .then(res=>{

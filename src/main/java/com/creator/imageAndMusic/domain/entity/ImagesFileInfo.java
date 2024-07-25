@@ -23,4 +23,8 @@ public class ImagesFileInfo {
     private Images images;
     private String dir;
     private String filename;
+    private long fileSize;
+    private long width;
+    private long height;
+    private String tool;
 }

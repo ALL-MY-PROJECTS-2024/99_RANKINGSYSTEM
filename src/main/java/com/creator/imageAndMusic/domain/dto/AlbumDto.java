@@ -11,6 +11,7 @@ public class AlbumDto {
     private String mainCategory;
     private String subCategory;
     private String description;
+    private String tool;
     private MultipartFile[] files;
     private int count;
     private int like;

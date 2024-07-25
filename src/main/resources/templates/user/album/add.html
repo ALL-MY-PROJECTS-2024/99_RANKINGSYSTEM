@@ -119,6 +119,15 @@
                                 </select>
                             </div>
                             <div class="m-2">
+                                <label>생성 도구 : </label>
+                                <select name="tool"  class="form-select tool">
+                                        <option value="StableDiffusion" selected>Stable Diffusion</option>
+                                        <option value="Dalle-E">Dalle-E</option>
+                                        <option value="MidJourney">Mid Journey</option>
+                                        <option value="GenAI">GenAI</option>
+                                </select>
+                            </div>
+                            <div class="m-2">
                                 <label>설명 : </label>
                                 <textarea name="description" class="form-control" required></textarea>
                             </div>
@@ -172,7 +181,19 @@
                                     <option value="Others">Others</option>
                                 </select>
                             </div>
-
+                            <div class="m-2">
+                                <label>생성 도구 : </label>
+                                <select name="tool"  class="form-select">
+                                    <option value="StableDiffusion" selected>Stable Diffusion</option>
+                                    <option value="Dalle-E">Dalle-E</option>
+                                    <option value="MidJourney">Mid Journey</option>
+                                    <option value="GenAI">GenAI</option>
+                                </select>
+                            </div>
+                            <div class="m-2">
+                                <label>설명 : </label>
+                                <textarea name="description" class="form-control" required></textarea>
+                            </div>
                             <input type="hidden" name="lat" />
                             <input type="hidden" name="lng" />
                             <div class="btn-block m-2">

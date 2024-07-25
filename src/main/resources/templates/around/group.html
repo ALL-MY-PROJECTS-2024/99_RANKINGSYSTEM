@@ -112,7 +112,7 @@
                                 <div class="show-block">
                                     <div class="show-image-block" th:each="imageRanking,imageRankingStat : ${imageList}">
 <!--                                        <td th:text="${imageRankingStat.count}"></td>-->
-                                            <a href="javascript:void(0)">
+                                            <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
                                                 <img style="" th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요">
                                             </a>
 <!--                                        <td th:text="${imageRanking.ImagesFileInfo.Images.title}"></td>-->

@@ -1,41 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="">
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-<!--
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
--->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
     <!--  link   -->
     <th:block th:insert="fragments/link :: linkFragment" />
 
 
+    <!-- index.css-->
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- join.css-->
+    <link rel="stylesheet" href="/css/user/index_join.css">
+
+    <link rel="stylesheet" href="/css/index_login.css">
+
+    <!--  MODEL 속성가져오기  -->
+    <script th:inline="javascript">
+        //let list = /*[[${list}]]*/
+        //let mode = /*[[${mode}]]*/
+        let subCategory = /*[[${subCategory}]]*/
+        //console.log(mode);
+        //console.log(list);
+    </script>
 
     <!--    -->
-    <link rel="stylesheet" href="/css/imageRanking/cat.css">
+    <link rel="stylesheet" href="/css/around/group.css">
 
     <!--    -->
     <script src="/js/imageRanking/cat.js" defer></script>
 
-    <!--  MODEL 속성가져오기  -->
-    <script th:inline="javascript">
-        let Character = /*[[${Character}]]*/
-        let City = /*[[${City}]]*/
-        let Map = /*[[${Map}]]*/
-        let iCON = /*[[${iCON}]]*/
-        let Furniture = /*[[${Furniture}]]*/
-        let Car = /*[[${Car}]]*/
-        let Place = /*[[${Place}]]*/
-        let Others = /*[[${Others}]]*/
-        console.log("Character",Character);
-        console.log("City",City);
-        console.log("Map",Map);
-        console.log("iCON",iCON);
-        console.log("Furniture",Furniture);
-        console.log("Car",Car);
-        console.log("Place",Place);
-        console.log("Others",Others);
-    </script>
+
 
 </head>
 <body>
@@ -72,19 +67,16 @@
         </section>
 
 
-        <section class="group-block layout-5">
+        <section  class="group-block layout-5 ">
             <div class="head">
                 <div class="">
                     <input type="radio" id="image" name="choose">
                     <label for="image">이미지</label>
                 </div>
-                <div class="">
-                    <input type="radio" id="music" name="choose">
-                    <label for="music">음악</label>
-                </div>
+                <div class="line"></div>
             </div>
-            <div class="body">
 
+            <div class="body">
                 <!--   IMAGE BODY             -->
                 <div class="image_body">
 
@@ -92,30 +84,42 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Character">Character</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="City">City</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Map">Map</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="iCON">iCON</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Furniture">Furniture</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Car">Car</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Place">Place</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)" data-title="Others">Others</a>   </div>
+                            <div class="swiper-slide "> <a href="/imageRanking/cat?subCategory=Character" data-title="Character">Character</a>   </div>
+                            <div class="swiper-slide">  <a href="/imageRanking/cat?subCategory=City" data-title="City">City </a>   </div>
+                            <div class="swiper-slide">  <a href="/imageRanking/cat?subCategory=Map" data-title="Map">Map </a>   </div>
+                            <div class="swiper-slide">  <a href="/imageRanking/cat?subCategory=iCON" data-title="iCON">iCON</a>   </div>
+                            <div class="swiper-slide">  <a href="/imageRanking/cat?subCategory=Furniture" data-title="Furniture">Furniture </a>   </div>
+                            <div class="swiper-slide">  <a href="/imageRanking/cat?subCategory=Car" data-title="Car">Car </a>   </div>
+                            <div class="swiper-slide">  <a href="/imageRanking/cat?subCategory=Place" data-title="Place">Place </a>   </div>
+                            <div class="swiper-slide">  <a href="/imageRanking/cat?subCategory=Others" data-title="Others">Others </a>   </div>
                         </div>
+
                     </div>
+
                     <div class="subCategoryBody">
-                        <div>TOTAL : <span class="object-cnt"></span></div>
-                        <hr>
-                        <div class="items  Character-block active"></div>
-                        <div class="items  City-block "></div>
-                        <div class="items  Map-block "></div>
-                        <div class="items  iCON-block "></div>
-                        <div class="items  Furniture-block "></div>
-                        <div class="items  Car-block "></div>
-                        <div class="items  Place-block "></div>
-                        <div class="items  Others-block "></div>
+                        <div>
+                            <div class="" >
+                                <div>
+                                    <span>TOTAL : </span><span th:text="${#lists.size(imageList)}"> </span>
+                                </div>
+                                <hr>
+                                <div class="show-block">
+                                    <div style="display:flex;justify-content:center;" class="show-image-block" th:if="${#lists.size(imageList)}==0">
+                                            표시할 이미지가 없습니다.
+                                    </div>
+                                    <div class="show-image-block" th:each="imageRanking,imageRankingStat : ${imageList}">
+                                        <!--                                        <td th:text="${imageRankingStat.count}"></td>-->
+                                        <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
+                                            <img style="" th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
+
             </div>
         </section>
 
