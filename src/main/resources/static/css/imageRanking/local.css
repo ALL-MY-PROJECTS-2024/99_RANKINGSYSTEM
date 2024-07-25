@@ -61,16 +61,19 @@ section{
     display:flex;
     justify-content : center;
     align-items : start;
-
+    flex-wrap : wrap;
+    gap : 20px;
 }
 
 section #map{
-    width : 500px;
-    height :500px;
+    width : 40vw;
+    max-width : 500px;
+    height :60vh;
+    max-height : 600px;
 }
 .show-block .table-block{
-    width : 600px;
-
+    width : 50vw;
+    max-width : calc(100vw - 550px);
     font-size : .9rem;
 }
 
@@ -78,6 +81,7 @@ section #map{
     display:block;
     position:relative;
     left:-30px;
+    top:10px;
     width : 120px;
     margin :0px;
     height :55px;
@@ -86,6 +90,8 @@ section #map{
     justify-content : center;
     align-items : center;
     flex-direction : column;
+    background-color :transparent;
+    color : lightgray;
 }
 
 .show-block .table-block .material-symbols-outlined {
@@ -100,4 +106,75 @@ section #map{
 
 .show-block .table-block td{
     font-size : .8rem;
+}
+
+.show-block .table-block .table-body{
+    display:flex;
+    justify-content : left;
+    align-items:center;
+    flex-wrap : wrap;
+    gap : 15px;
+
+    width : 100%;
+    min-width : 200px;
+}
+.show-block .table-block .table-body .item{
+    width : calc(20% - 15px);
+    overflow : hidden;
+    margin-bottom : 35px;
+
+    display:flex;
+    justify-content : center;
+    align-items :center;
+    flex-direction:column;
+
+    position:relative;
+}
+.show-block .table-block .table-body .item img{
+    width : 100%;
+    height : 100%;
+    object-fit :contain;
+    transition:.3s;
+}
+.show-block .table-block .table-body .item img:hover{
+    transform:scale(1.2);
+}
+
+.localname{
+    font-size : clamp(1rem,3vw,2.5rem);
+}
+
+.table-body .info{
+    align-items : center;
+    justify-content : space-between;
+    display:flex;
+    color : lightgray;
+    font-size : .7rem;
+    position:relative;
+    width : 100%;
+    bottom : 0px;
+    height : 25px;
+    background-color :black;
+    padding : 5px !important;
+    border-radius  : 0 !important;
+    z-index : 555;
+
+}
+
+.table-body .info .left{
+    width : 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.table-body .info .right{
+    display:flex;
+    justify-content : right;
+    align-items : center;
+    min-width : 60px;
+}
+.table-body .info .right>div{
+    text-align:right;
+    min-width:30px;
 }

@@ -15,6 +15,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,15 +27,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -171,7 +172,6 @@ public class UserServiceImpl implements UserService {
         images.setCreateAt(LocalDateTime.now());
         images.setLat(dto.getLat());
         images.setLng(dto.getLng());
-
         imagesRepository.save(images);
 
         //저장 폴더 지정()
@@ -220,15 +220,14 @@ public class UserServiceImpl implements UserService {
 
             // DB에 파일경로 저장
             saveFileInfo(images, dto, fileobj,file);
-
-
         }
 
         return true;
     }
+
     private void createThumbnail(File file, File dir) throws IOException {
         File thumbnailFile = new File(dir, "s_" + file.getName());
-        BufferedImage bo_image = ImageIO.read(file);
+        BufferedImage bo_image = Thumbnails.of(file).scale(1).asBufferedImage();
         BufferedImage bt_image = new BufferedImage(250, 250, BufferedImage.TYPE_INT_RGB); // BufferedImage의 타입 변경
 
         Graphics2D graphic = bt_image.createGraphics();
@@ -242,25 +241,31 @@ public class UserServiceImpl implements UserService {
 
         // 섬네일을 JPEG 형식으로 저장하고 이미지 품질 조정
         ImageIO.write(bt_image, "jpeg", thumbnailFile); // 섬네일 포맷 변경 및 이미지 품질 조정
+
     }
 
     private void saveFileInfo(Images images, AlbumDto dto, File fileobj,MultipartFile file) throws IOException {
-        ImagesFileInfo imageBoardFileInfo = new ImagesFileInfo();
-        imageBoardFileInfo.setImages(images);
-        String dirPath = File.separator + UPLOADPATH.UPPERDIRPATH + File.separator;
-        dirPath += UPLOADPATH.IMAGEDIRPATH + File.separator + dto.getUsername() + File.separator
-                + dto.getSubCategory() + File.separator + images.getIamgeid();
-        imageBoardFileInfo.setDir(dirPath);
-        imageBoardFileInfo.setFilename(fileobj.getName());
-        imageBoardFileInfo.setFileSize(file.getSize());
-        BufferedImage image = ImageIO.read(fileobj);
-        long width = image.getWidth();
-        long height = image.getHeight();
-        imageBoardFileInfo.setWidth(width);
-        imageBoardFileInfo.setHeight(height);
-        imageBoardFileInfo.setTool(dto.getTool());
-        imagesFileInfoRepository.save(imageBoardFileInfo);
+            ImagesFileInfo imageBoardFileInfo = new ImagesFileInfo();
+            imageBoardFileInfo.setImages(images);
+            String dirPath = File.separator + UPLOADPATH.UPPERDIRPATH + File.separator;
+            dirPath += UPLOADPATH.IMAGEDIRPATH + File.separator + dto.getUsername() + File.separator
+                    + dto.getSubCategory() + File.separator + images.getIamgeid();
+            imageBoardFileInfo.setDir(dirPath);
+            imageBoardFileInfo.setFilename(fileobj.getName());
+            imageBoardFileInfo.setFileSize(file.getSize());
+            BufferedImage image = Thumbnails.of(fileobj).scale(1).asBufferedImage();
+            System.out.println("fileobj " + fileobj);
+            System.out.println("image " + image);
+
+            long width = image.getWidth();
+            long height = image.getHeight();
+            imageBoardFileInfo.setWidth(width);
+            imageBoardFileInfo.setHeight(height);
+            imageBoardFileInfo.setTool(dto.getTool());
+            imagesFileInfoRepository.save(imageBoardFileInfo);
     }
+
+
 
 
     private void saveFileInfoMusic(Music music, AlbumDto dto, File fileobj) {

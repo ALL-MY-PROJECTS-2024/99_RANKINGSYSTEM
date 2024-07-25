@@ -49,22 +49,22 @@
                 <!-- breadcrumb -->
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb mt-2">
-                        <li class="breadcrumb-item"><a href="#">홈</a></li>
-                        <li class="breadcrumb-item"><a href="#">자유게시판</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">리스트</li>
+                        <li class="breadcrumb-item text-secondary"><a href="#">홈</a></li>
+                        <li class="breadcrumb-item text-secondary"><a href="#">자유게시판</a></li>
+                        <li class="breadcrumb-item text-secondary active" aria-current="page">리스트</li>
                     </ol>
                 </nav>
 
                 <!-- title -->
                 <h3 style="margin-bottom:15px;">자유게시판</h3>
                 <div>
-                    <div class="board-header">
+                    <div class="board-header mb-3">
                         Page No (<span th:text="${pageNo}"></span> / <span th:text="${pageDto.totalpage}"></span> Page)
                     </div>
-                    <div class="board-body">
+                    <div class="board-body  mb-3">
                         <!-- body -->
-                        <table class="table w-100" style="font-size:.9rem;">
-                            <thead class="bg-secondary text-light">
+                        <table class=" w-100">
+                            <thead class="bg-primary text-secondary">
                             <tr>
                                 <th scope="col-1">NO</th>
                                 <th scope="col-2">제목</th>
@@ -79,7 +79,7 @@
                                 <th:block >
                                     <tr th:each="boardDto : ${boardList}">
                                         <td th:text="${boardDto.no}"></td>
-                                        <td><a th:href="@{/board/read(no=${boardDto.no},pageNo=${pageNo})}"  th:text="${boardDto.title}">  </a> </td>
+                                        <td><a class="text-secondary" th:href="@{/board/read(no=${boardDto.no},pageNo=${pageNo})}"  th:text="${boardDto.title}">  </a> </td>
                                         <td th:text="${boardDto.username}"></td>
                                         <td th:text="${#temporals.format(boardDto.regdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                         <td th:text="${boardDto.count}"></td>
@@ -92,10 +92,10 @@
 
                     </div>
 
-                    <div class="board-footer row position-relative">
+                    <div class="board-footer  position-relative">
 
                         <!--  -->
-                        <div class="pagenation col-9">
+                        <div class="pagenation ">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
 
@@ -123,10 +123,10 @@
                             </nav>
                         </div>
                         <!--  -->
-                        <div class="button--group col-2">
+                        <div class="button--group">
                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                <a type="button" class="btn btn-outline-primary m-2" style="width:100px; font-size:.8rem"  href="/board/post">글쓰기</a>
-                                <button type="button" class="btn btn-outline-primary m-2" style="width:100px;font-size:.8rem;">처음으로</button>
+                                <a type="button" class="btn btn-primary m-2" style="width:100px; font-size:.8rem"  href="/board/post">글쓰기</a>
+                                <button type="button" class="btn btn-primary m-2" style="width:100px;font-size:.8rem;">처음으로</button>
                             </div>
                         </div>
 

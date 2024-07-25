@@ -70,7 +70,7 @@ uploadBoxEl.addEventListener('drop',function(e){
                 const imgEl =  document.createElement('img');
     //          console.log("reader.onload",e)
                 imgEl.setAttribute('src',e.target.result);
-                imgEl.setAttribute('style','position:absolute;width:100%;height:100%;left:0;top:0;z-index:10');
+                imgEl.setAttribute('style','position:absolute;width:100%;height:100%;max-height:600px;object-fit:contain;left:0;top:0;z-index:10');
                 preview.appendChild(imgEl);
             }
             formData.append('files',file);
@@ -242,7 +242,7 @@ musicUploadBoxEl.addEventListener('drop',function(e){
                 const imgEl =  document.createElement('img');
     //          console.log("reader.onload",e)
                 imgEl.setAttribute('src',e.target.result);
-                imgEl.setAttribute('style','position:absolute;width:100%;height:100%;left:0;top:0;');
+                imgEl.setAttribute('style','position:absolute;width:100%;height:100%;max-height:600px;object-fit:contain;left:0;top:0;');
                 preview.appendChild(imgEl);
             }
             music_form_data.append('imageFile',file);

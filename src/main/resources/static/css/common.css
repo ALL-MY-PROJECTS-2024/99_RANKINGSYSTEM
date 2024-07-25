@@ -405,7 +405,7 @@ ul{
     display: block;
     opacity: 1;
     position:relative;
-    z-index:9999;
+    z-index:999999;
     background-color: white;
 }
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu>li{
@@ -424,11 +424,12 @@ ul{
 
 }
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu>li>.submenu2{
-
+    position:relative;;
+    z-index : 999999;
 }
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu>li>.submenu2>li{
-    position:relative;;
-
+    position:relative;
+    z-index : 999999;
 }
 .wrapper>nav>.right>ul.mainmenu>li>ul.submenu>li>.submenu2>li>a{
     font-size:   clamp(6px,.8vw,24px);

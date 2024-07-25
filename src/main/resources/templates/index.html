@@ -184,7 +184,7 @@
                                         <!-- Slides -->
                                         <div class="swiper-slide" th:each="imageRanking,imageRankingStat : ${imageTop10ByCount}">
                                             <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
-                                                <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
+                                                <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
                                             </a>
                                             <div class="item-title" style="" th:text="${imageRanking.ImagesFileInfo.Images.title}"></div>
                                             <div class="item-count" >
@@ -227,7 +227,7 @@
                                         <!-- Slides -->
                                         <div class="swiper-slide" th:each="imageRanking,imageRankingStat : ${imageTop10ByLike}">
                                             <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
-                                                <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\s_'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
+                                                <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
                                             </a>
                                             <div class="item-title" style="" th:text="${imageRanking.ImagesFileInfo.Images.title}"></div>
                                             <div class="item-count" >

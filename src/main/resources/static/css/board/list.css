@@ -13,3 +13,25 @@
 .wrapper>main>section{}
 
 .wrapper>footer{}
+
+.table tr,
+.table td,
+.table th
+{
+    border :0;
+    background-color : transparent;
+}
+.table td,
+.table th{
+    padding : 5px;
+}
+th{
+    background-color :black;
+    color:lightgray;
+}
+
+.board-footer{
+    display:flex;
+    justify-content: space-between;
+    align-items : center;
+}

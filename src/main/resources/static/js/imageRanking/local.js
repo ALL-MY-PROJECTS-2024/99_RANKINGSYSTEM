@@ -76,11 +76,7 @@
                }
 
         }
-
-
         this._div.innerHTML +='</div>'
-
-
     };
 
     info.addTo(map);
@@ -284,29 +280,54 @@ function updateTable(localName) {
 
 
 function createTableBody(el,i){
+                console.log('el',el);
                 const tbody = document.querySelector('.table-body');
-                const tr = document.createElement('tr');
+                const tr = document.createElement('div');
+                tr.classList.add('item');
 
-                        const td1 = document.createElement('td');
-                        const td2 = document.createElement('td');
-                        const td3 = document.createElement('td');
-                        const td4 = document.createElement('td');
-                        const td5 = document.createElement('td');   //count
-                        const td6 = document.createElement('td');   //ilikeit
-                        td1.textContent = i;
-                        td2.textContent = el.imagesFileInfo.images.title;
-                        td3.textContent = el.imagesFileInfo.images.subCategory;
-                        td4.textContent = el.imagesFileInfo.images.username;
-                        td5.textContent = el.count;
-                        td6.textContent = el.ilikeit;
+                const td1 = document.createElement('div');
+                const img = document.createElement('img');
+                img.setAttribute('src',el.imagesFileInfo.dir+"\\" + el.imagesFileInfo.filename);
+                td1.appendChild(img);
+                tr.appendChild(td1);
 
-                        tr.appendChild(td1);
-                        tr.appendChild(td2);
-                        tr.appendChild(td3);
-                        tr.appendChild(td4);
-                        tr.appendChild(td5);
-                        tr.appendChild(td6);
 
-                    tbody.appendChild(tr);
+
+                const info = document.createElement('div');
+                info.classList.add('info');
+
+
+                const left = document.createElement('div');
+                left.classList.add('left');
+
+                left.innerHTML=el.imagesFileInfo.images.title;
+
+                const right = document.createElement('div');
+                right.classList.add('right');
+
+                const r1 = document.createElement('div');
+                r1.innerHTML=`
+                    <span style='font-size:.5rem;' class='material-symbols-outlined'>visibility</span> ${el.count}  `;
+                const r2 = document.createElement('div');
+                r2.innerHTML=`<span  style='font-size:.5rem;' class='material-symbols-outlined'>thumb_up</span> ${el.ilikeit}`;
+
+                right.appendChild(r1);
+                right.appendChild(r2);
+
+                info.appendChild(left);
+                info.appendChild(right);
+
+                tr.appendChild(info);
+//
+//                td2.textContent = el.imagesFileInfo.images.title;
+//                td3.textContent = el.count;
+//                td4.textContent = el.ilikeit;
+
+
+//                tr.appendChild(td2);
+//                tr.appendChild(td3);
+//                tr.appendChild(td4);
+
+                tbody.appendChild(tr);
 }
 

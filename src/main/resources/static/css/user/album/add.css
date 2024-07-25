@@ -20,10 +20,11 @@
 }
 .upload-box {
   width: 100%;
-  height: 45vh;
-  max-height : 500px;
+  max-width : 500px;
+  height : 100%;
+
   margin: 10px auto;
-  border: 3px dashed lightgray;
+
   padding: 5px !important;
   position: relative;
 
@@ -36,8 +37,8 @@
     left:0px;
     top:50px;
     width : 100%;
-    height : 45vh;
-    max-height : 500px;
+    max-width : 500px;
+    height : 100%;
     text-align:center;
     color:lightgray;
     margin-top:10px;
