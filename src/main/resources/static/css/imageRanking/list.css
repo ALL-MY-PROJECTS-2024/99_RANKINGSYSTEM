@@ -331,6 +331,7 @@
     justify-content : space-between;
     align-items : start;
 
+
 }
 .main-container>.right>.items>.item:hover .favorite-block{
     display:block;

@@ -42,9 +42,13 @@ th{
     text-decoration : underline;
     color : lightgray;
 }
-.board-footer.position-relative button,
-.board-footer.position-relative a
+.board-footer .button--group button,
+.board-footer .button--group a
 {
     background-color :darkcyan;
+    color : lightgray;
+}
+.pagenation a{
+    background-color : rgb(35,35,35);
     color : lightgray;
 }
