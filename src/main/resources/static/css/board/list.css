@@ -14,24 +14,37 @@
 
 .wrapper>footer{}
 
-.table tr,
-.table td,
-.table th
+tr,
+td,
+th
 {
     border :0;
     background-color : transparent;
 }
-.table td,
-.table th{
-    padding : 5px;
+
+td,
+th{
+    padding : 10px !important;
 }
 th{
-    background-color :black;
-    color:lightgray;
+    background-color :darkcyan !important;
+    color:lightgray !important;
 }
 
-.board-footer{
-    display:flex;
-    justify-content: space-between;
-    align-items : center;
+.board-footer.position-relative{
+    display:flex !important;
+    justify-content: space-between ;
+    align-items : center ;
+    width : 100%;
+
+}
+.board-body .title{
+    text-decoration : underline;
+    color : lightgray;
+}
+.board-footer.position-relative button,
+.board-footer.position-relative a
+{
+    background-color :darkcyan;
+    color : lightgray;
 }

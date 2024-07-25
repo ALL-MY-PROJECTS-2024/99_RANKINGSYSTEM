@@ -11,6 +11,8 @@
 
     <!-- common.css    -->
     <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/board/list.css">
+
 
 </head>
 <body>
@@ -49,9 +51,9 @@
                 <!-- breadcrumb -->
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb mt-2">
-                        <li class="breadcrumb-item text-secondary"><a href="#">홈</a></li>
-                        <li class="breadcrumb-item text-secondary"><a href="#">자유게시판</a></li>
-                        <li class="breadcrumb-item text-secondary active" aria-current="page">리스트</li>
+                        <li class="breadcrumb-item "><a class="text-secondary" href="#">홈</a></li>
+                        <li class="breadcrumb-item "><a  class="text-secondary" href="#">자유게시판</a></li>
+                        <li class="breadcrumb-item t active" aria-current="page">리스트</li>
                     </ol>
                 </nav>
 
@@ -63,15 +65,15 @@
                     </div>
                     <div class="board-body  mb-3">
                         <!-- body -->
-                        <table class=" w-100">
-                            <thead class="bg-primary text-secondary">
-                            <tr>
-                                <th scope="col-1">NO</th>
-                                <th scope="col-2">제목</th>
-                                <th scope="col-2">작성자</th>
-                                <th scope="col-2">작성날짜</th>
-                                <th scope="col-1">조회수</th>
-                            </tr>
+                        <table class="table w-100">
+                            <thead>
+                                <tr>
+                                    <th >NO</th>
+                                    <th >제목</th>
+                                    <th >작성자</th>
+                                    <th >작성날짜</th>
+                                    <th>조회수</th>
+                                </tr>
                             </thead>
                             <tbody>
 
@@ -79,57 +81,47 @@
                                 <th:block >
                                     <tr th:each="boardDto : ${boardList}">
                                         <td th:text="${boardDto.no}"></td>
-                                        <td><a class="text-secondary" th:href="@{/board/read(no=${boardDto.no},pageNo=${pageNo})}"  th:text="${boardDto.title}">  </a> </td>
+                                        <td><a class="title" th:href="@{/board/read(no=${boardDto.no},pageNo=${pageNo})}"  th:text="${boardDto.title}">  </a> </td>
                                         <td th:text="${boardDto.username}"></td>
                                         <td th:text="${#temporals.format(boardDto.regdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                         <td th:text="${boardDto.count}"></td>
                                     </tr>
                                 </th:block>
-
-
                             </tbody>
                         </table>
-
                     </div>
 
                     <div class="board-footer  position-relative">
-
                         <!--  -->
-                        <div class="pagenation ">
+                        <div class="pagenation">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-
                                     <!-- PREV -->
                                     <li class="page-item" th:if="${pageDto.prev}">
                                             <a class="page-link" th:href="@{/board/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                     </li>
-
                                     <!-- PAGENATION -->
                                     <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
                                             <a class="page-link" th:href="@{/board/list(pageNo=${i})}" > <span th:text="${i}"></span> </a>
                                     </li>
-
-
                                     <!-- NEXT -->
                                     <li class="page-item"  th:if="${pageDto.next}">
                                         <a class="page-link" th:href="@{/board/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
-
                                 </ul>
                             </nav>
                         </div>
                         <!--  -->
                         <div class="button--group">
                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                <a type="button" class="btn btn-primary m-2" style="width:100px; font-size:.8rem"  href="/board/post">글쓰기</a>
-                                <button type="button" class="btn btn-primary m-2" style="width:100px;font-size:.8rem;">처음으로</button>
+                                <a type="button" class="btn  m-2" style="width:100px; font-size:.8rem"  href="/board/post">글쓰기</a>
+                                <button type="button" class="btn  m-2" style="width:100px;font-size:.8rem;">처음으로</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
