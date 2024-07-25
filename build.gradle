@@ -67,8 +67,6 @@ dependencies {
 
 	//THUMNAILATOR
 	implementation 'net.coobird:thumbnailator:0.4.20'
-	// IMAGE SIZE(webp -> png로 변경)
-	implementation 'com.luciad:luciad-webp:1.4'
 
 	//WEBSOCKET
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
