@@ -1,52 +1,52 @@
-main>section{}
-main>section>.read-block{
 
-    /*height : 100vh;*/
+.image-block .audio-player {
+  background-color: #ffcccb; /* 배경 색상 */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
 }
 
-main>section>.read-block .info-block{
-    /*border : 1px solid;*/
-    /*height : 200px;*/
-}
-main>section>.read-block>.image-block{
-    display:flex;
-    justify-content : center;
-    align-items : start;
-}
-
-main>section>.read-block>.image-block>.item{
-    margin : 10px;
-    border : 1px solid;
-    height : 100%;
-}
-main>section>.read-block>.image-block>.item .btns{
-    margin : 5px;
-    font-size : .8rem;
-    border : 1px solid;
-
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-main>section>.read-block>.image-block>.item .btns a{
-    width : 150px;
-    margin : 10px;
-    font-size : .8rem;
+audio button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
-main>section>.read-block>.image-block>.item>.images{
-
-
-
+audio button:hover {
+  background-color: #45a049;
 }
 
-main>section>.read-block>.image-block>.item>.images{
-    padding : 10px;
-
-
+audio input[type="range"] {
+  width: 300px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  border-radius: 5px;
 }
-main>section>.read-block>.image-block>.item>div:nth-child(2) img{
-    object-fit : contain;
-    display:block;
-    margin : 0 auto;
+
+audio input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #4caf50;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+audio input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #4caf50;
+  border-radius: 50%;
+  cursor: pointer;
 }

@@ -27,5 +27,9 @@ public class MusicFileInfo {
     private String filename;
     private String albumImageName;
 
+    private long fileSize;
+    private long width;
+    private long height;
+    private String tool;
 
 }

@@ -268,16 +268,30 @@ public class UserServiceImpl implements UserService {
 
 
 
-    private void saveFileInfoMusic(Music music, AlbumDto dto, File fileobj) {
+    private void saveFileInfoMusic(Music music, AlbumDto dto, File  musicfile,MultipartFile file) throws IOException {
 
         MusicFileInfo musicFileInfo = new MusicFileInfo();
         musicFileInfo.setMusic(music);
         String dirPath = File.separator + UPLOADPATH.UPPERDIRPATH + File.separator;
         dirPath += UPLOADPATH.MUSICDIRPATH + File.separator + dto.getUsername() + File.separator
                 + dto.getSubCategory() + File.separator + music.getMusicid();
+
         musicFileInfo.setDir(dirPath);
-        musicFileInfo.setFilename(fileobj.getName());
+        musicFileInfo.setFilename(file.getOriginalFilename());
+        musicFileInfo.setFileSize(file.getSize());
+
         musicFileInfo.setAlbumImageName(dto.getImageFile().getOriginalFilename());
+
+        File albumImageFile = new File(dirPath, Objects.requireNonNull(dto.getImageFile().getOriginalFilename()));
+        BufferedImage image = Thumbnails.of(albumImageFile).scale(1).asBufferedImage();
+        System.out.println("albumImageFile " + albumImageFile);
+        System.out.println("image " + image);
+        long width = image.getWidth();
+        long height = image.getHeight();
+        musicFileInfo.setWidth(width);
+        musicFileInfo.setHeight(height);
+        musicFileInfo.setTool(dto.getTool());
+
         musicFileInfoRepository.save(musicFileInfo);
     }
 
@@ -525,7 +539,7 @@ public class UserServiceImpl implements UserService {
     //음악 앨범 추가
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public boolean uploadMusicAlbum(AlbumDto dto) {
+    public boolean uploadMusicAlbum(AlbumDto dto) throws IOException {
         //Dto->ImagesEntity
 
         Music music = new Music();
@@ -544,9 +558,17 @@ public class UserServiceImpl implements UserService {
         String uploadPath = UPLOADPATH.ROOTDIRPATH + File.separator + UPLOADPATH.UPPERDIRPATH + File.separator;
         uploadPath += UPLOADPATH.MUSICDIRPATH + File.separator + dto.getUsername() + File.separator + dto.getSubCategory() + File.separator + music.getMusicid();
 
+
+
         File dir = new File(uploadPath);
         if (!dir.exists())
             dir.mkdirs();
+
+        //앨범이미지파일 추가
+        File albumImageFile = new File(dir,dto.getImageFile().getOriginalFilename());
+        System.out.println("albumImageFile : " + albumImageFile);
+        dto.getImageFile().transferTo(albumImageFile);
+
         try {
             for (MultipartFile file : dto.getFiles()) {
                 System.out.println("-----------------------------");
@@ -554,17 +576,13 @@ public class UserServiceImpl implements UserService {
                 System.out.println("filename(origin) : " + file.getOriginalFilename());
                 System.out.println("filesize : " + file.getSize());
                 System.out.println("-----------------------------");
-                File fileobj = new File(dir, file.getOriginalFilename());    //파일객체생성
-
-
-                file.transferTo(fileobj);   //저장
+                File musicFile = new File(dir, Objects.requireNonNull(file.getOriginalFilename()));    //파일 객체생성
+                file.transferTo(musicFile);   //저장
 
                 // DB에 파일경로 저장
-                saveFileInfoMusic(music, dto, fileobj);
+                saveFileInfoMusic(music, dto, musicFile,file);
             }
-            //앨범이미지파일 추가
-            File albumImageFile = new File(dir,dto.getImageFile().getOriginalFilename());
-            dto.getImageFile().transferTo(albumImageFile);
+
 
 
         }catch(IOException e){

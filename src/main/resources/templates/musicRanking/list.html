@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-<!--
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
--->
+  <!--
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  -->
 
 
 
@@ -13,17 +13,20 @@
 
 
   <!-- /css/album/main.css -->
-  <link rel="stylesheet" href="/css/musicRanking/list.css">
+  <link rel="stylesheet" href="/css/imageRanking/list.css">
 
 
   <!--  MODEL 속성가져오기  -->
   <script th:inline="javascript">
-    let  favoriteList = /*[[${ favoriteList}]]*/
+    let  favoriteList = /*[[${favoriteList}]]*/
+    let  bookmarkList = /*[[${bookmarkList}]]*/
     console.log(favoriteList);
     let pageDto = /*[[${pageDto}]]*/
     let listpageDto = /*[[${listpageDto}]]*/
     let mode = /*[[${mode}]]*/
     console.log(pageDto);
+    console.log("mode",mode);
+    console.log("bookmarkList",bookmarkList);
   </script>
 
 
@@ -44,29 +47,26 @@
   <th:block th:insert="fragments/nav :: navFragment" />
 
 
-
-  <section class="layout-5 breadcrumb-block">
-    <div class="">
-      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="/">
-              <span class="">홈</span>
-            </a>
-          </li>
-          <li class="breadcrumb-item">
-            <a href="/">
-              <span class="">이달의 콘텐츠 RANKING</span>
-            </a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page" style="border:0 !important">전체 음악 랭킹</li>
-        </ol>
-      </nav>
-    </div>
-  </section>
-
-
   <main>
+    <section class="layout-5 breadcrumb-block">
+      <div class="">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/">
+                <span class="">홈</span>
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/user/album/main">
+                <span class="">이달의 콘텐츠 RANKING</span>
+              </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page" style="border:0 !important;">전체 음악 랭킹</li>
+          </ol>
+        </nav>
+      </div>
+    </section>
 
     <section>
 
@@ -74,36 +74,34 @@
 
         <div class="main-container">
 
-
           <div class="right">
             <div class="btn-group">
               <span class="countOrder active">조회순</span>
               <span class="likeOrder">좋아요순</span>
-              <span class="summary">요약보기</span>
             </div>
 
             <div class="items count-order-block">
               <!-- item             -->
               <div class="item" th:each="musicRanking,i:${list}">
                 <div class="ranking-block">
-                    <div class="rank" ></div>
-                    <div class="bookmark">
-                      <a href="javascript:void(0)" class="bookmark_btn" th:data-id="${musicRanking.rankingId}">
-                        <span class="material-symbols-outlined bookmark">bookmark</span>
-                      </a>
-                    </div>
+                  <div class="rank"></div>
+                  <div class="bookmark-block" th:data-id="${musicRanking.rankingId}">
+                    <a href="javascript:void(0)" class="bookmark_btn" th:data-id="${musicRanking.rankingId}">
+                      <span class="material-symbols-outlined bookmark">bookmark</span>
+                    </a>
+                  </div>
                 </div>
 
                 <div class="image-block">
                   <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId} )}">
-                    <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
+                    <img th:src="@{${musicRanking.musicFileInfo.dir}+'\\'+${musicRanking.musicFileInfo.albumImageName}}"  alt="" />
                   </a>
                 </div>
                 <div class="favorite-block" th:data-rankingid="${musicRanking.rankingId}">
                   <input type="hidden"  />
                   <a href="javascript:void(0)" th:data-imageid="${musicRanking.rankingId}" class="thumb_up_btn">
-                      <span class="material-symbols-outlined favorite">thumb_up</span>&nbsp;
-                    <span style="font-size : .8rem;color:black;font-weight:800" class="thumb-up-counter" th:text="${musicRanking.ilikeit}"></span>
+                    <span class="material-symbols-outlined favorite" >thumb_up</span>&nbsp;
+                    </span>
                   </a>
                 </div>
 
@@ -111,20 +109,22 @@
                   <!--    -->
                   <div>
                     <div class="title">
-
                       <div>
-                        <span>제목 : </span><span th:text="${musicRanking.MusicFileInfo.Music.title}"></span>
+                        <span th:text="${musicRanking.MusicFileInfo.Music.title}"></span>
                       </div>
                     </div>
                     <div class="count">
-                      <span>조회 : </span><span th:text="${musicRanking.count}"></span>
+                      <span class="material-symbols-outlined" style="font-size:.6rem;">visibility</span>&nbsp;&nbsp;<span th:text="${musicRanking.count}"></span>
+                    </div>
+                    <div class="thumb-up">
+                      <span class="material-symbols-outlined" style="font-size:.6rem;">thumb_up</span>&nbsp;&nbsp;&nbsp;<span style="" class="thumb-up-counter" th:text="${musicRanking.ilikeit}"></span>
                     </div>
                   </div>
-                    <!--      -->
-                    <div class="regdate">
-                      <div></div>
-                      <div th:text="${#temporals.format(musicRanking.regDate, 'yyyy-MM-dd')}"></div>
-                    </div>
+                  <!--      -->
+                  <div class="regdate">
+                    <div></div>
+                    <div th:text="${#temporals.format(musicRanking.regDate, 'yyyy-MM-dd')}"></div>
+                  </div>
 
                   <!--    -->
                 </div>
@@ -173,7 +173,7 @@
               <div class="item" th:each="musicRanking,i:${likelist}">
                 <div class="ranking-block">
                   <div class="rank" ></div>
-                  <div class="bookmark">
+                  <div class="bookmark-block" th:data-id="${musicRanking.rankingId}">
                     <a href="javascript:void(0)" class="bookmark_btn" th:data-id="${musicRanking.rankingId}">
                       <span class="material-symbols-outlined bookmark">bookmark</span>
                     </a>
@@ -182,14 +182,13 @@
 
                 <div class="image-block">
                   <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId})}">
-                    <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
+                    <img th:src="@{${musicRanking.musicFileInfo.dir}+'\\'+${musicRanking.musicFileInfo.albumImageName}}"  alt="" />
                   </a>
                 </div>
                 <div class="favorite-block" th:data-rankingid="${musicRanking.rankingId}">
                   <input type="hidden"  />
                   <a href="javascript:void(0)" th:data-imageid="${musicRanking.rankingId}" class="thumb_up_btn">
                     <span class="material-symbols-outlined favorite">thumb_up</span>&nbsp;
-                    <span style="font-size : .8rem;color:black;font-weight:800" class="thumb-up-counter" th:text="${musicRanking.ilikeit}"></span>
                   </a>
                 </div>
 
@@ -197,13 +196,15 @@
                   <!--    -->
                   <div>
                     <div class="title">
-
                       <div>
-                        <span>제목 : </span><span th:text="${musicRanking.MusicFileInfo.Music.title}"></span>
+                        <span th:text="${musicRanking.MusicFileInfo.Music.title}"></span>
                       </div>
                     </div>
                     <div class="count">
-                      <span>조회 : </span><span th:text="${musicRanking.count}"></span>
+                      <span class="material-symbols-outlined" style="font-size:.6rem; ">visibility</span>&nbsp;&nbsp;<span th:text="${musicRanking.count}"></span>
+                    </div>
+                    <div class="thumb-up">
+                      <span class="material-symbols-outlined" style="font-size:.6rem;">thumb_up</span>&nbsp;&nbsp;&nbsp;<span style="" class="thumb-up-counter" th:text="${musicRanking.ilikeit}"></span>
                     </div>
                   </div>
                   <!--      -->
@@ -249,76 +250,6 @@
               </div>
 
             </div>
-
-            <!-- 요약 하기 -->
-            <div class="items summary-block hidden">
-              <div class="item">
-                <h4 style="">조회순 RANKING</h4>
-                <hr>
-                <table class="table w-100">
-
-                  <thead>
-                  <tr>
-                    <th>순위</th>
-                    <th>이미지</th>
-                    <th >제목</th>
-                    <th>CAT</th>
-                    <th>계정</th>
-                    <th >조회수</th>
-                    <th>좋아요</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr th:each="musicRanking,obj : ${rankingList}">
-                    <td th:text="${obj.count}"></td>
-                    <td>
-                      <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" style="width:100px;height:50px;">
-                    </td>
-                    <td th:text="${musicRanking.MusicFileInfo.Music.title}"></td>
-                    <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
-                    <td th:text="${musicRanking.MusicFileInfo.Music.username}"></td>
-                    <td th:text="${musicRanking.count}"></td>
-                    <td th:text="${musicRanking.ilikeit}"></td>
-
-                  </tr>
-                  </tbody>
-                </table>
-
-
-
-              </div>
-              <div class="item">
-                <h4 style="">좋아요순 RANKING</h4>
-                <hr>
-                <table class="table w-100">
-                  <thead>
-                  <tr>
-                    <th>순위</th>
-                    <th>이미지</th>
-                    <th >제목</th>
-                    <th>CAT</th>
-                    <th>계정</th>
-                    <th >조회수</th>
-                    <th>좋아요</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr th:each="musicRanking,obj : ${rankingLikeList}">
-                    <td th:text="${obj.count}"></td>
-                    <td>
-                      <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" style="width:100px;height:50px;">
-                    </td>
-                    <td th:text="${musicRanking.MusicFileInfo.Music.title}"></td>
-                    <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>
-                    <td th:text="${musicRanking.MusicFileInfo.Music.username}"></td>
-                    <td th:text="${musicRanking.count}"></td>
-                    <td th:text="${musicRanking.ilikeit}"></td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
 
           </div>
 

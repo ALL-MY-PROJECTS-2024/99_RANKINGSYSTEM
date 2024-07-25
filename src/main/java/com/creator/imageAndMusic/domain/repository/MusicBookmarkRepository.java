@@ -16,4 +16,5 @@ public interface MusicBookmarkRepository extends JpaRepository<MusicBookmark,Lon
 
     List<MusicBookmark> findAllByUserOrderByIdDesc(User user);
 
+    List<MusicBookmark> findAllByUser(User user);
 }

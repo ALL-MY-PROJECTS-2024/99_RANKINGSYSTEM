@@ -117,4 +117,13 @@ public class BookmarkServiceImpl {
         Optional<User> userOptional = userRepository.findById(name);
         return userOptional.map(user -> bookmarkRepository.findAllByUser(user)).orElse(null);
     }
+
+    @Transactional(rollbackFor=Exception.class)
+    public List<MusicBookmark> getMyBookmarkMusic(String name) {
+        Optional<User> userOptional = userRepository.findById(name);
+        if(userOptional.isEmpty())
+            return null;
+        return userOptional.map(user -> musicBookmarkRepository.findAllByUser(user)).orElse(null);
+
+    }
 }

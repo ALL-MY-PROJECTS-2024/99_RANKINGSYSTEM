@@ -5,21 +5,20 @@ thumb_up_btn_els.forEach((el)=>{
     el.addEventListener('click',function(){
         console.log("clicked..thumb_up");
 
-        const musicid = el.getAttribute('data-imageid');
-        const thumbUpCounter = el.querySelector('.thumb-up-counter');
+        const imageid = el.getAttribute('data-imageid');
+        const thumbUpCounter = el.parentNode.parentNode.querySelector('.thumb-up-counter');
         const thumbUpIcon = el.querySelector('.material-symbols-outlined.favorite')
 
-        axios.get(`/favorite/music/${musicid}`)
+        axios.get(`/favorite/music/${imageid}`)
         .then(resp=>{
-            console.log(resp);
-            const isFavorite = resp.data.favorite;
-           if(isFavorite){
-                thumbUpIcon.setAttribute('style',"font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 18");
-           }else{
-                thumbUpIcon.setAttribute('style',"font-variation-settings:'FILL' 100,'wght' 300,'GRAD' 0,'opsz' 18");
-           }
-
-           thumbUpCounter.innerHTML =  resp.data.count;
+               console.log(resp);
+               const isFavorite = resp.data.favorite;
+               if(isFavorite){
+                    thumbUpIcon.setAttribute('style',"font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 18");
+               }else{
+                    thumbUpIcon.setAttribute('style',"font-variation-settings:'FILL' 100,'wght' 300,'GRAD' 0,'opsz' 18");
+               }
+                thumbUpCounter.innerHTML =  resp.data.count;
 
          })
         .catch(err=>{console.log(err);})
@@ -29,7 +28,7 @@ thumb_up_btn_els.forEach((el)=>{
 
 
 //----------------------------------------------------------------
-// 내가 누른 좋아요 확인
+// 내가 누른 좋아요 확인 - 채우기
 //----------------------------------------------------------------
 const favoriteBlock = document.querySelectorAll('.favorite-block');
 
@@ -42,9 +41,22 @@ favoriteBlock.forEach(el=>{
             const thumbUp =  el.querySelector('.favorite');
             thumbUp.setAttribute('style',"font-variation-settings:'FILL' 100,'wght' 300,'GRAD' 0,'opsz' 18");
         }
-
     })
 })
+//----------------------------------------------------------------
+// 내가 누른 북마크 확인 - 채우기
+//----------------------------------------------------------------
+const bookmarkBlock = document.querySelectorAll('.bookmark-block');
+bookmarkBlock.forEach(el=>{
+    const rankingId =  el.getAttribute('data-id');
+    bookmarkList.forEach(myBookmark=>{
+        if(rankingId==myBookmark.musicRanking.rankingId){
+            const bookmark =  el.querySelector('.bookmark');
+            bookmark.setAttribute('style',"font-variation-settings:'FILL' 100,'wght' 300,'GRAD' 0,'opsz' 18");
+        }
+    })
+})
+
 
 //----------------------------------------------------------------
 // 즐겨찾기 추가
@@ -64,6 +76,7 @@ bookmarkBtnEls.forEach(el=>{
                 }
                 else if(resp.data.exist=='false'){
                     alert("즐겨찾기에 추가했습니다.");
+                    location.reload();
                 }
            })
            .catch(err=>{console.log(err)});
@@ -80,6 +93,7 @@ const rankEls = document.querySelectorAll('.count-order-block .rank');
 let i = (pageDto.criteria.pageno-1)*pageDto.criteria.amount + 1
 rankEls.forEach(el=>{
     el.innerHTML=i;
+
     i++;
 })
 
@@ -98,11 +112,11 @@ likerankEls.forEach(el=>{
 
 const countOrder = document.querySelector(".countOrder");
 const likeOrder = document.querySelector(".likeOrder");
-const summary = document.querySelector(".summary");
+//const summary = document.querySelector(".summary");
 
 const countOrderBlock = document.querySelector(".count-order-block");
 const likeOrderBlock = document.querySelector(".like-order-block");
-const summaryBlock = document.querySelector(".summary-block");
+//const summaryBlock = document.querySelector(".summary-block");
 
 
 countOrder.addEventListener('click',function(){
@@ -114,8 +128,8 @@ countOrder.addEventListener('click',function(){
 //    countOrder.classList.add('active');
 //    likeOrder.classList.remove('active');
 //    summary.classList.remove('active');
-    location.href="/musicRanking/list?mode=1"
 
+    location.href="/musicRanking/list?mode=1"
 });
 
 likeOrder.addEventListener('click',function(){
@@ -127,10 +141,11 @@ likeOrder.addEventListener('click',function(){
 //    likeOrder.classList.add('active');
 //    countOrder.classList.remove('active');
 //    summary.classList.remove('active');
+
     location.href="/musicRanking/list?mode=2"
 })
 
-summary.addEventListener('click',function(){
+//summary.addEventListener('click',function(){
 //    summaryBlock.classList.remove('hidden');
 //    countOrderBlock.classList.add('hidden');
 //    likeOrderBlock.classList.add("hidden");
@@ -139,39 +154,38 @@ summary.addEventListener('click',function(){
 //    summary.classList.add('active');
 //    likeOrder.classList.remove('active');
 //    countOrder.classList.remove('active');
-    location.href="/musicRanking/list?mode=3"
-})
+//    location.href="/imageRanking/list?mode=3"
+//})
 //----------------------------------------------------------------
 // MODE
 //----------------------------------------------------------------
-if(mode=="1"){
-
+    if(mode=="1"){
             countOrderBlock.classList.remove('hidden');
             likeOrderBlock.classList.add("hidden");
-            summaryBlock.classList.add('hidden');
+            //summaryBlock.classList.add('hidden');
 
-            countOrder.classList.add('active');
+            countOrder.classList.add('active'); //조회순
             likeOrder.classList.remove('active');
-            summary.classList.remove('active');
-}else if(mode=="2"){
+            //summary.classList.remove('active');
 
+    }else if(mode=="2"){
         likeOrderBlock.classList.remove("hidden");;
         countOrderBlock.classList.add('hidden');
-        summaryBlock.classList.add('hidden');
+        //summaryBlock.classList.add('hidden');
 
         likeOrder.classList.add('active');
         countOrder.classList.remove('active');
-        summary.classList.remove('active');
-}else{
+        //summary.classList.remove('active');
 
-        summaryBlock.classList.remove('hidden');
+    }else{
+        //summaryBlock.classList.remove('hidden');
         likeOrderBlock.classList.add("hidden");;
         countOrderBlock.classList.add('hidden');
 
 
-        summary.classList.add('active');
+        //summary.classList.add('active');
         likeOrder.classList.remove('active');
         countOrder.classList.remove('active');
 
-}
+    }
 

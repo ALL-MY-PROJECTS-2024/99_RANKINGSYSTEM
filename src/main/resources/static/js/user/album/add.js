@@ -296,6 +296,7 @@ addMusicBtn.addEventListener('click',function(){
         })
         //const description = document.musicForm.description.value;
 
+        const tool = document.musicForm.tool.value;
 
         music_form_data.append('username',username);
         music_form_data.append('title',title);
@@ -304,6 +305,7 @@ addMusicBtn.addEventListener('click',function(){
         //music_form_data.append('description',description);
         music_form_data.append('lat',lat);
         music_form_data.append('lng',lng);
+        music_form_data.append('tool',tool);
 
         const musicFiles = document.musicForm.files.files[0];
         music_form_data.append("files",musicFiles);

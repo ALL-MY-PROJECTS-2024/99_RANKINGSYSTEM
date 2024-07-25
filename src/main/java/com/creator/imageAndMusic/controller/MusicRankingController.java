@@ -3,15 +3,9 @@ package com.creator.imageAndMusic.controller;
 
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
-import com.creator.imageAndMusic.domain.entity.FavoriteImage;
-import com.creator.imageAndMusic.domain.entity.FavoriteMusic;
-import com.creator.imageAndMusic.domain.entity.ImagesRanking;
-import com.creator.imageAndMusic.domain.entity.MusicRanking;
-import com.creator.imageAndMusic.domain.service.FavoriteImageServiceImpl;
-import com.creator.imageAndMusic.domain.service.FavoriteMusicServiceImpl;
-import com.creator.imageAndMusic.domain.service.ImageRankingService;
+import com.creator.imageAndMusic.domain.entity.*;
+import com.creator.imageAndMusic.domain.service.*;
 
-import com.creator.imageAndMusic.domain.service.MusicRankingServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +40,8 @@ public class MusicRankingController {
     @Autowired
     private MusicRankingServiceImpl musicRankingService;
 
-
+    @Autowired
+    private BookmarkServiceImpl bookmarkService;
 
     @GetMapping("/add")
     public @ResponseBody ResponseEntity<String> addRanking(@RequestParam("fileid") Long fileid,Model model) throws Exception {
@@ -109,6 +104,9 @@ public class MusicRankingController {
         List<FavoriteMusic> favoriteMusicList  = favoriteMusicService.getMyfavoriteMusic(authentication.getName());
         model.addAttribute("favoriteList",favoriteMusicList);
 
+        //Bookmark 찾기
+        List<MusicBookmark> bookmarkList  =bookmarkService.getMyBookmarkMusic(authentication.getName());
+        model.addAttribute("bookmarkList",bookmarkList);
 
 
         return "musicRanking/list";

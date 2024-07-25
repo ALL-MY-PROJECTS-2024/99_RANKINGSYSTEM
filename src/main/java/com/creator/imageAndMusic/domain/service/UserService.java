@@ -34,7 +34,7 @@ public interface UserService {
     @Transactional(rollbackFor = Exception.class)
     boolean modifiedMyInfo(UserDto userDto, Model model);
 
-    boolean uploadMusicAlbum(AlbumDto dto);
+    boolean uploadMusicAlbum(AlbumDto dto) throws IOException;
 
     @Transactional(rollbackFor = Exception.class)
     public List<MusicFileInfo> getUserMusicItems() throws Exception;
