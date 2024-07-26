@@ -17,6 +17,17 @@
     height: 50px;
     background-color:linear-gradient(to right, navy, deepskyblue);
 }
+.section1 .left{
+   height : 900px;
+}
+
+.section1 .left .image-block,
+.section1 .left .music-block
+{
+    height : 40vh;
+}
+
+
 .section1 .left>*{
     margin-bottom : 15px;
 }
@@ -34,32 +45,47 @@
 }
 .section1 .left .swiper{
     width : 100%;
-    height : 200px;
+    height : 30vh;
     position:relative;
 }
 .section1 .item-title{
-    padding:2px 5px;
+    padding:2px 0;
     position:absolute;
-    top:180px;
+    bottom : 0;
     left:0;
     width:70%;
     white-space: nowrap; /* 줄바꿈 방지 */
     overflow: hidden; /* 넘치는 부분 숨기기 */
     text-overflow: ellipsis; /* 넘치는 부분 대신 ...으로 표시 */
+    height : 20px;
+    background-color:black;
+    z-index:100;
+
+    display:flex;
+    justify-content:left;
+    align-items : center;
 }
 .section1 .item-count{
+      padding:2px 0;
+      width:30%;
       position:absolute;
-      top:180px;
-      right:5px;
+      bottom : 0;
+      right:0px;
       font-size : .7rem;
+      height : 20px;
+      background-color:black;
+      z-index:100;
+     display:flex;
+     justify-content:right;
+     align-items : center;
 }
 .section1 .left .swiper .swiper-wrapper{
     width : 100%;
-    height : 160%;
+    height : 30vh;
 }
 .section1 .left .swiper .swiper-wrapper .swiper-slide{
     width : 100%;
-    height :200px;
+    height : 30vh;
 /*
     border : 1px solid lightgray;
 */
@@ -71,8 +97,8 @@
 }
 .section1 .left .swiper .swiper-wrapper .swiper-slide img{
     width : 100%;
-    height : 150px;
-    margin-top : 25px;
+    height : 30vh;
+    margin-top : 0px;
     transition:.2s;
     border-radius : 2px;
     object-fit : cover;
@@ -93,7 +119,7 @@
 .section1 .left  .swiper-button-prev .material-symbols-outlined,
 .section1 .left  .swiper-button-next .material-symbols-outlined
 {
-    font-size : 1.8rem;
+    font-size : 2rem;
     border : 1px solid gray;
     border-radius : 50%;
     color :white;

@@ -157,7 +157,6 @@
 
                 </div>
                 <div class="left layout-5 mb-5">
-
                     <!--이미지 블록-->
                     <div class="image-block">
                         <div class="title-header mb-4">
@@ -188,7 +187,7 @@
                                             </a>
                                             <div class="item-title" style="" th:text="${imageRanking.ImagesFileInfo.Images.title}"></div>
                                             <div class="item-count" >
-                                                <span class="material-symbols-outlined" style="font-size:.6rem">visibility</span>
+                                                <span class="material-symbols-outlined" style="font-size:.6rem">visibility</span>&nbsp;&nbsp;
                                                 <span th:text="${imageRanking.count}"></span>
                                             </div>
                                             <div class="imageInfo hidden">
@@ -231,7 +230,7 @@
                                             </a>
                                             <div class="item-title" style="" th:text="${imageRanking.ImagesFileInfo.Images.title}"></div>
                                             <div class="item-count" >
-                                                <span class="material-symbols-outlined" style="font-size:.6rem">thumb_up</span>
+                                                <span class="material-symbols-outlined" style="font-size:.6rem">thumb_up</span>&nbsp;&nbsp;
                                                 <span th:text="${imageRanking.ilikeit}"></span>
                                             </div>
                                             <div class="imageInfo hidden">
@@ -286,7 +285,7 @@
                                             </a>
                                             <div class="item-title" style="" th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
                                             <div class="item-count" >
-                                                <span class="material-symbols-outlined" style="font-size:.6rem">visibility</span>
+                                                <span class="material-symbols-outlined" style="font-size:.6rem">visibility</span>&nbsp;&nbsp;
                                                 <span th:text="${musicRanking.count}"></span>
                                             </div>
                                             <div class="musicinfo hidden">
@@ -327,9 +326,9 @@
                                             <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId})}">
                                                 <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" ></img>
                                             </a>
-                                            <div class="item-title" style="" th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
+                                            <div class="item-title"  th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
                                             <div class="item-count" >
-                                                <span class="material-symbols-outlined" style="font-size:.6rem">thumb_up</span>
+                                                <span class="material-symbols-outlined" style="font-size:.6rem">thumb_up</span>&nbsp;&nbsp;
                                                 <span th:text="${musicRanking.ilikeit}"></span>
                                             </div>
                                             <div class="musicinfo hidden">
