@@ -54,7 +54,7 @@
 
             <div class="right">
 
-                <h4 style="background-color:darkcyan;padding:5px;color:white;">이미지</h4>
+                <h4 style="color:white;">이미지</h4>
                 <hr>
                 <div class="join_block">
                     <div  style="width : 100%;height:250px;overflow:auto;border :1px solid;margin-bottom:20px;">
@@ -80,7 +80,7 @@
                                     <td th:text="${dto.tradingid}"></td>
                                     <td>
                                         <a href="javascript:void(0)">
-                                            <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
+                                            <img  style="width:100px;height:50px;object-fit:contain" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
                                         </a>
                                     </td>
                                     <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>
@@ -126,7 +126,7 @@
 
                 -->
 
-                <h4 style="background-color:darkcyan;padding:5px;color:white;">음악</h4>
+                <h4 style="color:white;">음악</h4>
                 <hr>
                 <div class="join_block">
                     <div  style="width : 100%;height:250px;overflow:auto;border :1px solid;margin-bottom:20px;">
@@ -152,7 +152,7 @@
                                     <td th:text="${dto.tradingid}"></td>
                                     <td>
                                         <a href="javascript:void(0)">
-                                            <img  style="width:100px;height:50px;" th:src="${dto.fileid.dir}+'/'+${dto.fileid.albumImageName}"  alt="" />
+                                            <img  style="width:100px;height:50px;object-fit:contain" th:src="${dto.fileid.dir}+'/'+${dto.fileid.albumImageName}"  alt="" />
                                         </a>
                                     </td>
                                     <td th:text="${dto.adminAccepted}?'승인':'미승인'"></td>

@@ -23,18 +23,25 @@
     justify-content:space-between;
     align-items : start;
 }
+.accordion.accordion-flush *{
+    background-color:transparent;
+}
+
 .accordion-button{
-    background-color : rgb(25,25,25);
+    background-color : rgb(35,35,35) !important;
+}
+
+.accordion-header button{
+    margin-bottom : 15px;
 }
 .collapse.show{
-
-    background-color:gray;
+    background-color:lightgray;
 }
 
 .show-block .left{
     width: calc(100% - 320px);
     position:relative;
-    border-right:1px solid gray;
+
 
 }
 .accordion-header{
