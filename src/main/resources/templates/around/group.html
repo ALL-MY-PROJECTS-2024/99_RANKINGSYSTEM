@@ -158,7 +158,7 @@
 
                                     <div  class="show-image-block" th:each="musicRanking,musicRankingStat : ${musicList}">
 <!--                                        <td th:text="${musicRankingStat.count}"></td>-->
-                                            <a href="javascript:void(0)">
+                                            <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId})}">
                                                 <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
                                             </a>
 <!--                                        <td th:text="${musicRanking.MusicFileInfo.Music.title}"></td>-->

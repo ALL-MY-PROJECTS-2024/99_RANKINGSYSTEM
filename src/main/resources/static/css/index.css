@@ -40,7 +40,7 @@
 .section1 .item-title{
     padding:2px 5px;
     position:absolute;
-    top:183px;
+    top:180px;
     left:0;
     width:70%;
     white-space: nowrap; /* 줄바꿈 방지 */
@@ -49,7 +49,7 @@
 }
 .section1 .item-count{
       position:absolute;
-      top:183px;
+      top:180px;
       right:5px;
       font-size : .7rem;
 }
