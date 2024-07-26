@@ -281,7 +281,9 @@
                                             표시할 음악 이미지가 없습니다.
                                         </div>
                                         <div class="swiper-slide" th:each="musicRanking,musicRankingStat : ${musicTop10ByCount}">
-                                            <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId})}">
+                                                <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            </a>
                                             <div class="item-title" style="" th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
                                             <div class="item-count" >
                                                 <span class="material-symbols-outlined" style="font-size:.6rem">visibility</span>
@@ -322,8 +324,9 @@
                                         </div>
                                         <!-- Slides -->
                                         <div class="swiper-slide" th:each="musicRanking,musicRankingStat : ${musicTop10ByLike}">
-                                            <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
-                                            <div class="item-title" style="" th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
+                                            <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId})}">
+                                                <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
+                                            </a>                                            <div class="item-title" style="" th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
                                             <div class="item-count" >
                                                 <span class="material-symbols-outlined" style="font-size:.6rem">thumb_up</span>
                                                 <span th:text="${musicRanking.ilikeit}"></span>

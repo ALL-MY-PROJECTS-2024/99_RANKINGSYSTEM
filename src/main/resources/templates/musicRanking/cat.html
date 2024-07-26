@@ -2,40 +2,36 @@
 <html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-<!--
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
--->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
     <!--  link   -->
     <th:block th:insert="fragments/link :: linkFragment" />
 
 
+    <!-- index.css-->
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- join.css-->
+    <link rel="stylesheet" href="/css/user/index_join.css">
+
+    <link rel="stylesheet" href="/css/index_login.css">
+
     <!--  MODEL 속성가져오기  -->
     <script th:inline="javascript">
-        let Jazz = /*[[${Jazz}]]*/
-        let Rock = /*[[${Rock}]]*/
-        let Classic = /*[[${Classic}]]*/
-        let Progressive = /*[[${Progressive}]]*/
-        let Advertisement = /*[[${Advertisement}]]*/
-        let HeavyMetal = /*[[${HeavyMetal}]]*/
-        let Pop = /*[[${Pop}]]*/
-        let Others = /*[[${Others}]]*/
-        console.log("Jazz",Jazz);
-        console.log("Rock",Rock);
-        console.log("Classic",Classic);
-        console.log("Progressive",Progressive);
-        console.log("Advertisement",Advertisement);
-        console.log("Heavy Metal",HeavyMetal);
-        console.log("Pop",Pop);
-        console.log("Others",Others);
+        //let list = /*[[${list}]]*/
+        //let mode = /*[[${mode}]]*/
+        let subCategory = /*[[${subCategory}]]*/
+        //console.log(mode);
+        //console.log(list);
     </script>
 
-
     <!--    -->
-    <link rel="stylesheet" href="/css/musicRanking/cat.css">
+    <link rel="stylesheet" href="/css/around/group.css">
 
     <!--    -->
     <script src="/js/musicRanking/cat.js" defer></script>
+
+
+
 </head>
 <body>
 
@@ -48,26 +44,6 @@
     <th:block th:insert="fragments/nav :: navFragment" />
 
 
-    <section class="layout-5 breadcrumb-block">
-        <div class="">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="/">
-                            <span class="">홈</span>
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="/">
-                            <span class="">이달의 콘텐츠 RANKING</span>
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">장르별 랭킹</li>
-                </ol>
-            </nav>
-        </div>
-    </section>
-
     <main>
 
         <section class="layout-5 breadcrumb-block">
@@ -76,66 +52,74 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="/">
-                                <span class="material-symbols-outlined">home</span>
+                                <span class="">홈</span>
                             </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a href="/">
-                                <span class="">둘러 보기</span>
+                                <span class="">이달의 콘텐츠 RANKING</span>
                             </a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">그룹</li>
+                        <li class="breadcrumb-item active" aria-current="page">장르별 랭킹</li>
                     </ol>
                 </nav>
             </div>
         </section>
 
 
-        <section class="group-block layout-5">
+        <section  class="group-block layout-5 ">
             <div class="head">
                 <div class="">
                     <input type="radio" id="image" name="choose">
-                    <label for="image">이미지</label>
+                    <label for="image">음악</label>
                 </div>
-                <div class="">
-                    <input type="radio" id="music" name="choose">
-                    <label for="music">음악</label>
-                </div>
+                <div class="line"></div>
             </div>
-            <div class="body">
 
-                <div class="music_body ">
+            <div class="body">
+                <!--   IMAGE BODY             -->
+                <div class="image_body">
 
                     <div class="swiper sub_category">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
-
-
                             <!-- Slides -->
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Jazz</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Rock</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Classic</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Progressive</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Advertisement</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">HeavyMetal</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Pop</a>   </div>
-                            <div class="swiper-slide">  <a href="javascript:void(0)">Others</a>   </div>
+                            <div class="swiper-slide "> <a href="/musicRanking/cat?subCategory=Jazz" data-title="Jazz">Jazz</a>   </div>
+                            <div class="swiper-slide">  <a href="/musicRanking/cat?subCategory=Rock" data-title="Rock">Rock</a>   </div>
+                            <div class="swiper-slide">  <a href="/musicRanking/cat?subCategory=Classic" data-title="Classic">Classic</a>   </div>
+                            <div class="swiper-slide">  <a href="/musicRanking/cat?subCategory=Progressive" data-title="Progressive">Progressive</a>   </div>
+                            <div class="swiper-slide">  <a href="/musicRanking/cat?subCategory=Advertisement" data-title="Advertisement">Advertisement </a>   </div>
+                            <div class="swiper-slide">  <a href="/musicRanking/cat?subCategory=HeavyMetal" data-title="HeavyMetal">HeavyMetal</a>   </div>
+                            <div class="swiper-slide">  <a href="/musicRanking/cat?subCategory=Pop" data-title="Pop">Pop</a>   </div>
+                            <div class="swiper-slide">  <a href="/musicRanking/cat?subCategory=Others" data-title="Others">Others</a>   </div>
+                        </div>
 
+                    </div>
+
+                    <div class="subCategoryBody">
+                        <div>
+                            <div class="" >
+                                <div>
+                                    <span>TOTAL : </span><span th:text="${#lists.size(musicList)}"> </span>
+                                </div>
+                                <hr>
+                                <div class="show-block">
+                                    <div style="display:flex;justify-content:center;" class="show-image-block" th:if="${#lists.size(musicList)}==0">
+                                        표시할 이미지가 없습니다.
+                                    </div>
+                                    <div class="show-image-block" th:each="musicRanking,musicRankingStat : ${musicList}">
+                                        <!--                                        <td th:text="${imageRankingStat.count}"></td>-->
+                                        <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId})}">
+                                            <img style="" th:src="@{${musicRanking.MusicFileInfo.dir}+'\\'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="subCategoryBody ">
-                        <div>TOTAL : <span class="object-cnt"></span></div>
-                        <hr>
-                        <div class="items  Jazz-block active"></div>
-                            <div class="items  Rock-block "></div>
-                            <div class="items  Classic-block "></div>
-                            <div class="items  Progressive-block "></div>
-                            <div class="items  Advertisement-block "></div>
-                            <div class="items  HeavyMetal-block "></div>
-                            <div class="items  Pop-block "></div>
-                            <div class="items  Others-block "></div>
-                    </div>
+
                 </div>
+
             </div>
         </section>
 

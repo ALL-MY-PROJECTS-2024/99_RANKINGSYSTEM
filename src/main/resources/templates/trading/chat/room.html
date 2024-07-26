@@ -18,6 +18,7 @@
         let  wspath = /*[[${wspath}]]*/
         let  username = /*[[${username}]]*/
         let  users = /*[[${users}]]*/
+        console.log(wspath);
         console.log(users);
         let  tradingid = /*[[${tradingid}]]*/
 
@@ -35,14 +36,14 @@
     <!-- nav       -->
     <th:block th:insert="~{fragments/nav :: navFragment}" />
 
-    <main class="room-block layout-5">
+    <main class="room-block">
         <section class="layout-5 breadcrumb-block">
             <div class="">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="/">
-                                <span class="material-symbols-outlined">home</span>
+                                <span class="">홈</span>
                             </a>
                         </li>
                         <li class="breadcrumb-item">
@@ -61,7 +62,7 @@
             </div>
         </section>
 
-        <section class="auction-block">
+        <section class="auction-block layout-5">
 <!--            <div class="left">-->
 <!--            </div>-->
             <div class="center">
@@ -74,32 +75,32 @@
                     <img  th:src="@{${tradingImage.fileid.dir}+'\s_'+${tradingImage.fileid.filename}}"  alt="" />
                 </div>
                 <div>
-                    <table class="table  w-100">
+                    <table class="">
                         <tr>
-                            <td>제목</td>
+                            <th>제목</th>
                             <td th:text="${tradingImage.fileid.images.title}"></td>
                         </tr>
                         <tr>
-                            <td>판매자</td>
+                            <th>판매자</th>
                             <td></span><span th:text="${tradingImage.fileid.images.username}"></span></td>
                         </tr>
                     </table>
                 </div>
                 <div class="status">
                     <div class="now-price">
-                        <table class="table  w-100">
-                            <thead style="height:35px;">
-                                <tr class="table-dark">
-                                    <th style="width:80px;">시작가</th>
-                                    <th style="width:80px;">낙찰가</th>
-                                    <th style="width:210px;">유저</th>
+                        <table class="">
+                            <thead style="">
+                                <tr class="">
+                                    <th style="">시작가</th>
+                                    <th style="">낙찰가</th>
+                                    <th style="">유저</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th><span class="startPrice" th:text="${tradingImage.startPrice}"></span><span> 원</span></th>
-                                    <th><span class="auctionPrice"  th:text="${tradingImage.startPrice}"></span><span> 원</span></th>
-                                    <th><span class="rankingUser"> </span></th>
+                                    <td><span class="startPrice" th:text="${tradingImage.startPrice}"></span><span> 원</span></td>
+                                    <td><span class="auctionPrice"  th:text="${tradingImage.startPrice}"></span><span> 원</span></td>
+                                    <td><span class="rankingUser"> </span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -107,23 +108,22 @@
                 </div>
 
                 <div class="user-call">
-
                         <div style="">
-                            <table class="table simple-input w-100">
+                            <table class="">
                                 <tr>
-                                    <td colspan="6">간편입력</td>
+                                    <th colspan="6">간편입력</th>
                                 </tr>
                                 <tr>
-                                    <td><a href="javascript:plusPriceMsg(500)" class="btn btn-primary">+500</a></td>
-                                    <td><a href="javascript:plusPriceMsg(1000)" class="btn btn-primary">+1000</a></td>
-                                    <td><a href="javascript:plusPriceMsg(1500)" class="btn btn-primary">+1500</a></td>
-                                    <td><a href="javascript:plusPriceMsg(3000)" class="btn btn-primary">+3000</a></td>
-                                    <td><a href="javascript:plusPriceMsg(5000)" class="btn btn-primary">+5000</a></td>
-                                    <td><a href="javascript:plusPriceMsg(10000)" class="btn btn-primary">+10000</a></td>
+                                    <td><a href="javascript:plusPriceMsg(500)" class="btn ">+500</a></td>
+                                    <td><a href="javascript:plusPriceMsg(1000)" class="btn ">+1000</a></td>
+                                    <td><a href="javascript:plusPriceMsg(1500)" class="btn ">+1500</a></td>
+                                    <td><a href="javascript:plusPriceMsg(3000)" class="btn ">+3000</a></td>
+                                    <td><a href="javascript:plusPriceMsg(5000)" class="btn ">+5000</a></td>
+                                    <td><a href="javascript:plusPriceMsg(10000)"class="btn ">+10000</a></td>
                                 </tr>
                             </table>
 
-                            <table class="table w-100">
+                            <table class="">
                                 <tr>
                                     <td>계정명</td>
                                     <td>호가</td>

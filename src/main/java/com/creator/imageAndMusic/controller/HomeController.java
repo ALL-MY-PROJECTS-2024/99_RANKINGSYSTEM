@@ -12,10 +12,12 @@ import com.creator.imageAndMusic.domain.service.ImageRankingServiceImpl;
 import com.creator.imageAndMusic.domain.service.MusicRankingServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
+import com.creator.imageAndMusic.properties.UPLOADPATH;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +43,6 @@ public class HomeController {
 
     @Autowired
     private MusicRankingServiceImpl musicRankingServiceImpl;
-
 
     @GetMapping("/")
     public String home(Model model){
@@ -138,7 +139,6 @@ public class HomeController {
         model.addAttribute("imageTop10ByLike",imageTop10ByLike);
         model.addAttribute("musicTop10ByCount",musicTop10ByCount);
         model.addAttribute("musicTop10ByLike",musicTop10ByLike);
-
 
         return "index";
     }

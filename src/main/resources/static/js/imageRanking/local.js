@@ -286,9 +286,13 @@ function createTableBody(el,i){
                 tr.classList.add('item');
 
                 const td1 = document.createElement('div');
+                const a= document.createElement('a');
+                a.setAttribute('href',`/imageRanking/read?rankingId=${el.rankingId}`);
                 const img = document.createElement('img');
                 img.setAttribute('src',el.imagesFileInfo.dir+"\\" + el.imagesFileInfo.filename);
-                td1.appendChild(img);
+
+                a.appendChild(img)
+                td1.appendChild(a);
                 tr.appendChild(td1);
 
 
@@ -318,16 +322,6 @@ function createTableBody(el,i){
                 info.appendChild(right);
 
                 tr.appendChild(info);
-//
-//                td2.textContent = el.imagesFileInfo.images.title;
-//                td3.textContent = el.count;
-//                td4.textContent = el.ilikeit;
-
-
-//                tr.appendChild(td2);
-//                tr.appendChild(td3);
-//                tr.appendChild(td4);
-
                 tbody.appendChild(tr);
 }
 

@@ -1,41 +1,36 @@
 :root{
-
+    color : lightgray;
     font-size : .8rem;
 }
 .layout-5
 {
     padding :  0 5%;
 }
-
+.room-block a{
+    color : lightgray;
+    font-size : 1rem;
+}
 .room-block>section.auction-block{
     width :100%;
     height : 750px;
 
-    padding : 15px;
 
     display:flex;
     justify-content: center;
     align-items: start;
+    gap:20px;
+    flex-wrap : wrap;
 
 }
 .room-block>section.auction-block>*{
-    margin : 0 50px;;
+
 }
 
-.room-block .left{
-        border : 1px solid;
-        width : 300px;
-        height : 100%;
+.room-block .center>*{
+    width : 100%;
+}
 
 
-    }
-    .room-block .left>*{
-        margin : 5px;
-        border : 1px;
-        padding : 10px;
-        text-align:center;
-        border : 1px solid;
-    }
 .room-block .center .image-block{
     height : 200px;
 
@@ -43,6 +38,7 @@
     justify-content: center;
     align-items : center;
     padding : 10px;
+    margin-bottom : 25px;
 }
 .room-block .center .image-block img{
     width : 100%;
@@ -50,16 +46,17 @@
     object-fit: contain;
 }
 .room-block .center{
-    width : 500px;
+    width : 400px;
     height : 95%;
     padding : 15px;
 
 
-/*    display:flex;
-    justify-content: end;
+    display:flex;
+    justify-content: space-between;
     align-items: center;
-    flex-direction: column;*/
-    box-shadow: 5px 5px 5px lightgray;
+    flex-direction: column;
+
+    border : 1px solid;
 }
 
 
@@ -72,7 +69,7 @@
     text-align:center;
    /* border : 1px solid;*/
     overflow : hidden;
-    box-shadow: 5px 5px 5px lightgray;
+    border : 1px solid;
 }
 .room-block .center .show-item .chat{
     height : 95%;
@@ -94,91 +91,23 @@
 
 
 }
-.room-block .center .status .now-price .table{
-    width : 100%;
-    text-align:center;
-    margin : 10px auto;
-    box-shdow : 5px 5px 5px lightgray;
-}
-.room-block .center .status .now-price .table th,
-.room-block .center .status .now-price .table td{
-    text-align:center;
 
-}
 
 .room-block .center .user-call{
-
-
-
-    width : 100%;
-    height :200px ;
-    margin-top : 10px;
-    padding : 5px;
-
 }
 .room-block .center .user-call>*{
-    margin-bottom : 10px;
-}
-.room-block .center .user-call .top{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border : 1px solid;
-    font-size : .6rem;
-    width : 90%;
-    text-align:right;
-    border : 1px solid lightgray;
-    width : 100%;
-}
-.room-block .center .user-call .top>.control{
-    display:flex;
-    justify-content: right;
-}
-.room-block .center .user-call .top>.control a{
-    font-size :.7rem;
-    margin : 5px;
-    text-align:right;
-}
-.room-block .center .user-call .top>*{
-    margin : 5px;
-}
-.room-block .center .user-call .body{
-    display:flex;
-    justify-content: space-between;;
-    align-items: center;
-    height : 50px;;
 }
 
-.room-block .center .user-call .body>*{
-    margin : 5px;
-    border : 1px solid;
-    display:block;
-    width : 65px;
-    height :35px;
-
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-.room-block .center .status{
-    margin-bottom : 10px;
-    line-height : 50px;
-
-    display:flex;
-    justify-content: center;
-    align-items : center;
-}
 
 .room-block .right{
-    width : 400px;
+    width :400px;
     height : 95%;
     padding : 5px;
     font-size : .9rem;
     position:relative;
     padding : 15px;
-    box-shadow : 5px 5px 5px lightgray;
-
+    border : 1px solid;
+    background-color : rgb(25,25,25);
 }
 .room-block .right .controller{
     display:flex;
@@ -197,7 +126,7 @@
     left:-10px;
     top:25px;
     border : 1px solid;
-    box-shadow : 5px 5px 5px lightgray;
+    border : 1px solid;
 
 }
 .room-block .right .user-block .user-item{
@@ -208,7 +137,7 @@
     align-items : center;
     position:relative;
 
-    box-shadow : 5px 5px 5px lightgray;
+    border : 1px solid;
 }
 .room-block .right .user-block .user-item>*{
 
@@ -220,7 +149,7 @@
     width : 50px;
     background-color : lightgray;
     border-radius : 3px;
-    shadow-box : 5px 5px 5px lightgray;
+    border : 1px solid;
     font-size : .8rem;
 
 
@@ -283,45 +212,22 @@
 .right .table th,
 .right .table td{
     border : 0px;
-    margin : 2px;
     text-align:center;
+    font-size :.8rem;
 }
+
 .right table{
-    box-shadow : 5px 5px 5px lightgray;
+    border : 1px solid;
 
 }
-.center .table{
-     box-shadow : 5px 5px 5px lightgray;
-     margin-bottom : 5px;
-}
-.center .table td{
-    text-align:center;
-    font-size : 1rem;
-    border : 1px solid lightgray;;
 
-}
-.center .simple-input td{
 
-}
-.center .simple-input td a{
-    display:block;
-    width : 55px;
-    height : 100%;
-
-    display:flex;
-    justify-content : center;
-    align-items : center;
-
-}
 
 .now-price .table{
 
 }
-.now-price .table td,
-.now-price .table th
-{
 
-}
+
 
 .right .auction_status{
     width :100%;
@@ -335,6 +241,7 @@
     align-items : center;
     position:absolute;;
     top:-25px;
+    left : 0;
 }
 .right .auction_status>*{
     margin-right:10px;
@@ -358,4 +265,48 @@
 }
 .cancel{
     background-color:red;
+}
+
+
+
+.center table{
+    width : 100%;
+    border : 1px solid gray;
+    margin-bottom : 20px;
+
+}
+.center table th,
+.center table td
+{
+    min-height:35px;
+    line-height : 35px;
+    background-color:transparent;
+    font-size : .8rem;
+    text-align:center;
+    border : 1px solid gray;
+}
+.center table th{
+    background-color : rgb(15,15,15);
+
+}
+
+td .btn{
+    background-color:darkcyan;
+    font-size : .7rem;
+}
+.center table td  input{
+    font-size : .7rem;
+    background-color:rgb(25,25,25);
+    outline:0px;
+    border : 0px;
+    width : 95%;
+}
+.center table td  input:focus{
+    background-color:rgb(45,45,45);
+}
+.modal{
+    color : gray;
+}
+.right th{
+    background-color:darkcyan !important;
 }

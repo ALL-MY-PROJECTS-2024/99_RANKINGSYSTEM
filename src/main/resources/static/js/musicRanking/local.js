@@ -284,29 +284,46 @@ function updateTable(localName) {
 
 
 function createTableBody(el,i){
+               console.log('el',el);
                 const tbody = document.querySelector('.table-body');
-                const tr = document.createElement('tr');
+                const tr = document.createElement('div');
+                tr.classList.add('item');
 
-                        const td1 = document.createElement('td');
-                        const td2 = document.createElement('td');
-                        const td3 = document.createElement('td');
-                        const td4 = document.createElement('td');
-                        const td5 = document.createElement('td');   //count
-                        const td6 = document.createElement('td');   //ilikeit
-                        td1.textContent = i;
-                        td2.textContent = el.musicFileInfo.music.title;
-                        td3.textContent = el.musicFileInfo.music.subCategory;
-                        td4.textContent = el.musicFileInfo.music.username;
-                        td5.textContent = el.count;
-                        td6.textContent = el.ilikeit;
+                const td1 = document.createElement('div');
+                const a= document.createElement('a');
+                a.setAttribute('href',`/musicRanking/read?rankingId=${el.rankingId}`);
+                const img = document.createElement('img');
+                img.setAttribute('src',el.musicFileInfo.dir+"\\" + el.musicFileInfo.albumImageName);
 
-                        tr.appendChild(td1);
-                        tr.appendChild(td2);
-                        tr.appendChild(td3);
-                        tr.appendChild(td4);
-                        tr.appendChild(td5);
-                        tr.appendChild(td6);
+                a.appendChild(img)
+                td1.appendChild(a);
+                tr.appendChild(td1);
 
-                    tbody.appendChild(tr);
+                const info = document.createElement('div');
+                info.classList.add('info');
+
+
+                const left = document.createElement('div');
+                left.classList.add('left');
+
+                left.innerHTML=el.musicFileInfo.music.title;
+
+                const right = document.createElement('div');
+                right.classList.add('right');
+
+                const r1 = document.createElement('div');
+                r1.innerHTML=`
+                    <span style='font-size:.5rem;' class='material-symbols-outlined'>visibility</span> ${el.count}  `;
+                const r2 = document.createElement('div');
+                r2.innerHTML=`<span  style='font-size:.5rem;' class='material-symbols-outlined'>thumb_up</span> ${el.ilikeit}`;
+
+                right.appendChild(r1);
+                right.appendChild(r2);
+
+                info.appendChild(left);
+                info.appendChild(right);
+
+                tr.appendChild(info);
+                tbody.appendChild(tr);
 }
 

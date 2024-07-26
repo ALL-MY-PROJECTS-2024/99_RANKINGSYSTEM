@@ -1,6 +1,7 @@
 package com.creator.imageAndMusic.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
@@ -11,6 +12,11 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @RequiredArgsConstructor
 public class TradingMusicSocketConfigure implements WebSocketConfigurer {
     private final TradingMusicSocketHandler webSocketHandler;
+    @Value("${socket.allowed.origins}")
+    private String AllowedOrigins;
+
+    @Value("${socket.path}")
+    private String socketPath;
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 /*
@@ -19,7 +25,7 @@ public class TradingMusicSocketConfigure implements WebSocketConfigurer {
  */
 
 //        registry.addHandler(webSocketHandler, "/ws/music/chat").setAllowedOrigins("*");
-        registry.addHandler(webSocketHandler, "/wss/music/chat").setAllowedOrigins("https://test.wooriac.store");
+        registry.addHandler(webSocketHandler, "/wss/music/chat").setAllowedOrigins(AllowedOrigins);
 
     }
 

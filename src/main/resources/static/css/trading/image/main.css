@@ -22,3 +22,8 @@
 .remittanceBtn:hover::after{
     display:block;
 }
+
+
+img{
+    object-fit:contain;
+}

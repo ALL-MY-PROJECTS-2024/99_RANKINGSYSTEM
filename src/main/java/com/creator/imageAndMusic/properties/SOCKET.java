@@ -1,16 +1,24 @@
 package com.creator.imageAndMusic.properties;
 
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class SOCKET {
 
-    public static final String REQ_PATH ="wss://test.wooriac.store/wss/chat";
-    public static final String MUSIC_REQ_PATH ="wss://test.wooriac.store/wss/music/chat";
+    public static  String REQ_PATH;
+    public static  String MUSIC_REQ_PATH;
+    @Value("${socket.req.path}")
+    private String reqPath;
+    @Value("${socket.req.music.path}")
+    private String reqMusicPath;
 
-
-//    public static final String REQ_PATH ="ws://192.168.134.106:8080/ws/chat";
-
-
-//    public static final String REQ_PATH ="ws://192.168.126.106:8080/ws/chat";
-//    public static final String MUSIC_REQ_PATH ="ws://192.168.126.106:8080/ws/music/chat";
+    @PostConstruct
+    public void init() {
+        SOCKET.REQ_PATH = reqPath;
+        SOCKET.MUSIC_REQ_PATH = reqMusicPath;
+    }
 
 
 }

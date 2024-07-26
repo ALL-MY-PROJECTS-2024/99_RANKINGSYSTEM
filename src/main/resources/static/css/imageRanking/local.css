@@ -59,20 +59,23 @@ section{
 }
 .show-block{
     display:flex;
-    justify-content : center;
+    justify-content :space-between;
     align-items : start;
     flex-wrap : wrap;
     gap : 20px;
 }
 
 section #map{
-    width : 40vw;
+    width : 20vw;
     max-width : 500px;
-    height :60vh;
+    height :50vh;
     max-height : 600px;
+
+    position:relative;
+    z-index:1;
 }
 .show-block .table-block{
-    width : 50vw;
+    width : 70vw;
     max-width : calc(100vw - 550px);
     font-size : .9rem;
 }
@@ -141,7 +144,7 @@ section #map{
 }
 
 .localname{
-    font-size : clamp(1rem,3vw,2.5rem);
+    font-size : clamp(1rem,3vw,1.5rem);
 }
 
 .table-body .info{
@@ -154,7 +157,7 @@ section #map{
     width : 100%;
     bottom : 0px;
     height : 25px;
-    background-color :black;
+    background-color:#0a0b17;
     padding : 5px !important;
     border-radius  : 0 !important;
     z-index : 555;

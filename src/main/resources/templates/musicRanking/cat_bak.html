@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+<!--
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-->
+
+    <!--  link   -->
+    <th:block th:insert="fragments/link :: linkFragment" />
+
+
+    <!--  MODEL 속성가져오기  -->
+    <script th:inline="javascript">
+        let Jazz = /*[[${Jazz}]]*/
+        let Rock = /*[[${Rock}]]*/
+        let Classic = /*[[${Classic}]]*/
+        let Progressive = /*[[${Progressive}]]*/
+        let Advertisement = /*[[${Advertisement}]]*/
+        let HeavyMetal = /*[[${HeavyMetal}]]*/
+        let Pop = /*[[${Pop}]]*/
+        let Others = /*[[${Others}]]*/
+        console.log("Jazz",Jazz);
+        console.log("Rock",Rock);
+        console.log("Classic",Classic);
+        console.log("Progressive",Progressive);
+        console.log("Advertisement",Advertisement);
+        console.log("Heavy Metal",HeavyMetal);
+        console.log("Pop",Pop);
+        console.log("Others",Others);
+    </script>
+
+
+    <!--    -->
+    <link rel="stylesheet" href="/css/musicRanking/cat.css">
+
+    <!--    -->
+    <script src="/js/musicRanking/cat.js" defer></script>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="fragments/header :: mainHeaderFragment" />
+
+    <!-- nav       -->
+    <th:block th:insert="fragments/nav :: navFragment" />
+
+
+    <section class="layout-5 breadcrumb-block">
+        <div class="">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <span class="">홈</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <span class="">이달의 콘텐츠 RANKING</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">장르별 랭킹</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <main>
+
+        <section class="layout-5 breadcrumb-block">
+            <div class="">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="material-symbols-outlined">home</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="">둘러 보기</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">그룹</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+
+        <section class="group-block layout-5">
+            <div class="head">
+                <div class="">
+                    <input type="radio" id="image" name="choose">
+                    <label for="image">이미지</label>
+                </div>
+                <div class="">
+                    <input type="radio" id="music" name="choose">
+                    <label for="music">음악</label>
+                </div>
+            </div>
+            <div class="body">
+
+                <div class="music_body ">
+
+                    <div class="swiper sub_category">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+
+
+                            <!-- Slides -->
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Jazz</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Rock</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Classic</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Progressive</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Advertisement</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">HeavyMetal</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Pop</a>   </div>
+                            <div class="swiper-slide">  <a href="javascript:void(0)">Others</a>   </div>
+
+                        </div>
+                    </div>
+                    <div class="subCategoryBody ">
+                        <div>TOTAL : <span class="object-cnt"></span></div>
+                        <hr>
+                        <div class="items  Jazz-block active"></div>
+                            <div class="items  Rock-block "></div>
+                            <div class="items  Classic-block "></div>
+                            <div class="items  Progressive-block "></div>
+                            <div class="items  Advertisement-block "></div>
+                            <div class="items  HeavyMetal-block "></div>
+                            <div class="items  Pop-block "></div>
+                            <div class="items  Others-block "></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="fragments/footer :: footerFragment" />
+    </footer>
+
+</div>
+
+
+
+
+</body>
+</html>
