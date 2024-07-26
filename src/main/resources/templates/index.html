@@ -184,7 +184,7 @@
                                         <!-- Slides -->
                                         <div class="swiper-slide" th:each="imageRanking,imageRankingStat : ${imageTop10ByCount}">
                                             <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
-                                                <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
+                                                <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style=""></img>
                                             </a>
                                             <div class="item-title" style="" th:text="${imageRanking.ImagesFileInfo.Images.title}"></div>
                                             <div class="item-count" >
@@ -227,7 +227,7 @@
                                         <!-- Slides -->
                                         <div class="swiper-slide" th:each="imageRanking,imageRankingStat : ${imageTop10ByLike}">
                                             <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
-                                                <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style="object-fit:contain;"></img>
+                                                <img  th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요" style=""></img>
                                             </a>
                                             <div class="item-title" style="" th:text="${imageRanking.ImagesFileInfo.Images.title}"></div>
                                             <div class="item-count" >
@@ -282,7 +282,7 @@
                                         </div>
                                         <div class="swiper-slide" th:each="musicRanking,musicRankingStat : ${musicTop10ByCount}">
                                             <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId})}">
-                                                <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
+                                                <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" ></img>
                                             </a>
                                             <div class="item-title" style="" th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
                                             <div class="item-count" >
@@ -325,8 +325,9 @@
                                         <!-- Slides -->
                                         <div class="swiper-slide" th:each="musicRanking,musicRankingStat : ${musicTop10ByLike}">
                                             <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId})}">
-                                                <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" style="object-fit:contain;"></img>
-                                            </a>                                            <div class="item-title" style="" th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
+                                                <img  th:src="@{${musicRanking.MusicFileInfo.dir}+'/'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요" ></img>
+                                            </a>
+                                            <div class="item-title" style="" th:text="${musicRanking.MusicFileInfo.Music.title}"></div>
                                             <div class="item-count" >
                                                 <span class="material-symbols-outlined" style="font-size:.6rem">thumb_up</span>
                                                 <span th:text="${musicRanking.ilikeit}"></span>

@@ -61,7 +61,7 @@ section{
     display:flex;
     justify-content :space-between;
     align-items : start;
-    flex-wrap : wrap;
+
     gap : 20px;
 }
 
@@ -75,8 +75,8 @@ section #map{
     z-index:1;
 }
 .show-block .table-block{
-    width : 70vw;
-    max-width : calc(100vw - 550px);
+    width : calc(100vw - 550px);
+    min-width : 200px;
     font-size : .9rem;
 }
 
