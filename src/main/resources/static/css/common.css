@@ -74,6 +74,7 @@ ul{
 
 .wrapper{
     position:relative;
+    height: 100vh;
 }
 
 /*  */
@@ -486,7 +487,8 @@ a:hover{
 /* main */
 .wrapper>main{
     z-index: 1;
-    padding-bottom : 100px;
+
+    min-height : calc(100% - 280px)
 }
 
 
