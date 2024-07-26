@@ -3,3 +3,24 @@
 .fc-event-title{
     font-size: .7em;
 }
+th{
+    background-color: darkcyan;
+
+}
+th a{
+    color : lightgray ;
+}
+td{
+    background-color : transparent;
+    color : lightgray ;
+}
+
+.fc-day-today .fc-daygrid-day-frame{
+    background-color:beige;
+    color : black;
+}
+
+.modal *{
+    color : lightgray;
+
+}

@@ -15,24 +15,48 @@
     align-items : start;
 
 }
-
+.breadcrumb a{
+    color : gray;
+}
 .show-block{
     display:flex;
     justify-content:space-between;
     align-items : start;
 }
+.accordion-button{
+    background-color : rgb(25,25,25);
+}
+.collapse.show{
 
+    background-color:gray;
+}
 
 .show-block .left{
     width: calc(100% - 320px);
     position:relative;
+    border-right:1px solid gray;
+
+}
+.accordion-header{
+    border ; 0;
+    outline : 0;
 }
 
+.accordion-header button{
+    font-size : .8rem;
+    background-color:rgb(45,45,45);
+    color : lightgray;
+    border : 0;
+    outline : 0;
+    height : 45px;
+
+}
 .show-block .right{
     width:300px;
     height : 800px;
-    border : 2px solid darkcyan;
+
     padding : 10px;
+    border-left : 1px solid gray;
 }
 
 .left .accordion-body{
@@ -79,4 +103,10 @@ modal a{
 }
 modal input {
     font-size : .8rem !important;
+}
+.description{
+    border : 1px solid gray !important;
+}
+.modal {
+    color : gray;
 }

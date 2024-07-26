@@ -19,8 +19,6 @@ addRankingEls.forEach(addRankingEl=>{
                 .catch(err=>{console.log(err)})
         }
     })
-
-
 })
 
 
@@ -73,4 +71,21 @@ requestAuctionEls.forEach(requestAuction=>{
             alert(err.response.data+"");
         })
     })
+})
+
+
+
+//--------------------------------------
+// 음악 재생
+//--------------------------------------
+const audio = document.querySelector('#audio');
+
+//audio.play();
+const music_play_btn=document.querySelector('.music_play_btn');
+music_play_btn.addEventListener('click',function(){
+     audio.play();
+})
+const music_stop_btn=document.querySelector('.music_stop_btn');
+music_stop_btn.addEventListener('click',function(){
+     audio.pause();
 })
