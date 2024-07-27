@@ -155,7 +155,7 @@
 
                                 <div class="item" th:each="imageReply : ${replyList}">
                                     <div class="left">
-                                        <img src="http://localhost:8080/upload/images/user2@user2.com/Character/7/images%20(1).jpeg" alt="">
+                                        <img th:src="@{${imageReply.user.profileImage}}" alt="">
                                     </div>
                                     <div class="right">
                                         <div class="one">
