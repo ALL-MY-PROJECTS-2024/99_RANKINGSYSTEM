@@ -97,7 +97,7 @@ function createReplyNode(data){
     left.className = 'left';
 
     const img = document.createElement('img');
-    img.src = 'http://localhost:8080/upload/images/user2@user2.com/Character/7/images%20(1).jpeg';
+    img.src = data.user.profileImage;
     img.alt = '';
     left.appendChild(img);
 
