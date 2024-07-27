@@ -487,7 +487,8 @@ a:hover{
 /* main */
 .wrapper>main{
     z-index: 1;
-    min-height : calc(100% - 280px)
+    min-height : calc(100% - 280px);
+    margin-bottom : 100px;
 }
 
 

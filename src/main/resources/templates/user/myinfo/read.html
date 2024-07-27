@@ -34,9 +34,14 @@
                     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">
-                                <span class="material-symbols-outlined" style="font-size:.8rem;">홈</span>
-                            </a></li>
-                            <li class="breadcrumb-item active" aria-current="page">나의정보</li>
+                                <span class="" style="font-size:.8rem;">홈</span>
+                            </a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="/">
+                                <span class="material-symbols-outlined" style="font-size:.8rem;">내이미지</span>
+                            </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">내정보</li>
                         </ol>
                     </nav>
                 </div>
@@ -44,63 +49,81 @@
 
             <section class="read myinfoblock layout-5">
 
-<!--                &lt;!&ndash; aside                &ndash;&gt;-->
-<!--                <th:block th:insert="fragments/myaside :: myasideFragment" />-->
-
-
-
                 <th:block th:insert="~{fragments/myaside :: myasideFragment}" />
 
+                <div class="" style="width : 100%;">
+                    <h3>회원 정보</h3>
+                    <hr>
+                    <div class="info_body">
+                        <div class="profile">
+                            <div class="image">
+                                <img th:src="@{${dto.profileImage}}"  alt=""/>
+                            </div>
+                        <!--
+                            <div class="change-btn">
+                                <a class="btn btn-success" href="">변경하기</a>
+                            </div>
+                            -->
+                        </div>
+                        <table class="table w-100">
+                            <tbody>
+                                <tr>
+                                    <td style="width:20%;">계정명</td>
+                                    <td>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:52px;margin:0;" name="username" class="form-control" th:value="${dto.username}" readonly>
+                                    </td>
+                                    <td style="width:20%;">이름</td>
+                                    <td>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:52px;margin:0;" name="username" class="form-control" th:value="${dto.nickname}" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">연락처</td>
+                                    <td colspan="3">
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:52px;margin:0;" name="username" class="form-control" th:value="${dto.phone}" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">은행명</td>
+                                    <td>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:52px;margin:0;" name="username" class="form-control" th:value="${dto.bankname}" readonly>
+                                    </td>
+                                    <td style="width:20%;">계좌번호</td>
+                                    <td>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:52px;margin:0;" name="username" class="form-control" th:value="${dto.account}" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">우편번호</td>
+                                    <td colspan="3">
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:52px;margin:0;" name="username" class="form-control" th:value="${dto.zipcode}" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">기본주소</td>
+                                    <td>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:52px;margin:0;" name="username" class="form-control" th:value="${dto.addr1}" readonly>
+                                    </td>
+                                    <td style="width:20%;">상세주소</td>
+                                    <td>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:52px;margin:0;" name="username" class="form-control" th:value="${dto.addr2}" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
 
-
-                <div class="" style="width : 350px; margin : 0 auto;">
-                    <div class="body">
-                        <form class="mypageform" name="mypageform" action="" method="post"  onsubmit="return false">
-                            <div class="m-1">
-                                <label>이메일계정</label>&nbsp;&nbsp;
-                                <input name="usernmae" class="form-control" th:value="${dto.username}" readonly>
-                            </div>
-                            <div class="m-1">
-                                <label>이름</label>
-                                <input name="nickname" class="form-control" th:value="${dto.nickname}" readonly>
-                            </div>
-                            <div class="m-1">
-                                <label>연락처</label>
-                                <input name="phone" class="form-control" th:value="${dto.phone}" readonly>
-                            </div>
-                            <div class="m-1">
-                                <label>은행</label>
-                                <div style="display:flex;">
-                                    <input name="bankname" class="form-control zipcode" th:value="${dto.bankname}" readonly>
-                                </div>
-                            </div>
-                            <div class="m-1">
-                                <label>계좌번호</label>
-                                <div style="display:flex;">
-                                    <input name="account" class="form-control zipcode" th:value="${dto.account}" readonly>
-                                </div>
-                            </div>
-                            <div class="m-1">
-                                <label>우편번호</label>
-                                <div style="display:flex;">
-                                    <input name="zipcode" class="form-control zipcode" th:value="${dto.zipcode}" readonly>
-                                </div>
-                            </div>
-                            <div class="m-1">
-                                <label>기본 주소</label>
-                                <input name="addr1" class="form-control addr1" th:value="${dto.addr1}" readonly>
-                            </div>
-                            <div class="m-1 mb-2">
-                                <label>상세 주소 </label>
-                                <input name="addr2" class="form-control" th:value="${dto.addr2}" readonly>
-                            </div>
-                            <div class="m-1" style="display:flex;justify-content : space-between;">
-                                <a href="/user/myinfo/update" class="btn btn-success w-50 me-1">수정요청</a>
-                                <a href="/" class="btn btn-secondary w-50 ms-1">메인화면</a>
-                            </div>
-
-                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align:left;">
+                                        <a href="/user/myinfo/update" class="btn btn-success me-1">수정요청</a>
+                                        <a href="/" class="btn btn-secondary ms-1">메인화면</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
 
             </section>

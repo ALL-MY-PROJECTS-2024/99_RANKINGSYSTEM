@@ -101,6 +101,7 @@ public class JwtTokenProvider {
                 .claim("details", authentication.getDetails())          //정보저장
                 .claim("provider", userDto.getProvider())               //정보저장
                 .claim("providerId",userDto.getProviderId())             //정보저장
+                .claim("profileImage",userDto.getProfileImage())             //정보저장
 
                 .claim("accessToken", principalDetails.getAccessToken())//정보저장
                 .setExpiration(accessTokenExpiresIn)
@@ -223,7 +224,7 @@ public class JwtTokenProvider {
         String provider = (String)claims.get("provider");
         String providerId = (String)claims.get("providerId");
         String oauthAccessToken = (String)claims.get("accessToken");
-
+        String profileImage = (String)claims.get("profileImage");
 
 
 
@@ -242,7 +243,7 @@ public class JwtTokenProvider {
         userDto.setRole(auth);
         userDto.setBankname(bankname);
         userDto.setAccount(account);
-
+        userDto.setProfileImage(profileImage);
         PrincipalDetails principalDetails = new PrincipalDetails();
         principalDetails.setUserDto(userDto);
         principalDetails.setAccessToken(oauthAccessToken);   //Oauth AccessToken

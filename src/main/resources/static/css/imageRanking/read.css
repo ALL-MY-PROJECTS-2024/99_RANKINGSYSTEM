@@ -48,7 +48,6 @@ main>section>.read-block .info-block{
     min-width : 200px;
 
     height  :100vh;
-    max-height : 85%;
     min-height : 200px;
 
     background-color :rgb(10, 10, 10);;
@@ -60,6 +59,21 @@ main>section>.read-block .info-block{
     position:relative;
     margin-top : 0px;
 
+    overflow : auto;
+}
+main>section>.read-block .info-block::-webkit-scrollbar {
+    width : 10px;
+    height : 100%:
+}
+main>section>.read-block ::-webkit-scrollbar-track {
+    background: rgb(45,45,45);
+}
+main>section>.read-block  ::-webkit-scrollbar-thumb {
+    background: rgb(45,45,45);
+    border-radius: 6px;
+}
+main>section>.read-block  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 main>section>.read-block>.image-block{
     display:flex;
@@ -70,7 +84,6 @@ main>section>.read-block>.image-block{
     min-width : 200px;
 
     height  : 100vh;
-    max-height : 85%;
     min-height : 200px;
   /*  border : 1px solid;*/
     border-radius :25px 0 0 25px;
@@ -84,6 +97,8 @@ main>section>.read-block>.image-block{
     position:relative;
     margin-top : 0px;
 
+    overflow : hidden;
+
 }
 main>section>.read-block>.info-block h5{
     display:flex;
@@ -92,9 +107,14 @@ main>section>.read-block>.info-block h5{
     gap : 15px;
 }
 main>section>.read-block>.image-block img{
+    position:absolute;
+    top:50px;
+    left :0;
+    right:0;
+    margin : auto;
     width : 100%;
-    height : 100%;
-    object-fit : cover;
+
+    object-fit : contain;
    border-radius : 10px;
 }
 
@@ -182,4 +202,81 @@ main>section>.read-block>.image-block>.item>div:nth-child(2) img{
     justify-content:right;
     align-items:center;
     gap : 10px;
+}
+.info-block .reply-block {
+    position:relative;
+    width : 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.info-block .reply-block input{
+    width : 100%;
+    height : 45px;
+    padding : 5px;
+    background-color : rgb(25,25,25);
+    border : 0;
+    outline :0;
+    border-radius :10px;
+    color : lightgrey;
+}
+.info-block .reply-block .reply-icon{
+    position:absolute;
+    right:5px;
+    cursor:pointer;
+}
+.info-block .contents{
+    width : 100%;
+    height : 100%:
+}
+.info-block .contents .item{
+    width : 100%;
+    height : 100%;
+}
+.info-block .contents .item{
+    display:flex;
+    align-items:start;
+    justify-content:left;
+
+    gap:10px;
+    width : 100%;
+    border-top : 1px solid gray;
+    border-bottom : 1px solid gray;
+    margin-bottom : 10px;
+    padding : 10px;
+}
+.info-block .contents .left{
+    width :50px;
+    height : 50px;
+
+    position:relative;
+}
+.info-block .contents .left img{
+    width : 100%;
+    height : 100%;
+    position:absolute;
+    border-radius:50px;
+    top:0;
+}
+.info-block .contents .right{
+    width : 100%;
+}
+.info-block .contents .right .one{
+    display:flex;
+    justify-content:space-between;
+    align-items : start;
+    margin-bottom : 5px;
+    height : 10px;
+}
+.info-block .contents .right .two{
+
+}
+.info-block .contents .right .two .context{
+    margin-top : 10px;
+    padding : 5px;
+    background-color : rgb(35,35,35);
+    outline : 0;
+    border :0;
+    width : 100%;
+    color : gray;
 }

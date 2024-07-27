@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="/css/imageRanking/read.css">
 
     <script src="/js/imageRanking/read.js" defer></script>
+
+    <script th:inline="javascript">
+        const imageId = [[${imagesRanking.ImagesFileInfo.Images.iamgeid}]]
+        console.log("imageId",imageId);
+    </script>
 </head>
 <body>
     
@@ -134,6 +139,38 @@
                                     <span style="font-size:.8rem;"> 즐겨찾기에 추가</span>
                                 </a>
                             </div>
+                            <!--           REPLY                 -->
+                            <hr>
+                            <div class="reply-block">
+                                <input type="text" name="relpy" class="reply" placeholder="댓글을 입력하세요.">
+                                <span  class="material-symbols-outlined reply-icon">send</span>
+                            </div>
+                            <br>
+                            <div th:if="${total} != 0">
+                                댓글 : <span class="reply-total" th:text="${total}"></span>
+                            </div>
+                            <span th:if="${total} != 0" style="margin : 15px 0 ;display:block;border : 1px solid rgb(35,35,35); width : 50%;"></span>
+                            <div class="contents">
+
+
+                                <div class="item" th:each="imageReply : ${replyList}">
+                                    <div class="left">
+                                        <img src="http://localhost:8080/upload/images/user2@user2.com/Character/7/images%20(1).jpeg" alt="">
+                                    </div>
+                                    <div class="right">
+                                        <div class="one">
+                                            <span class="user" th:text="${imageReply.user.username}"></span>
+                                            <div th:text="${#temporals.format(imageReply.date, 'yyyy-MM-dd HH:mm:ss')}"></div>
+                                        </div>
+                                        <div class="two">
+                                            <textarea class="context" readonly th:text="${imageReply.context}"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
                         </div>
                     </div>
 

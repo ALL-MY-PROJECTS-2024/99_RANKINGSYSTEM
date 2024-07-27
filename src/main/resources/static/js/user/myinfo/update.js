@@ -57,21 +57,58 @@ search_addr_btn.addEventListener('click',function(){
 //  account_confirm
 //  ----------------------------------
 
-const account_confirm = document.querySelector('.account_confirm');
+//const account_confirm = document.querySelector('.account_confirm');
+//
+//account_confirm.addEventListener('click',function(){
+//    const bankCode = document.mypageform.bankname.value;
+//    const account = document.mypageform.account.value;
+//    const formData = new FormData();
+//    formData.append("bankCode",bankCode);
+//    formData.append("account",account);
+//
+//        axios.post('/user/comfirm/account',formData,{ headers: {'Content-Type' :'x-www.form-urlencoded' } } )
+//                .then(res=>{
+//                    console.log(res);
+//
+//                    //location.href="/user/myinfo/read";
+//        })
+//                .catch(err=>{console.log(err);})
+//
+//})
 
-account_confirm.addEventListener('click',function(){
-    const bankCode = document.mypageform.bankname.value;
-    const account = document.mypageform.account.value;
-    const formData = new FormData();
-    formData.append("bankCode",bankCode);
-    formData.append("account",account);
+const profileChangeBtn= document.querySelector('.profileChangeBtn');
+const profileFile= document.querySelector('.profileFile');
+const imageBlock = document.querySelector('.profile .image img');
+const formData = new FormData();
+profileFile.addEventListener('change',function(e){
+    console.log(e.target.files[0]);
+    const file = e.target.files[0];
 
-        axios.post('/user/comfirm/account',formData,{ headers: {'Content-Type' :'x-www.form-urlencoded' } } )
-                .then(res=>{
-                    console.log(res);
-
-                    //location.href="/user/myinfo/read";
-        })
-                .catch(err=>{console.log(err);})
-
+    if(!file.type.startsWith('image/')){
+        alert("이미지 파일만 가능합니다.")
+        return false;
+    }
+    if(file.size>(1024*1024*5)){
+        alert("파일 최대 사이즈는 5Mb 이하여야 합니다..")
+        return false;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload=function(e){
+        imageBlock.src=e.target.result;
+    }
+    formData.append('profileFile',file);
 })
+
+profileChangeBtn.addEventListener('click',function(){
+    axios.post('/user/profileImage/upload',formData,{ headers: {'Content-Type' :'multipart/form-data' } } )
+                    .then(res=>{
+                        console.log(res);
+                        alert("업로드 완료")
+                        location.reload();
+                    })
+    .catch(err=>{console.log(err);})
+})
+
+
+

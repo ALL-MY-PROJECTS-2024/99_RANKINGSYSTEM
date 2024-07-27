@@ -1,6 +1,7 @@
 package com.creator.imageAndMusic.domain.service;
 
 import com.creator.imageAndMusic.domain.dto.Criteria;
+import com.creator.imageAndMusic.domain.entity.ImageReply;
 import com.creator.imageAndMusic.domain.entity.ImagesRanking;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,4 +31,9 @@ public interface ImageRankingService {
     List<ImagesRanking> getAllImageRankingByCategory(String subCategory);
     @Transactional(rollbackFor = SQLException.class)
     Map<String, Object> getAllImageRankingByAllCategory();
+    @Transactional(rollbackFor = SQLException.class)
+    ImageReply addReply(String context, Long imageId ,String username);
+
+    @Transactional(rollbackFor = SQLException.class)
+    List<ImageReply> getAllReply(Long iamgeid);
 }

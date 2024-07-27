@@ -2,16 +2,17 @@
 <html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
     <!--  link   -->
-    <th:block th:insert="fragments/link :: linkFragment" />
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
 
 
     <!--  myinfo.css  -->
     <link rel="stylesheet" href="/css/user/myinfo.css">
 
     <script src="/js/user/myinfo/update.js" defer></script>
+
 </head>
 <body>
 
@@ -19,7 +20,7 @@
 <div class="wrapper">
 
     <!-- header   -->
-    <th:block th:insert="fragments/header :: headerFragment" />
+    <th:block th:insert="~{fragments/header :: headerFragment}" />
 
     <!-- nav       -->
     <th:block th:insert="~{fragments/nav :: albumNavFragment}" />
@@ -33,121 +34,157 @@
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">
-                            <span class="material-symbols-outlined">home</span>
-                        </a></li>
-                        <li class="breadcrumb-item active" aria-current="page">MY INFO</li>
+                            <span class="" style="font-size:.8rem;">홈</span>
+                        </a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="/">
+                            <span class="material-symbols-outlined" style="font-size:.8rem;">내이미지</span>
+                        </a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="/">
+                            <span class="material-symbols-outlined" style="font-size:.8rem;">내정보</span>
+                        </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">정보 수정</li>
                     </ol>
                 </nav>
             </div>
         </section>
 
-        <section class="myinfoblock layout-5">
+        <section class="read myinfoblock layout-5">
 
-            <!--                &lt;!&ndash; aside                &ndash;&gt;-->
-            <!--                <th:block th:insert="fragments/myaside :: myasideFragment" />-->
+            <th:block th:insert="~{fragments/myaside :: myasideFragment}" />
 
+            <div class="" style="width : 100%;">
+                <h3>정보 수정</h3>
+                <hr>
+                <div class="info_body">
+                    <div class="profile">
+                        <div class="image">
+                            <img th:src="@{${dto.profileImage}}"  alt=""/>
+                        </div>
+                        <div class="change-btn">
+                                <input type="file" name="profileFile" class="profileFile">
+                                <a class="btn btn-success profileChangeBtn" href="javascript:void(0)">변경하기</a>
+                        </div>
+                    </div>
+                    <table class="table w-100">
+                        <tbody>
+                        <form class="mypageform" name="mypageform" action="/user/myinfo/update" method="post">
+                                <tr>
+                                    <td style="width:20%;">계정명</td>
+                                    <td>
+                                        <span style="font-size:0.7rem;color:orange;"  class="username_msg"></span>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;" name="username" class="form-control" th:value="${dto.username}" readonly>
+                                    </td>
+                                    <td style="width:20%;">이름</td>
+                                    <td>
+                                        <span style="font-size:0.7rem;color:orange;" th:text="${nickname}"></span>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;" name="nickname" class="form-control" th:value="${dto.nickname}" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">기존 패스워드</td>
+                                    <td style="display:flex;border:0;align-items:center;">
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;" type="password" name="oldpassword" class="form-control" placeholder="기존 패스워드 입력" >
+                                        <a style="width:80px;margin-left:5px;" href="javascript:void(0)"  class="btn btn-secondary confirmpasswordbtn">확인</a>
+                                    </td>
+                                    <td>
+                                        <span class="pwmsg" style="font-size:0.7rem;color:red;" th:text="${oldpassword}"></span>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">변경 패스워드</td>
 
+                                    <td>
+                                        <span style="font-size:0.7rem;color:orange;" th:text="${password}"></span>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;" type="password"  name="password" class="form-control" placeholder="NEW 패스워드 입력"  readonly>
+                                    </td>
+                                    <td style="width:20%;">패스워드 확인</td>
+                                    <td>
+                                        <span style="font-size:0.7rem;color:orange;" th:text="${repassword}"></span>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;" type="password"  name="repassword" class="form-control" placeholder="NEW 패스워드 확인"  readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">연락처</td>
+                                    <td colspan="3">
+                                        <span style="font-size:0.7rem;color:orange;" th:text="${phone}"></span>
+                                        <input placeholder="-없이 입력하세요" style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;" name="phone" class="form-control" th:value="${dto.phone}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">은행명</td>
+                                    <td>
+                                        <select name="bankname" class="form-select" style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;font-size:.8rem;">
+                                            <option th:value="한국은행" th:text="한국은행" th:selected="${dto.bankname == '한국은행'}"></option>
+                                            <option th:value="산업은행" th:text="산업은행" th:selected="${dto.bankname == '산업은행'}"></option>
+                                            <option th:value="기업은행" th:text="기업은행" th:selected="${dto.bankname == '기업은행'}"></option>
+                                            <option th:value="국민은행" th:text="국민은행" th:selected="${dto.bankname == '국민은행'}"></option>
+                                            <option th:value="수협은행" th:text="수협은행" th:selected="${dto.bankname == '수협은행'}"></option>
+                                            <option th:value="수출입은행" th:text="수출입은행" th:selected="${dto.bankname == '수출입은행'}"></option>
+                                            <option th:value="NH농협은행" th:text="NH농협은행" th:selected="${dto.bankname == 'NH농협은행'}"></option>
+                                            <option th:value="지역농축협" th:text="지역농축협" th:selected="${dto.bankname == '지역농축협'}"></option>
+                                            <option th:value="우리은행" th:text="우리은행" th:selected="${dto.bankname == '우리은행'}"></option>
+                                            <option th:value="제일은행" th:text="제일은행" th:selected="${dto.bankname == '제일은행'}"></option>
+                                        </select>
+                                    </td>
+                                    <td style="width:20%;">계좌번호</td>
+                                    <td>
+                                        <input placeholder="-없이 입력하세요" style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;" name="account" class="form-control" th:value="${dto.account}" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">우편번호</td>
+                                    <td>
+                                        <span style="font-size:0.7rem;color:orange;" th:text="${zipcode}"></span>
+                                        <input  style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;" name="zipcode" class="form-control zipcode" th:value="${dto.zipcode}" >
+                                    </td>
+                                    <td>
+                                        <a href="javascript:void(0)" class="btn btn-secondary search_addr_btn" style="width:80px;">
+                                            검색
+                                        </a>
+                                    </td>
+                                    <td>
 
-            <th:block th:insert="fragments/myaside :: myasideFragment" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">기본주소</td>
+                                    <td>
+                                        <span style="font-size:0.7rem;color:orange;" th:text="${addr1}"></span>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;" name="addr1" class="form-control addr1" th:value="${dto.addr1}" >
+                                    </td>
+                                    <td style="width:20%;">상세주소</td>
+                                    <td>
+                                        <span style="font-size:0.7rem;color:orange;" th:text="${addr2}"></span>
+                                        <input style="background-color:rgb(35,35,35);border:0;outline:0;color:gray;width:100%;height:42px;margin:0;" name="addr2" class="form-control" th:value="${dto.addr2}" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
 
-
-
-            <div class="" style="width:350px;margin: 0 auto;">
-                <div class="body">
-                    <form class="mypageform" name="mypageform" action="/user/myinfo/update" method="post">
-                        <div class="m-1">
-                            <label>이메일계정</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;"  class="username_msg"></span>
-                            <div style="display:flex;">
-                                <input name="username" class="form-control username" placeholder="이메일 계정 입력" th:value="${dto.username}" readonly>
-                            </div>
-                        </div>
-                        <div class="m-1">
-                            <label>기존 패스워드 </label>&nbsp;&nbsp;<span class="pwmsg" style="font-size:0.7rem;" th:text="${oldpassword}"></span>
-                            <div style="display:flex;">
-                                <input type="password" name="oldpassword" class="form-control" placeholder="패스워드 입력">
-                                <a href="javascript:void(0)"  class="btn btn-secondary confirmpasswordbtn"
-                                        style="width:80px;margin-left:5px;">확인
-                                </a>
-                            </div>
-                        </div>
-                        <div class="m-1">
-                            <label>새로운 패스워드 입력</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${password}"></span>
-                            <div style="display:flex;">
-                                <input type="password" name="password" class="form-control" placeholder="패스워드 입력"  readonly>
-                            </div>
-                        </div>
-                        <div class="m-1">
-                            <label>패스워드 다시 입력</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${repassword}"></span>
-                            <div style="display:flex;">
-                                <input type="password" name="repassword" class="form-control" placeholder="패스워드 다시 입력"  readonly>
-                            </div>
-                        </div>
-                        <div class="m-1">
-                            <label>이름</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${nickname}"></span>
-                            <input name="nickname" class="form-control" th:value="${dto.nickname}" >
-                        </div>
-                        <div class="m-1">
-                            <label>연락처</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${phone}"></span>
-                            <input name="phone" class="form-control" placeholder="- 제외하고 입력" th:value="${dto.phone}">
-                        </div>
-                        <div class="m-1">
-
-                        </div>
-                        <div class="m-1" style="display:flex;justify-content:space-between;align-items : center;">
-                                <div >
-                                    <label>은행</label>
-                                    <select name="bankname" class="form-select" style="width:120px;font-size : .8rem;">
-                                        <option value="한국은행">한국은행</option>
-                                        <option value="산업은행">산업은행</option>
-                                        <option value="기업은행">기업은행</option>
-                                        <option value="국민은행">국민은행</option>
-                                        <option value="수협은행">수협은행</option>
-                                        <option value="수출입은행">수출입은행</option>
-                                        <option value="NH농협은행">NH농협은행</option>
-                                        <option value="지역농축협">지역농축협</option>
-                                        <option value="우리은행" selected>우리은행</option>
-                                        <option value="제일은행">제일은행</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label>계좌번호</label>
-                                    <div style="display:flex;">
-                                        <input name="account" class="form-control " th:value="${dto.account}" >
-                                    </div>
-                                </div>
-                        </div>
-
-                        <div class="m-1">
-                            <label>우편번호 검색</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${zipcode}"></span>
-                            <div style="display:flex;">
-                                <input name="zipcode" class="form-control zipcode" placeholder="우편번호 입력" th:value="${dto.zipcode}">
-                                <a href="javascript:void(0)" class="btn btn-secondary search_addr_btn" style="width:80px;margin-left:5px;">
-                                    검색
-                                </a>
-                            </div>
-                        </div>
-                        <div class="m-1">
-                            <label>기본 주소</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${addr1}"></span>
-                            <input name="addr1" class="form-control addr1" placeholder="기본주소 입력" th:value="${dto.addr1}">
-                        </div>
-                        <div class="m-1 mb-2">
-                            <label>상세 주소</label>&nbsp;&nbsp;<span style="font-size:0.7rem;color:orange;" th:text="${addr2}"></span>
-                            <input name="addr2" class="form-control" placeholder="상세주소 입력" th:value="${dto.addr2}">
-                        </div>
-                        <div class="me-1" style="display:flex;justify-content:space-between;">
-                            <button onclick="isValid()" class="btn btn-success w-50 me-1">수정요청</button>
-                            <button class="btn btn-secondary w-50  ms-1">이전으로</button>
-                        </div>
-
-                    </form>
-                </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align:left;">
+                                        <button  onclick="isValid()"  class="btn btn-success me-1">수정완료</button>
+                                        <a href="/" class="btn btn-secondary ms-1">이전으로</a>
+                                    </td>
+                                </tr>
+                        </form>
+                    </tbody>
+                </table>
             </div>
 
-        </section>
+        </div>
+
+    </section>
     </main>
 
     <footer>
-        <th:block th:insert="fragments/footer :: footerFragment" />
+        <th:block th:insert="~{fragments/footer :: footerFragment}" />
     </footer>
 
 </div>

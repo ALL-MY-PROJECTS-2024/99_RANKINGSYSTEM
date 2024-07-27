@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface UserRepository extends JpaRepository<User,String> {
     //@Query(value = "SELECT * FROM CreatorDB.board b WHERE b.title LIKE %:keyWord%  ORDER BY b.no DESC LIMIT :amount OFFSET :offset", nativeQuery = true)
     User findUserByNicknameAndPhone(String nickname, String phone);
     User findUserByUsernameAndNicknameAndPhone(String username,String nickname, String phone);
+
 }

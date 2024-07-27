@@ -2,13 +2,8 @@ package com.creator.imageAndMusic.domain.service;
 
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
-import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
-import com.creator.imageAndMusic.domain.entity.ImagesRanking;
-import com.creator.imageAndMusic.domain.entity.User;
-import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
-import com.creator.imageAndMusic.domain.repository.ImagesFileInfoRepository;
-import com.creator.imageAndMusic.domain.repository.ImagesRepository;
-import com.creator.imageAndMusic.domain.repository.UserRepository;
+import com.creator.imageAndMusic.domain.entity.*;
+import com.creator.imageAndMusic.domain.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -16,9 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
+import java.awt.*;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.List;
 
 
 @Service
@@ -39,6 +36,9 @@ public class ImageRankingServiceImpl implements ImageRankingService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ImageReplyRepository imageReplyRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -133,7 +133,8 @@ public class ImageRankingServiceImpl implements ImageRankingService {
     @Override
     @Transactional(rollbackFor = SQLException.class)
     public ImagesRanking getImageRanking(Long rankingId) {
-       return imageRankingRepostiroy.findById(rankingId).get();
+
+        return imageRankingRepostiroy.findById(rankingId).get();
     }
 
 
@@ -302,6 +303,46 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         result.put("Others",Others);
         return result;
     }
+
+
+    @Override
+    public ImageReply addReply(String context, Long imageId,String username) {
+        Optional<User> userOptional =  userRepository.findById(username);
+        Optional<Images> imageOptional =  imagesRepository.findById(imageId);
+        if(userOptional.isEmpty()) {
+            return null;
+        }
+        if(imageOptional.isEmpty()){
+            return null;
+        }
+        User user = userOptional.get();
+        Images image = imageOptional.get();
+
+        ImageReply reply = new ImageReply();
+        reply.setContext(context);
+        reply.setUser(user);
+        reply.setImage(image);
+        reply.setDate(LocalDateTime.now());
+
+        imageReplyRepository.save(reply);
+
+
+
+        return reply;
+    }
+
+    @Override
+    public List<ImageReply> getAllReply(Long iamgeId) {
+        Optional<Images> imageOptional =  imagesRepository.findById(iamgeId);
+        if(imageOptional.isEmpty()){
+            return null;
+        }
+
+        List<ImageReply> list =  imageReplyRepository.findAllByImageOrderByIdDesc(imageOptional.get());
+
+        return list;
+    }
+
 
     @Transactional(rollbackFor = SQLException.class)
     public Map<String, Object> getAllImageRankingByAllCategoryCount()

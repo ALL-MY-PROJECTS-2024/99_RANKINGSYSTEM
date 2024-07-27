@@ -4,6 +4,7 @@ package com.creator.imageAndMusic.domain.service;
 import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.config.auth.jwt.JwtProperties;
 import com.creator.imageAndMusic.config.auth.jwt.JwtTokenProvider;
+import com.creator.imageAndMusic.config.auth.jwt.TokenInfo;
 import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.*;
@@ -27,8 +28,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -134,16 +133,65 @@ public class UserServiceImpl implements UserService {
         user.setAddr1(dto.getAddr1());
         user.setAddr2(dto.getAddr2());
         user.setRole("ROLE_USER");
-
+        user.setProfileImage("/assets/anonymous.webp");
 
         //Db Saved...
         userRepository.save(user);
-
-
-
         return true;
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean uploadProfile(PrincipalDetails principalDetails, MultipartFile profileFile,HttpServletResponse response) throws IOException {
+        UserDto dto = principalDetails.getUserDto();
+        //저장 폴더 지정()
+        String uploadPath= UPLOADPATH.ROOTDIRPATH+ File.separator+UPLOADPATH.UPPERDIRPATH+ File.separator;
+        uploadPath+="profileImage" + File.separator+dto.getUsername();
+        File dir = new File(uploadPath);
+        if(dir.exists()){
+            deleteDirectoryContents(dir);
+            dir.mkdirs();
+        }else{
+            dir.mkdirs();
+        }
+
+        File fileobj = new File(dir,profileFile.getOriginalFilename());
+        profileFile.transferTo(fileobj);   //저장
+        Optional<User> userOptional =  userRepository.findById(dto.getUsername());
+        if(userOptional.isEmpty())
+            return false;
+        User user = userOptional.get();
+
+        String profilePath= File.separator+UPLOADPATH.UPPERDIRPATH+ File.separator;
+        profilePath+="profileImage" + File.separator+dto.getUsername()+File.separator+profileFile.getOriginalFilename();
+
+        user.setProfileImage(profilePath);
+        userRepository.save(user);
+
+        dto.setProfileImage(profilePath);
+        principalDetails.setUserDto(dto);
+
+        TokenInfo tokenInfo = jwtTokenProvider.generateToken(SecurityContextHolder.getContext().getAuthentication());
+        // 쿠키 생성
+        Cookie cookie = new Cookie(JwtProperties.COOKIE_NAME, tokenInfo.getAccessToken());
+        cookie.setMaxAge(JwtProperties.EXPIRATION_TIME); // 쿠키의 만료시간 설정
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return true;
+    }
+    public static void deleteDirectoryContents(File dir) {
+        if (dir.isDirectory()) {
+            File[] files = dir.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    deleteDirectoryContents(file);
+                }
+            }
+        }
+        // 디렉토리 자체 또는 파일 삭제
+        dir.delete();
+    }
 
     @Override
     public boolean uploadAlbum(AlbumDto dto) throws IOException {
@@ -494,6 +542,8 @@ public class UserServiceImpl implements UserService {
 
         return true;
     }
+
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)

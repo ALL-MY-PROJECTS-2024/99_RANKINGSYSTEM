@@ -8,8 +8,12 @@
     <th:block th:insert="fragments/link :: linkFragment" />
 
 
-    <!-- index.css-->
-    <link rel="stylesheet" href="/css/myinfo/confirm.css">
+
+    <style>
+        .wrapper>main{
+            min-height : calc(100% - 550px) !important;
+        }
+    </style>
 
     <!-- index.js   -->
     <script src="/js/myinfo/confirm.js" defer> </script>
@@ -46,7 +50,7 @@
     </section>
     <main>
         <section class="banner">
-            <form action="/user/myinfo/confirm" method="post" style="width:500px;margin:50px auto;">
+            <form action="/user/myinfo/confirm" method="post" style="width:350px;margin:150px auto;">
 
                 <div class="m-3" style="font-size : .7rem; color : orange;display:flex;align-items:center;">
                     <span class="material-symbols-outlined" th:text="${icon}"></span> &nbsp;

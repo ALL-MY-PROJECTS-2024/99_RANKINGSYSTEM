@@ -40,6 +40,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
@@ -501,7 +502,7 @@ public class UserController {
 
         UserDto userDto =  principalDetails.getUserDto();
         model.addAttribute("dto",userDto);
-        log.info("GET /user/myinfo/update..");
+        log.info("GET /user/myinfo/update.." + userDto);
         ispasswordOk = false;
         return "user/myinfo/update";
 
@@ -718,4 +719,22 @@ public class UserController {
 //
 //
 //    }
+
+
+    @PostMapping("/profileImage/upload")
+    public @ResponseBody ResponseEntity<String> upload_profile(
+           @RequestPart("profileFile") MultipartFile profileFile,
+           @AuthenticationPrincipal PrincipalDetails principalDetails,
+           HttpServletResponse response
+    ) throws IOException {
+        System.out.println("POST /user/profileimage/upload..." + profileFile);
+
+        boolean isUploaded = userService.uploadProfile(principalDetails,profileFile,response);
+        if(isUploaded)
+            return new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+        return  new ResponseEntity<>("FAILD",HttpStatus.BAD_GATEWAY);
+    }
+
+
+
 }

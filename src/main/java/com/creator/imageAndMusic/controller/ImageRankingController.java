@@ -1,13 +1,12 @@
 package com.creator.imageAndMusic.controller;
 
 
+import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.domain.dto.BoardDto;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
-import com.creator.imageAndMusic.domain.entity.Board;
-import com.creator.imageAndMusic.domain.entity.Bookmark;
-import com.creator.imageAndMusic.domain.entity.FavoriteImage;
-import com.creator.imageAndMusic.domain.entity.ImagesRanking;
+import com.creator.imageAndMusic.domain.dto.UserDto;
+import com.creator.imageAndMusic.domain.entity.*;
 import com.creator.imageAndMusic.domain.service.BookmarkServiceImpl;
 import com.creator.imageAndMusic.domain.service.FavoriteImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.ImageRankingService;
@@ -18,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -125,6 +125,13 @@ public class ImageRankingController {
         model.addAttribute("imagesRanking",imagesRanking);
         model.addAttribute("title","조회순");
 
+
+        List<ImageReply> list =  imageRankingService.getAllReply(imagesRanking.getImagesFileInfo().getImages().getIamgeid());
+
+        model.addAttribute("replyList",list);
+        model.addAttribute("total",list.size());
+
+
         imageRankingService.count(rankingId);
     }
 
@@ -152,4 +159,26 @@ public class ImageRankingController {
         model.addAttribute("imageList",list);
         model.addAttribute("subCategory",subCategory);
     }
+
+    @GetMapping("/reply/add")
+    public @ResponseBody ResponseEntity<ImageReply> replyAdd(
+            @RequestParam("context") String context,
+            @RequestParam("imageId") Long imageId,
+            @AuthenticationPrincipal PrincipalDetails principalDetails
+            ){
+
+
+        System.out.println("/GET /image/reply/add...context : " + context + " , imageId : " + imageId);
+        UserDto userDto =  principalDetails.getUserDto();
+
+        ImageReply reply  =  imageRankingService.addReply(context,imageId,userDto.getUsername());
+
+
+        if(reply==null)
+            return new ResponseEntity<>(reply,HttpStatus.BAD_GATEWAY);
+
+        return new ResponseEntity<>(reply,HttpStatus.OK);
+
+    }
+
 }

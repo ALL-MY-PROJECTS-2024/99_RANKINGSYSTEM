@@ -36,6 +36,9 @@ public class PrincipalDetailsService implements UserDetailsService {
         dto.setZipcode(userOptional.get().getZipcode());
         dto.setAddr1(userOptional.get().getAddr1());
         dto.setAddr2(userOptional.get().getAddr2());
+        dto.setBankname(userOptional.get().getBankname());
+        dto.setAccount(userOptional.get().getAccount());
+        dto.setProfileImage(userOptional.get().getProfileImage());
 
         //
 

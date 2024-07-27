@@ -37,7 +37,7 @@ public class User {
     //OAUTH2
     private String provider;
     private String providerId;
-
+    private String profileImage;
     public static UserDto entityToDto(User user){
         UserDto dto = UserDto.builder()
                 .username(user.getUsername())
@@ -50,6 +50,7 @@ public class User {
                 .addr1(user.getAddr1())
                 .addr2(user.getAddr2())
                 .phone(user.getPhone())
+                .profileImage(user.profileImage)
                 .build();
         return dto;
     }
