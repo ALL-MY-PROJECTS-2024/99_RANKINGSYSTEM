@@ -104,15 +104,24 @@
             <div>
                 <div class="reply-block">
                     <div class="item mb-3" th:each="reply:${replyList}">
-                        <div  class="header">
-                            <div  style="font-size:.8rem;" th:text="${reply.user.username}"></div>
-                            <div  style="font-size:.6rem;" th:text="${#temporals.format(reply.regdate, 'yyyy-MM-dd HH:mm:ss')}"></div>
-
+                        <div class="reply-left">
+                            <img th:src="${reply.user.profileImage}" alt="">
                         </div>
-                        <hr>
-                        <div>
-                            <div style="font-size:.6rem;">내용 : </div>
-                            <div style="margin-top : 5px;" th:text="${reply.content}"></div>
+                        <div class="reply-right">
+                            <div  class="header">
+                                <div  style="font-size:.8rem;" th:text="${reply.user.username}"></div>
+                                <div  style="font-size:.6rem;" th:text="${#temporals.format(reply.regdate, 'yyyy-MM-dd HH:mm:ss')}"></div>
+                            </div>
+                            <hr>
+                            <div>
+                                <div style="font-size:.6rem;">내용 : </div>
+                                <textarea style="margin-top : 5px;" th:text="${reply.content}" readonly></textarea>
+                            </div>
+                            <div class="closeBlock">
+                                <a href="javascript:void(0)" style="color:lightgray;" class="closeBlockBtn" th:data-rno="${reply.rno}" th:data-bno="${boardDto.no}">
+                                    <span class="material-symbols-outlined">close</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
 

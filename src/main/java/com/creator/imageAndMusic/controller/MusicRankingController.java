@@ -1,8 +1,10 @@
 package com.creator.imageAndMusic.controller;
 
 
+import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
+import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.*;
 import com.creator.imageAndMusic.domain.service.*;
 
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +33,7 @@ public class MusicRankingController {
         log.info("/imageRanking Exception.. ",e);
     }
     @Autowired
-    private ImageRankingService imageRankingService;
+    private ImageRankingServiceImpl imageRankingService;
 
     @Autowired
     private FavoriteImageServiceImpl favoriteImageService;
@@ -117,10 +120,14 @@ public class MusicRankingController {
     public void readRanking(@RequestParam(name = "rankingId",defaultValue = "1") Long rankingId,Model model){
         log.info("GET /musicRanking/read..");
 
-
         MusicRanking musicRanking = musicRankingService.getMusicRanking(rankingId);
         model.addAttribute("musicRanking",musicRanking);
         model.addAttribute("title","조회순");
+
+        List<MusicReply> list =  musicRankingService.getAllReply(musicRanking.getMusicFileInfo().getMusic().getMusicid());
+
+        model.addAttribute("replyList",list);
+        model.addAttribute("total",list.size());
 
         musicRankingService.count(rankingId);
 
@@ -147,4 +154,40 @@ public class MusicRankingController {
 
 
     }
+    @GetMapping("/reply/add")
+    public @ResponseBody ResponseEntity<MusicReply> replyAdd(
+            @RequestParam("context") String context,
+            @RequestParam("musicId") Long musicId,
+            @AuthenticationPrincipal PrincipalDetails principalDetails
+    ){
+
+
+        System.out.println("/GET /image/reply/add...context : " + context + " , musicId : " + musicId);
+        UserDto userDto =  principalDetails.getUserDto();
+
+        MusicReply reply  =  musicRankingService.addReply(context,musicId,userDto.getUsername());
+
+        if(reply==null)
+            return new ResponseEntity<>(reply,HttpStatus.BAD_GATEWAY);
+
+        return new ResponseEntity<>(reply,HttpStatus.OK);
+
+    }
+    @DeleteMapping("/reply/delete")
+    public @ResponseBody ResponseEntity<String> delete(
+            @RequestParam("id") Long id,
+            @AuthenticationPrincipal PrincipalDetails principalDetails
+    )
+    {
+        Map<String,Object> result=musicRankingService.deleteReply(id,principalDetails);
+
+        String message =(String)result.get("message");
+        boolean success = (boolean)result.get("success");
+        if(!success)
+            return new ResponseEntity<>(message,HttpStatus.BAD_GATEWAY);
+
+        return new ResponseEntity<>(message,HttpStatus.OK);
+    }
+
+
 }

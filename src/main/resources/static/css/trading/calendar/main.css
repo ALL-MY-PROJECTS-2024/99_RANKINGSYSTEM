@@ -1,3 +1,10 @@
+.fc-daygrid-day-number{
+    color : gray;
+}
+.fc-daygrid-event-harness{
+    background-color : gray;
+    margin : 2px;
+}
 
 .fc-event-time,
 .fc-event-title{
@@ -16,8 +23,8 @@ td{
 }
 
 .fc-day-today .fc-daygrid-day-frame{
-    background-color:beige;
-    color : black;
+    background-color:lightgray;
+    color : gray;
 }
 
 .modal *{

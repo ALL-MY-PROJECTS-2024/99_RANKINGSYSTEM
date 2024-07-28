@@ -1,12 +1,14 @@
 package com.creator.imageAndMusic.domain.service;
 
 
+import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.controller.BoardController;
 import com.creator.imageAndMusic.domain.dto.BoardDto;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.Board;
+import com.creator.imageAndMusic.domain.entity.ImageReply;
 import com.creator.imageAndMusic.domain.entity.Reply;
 import com.creator.imageAndMusic.domain.entity.User;
 import com.creator.imageAndMusic.domain.repository.BoardRepository;
@@ -199,5 +201,35 @@ public class BoardServiceImpl {
     @Transactional(rollbackFor = SQLException.class)
     public List<Reply> findByReply(Board board) {
         return  replyRepository.findAllByBoardOrderByRnoDesc(board);
+    }
+    @Transactional(rollbackFor = SQLException.class)
+    public Map<String, Object> deleteReply(Long bno, Long rno, PrincipalDetails principalDetails) {
+
+        Map<String, Object> result = new HashMap<String, Object>();;
+        Optional<Reply> replyOptional =  replyRepository.findById(rno);
+        if(replyOptional.isEmpty()){
+            result.put("message","댓글이 존재하지 않습니다.");
+            result.put("success",false);
+            return result;
+        }
+        Reply reply = replyOptional.get();
+        UserDto userDto = principalDetails.getUserDto();
+        if(StringUtils.equals("ROLE_ADMIN",userDto.getRole())){
+            result.put("message","관리자에 의해 댓글이 삭제되었습니다.");
+            result.put("success",true);
+            replyRepository.deleteById(rno);
+            return result;
+        }
+
+        if(!StringUtils.equals(userDto.getUsername(),reply.getUser().getUsername())){
+            result.put("message","삭제를 할수 있는 권한이 없습니다.");
+            result.put("success",false);
+            return result;
+        }
+        result.put("message","댓글삭제 완료");
+        result.put("success",true);
+        replyRepository.deleteById(rno);
+        return result;
+
     }
 }

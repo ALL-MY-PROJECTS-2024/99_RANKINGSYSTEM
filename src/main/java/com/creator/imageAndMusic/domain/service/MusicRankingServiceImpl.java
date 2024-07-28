@@ -1,7 +1,9 @@
 package com.creator.imageAndMusic.domain.service;
 
+import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
+import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.*;
 import com.creator.imageAndMusic.domain.repository.*;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +39,9 @@ public class MusicRankingServiceImpl {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private MusicReplyRepository musicReplyRepository;
 
 
     @Transactional(rollbackFor = Exception.class)
@@ -129,6 +134,25 @@ public class MusicRankingServiceImpl {
     public MusicRanking getMusicRanking(Long rankingId) {
         return musicRankingRepository.findById(rankingId).get();
     }
+
+//    @Transactional(rollbackFor = SQLException.class)
+//    public List<MusicRanking> getAllMusicRankingByCategory(String subCategory, Criteria criteria) {
+//        System.out.println(subCategory);
+//
+//        subCategory = subCategory.replaceAll("'", "");
+//
+//
+//        List<MusicRanking> list = musicRankingRepository.findAllByOrderByCountDesc();
+//        List<MusicRanking> result = new ArrayList<>();
+//        for (MusicRanking musicRanking : list) {
+//            String sub = musicRanking.getMusicFileInfo().getMusic().getSubCategory();
+//            if (StringUtils.equals(sub, subCategory)) {
+//                result.add(musicRanking);
+//            }
+//        }
+//        return result;
+//    }
+
 
     @Transactional(rollbackFor = SQLException.class)
     public List<MusicRanking> getAllMusicRankingByCategory(String subCategory) {
@@ -339,4 +363,95 @@ public class MusicRankingServiceImpl {
         return result;
 
     }
+
+    @Transactional(rollbackFor = SQLException.class)
+    public MusicReply addReply(String context, Long imageId,String username) {
+        Optional<User> userOptional =  userRepository.findById(username);
+        Optional<Music> musicOptional =  musicRepository.findById(imageId);
+        if(userOptional.isEmpty()) {
+            return null;
+        }
+        if(musicOptional.isEmpty()){
+            return null;
+        }
+        User user = userOptional.get();
+        Music music = musicOptional.get();
+
+        MusicReply reply = new MusicReply();
+        reply.setContext(context);
+        reply.setUser(user);
+        reply.setMusic(music);
+        reply.setDate(LocalDateTime.now());
+
+        musicReplyRepository.save(reply);
+
+        return reply;
+    }
+
+
+    @Transactional(rollbackFor = SQLException.class)
+    public List<MusicReply> getAllReply(Long musicId) {
+        Optional<Music> musicOptional =  musicRepository.findById(musicId);
+        if(musicOptional.isEmpty()){
+            return null;
+        }
+        List<MusicReply> list =  musicReplyRepository.findAllByMusicOrderByIdDesc(musicOptional.get());
+
+        return list;
+    }
+
+    @Transactional(rollbackFor = SQLException.class)
+    public Map<String, Object> deleteReply(Long id, PrincipalDetails principalDetails) {
+        Map<String, Object> result = new HashMap<String, Object>();;
+        Optional<MusicReply> musicReplyOptional =  musicReplyRepository.findById(id);
+        if(musicReplyOptional.isEmpty()){
+            result.put("message","댓글이 존재하지 않습니다.");
+            result.put("success",false);
+            return result;
+        }
+        MusicReply musicReply = musicReplyOptional.get();
+        UserDto userDto = principalDetails.getUserDto();
+        if(StringUtils.equals("ROLE_ADMIN",userDto.getRole())){
+            result.put("message","관리자에 의해 댓글이 삭제되었습니다.");
+            result.put("success",true);
+            musicReplyRepository.deleteById(id);
+            return result;
+        }
+
+        if(!StringUtils.equals(userDto.getUsername(),musicReply.getUser().getUsername())){
+            result.put("message","삭제를 할수 있는 권한이 없습니다.");
+            result.put("success",false);
+            return result;
+        }
+        result.put("message","댓글삭제 완료");
+        result.put("success",true);
+        musicReplyRepository.deleteById(id);
+        return result;
+    }
+
+    @Transactional(rollbackFor = SQLException.class)
+    public Map<String,Object> getAllMusicRankingByCategory(String subCategory, Criteria criteria) {
+        subCategory = subCategory.replaceAll("'","");
+        System.out.println(subCategory);
+        Map<String,Object> result = new HashMap<>();
+        int totalCount=(int)musicRankingRepository.findMusicRankingSubCategoryCount(subCategory);
+        System.out.println("totalCount  :" + totalCount);
+        //pageDto
+        PageDto pagedto = new PageDto(totalCount,1,criteria);
+        //offset
+        int offset =(criteria.getPageno()-1) * criteria.getAmount();    //1page = 0, 2page = 10
+
+        subCategory = subCategory.replaceAll("'","");
+
+
+        List<MusicRanking> list =   musicRankingRepository.findMusicRankingAmountStart(subCategory,criteria.getAmount(),offset);
+
+        result.put("list",list);
+        result.put("pageDto",pagedto);
+        result.put("totalCount",totalCount);
+        return result;
+
+    }
+
+
 }

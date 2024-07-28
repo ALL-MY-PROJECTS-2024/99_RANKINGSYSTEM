@@ -1,7 +1,9 @@
 package com.creator.imageAndMusic.domain.service;
 
+import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
+import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.*;
 import com.creator.imageAndMusic.domain.repository.*;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
-import java.awt.*;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ImageRankingServiceImpl implements ImageRankingService {
+public class ImageRankingServiceImpl {
 
 
     @Autowired
@@ -40,7 +41,6 @@ public class ImageRankingServiceImpl implements ImageRankingService {
     @Autowired
     private ImageReplyRepository imageReplyRepository;
 
-    @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addRankingImage(Long fileid) throws Exception {
 
@@ -69,7 +69,7 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         return true;
     }
 
-    @Override
+
     @Transactional(rollbackFor = Exception.class)
     public Map<String,Object> getAllImageRanking(Criteria criteria) {
 
@@ -113,7 +113,6 @@ public class ImageRankingServiceImpl implements ImageRankingService {
 
 
 
-    @Override
     @Transactional(rollbackFor = Exception.class)
     public List<ImagesRanking> getAllImageRanking() {
 
@@ -122,7 +121,6 @@ public class ImageRankingServiceImpl implements ImageRankingService {
     }
 
 
-    @Override
     @Transactional(rollbackFor = SQLException.class)
     public void count(Long rankingId) {
         ImagesRanking imageRanking =  imageRankingRepostiroy.findById(rankingId).get();
@@ -130,7 +128,6 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         imageRankingRepostiroy.save(imageRanking);
     }
 
-    @Override
     @Transactional(rollbackFor = SQLException.class)
     public ImagesRanking getImageRanking(Long rankingId) {
 
@@ -140,7 +137,6 @@ public class ImageRankingServiceImpl implements ImageRankingService {
 
 
     //지역별로 묶인 이미지 정보가져오기(USER가 Ranking등록한 이미지 가져와서 지역별로 선별하기)
-    @Override
     @Transactional(rollbackFor = SQLException.class)
     public Map<String,Object> getLocalImageRanking(){
 
@@ -229,8 +225,6 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         return datas;
 
     }
-
-    @Override
     @Transactional(rollbackFor = SQLException.class)
     public List<ImagesRanking> getAllImageRankingByCategory(String subCategory) {
         System.out.println(subCategory);
@@ -244,6 +238,42 @@ public class ImageRankingServiceImpl implements ImageRankingService {
                 result.add(imagesRanking);
             }
         }
+        return result;
+    }
+
+
+    @Transactional(rollbackFor = SQLException.class)
+    public Map<String,Object> getAllImageRankingByCategory(String subCategory, Criteria criteria) {
+        subCategory = subCategory.replaceAll("'","");
+        System.out.println(subCategory);
+        Map<String,Object> result = new HashMap<>();
+        int totalCount=(int)imageRankingRepostiroy.findImageRankingSubCategoryCount(subCategory);
+        System.out.println("totalCount  :" + totalCount);
+        //pageDto
+        PageDto pagedto = new PageDto(totalCount,1,criteria);
+        //offset
+        int offset =(criteria.getPageno()-1) * criteria.getAmount();    //1page = 0, 2page = 10
+
+
+        subCategory = subCategory.replaceAll("'","");
+
+
+        //List<ImagesRanking> list =   imageRankingRepostiroy.findAllByOrderByCountDesc();
+        List<ImagesRanking> list =   imageRankingRepostiroy.findImageRankingAmountStart(subCategory,criteria.getAmount(),offset);
+//
+//        Pageable pageable = PageRequest.of(offset / criteria.getAmount(), criteria.getAmount());
+//        List<ImagesRanking> list =   imageRankingRepostiroy.findImageRankingAmountStart(subCategory,pageable);
+
+//        List<ImagesRanking> result = new ArrayList<>();
+//        for(ImagesRanking imagesRanking : list){
+//            String sub = imagesRanking.getImagesFileInfo().getImages().getSubCategory();
+//            if(StringUtils.equals(sub,subCategory)){
+//                result.add(imagesRanking);
+//            }
+//        }
+        result.put("list",list);
+        result.put("pageDto",pagedto);
+        result.put("totalCount",totalCount);
         return result;
 
     }
@@ -259,7 +289,7 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         return result;
     }
 
-    @Override
+
     @Transactional(rollbackFor = SQLException.class)
     public Map<String, Object> getAllImageRankingByAllCategory() {
 
@@ -305,7 +335,7 @@ public class ImageRankingServiceImpl implements ImageRankingService {
     }
 
 
-    @Override
+
     public ImageReply addReply(String context, Long imageId,String username) {
         Optional<User> userOptional =  userRepository.findById(username);
         Optional<Images> imageOptional =  imagesRepository.findById(imageId);
@@ -326,12 +356,10 @@ public class ImageRankingServiceImpl implements ImageRankingService {
 
         imageReplyRepository.save(reply);
 
-
-
         return reply;
     }
 
-    @Override
+
     public List<ImageReply> getAllReply(Long iamgeId) {
         Optional<Images> imageOptional =  imagesRepository.findById(iamgeId);
         if(imageOptional.isEmpty()){
@@ -341,6 +369,35 @@ public class ImageRankingServiceImpl implements ImageRankingService {
         List<ImageReply> list =  imageReplyRepository.findAllByImageOrderByIdDesc(imageOptional.get());
 
         return list;
+    }
+
+
+    public Map<String, Object> deleteReply(Long id, PrincipalDetails principalDetails) {
+        Map<String, Object> result = new HashMap<String, Object>();;
+        Optional<ImageReply> imageReplyOptional =  imageReplyRepository.findById(id);
+        if(imageReplyOptional.isEmpty()){
+            result.put("message","댓글이 존재하지 않습니다.");
+            result.put("success",false);
+            return result;
+        }
+        ImageReply imageReply = imageReplyOptional.get();
+        UserDto userDto = principalDetails.getUserDto();
+        if(StringUtils.equals("ROLE_ADMIN",userDto.getRole())){
+            result.put("message","관리자에 의해 댓글이 삭제되었습니다.");
+            result.put("success",true);
+            imageReplyRepository.deleteById(id);
+            return result;
+        }
+
+        if(!StringUtils.equals(userDto.getUsername(),imageReply.getUser().getUsername())){
+            result.put("message","삭제를 할수 있는 권한이 없습니다.");
+            result.put("success",false);
+            return result;
+        }
+        result.put("message","댓글삭제 완료");
+        result.put("success",true);
+        imageReplyRepository.deleteById(id);
+        return result;
     }
 
 

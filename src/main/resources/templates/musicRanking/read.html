@@ -15,6 +15,12 @@
     <link rel="stylesheet" href="/css/imageRanking/read.css">
 
     <script src="/js/musicRanking/read.js" defer></script>
+
+    <script th:inline="javascript">
+        const musicId = [[${musicRanking.MusicFileInfo.Music.musicid}]]
+        console.log("musicId",musicId);
+    </script>
+
 </head>
 <body>
 
@@ -147,10 +153,45 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                    <!--           REPLY                 -->
+                    <hr>
+                    <div class="reply-block">
+                        <input type="text" name="relpy" class="reply" placeholder="댓글을 입력하세요.">
+                        <span  class="material-symbols-outlined reply-icon">send</span>
+                    </div>
+                    <br>
+                    <div th:if="${total} != 0">
+                        댓글 : <span class="reply-total" th:text="${total}"></span>
+                    </div>
+                    <span th:if="${total} != 0" style="margin : 15px 0 ;display:block;border : 1px solid rgb(35,35,35); width : 50%;"></span>
+                    <div class="contents">
 
+                        <div class="item" th:each="musicReply : ${replyList}">
+                            <div class="left">
+                                <img th:src="@{${musicReply.user.profileImage}}" alt="">
+                            </div>
+                            <div class="right">
+                                <div class="one">
+                                    <span class="user" th:text="${musicReply.user.username}"></span>
+                                    <div style="display:flex;justify-content:right:align-items : center;">
+                                        <div th:text="${#temporals.format(musicReply.date, 'yyyy-MM-dd HH:mm:ss')}"></div>
+                                        <div class="" style="margin-left:15px">
+                                            <a href="javascript:void(0)" th:data-id="${musicReply.id}" class="replyDeleteBtn">
+                                                <span class="material-symbols-outlined" style="font-size:.7rem;">close</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="two">
+                                    <textarea class="context" readonly th:text="${musicReply.context}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    </div>
             </div>
-
         </section>
     </main>
     <footer></footer>

@@ -1,10 +1,9 @@
 package com.creator.imageAndMusic.controller;
 
 
-import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
-import com.creator.imageAndMusic.domain.entity.ImagesRanking;
-import com.creator.imageAndMusic.domain.entity.MusicFileInfo;
-import com.creator.imageAndMusic.domain.entity.MusicRanking;
+import com.creator.imageAndMusic.domain.dto.Criteria;
+import com.creator.imageAndMusic.domain.dto.PageDto;
+import com.creator.imageAndMusic.domain.entity.*;
 import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
 import com.creator.imageAndMusic.domain.service.AroundServiceImpl;
 import com.creator.imageAndMusic.domain.service.ImageRankingServiceImpl;
@@ -15,11 +14,9 @@ import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.DoubleToIntFunction;
@@ -62,22 +59,86 @@ public class AroundController {
             @RequestParam(value = "mainCategory",defaultValue = "이미지") String mainCategory,
             @RequestParam(value = "subCategory",defaultValue = "Character") String subCategory,
             @RequestParam(value = "mode",defaultValue = "1") String mode,
+
+            @RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
+            @RequestParam(value = "amount",defaultValue = "10") int amount,
             Model model
     ){
+
+        Criteria criteria= new Criteria(pageNo,amount); //페이지이동 요청 했을때
+
+
         log.info("GET /around/group " + mainCategory + " " + subCategory + " " + mode);
         if(mainCategory.contains("이미지")){
-           List<ImagesRanking> list =   imageRankingServiceImpl.getAllImageRankingByCategory(subCategory);
+           Map<String,Object> result =   imageRankingServiceImpl.getAllImageRankingByCategory(subCategory,criteria);
+           List<ImagesRanking> list = (List<ImagesRanking>)result.get("list");
+           PageDto pageDto = (PageDto)result.get("pageDto");
+           int totalCount = (int)result.get("totalCount");
            System.out.println("개수 : " + list.size());
            model.addAttribute("imageList",list);
+           model.addAttribute("pageDto",pageDto);
+           model.addAttribute("totalCount",totalCount);
         }
         else{
-            List<MusicRanking> list =   musicRankingServiceImpl.getAllMusicRankingByCategory(subCategory);
+            Map<String,Object> result =   musicRankingServiceImpl.getAllMusicRankingByCategory(subCategory,criteria);
+            List<MusicRanking> list = (List<MusicRanking>)result.get("list");
+            PageDto pageDto = (PageDto)result.get("pageDto");
+            int totalCount = (int)result.get("totalCount");
             System.out.println("개수 : " + list.size());
             model.addAttribute("musicList",list);
+            model.addAttribute("pageDto",pageDto);
+            model.addAttribute("totalCount",totalCount);
         }
+
         model.addAttribute("subCategory",subCategory);
+        model.addAttribute("mainCategory",mainCategory);
         model.addAttribute("mode",mode);
+        model.addAttribute("amount",amount);
     }
+
+    @GetMapping("/group/next")
+    public @ResponseBody Map<String,Object> getNext(
+            @RequestParam(value = "mainCategory",defaultValue = "이미지") String mainCategory,
+            @RequestParam(value = "subCategory",defaultValue = "Character") String subCategory,
+            @RequestParam(value = "mode",defaultValue = "1") String mode,
+
+            @RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
+            @RequestParam(value = "amount",defaultValue = "10") int amount
+
+    ){
+
+        Criteria criteria= new Criteria(pageNo,amount); //페이지이동 요청 했을때
+        Map<String,Object> returnValue = new HashMap<>();
+
+        log.info("GET /around/group/next " + mainCategory + " " + subCategory + " " + mode);
+        if(mainCategory.contains("이미지")){
+            Map<String,Object> result =   imageRankingServiceImpl.getAllImageRankingByCategory(subCategory,criteria);
+            List<ImagesRanking> list = (List<ImagesRanking>)result.get("list");
+            PageDto pageDto = (PageDto)result.get("pageDto");
+            int totalCount = (int)result.get("totalCount");
+            System.out.println("개수 : " + list.size());
+            returnValue.put("imageList",list);
+            returnValue.put("pageDto",pageDto);
+            returnValue.put("totalCount",totalCount);
+        }
+        else{
+            Map<String,Object> result =   musicRankingServiceImpl.getAllMusicRankingByCategory(subCategory,criteria);
+            List<MusicRanking> list = (List<MusicRanking>)result.get("list");
+            PageDto pageDto = (PageDto)result.get("pageDto");
+            int totalCount = (int)result.get("totalCount");
+            System.out.println("개수 : " + list.size());
+            returnValue.put("musicList",list);
+            returnValue.put("pageDto",pageDto);
+            returnValue.put("totalCount",totalCount);
+        }
+
+        returnValue.put("subCategory",subCategory);
+        returnValue.put("mainCategory",mainCategory);
+        returnValue.put("mode",mode);
+        returnValue.put("amount",amount);
+        return returnValue;
+    }
+
     @GetMapping("/local")
     public String local(Model model){
         log.info("GET /around/local");

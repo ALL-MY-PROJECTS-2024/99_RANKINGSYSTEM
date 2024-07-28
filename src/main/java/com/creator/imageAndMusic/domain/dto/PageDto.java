@@ -49,7 +49,32 @@ public class PageDto {
 		 
 		
 	}
+	public PageDto(int totalcount, int pagePerBlock, Criteria criteria) {
 
+
+		this.criteria = criteria;
+
+		//전체페이지 계산
+		totalpage =(int)Math.ceil((1.0*totalcount)/criteria.getAmount());
+
+		//블럭계산
+		pagePerBlock=pagePerBlock;
+		totalBlock = (int)Math.ceil( (1.0*totalpage) / pagePerBlock );
+		nowBlock =  (int)Math.ceil ((1.0*criteria.getPageno()) / pagePerBlock);
+
+		//Next,Prev 버튼 활성화 유무
+		prev=nowBlock>1;
+		next=nowBlock<totalBlock;
+
+		//블럭에 표시할 페이지 번호 계산
+		//
+		this.endPage = (nowBlock * pagePerBlock<totalpage)?nowBlock * pagePerBlock:totalpage
+		;
+
+		this.startPage=nowBlock * pagePerBlock -pagePerBlock + 1;
+
+
+	}
 	@Override
 	public String toString() {
 		return "PageDto [totalpage=" + totalpage + ", criteria=" + criteria + ", pagePerBlock=" + pagePerBlock

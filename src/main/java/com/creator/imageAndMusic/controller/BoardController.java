@@ -50,11 +50,12 @@ public class BoardController {
     //-------------------
     //-------------------
     @GetMapping("/list")
-    public String list(@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
-                       @RequestParam(name = "type",defaultValue = "") String type,
-                       @RequestParam(name = "keyword",defaultValue = "") String keyword,
-                       Model model,
-                       HttpServletResponse response
+    public String list(
+            @RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
+            @RequestParam(name = "type",defaultValue = "") String type,
+            @RequestParam(name = "keyword",defaultValue = "") String keyword,
+            Model model,
+            HttpServletResponse response
     )
     {
         log.info("GET /board/list... " + pageNo + " " + type +" " + keyword);
@@ -302,5 +303,20 @@ public class BoardController {
     }
 
 
+    @DeleteMapping("/reply/delete")
+    public @ResponseBody ResponseEntity<String> delete(
+            @RequestParam("bno") Long bno,
+            @RequestParam("rno") Long rno,
+            @AuthenticationPrincipal PrincipalDetails principalDetails
+    )
+    {
+        Map<String,Object> result=boardService.deleteReply(bno,rno,principalDetails);
 
+        String message =(String)result.get("message");
+        boolean success = (boolean)result.get("success");
+        if(!success)
+            return new ResponseEntity<>(message,HttpStatus.BAD_GATEWAY);
+
+        return new ResponseEntity<>(message,HttpStatus.OK);
+    }
 }

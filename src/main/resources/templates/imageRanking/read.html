@@ -160,14 +160,20 @@
                                     <div class="right">
                                         <div class="one">
                                             <span class="user" th:text="${imageReply.user.username}"></span>
-                                            <div th:text="${#temporals.format(imageReply.date, 'yyyy-MM-dd HH:mm:ss')}"></div>
+                                            <div style="display:flex;justify-content:right:align-items : center;">
+                                                <div th:text="${#temporals.format(imageReply.date, 'yyyy-MM-dd HH:mm:ss')}"></div>
+                                                <div class="" style="margin-left:15px">
+                                                    <a href="javascript:void(0)" th:data-id="${imageReply.id}" class="replyDeleteBtn">
+                                                        <span class="material-symbols-outlined" style="font-size:.7rem;">close</span>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="two">
                                             <textarea class="context" readonly th:text="${imageReply.context}"></textarea>
                                         </div>
                                     </div>
                                 </div>
-
 
                             </div>
 

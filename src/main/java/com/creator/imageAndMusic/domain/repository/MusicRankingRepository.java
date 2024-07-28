@@ -33,6 +33,31 @@ public interface MusicRankingRepository extends JpaRepository<MusicRanking,Long>
 
     List<MusicRanking> findTop10ByOrderByIlikeitDesc();
 
+    @Query(value =
+            "SELECT ir.ranking_id,ir.count,ir.ilikeit,ir.reg_date,ir.music_file_info " +
+                    "FROM music_File_info ifi " +
+                    "INNER JOIN music i " +
+                    "ON ifi.musicid = i.musicid " +
+                    "INNER JOIN music_ranking ir " +
+                    "ON ir.music_file_info=ifi.fileid " +
+                    "WHERE i.sub_category = :subCategory " +
+                    "ORDER BY ir.ranking_id DESC " +
+                    "LIMIT :amount offset :offset"
+            , nativeQuery = true //LIMIT 사용위해
+    )
+    List<MusicRanking> findMusicRankingAmountStart(@Param("subCategory") String subCategory, @Param("amount") int amount, @Param("offset") int offset);
+
+    @Query(value =
+            "SELECT count(ir.ranking_id) " +
+                    "FROM music_File_info ifi " +
+                    "INNER JOIN music i " +
+                    "ON ifi.musicid = i.musicid " +
+                    "INNER JOIN music_ranking ir " +
+                    "ON ir.music_file_info=ifi.fileid " +
+                    "WHERE i.sub_category = :subCategory "
+            , nativeQuery = true //LIMIT 사용위해
+    )
+    int findMusicRankingSubCategoryCount(@Param("subCategory") String subCategory);
 
 
 }

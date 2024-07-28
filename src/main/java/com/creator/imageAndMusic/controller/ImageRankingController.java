@@ -9,7 +9,8 @@ import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.*;
 import com.creator.imageAndMusic.domain.service.BookmarkServiceImpl;
 import com.creator.imageAndMusic.domain.service.FavoriteImageServiceImpl;
-import com.creator.imageAndMusic.domain.service.ImageRankingService;
+
+import com.creator.imageAndMusic.domain.service.ImageRankingServiceImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ public class ImageRankingController {
         log.info("/imageRanking Exception.. ",e);
     }
     @Autowired
-    private ImageRankingService imageRankingService;
+    private ImageRankingServiceImpl imageRankingService;
 
     @Autowired
     private FavoriteImageServiceImpl favoriteImageService;
@@ -180,5 +181,24 @@ public class ImageRankingController {
         return new ResponseEntity<>(reply,HttpStatus.OK);
 
     }
+
+
+    @DeleteMapping("/reply/delete")
+    public @ResponseBody ResponseEntity<String> delete(
+            @RequestParam("id") Long id,
+            @AuthenticationPrincipal PrincipalDetails principalDetails
+    )
+    {
+        Map<String,Object> result=imageRankingService.deleteReply(id,principalDetails);
+
+        String message =(String)result.get("message");
+        boolean success = (boolean)result.get("success");
+        if(!success)
+            return new ResponseEntity<>(message,HttpStatus.BAD_GATEWAY);
+
+        return new ResponseEntity<>(message,HttpStatus.OK);
+    }
+
+
 
 }

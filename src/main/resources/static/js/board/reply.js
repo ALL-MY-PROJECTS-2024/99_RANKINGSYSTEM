@@ -21,3 +21,26 @@ replyAddBtn.addEventListener('click',function(){
     })
     .catch(err=>{console.log(err)})
 })
+
+const closeBlockBtns = document.querySelectorAll('.closeBlockBtn');
+closeBlockBtns.forEach(btn=>{
+
+    btn.addEventListener('click',function(){
+        const bno = btn.getAttribute('data-bno');
+        const rno = btn.getAttribute('data-rno');
+
+
+        axios.delete(`/board/reply/delete?bno=${bno}&rno=${rno}`)
+        .then(resp=>{
+                console.log(resp)
+                alert(resp.data);
+                location.reload();
+            })
+        .catch(err=>{
+                console.log(err);
+                alert(err.response.data);
+        })
+
+    })
+
+})

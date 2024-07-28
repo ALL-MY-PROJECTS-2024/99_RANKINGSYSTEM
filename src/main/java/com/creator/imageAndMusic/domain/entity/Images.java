@@ -23,10 +23,7 @@ public class Images {
     private String mainCategory;
     private String subCategory;
     private String description;
-
-
     private LocalDateTime createAt;
-
     private double lat;
     private double lng;
 

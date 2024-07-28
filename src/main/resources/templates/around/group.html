@@ -19,9 +19,12 @@
     <script th:inline="javascript">
         let list = /*[[${list}]]*/
         let mode = /*[[${mode}]]*/
+        let mainCategory = /*[[${mainCategory}]]*/
         let subCategory = /*[[${subCategory}]]*/
-        console.log(mode);
-        console.log(list);
+        let amount = /*[[${amount}]]*/
+        let totalCount = /*[[${totalCount}]]*/
+        console.log("mode",mode);
+        console.log("list",list);
     </script>
 
     <!--    -->
@@ -106,23 +109,23 @@
                                 <div th:text="${imageRanking}"></div>
 -->
                                 <div th:if="${mode=='1'}">
-                                    <span>TOTAL : </span><span th:text="${#lists.size(imageList)}"> </span>
+                                    <span>TOTAL : </span><span th:text="${totalCount}"> </span>
                                 </div>
                                 <hr>
                                 <div class="show-block">
                                     <div class="show-image-block" th:each="imageRanking,imageRankingStat : ${imageList}">
-<!--                                        <td th:text="${imageRankingStat.count}"></td>-->
                                             <a th:href="@{/imageRanking/read(rankingId=${imageRanking.rankingId})}">
                                                 <img style="" th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요">
                                             </a>
-<!--                                        <td th:text="${imageRanking.ImagesFileInfo.Images.title}"></td>-->
-<!--                                        <td th:text="${imageRanking.ImagesFileInfo.Images.username}"></td>-->
-<!--                                        <td th:text="${imageRanking.ImagesFileInfo.Images.mainCategory}"></td>-->
-<!--                                        <td th:text="${imageRanking.ImagesFileInfo.Images.subCategory}"></td>-->
-<!--                                        <td th:text="${imageRanking.count}"></td>-->
-<!--                                        <td th:text="${imageRanking.ilikeit}"></td>-->
-<!--                                        <td th:text="${#temporals.format(imageRanking.ImagesFileInfo.Images.createAt, 'yyyy.MM.dd HH:mm:ss')}"></td>-->
                                     </div>
+                                    <th:block th:if="${pageDto.next}">
+                                        <div class="next">
+                                            <a href="javascript:void(0)" class="next_btn" th:data-pageNo="${pageDto.criteria.pageno}+1">
+                                                <span class="material-symbols-outlined" >arrow_downward</span>
+                                            </a>
+                                        </div>
+                                    </th:block>
+
                                 </div>
                             </div>
                         </div>
@@ -151,24 +154,24 @@
                             <div class="" >
 
                                 <div th:if="${mode=='2'}">
-                                    <span>TOTAL : </span><span th:text="${#lists.size(musicList)}"> </span>
+                                    <span>TOTAL : </span><span th:text="${totalCount}"> </span>
                                 </div>
                                 <hr>
-                                <div  class="show-block" style="text-align:center;">
+                                <div  class="show-block music-block" style="text-align:center;">
 
                                     <div  class="show-image-block" th:each="musicRanking,musicRankingStat : ${musicList}">
-<!--                                        <td th:text="${musicRankingStat.count}"></td>-->
                                             <a th:href="@{/musicRanking/read(rankingId=${musicRanking.rankingId})}">
                                                 <img th:src="${musicRanking.musicFileInfo.dir}+'/'+${musicRanking.musicFileInfo.albumImageName}" alt="" >
                                             </a>
-<!--                                        <td th:text="${musicRanking.MusicFileInfo.Music.title}"></td>-->
-<!--                                        <td th:text="${musicRanking.MusicFileInfo.Music.username}"></td>-->
-<!--                                        <td th:text="${musicRanking.MusicFileInfo.Music.mainCategory}"></td>-->
-<!--                                        <td th:text="${musicRanking.MusicFileInfo.Music.subCategory}"></td>-->
-<!--                                        <td th:text="${musicRanking.count}"></td>-->
-<!--                                        <td th:text="${musicRanking.ilikeit}"></td>-->
-<!--                                        <td th:text="${#temporals.format(musicRanking.MusicFileInfo.Music.createAt, 'yyyy.MM.dd HH:mm:ss')}"></td>-->
                                     </div>
+                                    <th:block th:if="${pageDto.next}">
+                                        <div class="next">
+                                            <a href="javascript:void(0)" class="music_next_btn" th:data-pageNo="${pageDto.criteria.pageno}+1">
+                                                <span class="material-symbols-outlined" >arrow_downward</span>
+                                            </a>
+                                        </div>
+                                    </th:block>
+
                                 </div>
                             </div>
                         </div>

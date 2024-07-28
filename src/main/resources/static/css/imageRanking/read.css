@@ -230,33 +230,33 @@ main>section>.read-block>.image-block>.item>div:nth-child(2) img{
     height : 100%:
 }
 .info-block .contents .item{
-    width : 100%;
-    height : 100%;
-}
-.info-block .contents .item{
     display:flex;
     align-items:start;
     justify-content:left;
 
-    gap:10px;
+    gap:15px;
     width : 100%;
+    height : 100%;
+
     border-top : 1px solid gray;
     border-bottom : 1px solid gray;
     margin-bottom : 10px;
-    padding : 10px;
+    padding : 5px;
 }
 .info-block .contents .left{
     width :50px;
-    height : 50px;
-
+    height : 100%;
     position:relative;
+    min-height : 100px;
 }
 .info-block .contents .left img{
-    width : 100%;
-    height : 100%;
+    width : 50px;
+    height : 50px;
     position:absolute;
     border-radius:50px;
-    top:0;
+    top:0;bottom : 0;
+    left:0;right:0;
+    margin : auto;
 }
 .info-block .contents .right{
     width : 100%;
@@ -279,4 +279,8 @@ main>section>.read-block>.image-block>.item>div:nth-child(2) img{
     border :0;
     width : 100%;
     color : gray;
+}
+
+.replyDeleteBtn{
+    color : lightgray;
 }
