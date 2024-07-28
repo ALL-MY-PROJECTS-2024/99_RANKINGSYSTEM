@@ -35,7 +35,7 @@ public interface MusicRankingRepository extends JpaRepository<MusicRanking,Long>
 
     @Query(value =
             "SELECT ir.ranking_id,ir.count,ir.ilikeit,ir.reg_date,ir.music_file_info " +
-                    "FROM music_File_info ifi " +
+                    "FROM music_file_info ifi " +
                     "INNER JOIN music i " +
                     "ON ifi.musicid = i.musicid " +
                     "INNER JOIN music_ranking ir " +
@@ -49,7 +49,7 @@ public interface MusicRankingRepository extends JpaRepository<MusicRanking,Long>
 
     @Query(value =
             "SELECT count(ir.ranking_id) " +
-                    "FROM music_File_info ifi " +
+                    "FROM music_file_info ifi " +
                     "INNER JOIN music i " +
                     "ON ifi.musicid = i.musicid " +
                     "INNER JOIN music_ranking ir " +

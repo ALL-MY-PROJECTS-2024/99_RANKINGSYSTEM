@@ -33,7 +33,7 @@ public interface ImageRankingRepository extends JpaRepository<ImagesRanking,Long
     List<ImagesRanking> findTop10ByOrderByIlikeitDesc();
     @Query(value =
             "SELECT ir.ranking_id,ir.count,ir.ilikeit,ir.reg_date,ir.images_file_info " +
-            "FROM images_File_info ifi " +
+            "FROM images_file_info ifi " +
             "INNER JOIN images i " +
             "ON ifi.iamgeid = i.iamgeid " +
             "INNER JOIN images_ranking ir " +
@@ -47,7 +47,7 @@ public interface ImageRankingRepository extends JpaRepository<ImagesRanking,Long
 
     @Query(value =
             "SELECT count(ir.ranking_id) " +
-                    "FROM images_File_info ifi " +
+                    "FROM images_file_info ifi " +
                     "INNER JOIN images i " +
                     "ON ifi.iamgeid = i.iamgeid " +
                     "INNER JOIN images_ranking ir " +
