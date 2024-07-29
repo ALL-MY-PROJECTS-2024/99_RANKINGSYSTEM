@@ -148,7 +148,7 @@ if(musicNextBtn!=null){
     musicNextBtn.addEventListener('click',function(){
         console.log('clicked..');
         const showBlock = document.querySelector('.show-block.music-block');
-        const pageNo =  nextBtn.getAttribute('data-pageNo');
+        const pageNo =  musicNextBtn.getAttribute('data-pageNo');
         //mode  ,pageNo,mainCat , subCat,amount
         axios.get(`/around/group/next?mainCategory=${mainCategory}&subCategory=${subCategory}&pageNo=${pageNo}&amount=${amount}`)
         .then(resp=>{

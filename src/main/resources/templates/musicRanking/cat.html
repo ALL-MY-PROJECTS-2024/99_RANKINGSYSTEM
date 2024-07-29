@@ -14,16 +14,15 @@
     <link rel="stylesheet" href="/css/user/index_join.css">
 
     <link rel="stylesheet" href="/css/index_login.css">
-
     <!--  MODEL 속성가져오기  -->
     <script th:inline="javascript">
-        //let list = /*[[${list}]]*/
-        //let mode = /*[[${mode}]]*/
         let subCategory = /*[[${subCategory}]]*/
-        //console.log(mode);
-        //console.log(list);
+        let amount = /*[[${amount}]]*/
+        let totalCount = /*[[${totalCount}]]*/
+        console.log("subCategory",subCategory);
+        console.log("amount",amount);
+        console.log("totalCount",totalCount);
     </script>
-
     <!--    -->
     <link rel="stylesheet" href="/css/around/group.css">
 
@@ -103,7 +102,7 @@
                                     <span>TOTAL : </span><span th:text="${#lists.size(musicList)}"> </span>
                                 </div>
                                 <hr>
-                                <div class="show-block">
+                                <div class="show-block music-block">
                                     <div style="display:flex;justify-content:center;" class="show-image-block" th:if="${#lists.size(musicList)}==0">
                                         표시할 이미지가 없습니다.
                                     </div>
@@ -113,6 +112,15 @@
                                             <img style="" th:src="@{${musicRanking.MusicFileInfo.dir}+'\\'+${musicRanking.MusicFileInfo.albumImageName}}" alt="인증필요">
                                         </a>
                                     </div>
+
+                                    <th:block th:if="${pageDto.next}">
+                                        <div class="next">
+                                            <a href="javascript:void(0)" class="music_next_btn" th:data-pageNo="${pageDto.criteria.pageno}+1">
+                                                <span class="material-symbols-outlined" >arrow_downward</span>
+                                            </a>
+                                        </div>
+                                    </th:block>
+
                                 </div>
                             </div>
                         </div>

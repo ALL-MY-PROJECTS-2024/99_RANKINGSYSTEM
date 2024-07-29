@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -144,16 +145,55 @@ public class MusicRankingController {
     }
 
     @GetMapping("/cat")
-    public void cat( @RequestParam(value = "subCategory",defaultValue = "Jazz") String subCategory,Model model){
+    public void cat(
+            @RequestParam(value = "subCategory",defaultValue = "Jazz") String subCategory,
+            @RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
+            @RequestParam(value = "amount",defaultValue = "10") int amount,
+            Model model
+    ){
         log.info("GET /musicRanking/cat...");
-        List<MusicRanking> list =   musicRankingService.getAllMusicRankingByCategory(subCategory);
+        Criteria criteria= new Criteria(pageNo,amount); //페이지이동 요청 했을때
+
+
+        Map<String,Object> result  =   musicRankingService.getAllMusicRankingByCategory(subCategory,criteria);
+        List<MusicRanking> list = (List<MusicRanking>)result.get("list");
+        PageDto pageDto = (PageDto)result.get("pageDto");
+        int totalCount = (int)result.get("totalCount");
 
         System.out.println("개수 : " + list.size());
         model.addAttribute("musicList",list);
+        model.addAttribute("pageDto",pageDto);
+        model.addAttribute("totalCount",totalCount);
+
         model.addAttribute("subCategory",subCategory);
-
-
+        model.addAttribute("amount",amount);
     }
+    @GetMapping("/cat/next")
+    public @ResponseBody Map<String,Object> getNext(
+            @RequestParam(value = "subCategory",defaultValue = "Jazz") String subCategory,
+            @RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
+            @RequestParam(value = "amount",defaultValue = "10") int amount
+    ){
+
+        Criteria criteria= new Criteria(pageNo,amount); //페이지이동 요청 했을때
+        Map<String,Object> returnValue = new HashMap<>();
+
+        log.info("GET /musicRanking/cat/next..." +subCategory);
+        Map<String,Object> result =   musicRankingService.getAllMusicRankingByCategory(subCategory,criteria);
+        List<ImagesRanking> list = (List<ImagesRanking>)result.get("list");
+        PageDto pageDto = (PageDto)result.get("pageDto");
+        int totalCount = (int)result.get("totalCount");
+        System.out.println("개수 : " + list.size());
+        returnValue.put("musicList",list);
+        returnValue.put("pageDto",pageDto);
+        returnValue.put("totalCount",totalCount);
+
+        returnValue.put("subCategory",subCategory);
+        returnValue.put("amount",amount);
+        return returnValue;
+    }
+
+
     @GetMapping("/reply/add")
     public @ResponseBody ResponseEntity<MusicReply> replyAdd(
             @RequestParam("context") String context,

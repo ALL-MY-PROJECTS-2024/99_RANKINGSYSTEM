@@ -260,17 +260,7 @@ public class ImageRankingServiceImpl {
 
         //List<ImagesRanking> list =   imageRankingRepostiroy.findAllByOrderByCountDesc();
         List<ImagesRanking> list =   imageRankingRepostiroy.findImageRankingAmountStart(subCategory,criteria.getAmount(),offset);
-//
-//        Pageable pageable = PageRequest.of(offset / criteria.getAmount(), criteria.getAmount());
-//        List<ImagesRanking> list =   imageRankingRepostiroy.findImageRankingAmountStart(subCategory,pageable);
 
-//        List<ImagesRanking> result = new ArrayList<>();
-//        for(ImagesRanking imagesRanking : list){
-//            String sub = imagesRanking.getImagesFileInfo().getImages().getSubCategory();
-//            if(StringUtils.equals(sub,subCategory)){
-//                result.add(imagesRanking);
-//            }
-//        }
         result.put("list",list);
         result.put("pageDto",pagedto);
         result.put("totalCount",totalCount);

@@ -17,13 +17,13 @@
 
     <!--  MODEL 속성가져오기  -->
     <script th:inline="javascript">
-        //let list = /*[[${list}]]*/
-        //let mode = /*[[${mode}]]*/
         let subCategory = /*[[${subCategory}]]*/
-        //console.log(mode);
-        //console.log(list);
+        let amount = /*[[${amount}]]*/
+        let totalCount = /*[[${totalCount}]]*/
+        console.log("subCategory",subCategory);
+        console.log("amount",amount);
+        console.log("totalCount",totalCount);
     </script>
-
     <!--    -->
     <link rel="stylesheet" href="/css/around/group.css">
 
@@ -100,7 +100,7 @@
                         <div>
                             <div class="" >
                                 <div>
-                                    <span>TOTAL : </span><span th:text="${#lists.size(imageList)}"> </span>
+                                    <span>TOTAL : </span><span th:text="${totalCount}"> </span>
                                 </div>
                                 <hr>
                                 <div class="show-block">
@@ -113,7 +113,15 @@
                                             <img style="" th:src="@{${imageRanking.ImagesFileInfo.dir}+'\\'+${imageRanking.ImagesFileInfo.filename}}" alt="인증필요">
                                         </a>
                                     </div>
+                                    <th:block th:if="${pageDto.next}">
+                                        <div class="next">
+                                            <a href="javascript:void(0)" class="next_btn" th:data-pageNo="${pageDto.criteria.pageno}+1">
+                                                <span class="material-symbols-outlined" >arrow_downward</span>
+                                            </a>
+                                        </div>
+                                    </th:block>
                                 </div>
+
                             </div>
                         </div>
                     </div>
