@@ -3,8 +3,10 @@ package com.creator.imageAndMusic.controller;
 
 import com.creator.imageAndMusic.domain.dto.TradingImageDto;
 import com.creator.imageAndMusic.domain.dto.TradingMusicDto;
+import com.creator.imageAndMusic.domain.entity.ConnectionUser;
 import com.creator.imageAndMusic.domain.entity.TradingImage;
 import com.creator.imageAndMusic.domain.entity.TradingMusic;
+import com.creator.imageAndMusic.domain.repository.ConnectionUserRepository;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -102,9 +104,15 @@ public class AdminController {
     //
     //----------------------------------------------------------------
 
+    @Autowired
+    private ConnectionUserRepository connectionUserRepository;
+
     @GetMapping("/settings")
-    public void settings(){
+    public void settings(Model model){
+
         log.info("GET /admin/settings...");
+        List<ConnectionUser> list =  connectionUserRepository.findAll();
+        model.addAttribute("list",list);
     }
 
 }

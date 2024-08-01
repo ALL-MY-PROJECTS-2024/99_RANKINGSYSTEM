@@ -2,6 +2,7 @@ package com.creator.imageAndMusic.config;
 
 
 import com.creator.imageAndMusic.properties.UPLOADPATH;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -20,5 +21,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/upload/**").addResourceLocations("file:/"+ UPLOADPATH.UPPERDIRPATH +"/");//.setCachePeriod(60*60*24*365);
 
 	}
+
 
 }

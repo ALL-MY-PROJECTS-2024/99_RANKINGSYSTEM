@@ -50,8 +50,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         String token = null;
         String importAuth = null;
 
-
-
         try{
 
             if(token==null) {
