@@ -3,27 +3,31 @@ package com.creator.imageAndMusic.controller;
 
 import com.creator.imageAndMusic.domain.dto.Criteria;
 import com.creator.imageAndMusic.domain.dto.PageDto;
-import com.creator.imageAndMusic.domain.entity.*;
-import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
+import com.creator.imageAndMusic.domain.entity.ImagesRanking;
+import com.creator.imageAndMusic.domain.entity.MusicRanking;
 import com.creator.imageAndMusic.domain.service.AroundServiceImpl;
 import com.creator.imageAndMusic.domain.service.ImageRankingServiceImpl;
 import com.creator.imageAndMusic.domain.service.MusicRankingServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.internal.util.collections.ArrayHelper;
-import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.DoubleToIntFunction;
 
 @Controller
 @Slf4j
 @RequestMapping("/around")
+@Tag(name = "둘러보기", description = "인기이미지,그룹,국내지도,세계지도")
 public class AroundController {
 
     @Autowired
@@ -34,6 +38,17 @@ public class AroundController {
 
     @Autowired
     private MusicRankingServiceImpl musicRankingServiceImpl;
+
+    @Operation(
+            summary = "홈>둘러보기>인기이미지",
+            description = "이미지TOP 10건 과 음악TOP 10건을 표시합니다.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/popular")
     public void popular(Model model){
         log.info("GET /around/popular");
@@ -54,6 +69,17 @@ public class AroundController {
 
     }
 
+
+    @Operation(
+            summary = "홈>둘러보기>그룹",
+            description = "이미지/음악 세부 카테고리별 ITEM을 표시합니다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/group")
     public void group(
             @RequestParam(value = "mainCategory",defaultValue = "이미지") String mainCategory,
@@ -96,6 +122,16 @@ public class AroundController {
         model.addAttribute("amount",amount);
     }
 
+    @Operation(
+            summary = "홈>둘러보기>그룹(페이징)",
+            description = "그룹 페이지의 페이징 처리요청 입니다.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "수량(amount)에 따른 LISTITEM이 반환됩니다.\n페이징 처리를 위한 객체(PageDto)가 반환됩니다.\n전체 ITEM건수(totalCount)가 반환됩니다."
+                    )
+            }
+    )
     @GetMapping("/group/next")
     public @ResponseBody Map<String,Object> getNext(
             @RequestParam(value = "mainCategory",defaultValue = "이미지") String mainCategory,
@@ -139,6 +175,16 @@ public class AroundController {
         return returnValue;
     }
 
+    @Operation(
+            summary = "홈>둘러보기>국내지도",
+            description = "국내지도 페이지입니다.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = ""
+                    )
+            }
+    )
     @GetMapping("/local")
     public String local(Model model){
         log.info("GET /around/local");

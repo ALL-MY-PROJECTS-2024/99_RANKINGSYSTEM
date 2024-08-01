@@ -75,7 +75,7 @@ dependencies {
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.2'
 
 	//SPRING-DOC - API DOCUMENTATION
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.8.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'		// springdoc-openapi 의존성 추가
 
 
 	//TEST

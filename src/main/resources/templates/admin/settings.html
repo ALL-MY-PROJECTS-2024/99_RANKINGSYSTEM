@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
+
+
+    <link rel="stylesheet" href="/css/admin/settings.css">
+
+    <script src="/js/admin/settings.js" defer> </script>
+
+    <!--  chartjs  -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="~{fragments/header :: mainHeaderFragment}" />
+
+    <!-- nav       -->
+    <th:block th:insert="~{fragments/nav :: navFragment}" />
+
+    <main class="layout-5">
+        <section class="banner mt-5 layout-5">
+            <h3>관리자 페이지</h3>
+            <hr>
+            <div class="dashboard">
+                <h4>접속 현황</h4>
+                <div>
+                    <canvas id="totalPerDay"></canvas>
+                </div>
+            </div>
+            <div>
+                <pre style="text-align:3rem;">
+                        추가할 항목들...
+                        1.일별 총 접속현황
+                        2 월별 총 접속현황
+                        3 메일전송에 사용되는 KEYCODE 값 변경 / 가이드 페이지 제작
+                        4 결제처리에 사용되는 KEYCODE 값 변경 / 가이드 페이지 제작
+
+                </pre>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footerFragment}" />
+    </footer>
+
+</div>
+
+
+
+
+</body>
+</html>

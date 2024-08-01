@@ -85,7 +85,8 @@ public class SecurityConfig  {
                     authorize.requestMatchers("/admin/**").hasAnyRole("ADMIN");
                     authorize.requestMatchers("/trading/**").hasAnyRole("USER","ADMIN");
 
-                    authorize.requestMatchers("/swagger-ui/*").permitAll();
+                    authorize.requestMatchers("/api-docs/**").permitAll();
+                    authorize.requestMatchers("/admin/settings").hasRole("ADMIN");
 
                     authorize.anyRequest().authenticated();
 

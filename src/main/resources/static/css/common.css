@@ -526,7 +526,10 @@ a:hover{
 }
 
 
-
+.swiper-wrapper {
+    display:flex;
+    justify-content : center;
+}
 
 .wrapper>main>.section-1>.photo{
     position: absolute;

@@ -23,8 +23,19 @@
                         <span> 님</span>
                     </li>
                 </th:block>
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li class="item" style="">
+                        <a href="/admin/settings">
+                            <span class="material-symbols-outlined">settings</span>
+                            <span class="naming">관리자설정</span>
+                        </a>
+
+                    </li>
+                </th:block>
 
                 <th:block class="top-header-menu" sec:authorize="!isAuthenticated()" >
+
+
                     <li class="item">
                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <span class="material-symbols-outlined">login</span>
@@ -77,7 +88,18 @@
                         <span>님</span>
                     </li>
                 </th:block>
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li class="item" style="">
+                        <a href="/admin/settings">
+                            <span class="material-symbols-outlined">settings</span>
+                            <span class="naming">관리자설정</span>
+
+                        </a>
+                    </li>
+                </th:block>
+
                 <th:block class="top-header-menu" sec:authorize="!isAuthenticated()" >
+
                     <li class="item">
                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <span class="material-symbols-outlined">login</span>
