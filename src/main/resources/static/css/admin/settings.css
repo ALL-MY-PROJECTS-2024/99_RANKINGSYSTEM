@@ -1,10 +1,24 @@
-#totalPerDay{
+.dashboard{
+    display:flex;
+    justify-content : space-between;
+    align-items :start;
+    gap : 20px;
+}
+.dashboard .totalPerDay.left{
     width : 40vw;
+    min-width: 200px;
     height : 400px;
     padding : 5px;
     border : 1px solid gray;
+
+   display:flex;
+   justify-content : center;
+   align-items : center;
 }
-#totalPerDay canvas{
-    width : 400px;
-    height : 400px;
+.dashboard .right{
+    width :calc(60vw - 20px);
+    height :100%;
+
 }
+
+
