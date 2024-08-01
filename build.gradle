@@ -8,7 +8,7 @@ group = 'com.creator'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = '21'
 }
 
 repositories {
@@ -73,6 +73,10 @@ dependencies {
 
 	//JACKSON_DATA_BINDER
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.2'
+
+	//SPRING-DOC - API DOCUMENTATION
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.8.0'
+
 
 	//TEST
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
