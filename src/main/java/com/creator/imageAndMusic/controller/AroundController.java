@@ -199,6 +199,17 @@ public class AroundController {
 
         return "around/local";
     }
+
+    @Operation(
+            summary = "홈>둘러보기>세계지도",
+            description = "세계지도 페이지입니다.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/global")
     public String global(Model model){
         log.info("GET /around/global");
