@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -198,9 +199,13 @@ public class AdminController {
 
         log.info("GET /admin/settings...");
 
-        Map<String,Object> result = settingService.getSettingInfo();
+        Map<String,Object> result = settingService.getAllConnectionList();
         List<ConnectionUser> totalConnectionList = (List<ConnectionUser>)result.get("totalConnectionList");
         model.addAttribute("totalConnectionList",totalConnectionList);
+
+        Map<LocalDate,Object> weeklyConnectionList =  settingService.getConnectionListPerWeekly();
+        model.addAttribute("weeklyConnectionList",weeklyConnectionList);
+
 
     }
 

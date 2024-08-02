@@ -44,9 +44,25 @@
         console.log('totalUser',totalUser);
         console.log('totalCountPerUser',totalCountPerUser);
 
+
         //자바스크립트 주간 접속현황 처리
-        //현재 일(요일)을 기준으로 일 - 토 까지의
-        //
+        const weeklyConnectionList = [[${weeklyConnectionList}]];
+        console.log('weeklyConnectionList',weeklyConnectionList);
+
+        const result = weeklyConnectionList.reduce((acc, current) => {
+            const { username, count } = current;
+            if (!acc[username]) {
+                acc[username] = { username, count: 0 };
+            }
+            acc[username].count += count;
+            return acc;
+        }, {});
+
+        const resultArray = Object.values(result);
+
+        console.log("resultArray",resultArray);
+
+
     </script>
 </head>
 <body>
