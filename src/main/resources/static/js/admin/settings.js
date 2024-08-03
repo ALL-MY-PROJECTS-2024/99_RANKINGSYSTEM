@@ -53,8 +53,8 @@ const borderColors = [
 const datasets = Object.keys(userData).map((username, index) => ({
     label: username,
     data: userData[username],
-    backgroundColor: colors[index % colors.length],
-    borderColor: borderColors[index % borderColors.length],
+    //backgroundColor: colors[index % colors.length],
+    //borderColor: borderColors[index % borderColors.length],
     borderWidth: 1
 }));
 
