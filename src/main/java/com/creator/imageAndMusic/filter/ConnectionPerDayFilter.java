@@ -64,7 +64,7 @@ public class ConnectionPerDayFilter implements Filter {
                 ConnectionUser connection = new ConnectionUser();
                 connection.setRequestUri(uri);
                 connection.setRepeatPerSecond(0L);
-                connection.setCount(0L);
+                connection.setCount(1L);
                 connection.setRemoteIp(ip);
                 connection.setToday(LocalDate.now());
                 connection.setUsername(username);
@@ -87,7 +87,7 @@ public class ConnectionPerDayFilter implements Filter {
                 ConnectionUser connection = new ConnectionUser();
                 connection.setRequestUri(uri);
                 connection.setRepeatPerSecond(0L);
-                connection.setCount(0L);
+                connection.setCount(1L);
                 connection.setRemoteIp(ip);
                 connection.setToday(LocalDate.now());
                 connection.setUsername(username);

@@ -56,15 +56,15 @@ public class SettingServiceImpl {
         // 오늘 날짜의 요일
         DayOfWeek currentDayOfWeek = today.getDayOfWeek();
 
-        // 이번 주 일요일 계산
-        LocalDate sunday = today.minusDays(currentDayOfWeek.getValue() % 7);
+        // 이번 주 월요일 계산
+        LocalDate monday = today.minusDays(currentDayOfWeek.getValue() - DayOfWeek.MONDAY.getValue());
 
         // List 생성
         List<LocalDate> weekDates = new ArrayList<>();
 
-        // 일요일부터 토요일까지의 날짜를 List에 추가
+        // 월요일부터 일요일까지의 날짜를 List에 추가
         for (int i = 0; i < 7; i++) {
-            LocalDate day = sunday.plusDays(i);
+            LocalDate day = monday.plusDays(i);
             weekDates.add(day);
         }
 

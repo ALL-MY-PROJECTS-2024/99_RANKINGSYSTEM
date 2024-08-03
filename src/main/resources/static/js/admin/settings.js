@@ -28,15 +28,11 @@ const totalPerDay =
 
 
 //일별 접속 현황
-const weeklyDate = getWeekDates();  //오늘날짜 기준으로 일 - 토까지 날짜 구하기
+const weeklyDate = getWeekDates();  //오늘날짜 기준으로 월 - 토까지 날짜 구하기
 
 //해당 데이터 가져오기
-const userData = {
-    admin: [5, 10, 15, 20, 25, 30, 35],
-    user1: [10, 20, 30, 40, 50, 60, 70],
-    anonymous: [2, 4, 6, 8, 10, 12, 14],
-    user2: [3, 5, 7, 9, 11, 13, 15]  // 추가 유저 예시
-};
+//userData 에 값 있음
+
 
 // 동적 데이터셋 생성
 const colors = [

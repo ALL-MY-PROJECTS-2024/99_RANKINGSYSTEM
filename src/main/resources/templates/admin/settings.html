@@ -49,19 +49,31 @@
         const weeklyConnectionList = [[${weeklyConnectionList}]];
         console.log('weeklyConnectionList',weeklyConnectionList);
 
-        const result = weeklyConnectionList.reduce((acc, current) => {
-            const { username, count } = current;
-            if (!acc[username]) {
-                acc[username] = { username, count: 0 };
+
+        // 유저별 데이터 초기화
+        const userData = {};
+        const dates = Object.keys(weeklyConnectionList);
+        // 날짜 문자열을 Date 객체로 변환하여 오름차순 정렬
+        dates.sort((a, b) => new Date(a) - new Date(b));
+
+        console.log('dates',dates);
+        // 데이터 처리
+        dates.forEach((date, index) => {
+            const logs = weeklyConnectionList[date];
+               console.log("log",logs,"index",index);
+
+            if (logs && logs.length > 0) {
+                logs.forEach(log => {
+                    if (!userData[log.username]) {
+                        userData[log.username] = Array(dates.length).fill(0); // 초기화
+                    }
+                    userData[log.username][index] += log.count; // 카운트 합산
+                });
             }
-            acc[username].count += count;
-            return acc;
-        }, {});
+        });
 
-        const resultArray = Object.values(result);
-
-        console.log("resultArray",resultArray);
-
+        // 출력
+        console.log("userData",userData);
 
     </script>
 </head>
