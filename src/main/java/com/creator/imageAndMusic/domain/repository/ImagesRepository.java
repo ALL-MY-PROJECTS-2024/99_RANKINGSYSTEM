@@ -20,4 +20,5 @@ public interface ImagesRepository extends JpaRepository<Images,Long> {
     @Query("SELECT i FROM Images i WHERE i.subCategory=:subcategory")
     List<Images> findAllBySubCategory(@Param("subcategory") String subcategory);
 
+    Long countByUsername(String username);
 }

@@ -117,3 +117,39 @@ function formatDate(date) {
 console.log(getWeekDates());
 
 
+
+
+const setSocketMax = document.querySelector('.setSocketMax');
+setSocketMax.addEventListener('click',function(){
+    console.log('setSocketMax clicked...');
+    const socketMax = document.querySelector(".socketmax").value;
+    axios.get(`/admin/setSocketVal?socketMax=${socketMax}`)
+    .then(
+        resp=>{console.log(resp)
+    })
+    .catch(err=>{console.log(err);})
+})
+
+const setImageMax = document.querySelector('.setImageMax');
+setImageMax.addEventListener('click',function(){
+    console.log('setImageMax clicked...');
+    const userImageMax = document.querySelector(".userImageMax").value;
+    axios.get(`/admin/setImageUploadVal?imageMax=${userImageMax}`)
+    .then(
+        resp=>{console.log(resp)
+
+    })
+    .catch(err=>{console.log(err);})
+})
+
+const setMusicMax = document.querySelector('.setMusicMax');
+setMusicMax.addEventListener('click',function(){
+    console.log('setMusicMax clicked...');
+    const userMusicMax = document.querySelector(".userMusicMax").value;
+    axios.get(`/admin/setMusicUploadVal?musicMax=${userMusicMax}`)
+    .then(
+        resp=>{console.log(resp)
+    })
+    .catch(err=>{console.log(err);})
+})
+

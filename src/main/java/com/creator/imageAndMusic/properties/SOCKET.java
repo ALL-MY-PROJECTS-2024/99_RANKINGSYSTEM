@@ -20,5 +20,7 @@ public class SOCKET {
         SOCKET.MUSIC_REQ_PATH = reqMusicPath;
     }
 
+    public static Long max = 5L;
+
 
 }

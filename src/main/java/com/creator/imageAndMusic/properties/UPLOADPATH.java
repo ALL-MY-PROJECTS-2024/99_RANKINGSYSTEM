@@ -3,8 +3,6 @@ package com.creator.imageAndMusic.properties;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.io.File;
 @Component
 public class UPLOADPATH {
 
@@ -56,4 +54,6 @@ public class UPLOADPATH {
         UPLOADPATH.FILEPATH = filePathProperty;
     }
 
+    public static Long userImageMax=10L;
+    public static Long userMusicMax=10L;
 }

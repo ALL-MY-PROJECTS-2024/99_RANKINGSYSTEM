@@ -1,14 +1,16 @@
 package com.creator.imageAndMusic.domain.service;
 
-import com.creator.imageAndMusic.domain.dto.ChatRoom;
 import com.creator.imageAndMusic.domain.dto.ChatRoomMusic;
-import com.creator.imageAndMusic.domain.dto.TradingImageDto;
 import com.creator.imageAndMusic.domain.dto.TradingMusicDto;
-import com.creator.imageAndMusic.domain.entity.*;
+import com.creator.imageAndMusic.domain.entity.MusicFileInfo;
+import com.creator.imageAndMusic.domain.entity.MusicRanking;
+import com.creator.imageAndMusic.domain.entity.TradingMusic;
+import com.creator.imageAndMusic.domain.entity.User;
 import com.creator.imageAndMusic.domain.repository.MusicFileInfoRepository;
 import com.creator.imageAndMusic.domain.repository.MusicRankingRepository;
 import com.creator.imageAndMusic.domain.repository.TradingMusicRepository;
 import com.creator.imageAndMusic.domain.repository.UserRepository;
+import com.creator.imageAndMusic.properties.SOCKET;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,7 +163,7 @@ public class TradingMusicServiceImpl {
 
         TradingMusic tradingMusic =  tradingMusicRepository.findById(tradingid).get();
         tradingMusic.setRoomId(chatRoom.getRoomId());
-        tradingMusic.setMax(5L);//정원 5명
+        tradingMusic.setMax(SOCKET.max);//정원 5명
         tradingMusic.setStatus("경매중");
         tradingMusicRepository.save(tradingMusic);
     }

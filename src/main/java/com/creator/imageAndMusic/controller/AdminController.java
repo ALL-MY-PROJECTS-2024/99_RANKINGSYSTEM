@@ -10,11 +10,15 @@ import com.creator.imageAndMusic.domain.repository.ConnectionUserRepository;
 import com.creator.imageAndMusic.domain.service.SettingServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
+import com.creator.imageAndMusic.properties.SOCKET;
+import com.creator.imageAndMusic.properties.UPLOADPATH;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,8 +50,8 @@ public class AdminController {
 
 
     @Operation(
-            summary = "홈>TRADING>이미지/메인",
-            description = "세계지도 페이지입니다.",
+            summary = "홈>TRADING>이미지>메인",
+            description = "이미지 매매 페이지 입니다.",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -64,8 +68,8 @@ public class AdminController {
 
 
     @Operation(
-            summary = "홈>둘러보기>세계지도",
-            description = "세계지도 페이지입니다.",
+            summary = "홈>TRADING>이미지>승인",
+            description = "매매 승인 기능입니다.",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -87,8 +91,8 @@ public class AdminController {
     }
 
     @Operation(
-            summary = "홈>둘러보기>세계지도",
-            description = "세계지도 페이지입니다.",
+            summary = "홈>TRADING>이미지>취소",
+            description = "매매 취소 기능입니다",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -113,8 +117,8 @@ public class AdminController {
     //----------------------------------------------------------------
 
     @Operation(
-            summary = "홈>둘러보기>세계지도",
-            description = "세계지도 페이지입니다.",
+            summary = "홈>TRADING>음악>메인",
+            description = "음악 매매 페이지 입니다.",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -132,8 +136,8 @@ public class AdminController {
 
 
     @Operation(
-            summary = "홈>둘러보기>세계지도",
-            description = "세계지도 페이지입니다.",
+            summary = "홈>TRADING>음악>승인",
+            description = "음악 매매 승인 기능입니다",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -155,8 +159,8 @@ public class AdminController {
     }
 
     @Operation(
-            summary = "홈>둘러보기>세계지도",
-            description = "세계지도 페이지입니다.",
+            summary = "홈>TRADING>음악>취소",
+            description = "음악 매매 취소 기능입니다",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -185,8 +189,8 @@ public class AdminController {
 
 
     @Operation(
-            summary = "홈>둘러보기>세계지도",
-            description = "세계지도 페이지입니다.",
+            summary = "홈>관리자 설정",
+            description = "관리저 설정 페이지 입니다.",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -207,6 +211,32 @@ public class AdminController {
         model.addAttribute("weeklyConnectionList",weeklyConnectionList);
 
 
+        //최대 접속인원 전달
+        model.addAttribute("SOCKETMAX", SOCKET.max);
+        model.addAttribute("UPLOADIMAGEMAX", UPLOADPATH.userImageMax);
+        model.addAttribute("UPLOADMUSICMAX", UPLOADPATH.userMusicMax);
+
+
     }
 
+    @GetMapping("/setSocketVal")
+    public @ResponseBody ResponseEntity<String> socketVal(@RequestParam("socketMax") Long SocketMax){
+        SOCKET.max = SocketMax;
+        log.info("GET /admin/setSocketVal..changeSocketVal : " + SOCKET.max);
+
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+    }
+
+    @GetMapping("/setImageUploadVal")
+    public @ResponseBody ResponseEntity<String> setImageUploadVal(@RequestParam("imageMax") Long imageMax){
+        UPLOADPATH.userImageMax = imageMax;
+        log.info("GET /admin/setImageUploadVal..UPLOADPATH.userImageMax : " + UPLOADPATH.userImageMax);
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+    }
+    @GetMapping("/setMusicUploadVal")
+    public @ResponseBody ResponseEntity<String> setMusicUploadVal(@RequestParam("musicMax") Long musicMax){
+        UPLOADPATH.userMusicMax = musicMax;
+        log.info("GET /admin/setImageUploadVal..UPLOADPATH.userMusicMax : " + UPLOADPATH.userMusicMax);
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+    }
 }

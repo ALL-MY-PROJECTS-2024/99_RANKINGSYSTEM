@@ -1,19 +1,20 @@
 package com.creator.imageAndMusic.domain.service;
 
 
-import com.creator.imageAndMusic.config.auth.PrincipalDetails;
 import com.creator.imageAndMusic.domain.dto.ChatRoom;
-import com.creator.imageAndMusic.domain.dto.ChatRoomMusic;
 import com.creator.imageAndMusic.domain.dto.TradingImageDto;
-import com.creator.imageAndMusic.domain.dto.TradingMusicDto;
-import com.creator.imageAndMusic.domain.entity.*;
-import com.creator.imageAndMusic.domain.repository.*;
-
+import com.creator.imageAndMusic.domain.entity.ImagesFileInfo;
+import com.creator.imageAndMusic.domain.entity.ImagesRanking;
+import com.creator.imageAndMusic.domain.entity.TradingImage;
+import com.creator.imageAndMusic.domain.entity.User;
+import com.creator.imageAndMusic.domain.repository.ImageRankingRepository;
+import com.creator.imageAndMusic.domain.repository.ImagesFileInfoRepository;
+import com.creator.imageAndMusic.domain.repository.TradingImageRepository;
+import com.creator.imageAndMusic.domain.repository.UserRepository;
+import com.creator.imageAndMusic.properties.SOCKET;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.socket.WebSocketSession;
@@ -164,7 +165,7 @@ public class TradingImageServiceImpl {
 
         TradingImage tradingImage =  tradingImageRepository.findById(tradingid).get();
         tradingImage.setRoomId(chatRoom.getRoomId());
-        tradingImage.setMax(5L);//정원 5명
+        tradingImage.setMax(SOCKET.max);//정원 5명
         tradingImage.setStatus("경매중");
         tradingImageRepository.save(tradingImage);
     }

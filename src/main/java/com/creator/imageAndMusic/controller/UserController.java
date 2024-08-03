@@ -8,11 +8,14 @@ import com.creator.imageAndMusic.config.auth.jwt.TokenInfo;
 import com.creator.imageAndMusic.domain.dto.AlbumDto;
 import com.creator.imageAndMusic.domain.dto.UserDto;
 import com.creator.imageAndMusic.domain.entity.*;
+import com.creator.imageAndMusic.domain.repository.ImagesRepository;
+import com.creator.imageAndMusic.domain.repository.MusicRepository;
 import com.creator.imageAndMusic.domain.repository.UserRepository;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
 import com.creator.imageAndMusic.domain.service.UserService;
 import com.creator.imageAndMusic.properties.AUTH;
+import com.creator.imageAndMusic.properties.UPLOADPATH;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +23,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -398,31 +400,71 @@ public class UserController {
         log.info("GET /album/add");
     }
 
+
+    @Autowired
+    private ImagesRepository imagesRepository;
+
     @PostMapping("/album/add")
-    public  @ResponseBody void add_image(AlbumDto dto) throws IOException {
+    public  @ResponseBody ResponseEntity<Map<String,Object>> add_image(AlbumDto dto) throws IOException {
         log.info("POST /album/add : " + dto+" file count : " + dto.getFiles().length);
-        //유효성 검사
-//        if(bindingResult.hasFieldErrors()){
-//            for(FieldError error :bindingResult.getFieldErrors()){
-//                log.info(error.getField() +" : " + error.getDefaultMessage());
-//                //model.addAttribute(error.getField(),error.getDefaultMessage());
-//            }
-//        }
+
+
+        Map<String,Object> result = new HashMap<>();
+
+        Long count =  imagesRepository.countByUsername(dto.getUsername());
+        if(count >= UPLOADPATH.userImageMax){
+            result.put("success",false);
+            result.put("message","업로드 최대 허용개수를 초과하였습니다");
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }
+
+        System.out.println("COUNT : " + count);
 
         //서비스 실행
         boolean isUploaded =  userService.uploadAlbum(dto);
+        if(isUploaded){
+            result.put("success",isUploaded);
+            result.put("message","업로드 성공");
+        }
+        else{
+            result.put("success",isUploaded);
+            result.put("message", "업로드 실패");
+        }
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
+
+    @Autowired
+    private MusicRepository musicRepository;
+
     @PostMapping("/music/add")
-    public String add_music(AlbumDto dto) throws IOException {
+    public @ResponseBody ResponseEntity<Map<String,Object>>  add_music(AlbumDto dto) throws IOException {
         System.out.println("POST /music/add : " + dto+" file count : " + dto.getFiles().length);
         //서비스 실행
+
+        Map<String,Object> result = new HashMap<>();
+
+        Long count =  musicRepository.countByUsername(dto.getUsername());
+        if(count >= UPLOADPATH.userMusicMax){
+            result.put("success",false);
+            result.put("message","업로드 최대 허용개수를 초과하였습니다");
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }
+
+        System.out.println("COUNT : " + count);
 
         boolean isUploaded = userService.uploadMusicAlbum(dto);
 
         if(isUploaded){
-            return "redirect:/user/album/main";
+            result.put("success", isUploaded);
+            result.put("message", "업로드 성공");
         }
-        return "user/album/add";
+        else{
+            result.put("success",isUploaded);
+            result.put("message", "업로드 실패");
+        }
+        return new ResponseEntity<>(result,HttpStatus.OK);
+
+
     }
 
     @GetMapping("/album/read")

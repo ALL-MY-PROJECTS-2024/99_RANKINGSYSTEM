@@ -125,10 +125,15 @@ const add_product_btn_el = document.querySelector('.add_album_btn');
         axios.post('/user/album/add',formData,{ headers: {'Content-Type' :'multipart/form-data' } } )
                 .then(res=>{
                     console.log(res);
-                    alert("업로드 완료")
-                    location.href="/user/album/main";
+                    alert(res.data.message);
+                    if(res.data.success)
+                        location.href="/user/album/main";
                 })
-                .catch(err=>{console.log(err);})
+                .catch(
+                    err=>{
+                        console.log(err);
+
+                })
 
 });
 
@@ -314,8 +319,9 @@ addMusicBtn.addEventListener('click',function(){
         axios.post('/user/music/add',music_form_data,{ headers: {'Content-Type' :'multipart/form-data' } } )
                 .then(res=>{
                     console.log(res);
-                    alert("업로드 완료")
-                    location.href="/user/album/main";
+                    alert(res.data.message);
+                    if(res.data.success)
+                        location.href="/user/album/main";
          })
         .catch(err=>{console.log(err);})
 })
