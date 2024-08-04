@@ -1,3 +1,16 @@
+
+const imageBodyNextBtn = document.querySelector('.image_body .swiper-button-next')
+imageBodyNextBtn.addEventListener('click',function(){
+    const swiperWrapper = document.querySelector('.image_body .swiper-wrapper')
+    swiperWrapper.style.left="-60%";
+})
+const imageBodyPrevBtn = document.querySelector('.image_body .swiper-button-prev')
+imageBodyPrevBtn.addEventListener('click',function(){
+    const swiperWrapper = document.querySelector('.swiper-wrapper')
+    swiperWrapper.style.left="0";
+})
+
+
 //---------------------------------------------------
 //초기모드
 //---------------------------------------------------

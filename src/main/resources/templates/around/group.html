@@ -86,7 +86,7 @@
                 <!--   IMAGE BODY             -->
                 <div th:class="${mode=='2'} ? 'image_body hidden' : 'image_body'">
 
-                    <div class="swiper sub_category">
+                    <div class="swiper sub_category image_body">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
@@ -97,9 +97,18 @@
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Furniture'&mode=1" data-title="Furniture">Furniture </a>   </div>
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Car'&mode=1" data-title="Car">Car </a>   </div>
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Place'&mode=1" data-title="Place">Place </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Robot'&mode=1" data-title="Robot">Robot </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Animal'&mode=1" data-title="Animal">Animal </a>   </div>
+                            <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Food'&mode=1" data-title="Food">Food </a>   </div>
                             <div class="swiper-slide">  <a href="/around/group?mainCategory='이미지'&subCategory='Others'&mode=1" data-title="Others">Others </a>   </div>
                         </div>
 
+                        <div class="swiper-button-prev" style="background-color:royalblue;border:1px solid;position:absolute;top:55%;left:0px;">
+                            <span class="material-symbols-outlined" style="color:white;" >arrow_left</span>
+                        </div>
+                        <div class="swiper-button-next" style="background-color:royalblue;border:1px solid;position:absolute;top:55%;left:calc(100% - 35px);">
+                            <span class="material-symbols-outlined"  style="color:white;">arrow_right</span>
+                        </div>
                     </div>
 
                     <div class="subCategoryBody">

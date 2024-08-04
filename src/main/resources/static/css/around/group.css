@@ -260,7 +260,6 @@ section.group-block .body   .swiper .swiper-button-next::after{
 }
 .sub_category .swiper-wrapper{
     width : 100%;
-
     transition : .3s;
 
 }
