@@ -151,7 +151,7 @@
                                 관리자 GOOGLE 계정
                         </td>
                         <td>
-                            <input type="text" name="" class="form-control" style="width : 200px;background-color:rgb(25,25,25);outline:none;color:lightgray;">
+                            <input placeholder="GOOGLE 이메일 계 입력"  th:value="${ADMIN_EMAIL}" type="email" name="" class="form-control admin-mail" style="width : 200px;background-color:rgb(25,25,25);outline:none;color:lightgray;">
                         </td>
                     </tr>
                     <tr>
@@ -160,17 +160,17 @@
                     <tr>
                         <td style="width : 200px;background-color:transparent">
                             관리자 GOOGLE 앱 비밀번호<br>
-                            <a href="javascript:void(0)" style="color:green;">[참고]비밀번호 확인하기</a>
+                            <a href="/admin/guide/email" target="_blank" style="color:green;">[가이드] 앱 비밀번호 확인하기</a>
                         </td>
                         <td style="background-color:transparent">
-                            <input type="text" name="" class="form-control" style="width : 200px;background-color:rgb(25,25,25);outline:none;color:lightgray;">
+                            <input placeholder="GOOGLE APP 패스워드 입력"  th:value="${ADMIN_APP_KEY}" type="password" name="" class="form-control mail-password" style="width : 200px;background-color:rgb(25,25,25);outline:none;color:lightgray;">
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" style="background-color:transparent">&nbsp; </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="background-color:transparent"><a style="background-color:darkcyan" class="btn "  href="javascript:void(0)">변경</a></td>
+                        <td colspan="2" style="background-color:transparent"><a style="background-color:darkcyan" class="btn setMail"  href="javascript:void(0)">변경</a></td>
                     </tr>
 
                 </table>
@@ -183,10 +183,10 @@
                     <tr>
                         <td style="width : 200px;background-color:transparent">
                             결제 사용 KEY(PORTONE) : <br>
-                            <a href="" style="color:green;">[참고]PORTONE KEY 확인</a>
+                            <a href="/admin/guide/portOne" target="_blank" style="color:green;">[참고]PORTONE KEY 확인</a>
                         </td>
                         <td style="background-color:transparent">
-                            <input type="password" name="" class="form-control" style="width : 200px; background-color:rgb(25,25,25);outline:none;color:lightgray;">
+                            <input  placeholder="IMPORTUID 입력"  th:value="${IMPORT_UID}"  type="password" name="" class="form-control import-uid" style="width : 200px; background-color:rgb(25,25,25);outline:none;color:lightgray;">
 
                     </tr>
                     <tr>
@@ -194,7 +194,7 @@
                     </tr>
                     <tr>
                         <td style="background-color:transparent">
-                            <a style="background-color:darkcyan" class="btn "  href="javascript:void(0)">변경</a>
+                            <a style="background-color:darkcyan" class="btn importUidBtn"  href="javascript:void(0)">변경</a>
                         </td>
                     </tr>
                 </table>

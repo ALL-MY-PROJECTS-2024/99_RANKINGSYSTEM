@@ -10,6 +10,7 @@ import com.creator.imageAndMusic.domain.repository.ConnectionUserRepository;
 import com.creator.imageAndMusic.domain.service.SettingServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
+import com.creator.imageAndMusic.properties.ADMINPROPERTIES;
 import com.creator.imageAndMusic.properties.SOCKET;
 import com.creator.imageAndMusic.properties.UPLOADPATH;
 import io.swagger.v3.oas.annotations.Operation;
@@ -215,6 +216,9 @@ public class AdminController {
         model.addAttribute("SOCKETMAX", SOCKET.max);
         model.addAttribute("UPLOADIMAGEMAX", UPLOADPATH.userImageMax);
         model.addAttribute("UPLOADMUSICMAX", UPLOADPATH.userMusicMax);
+        model.addAttribute("IMPORT_UID", ADMINPROPERTIES.IMPORT_UID);
+        model.addAttribute("ADMIN_APP_KEY", ADMINPROPERTIES.ADMIN_APP_KEY);
+        model.addAttribute("ADMIN_EMAIL", ADMINPROPERTIES.ADMIN_EMAIL);
 
 
     }
@@ -239,4 +243,38 @@ public class AdminController {
         log.info("GET /admin/setImageUploadVal..UPLOADPATH.userMusicMax : " + UPLOADPATH.userMusicMax);
         return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
     }
+
+    @PostMapping("/setAdminMail")
+    public @ResponseBody ResponseEntity<String> setAdminMail(
+            @RequestParam("adminMail") String adminMail,
+            @RequestParam("mailPassword") String mailPassword
+    )
+    {
+        ADMINPROPERTIES.ADMIN_EMAIL = adminMail;
+        ADMINPROPERTIES.ADMIN_APP_KEY = mailPassword;
+        log.info("POST /admin/setAdminMail..ADMINPROPERTIES.ADMIN_EMAIL : " + ADMINPROPERTIES.ADMIN_EMAIL);
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+    }
+
+    @PostMapping("/setPaymentVal")
+    public @ResponseBody ResponseEntity<String> setPaymentVal(
+            @RequestParam("importUid") String importUid
+    )
+    {
+        ADMINPROPERTIES.IMPORT_UID = importUid;
+        log.info("POST /admin/setPaymentVal..ADMINPROPERTIES.IMPORT_UID : " + ADMINPROPERTIES.IMPORT_UID);
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+    }
+
+
+    @GetMapping("/guide/email")
+    public void guideEmail(){
+
+    }
+    @GetMapping("/guide/portOne")
+    public void guidePortONE(){
+
+    }
+
+
 }

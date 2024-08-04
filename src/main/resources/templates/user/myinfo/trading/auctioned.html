@@ -12,6 +12,11 @@
   <script th:inline="javascript">
     var userDto = /*[[${userDto}]]*/
     console.log(userDto);
+    const importUid = [[${importUid}]]
+    //console.log('importUid',importUid);
+    if(importUid==null)
+      alert('관리자가 결제설정을 완료하지 않았습니다.\n결제요청시 관리자에게 문의하세요.');
+
   </script>
 
 
@@ -199,97 +204,103 @@
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script th:inline="javascript">
 
-  IMP.init("imp87380722");
 
 
-  //----------------------------------------------------------------
-  //낙찰 받은 이미지 결제
-  //----------------------------------------------------------------
-  function requestImagePay(price,title,tradingid) {
+  if(importUid!=null)
+  {
 
-    console.log(price,title);
-    IMP.request_pay
-    (
-      {
-        pg: "html5_inicis.INIpayTest",
-        pay_method: "card",
-        merchant_uid: "test_"+Date.now(),
-        name: title,
-        //amount: price,
-        amount: 100,
-        buyer_tel: userDto.phone,
-      }
-      ,
-      function(resp)
-      {
-        console.log(resp);
-        if(resp.success){
-            resp['tradingid'] = tradingid;
-            axios.post('/payment/add/image',resp)
-            .then(resp=>{
-                  console.log(resp)
-                  alert("결제가 완료되었습니다.\n");
-                  location.href='/user/myinfo/trading/auctioned';
+              IMP.init(importUid);
 
-            })
-            .catch(err=>{
-                console.log(err);
-                alert("결제 취소");
 
-            });
-        }
-        else
-        {
-            alert("결제 실패.");
-        }
-      }
-    );
+              //----------------------------------------------------------------
+              //낙찰 받은 이미지 결제
+              //----------------------------------------------------------------
+              function requestImagePay(price,title,tradingid) {
+
+                console.log(price,title);
+                IMP.request_pay
+                (
+                  {
+                    pg: "html5_inicis.INIpayTest",
+                    pay_method: "card",
+                    merchant_uid: "test_"+Date.now(),
+                    name: title,
+                    amount: price,
+                    //amount: 100,
+                    buyer_tel: userDto.phone,
+                  }
+                  ,
+                  function(resp)
+                  {
+                    console.log(resp);
+                    if(resp.success){
+                        resp['tradingid'] = tradingid;
+                        axios.post('/payment/add/image',resp)
+                        .then(resp=>{
+                              console.log(resp)
+                              alert("결제가 완료되었습니다.\n");
+                              location.href='/user/myinfo/trading/auctioned';
+
+                        })
+                        .catch(err=>{
+                            console.log(err);
+                            alert("결제 취소");
+
+                        });
+                    }
+                    else
+                    {
+                        alert("결제 실패.");
+                    }
+                  }
+                );
+              }
+
+              //----------------------------------------------------------------
+              //낙찰 받은 음악 결제
+              //----------------------------------------------------------------
+              function requestMusicPay(price,title,tradingid) {
+
+                console.log(price,title);
+                IMP.request_pay
+                (
+                  {
+                    pg: "html5_inicis.INIpayTest",
+                    pay_method: "card",
+                    merchant_uid: "test_"+Date.now(),
+                    name: title,
+                    amount: price,
+                    //amount: 100,
+                    buyer_tel: userDto.phone,
+                  }
+                  ,
+                  function(resp)
+                  {
+                    console.log(resp);
+                    if(resp.success){
+                        resp['tradingid'] = tradingid;
+                        axios.post('/payment/add/music',resp)
+                        .then(resp=>{
+                              console.log(resp)
+                              alert("결제가 완료되었습니다.\n나의 구매내역 에서 확인하세요");
+                              location.href='/user/myinfo/trading/auctioned';
+
+                        })
+                        .catch(err=>{
+                            console.log(err);
+                            alert("결제 취소");
+
+                        });
+                    }
+                    else
+                    {
+                        alert("결제 실패.");
+                    }
+                  }
+                );
+              }
+
   }
-
-  //----------------------------------------------------------------
-  //낙찰 받은 음악 결제
-  //----------------------------------------------------------------
-  function requestMusicPay(price,title,tradingid) {
-
-    console.log(price,title);
-    IMP.request_pay
-    (
-      {
-        pg: "html5_inicis.INIpayTest",
-        pay_method: "card",
-        merchant_uid: "test_"+Date.now(),
-        name: title,
-        //amount: price,
-        amount: 100,
-        buyer_tel: userDto.phone,
-      }
-      ,
-      function(resp)
-      {
-        console.log(resp);
-        if(resp.success){
-            resp['tradingid'] = tradingid;
-            axios.post('/payment/add/music',resp)
-            .then(resp=>{
-                  console.log(resp)
-                  alert("결제가 완료되었습니다.\n나의 구매내역 에서 확인하세요");
-                  location.href='/user/myinfo/trading/auctioned';
-
-            })
-            .catch(err=>{
-                console.log(err);
-                alert("결제 취소");
-
-            });
-        }
-        else
-        {
-            alert("결제 실패.");
-        }
-      }
-    );
-  }
-
   //----------------------------------------------------------------
   //다운로드 처리
   //----------------------------------------------------------------
@@ -302,7 +313,6 @@
           console.log('cilcked..',path);
           location.href="/user/myinfo/trading/download?filepath="+encodeURIComponent(path);
       })
-
   })
 
 </script>

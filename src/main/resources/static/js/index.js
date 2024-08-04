@@ -5,6 +5,8 @@ window.addEventListener('DOMContentLoaded',function(){
         //
         var section1_1 = new Swiper('.section1 .img-body-order  .swiper', {
                         slidesPerView: 5,
+                        initialSlide: 0,
+                        centeredSlides: false, // 가운데 정렬 해제
                         spaceBetween: 10, // 슬라이드 사이의 간격 설정
                         navigation: {
                           nextEl: '.section1 .left .img-body-order  .swiper-button-next',

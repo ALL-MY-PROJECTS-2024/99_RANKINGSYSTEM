@@ -153,3 +153,28 @@ setMusicMax.addEventListener('click',function(){
     .catch(err=>{console.log(err);})
 })
 
+
+const setMail = document.querySelector('.setMail');
+setMail.addEventListener('click',function(){
+    console.log('setMail clicked...');
+    const adminMail = document.querySelector(".admin-mail").value;
+    const mailPassword = document.querySelector(".mail-password").value;
+    axios.post(`/admin/setAdminMail?adminMail=${adminMail}&mailPassword=${mailPassword}`)
+    .then(
+        resp=>{console.log(resp)
+    })
+    .catch(err=>{console.log(err);})
+})
+
+const importUidBtn = document.querySelector('.importUidBtn');
+importUidBtn.addEventListener('click',function(){
+    console.log('importUidBtn clicked...');
+    const importUid = document.querySelector(".import-uid").value;
+    axios.post(`/admin/setPaymentVal?importUid=${importUid}`)
+    .then(
+        resp=>{console.log(resp)
+    })
+    .catch(err=>{console.log(err);})
+})
+
+

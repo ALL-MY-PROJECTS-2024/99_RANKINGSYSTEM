@@ -14,6 +14,7 @@ import com.creator.imageAndMusic.domain.repository.UserRepository;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
 import com.creator.imageAndMusic.domain.service.UserService;
+import com.creator.imageAndMusic.properties.ADMINPROPERTIES;
 import com.creator.imageAndMusic.properties.AUTH;
 import com.creator.imageAndMusic.properties.UPLOADPATH;
 import io.jsonwebtoken.Claims;
@@ -29,6 +30,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -64,8 +66,8 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+//    @Autowired
+//    private JavaMailSender javaMailSender;
 
 
     @Autowired
@@ -176,15 +178,25 @@ public class UserController {
             user.setPassword(passwordEncoder.encode(String.valueOf(value)));
             userRepository.save(user);
 
+            JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+            javaMailSender.setHost("smtp.gmail.com");
+            javaMailSender.setPort(587);
+            javaMailSender.setUsername(ADMINPROPERTIES.ADMIN_EMAIL);
+            javaMailSender.setPassword(ADMINPROPERTIES.ADMIN_APP_KEY);
+
+            Properties props = javaMailSender.getJavaMailProperties();
+            props.put("mail.transport.protocol", "smtp");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.debug", "true");
+            props.put("mail.mime.charset", "UTF-8");
+
             //이메일 발송
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(user.getUsername());
             message.setSubject("[RANKING WEB SERVICE] 임시 패스워드 ");
             message.setText(value+"");
             javaMailSender.send(message);
-
-
-
 
 
             return new ResponseEntity(user.getUsername()+" 으로 임시 패스워드 전송 완료",HttpStatus.OK);
@@ -268,6 +280,27 @@ public class UserController {
             return new ResponseEntity<>(result , HttpStatus.OK);
 
         }else{
+            JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+            javaMailSender.setHost("smtp.gmail.com");
+            javaMailSender.setPort(587);
+//            javaMailSender.setUsername("jwg135790@gmail.com");
+//            javaMailSender.setPassword("nyoe oiuq rsca vcrt");
+            if(ADMINPROPERTIES.ADMIN_EMAIL==null || ADMINPROPERTIES.ADMIN_APP_KEY ==null){
+                result.put("isSuccess",false);
+                result.put("message","메일전송을 위한 관리자 계정등록이 되어있지않습니다.\n관리자에게 문의하세요.");
+                return new ResponseEntity<>(result , HttpStatus.OK);
+            }
+            javaMailSender.setUsername(ADMINPROPERTIES.ADMIN_EMAIL);
+            javaMailSender.setPassword(ADMINPROPERTIES.ADMIN_APP_KEY);
+
+
+            Properties props = javaMailSender.getJavaMailProperties();
+            props.put("mail.transport.protocol", "smtp");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.debug", "true");
+            props.put("mail.mime.charset", "UTF-8");
+
             //메일 메시지 만들기
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(email);
@@ -690,6 +723,7 @@ public class UserController {
 
         model.addAttribute("list",list);
         model.addAttribute("musicList",musicList);
+
     }
     //----------------------------------------------------------------
     // 낙찰받은 경매
@@ -704,6 +738,8 @@ public class UserController {
         model.addAttribute("list",list);
         model.addAttribute("musicList",musicList);
         model.addAttribute("userDto",principalDetails.getUserDto());
+        model.addAttribute("importUid",ADMINPROPERTIES.IMPORT_UID);
+
     }
     //----------------------------------------------------------------
     // 경매 취소 - 삭제

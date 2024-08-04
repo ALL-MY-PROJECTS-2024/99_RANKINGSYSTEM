@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--  link   -->
+    <th:block th:insert="~{fragments/link :: linkFragment}" />
+
+
+    <link rel="stylesheet" href="/css/myinfo/confirm.css">
+
+    <script src="/js/myinfo/confirm.js" defer> </script>
+
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- header   -->
+    <th:block th:insert="~{fragments/header :: mainHeaderFragment}" />
+
+    <!-- nav       -->
+    <th:block th:insert="~{fragments/nav :: navFragment}" />
+    <style>
+        section.banner img {
+             margin : 10px;
+             padding : 10px;
+             border : 1px solid ;
+             max-width : 450px;
+             max-height : 500px;
+             object-fit:contain;
+
+         }
+         section.banner{
+             display:flex;
+             justify-content : space-between;
+             align-items : start;
+             flex-wrap : wrap;
+             gap : 0px;
+         }
+    </style>
+    <main>
+        <section class="banner layout-5">
+
+            <img src="/assets/guide/email/1.png" alt="">
+            <img src="/assets/guide/email/2.png" alt="">
+            <img src="/assets/guide/email/3.png" alt="">
+            <img src="/assets/guide/email/4.png" alt="">
+            <img src="/assets/guide/email/5.png" alt="">
+            <img src="/assets/guide/email/6.png" alt="">
+            <img src="/assets/guide/email/7.png" alt="">
+            <img src="/assets/guide/email/8.png" alt="">
+            <img src="/assets/guide/email/9.png" alt="">
+            <img src="/assets/guide/email/10.png" alt="">
+            <img src="/assets/guide/email/11.png" alt="">
+            <img src="/assets/guide/email/12.png" alt="">
+            <img src="/assets/guide/email/13.png" alt="">
+            <img src="/assets/guide/email/14.png" alt="">
+
+
+        </section>
+    </main>
+
+
+    <!-- Footer        -->
+    <footer>
+        <th:block th:insert="~{fragments/footer :: footerFragment}" />
+    </footer>
+
+</div>
+
+
+
+
+</body>
+</html>
