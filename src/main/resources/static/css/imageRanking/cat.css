@@ -60,6 +60,10 @@ section.group-block>.body>.music_body{
     border-top : 0px;
     flex-direction:column;
 }
+section.group-block>.body>.image_body  .swiper-wrapper{
+
+
+}
 
 /**/
 
@@ -94,6 +98,7 @@ section.group-block .body .swiper-wrapper .swiper-slide{
     justify-content : center;
     align-items : center;
     margin : 10px;
+    border : 1px solid;
 }
 section.group-block .body .swiper-wrapper .swiper-slide:first-child{
     margin-left:0;
@@ -106,7 +111,7 @@ section.group-block .body .swiper-wrapper .swiper-slide a{
     display:block;
     width : 7.813vw;
     height : 55px;
-    border : 1px solid;
+
     border-radius:5px;
     display:flex;
     justify-content : center;
@@ -238,4 +243,16 @@ section.group-block .body .swiper .swiper-button-next::after{
 }
 .show-image-block img:hover{
     transform: scale(1.2);
+}
+
+.image_body .swiper-button-next,
+.image_body  .swiper-button-prev{
+    position:absolute;
+    top:50%;
+}
+.image_body  .swiper-button-prev{
+    left:0;
+}
+.image_body  .swiper-button-next{
+    right:0;
 }

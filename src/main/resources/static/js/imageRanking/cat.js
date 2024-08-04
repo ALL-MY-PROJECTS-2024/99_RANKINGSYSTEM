@@ -1,3 +1,31 @@
+
+//---------------------------------------------------
+//sub_category Swiper
+//---------------------------------------------------
+//var section1_1 = new Swiper('.image_body  .sub_category.swiper',
+//{
+//                        slidesPerView: 8,
+//                        initialSlide: 0,
+//                        centeredSlides: false, // 가운데 정렬 해제
+//                        spaceBetween: 10, // 슬라이드 사이의 간격 설정
+//                        navigation: {
+//                          nextEl: '.image_body  .swiper-button-next',
+//                          prevEl: '.image_body  .swiper-button-prev',
+//                        }
+//});
+
+
+const imageBodyNextBtn = document.querySelector('.image_body .swiper-button-next')
+imageBodyNextBtn.addEventListener('click',function(){
+    const swiperWrapper = document.querySelector('.swiper-wrapper')
+    swiperWrapper.style.left="-60%";
+})
+const imageBodyPrevBtn = document.querySelector('.image_body .swiper-button-prev')
+imageBodyPrevBtn.addEventListener('click',function(){
+    const swiperWrapper = document.querySelector('.swiper-wrapper')
+    swiperWrapper.style.left="0";
+})
+
 //---------------------------------------------------
 //초기모드
 //---------------------------------------------------
