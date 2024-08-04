@@ -11,6 +11,7 @@ remittanceBtn.forEach(btn=>{
             console.log(resp);
             const bankname =document.querySelector('.bankname');
             const account =document.querySelector('.account');
+            const endPrice =document.querySelector('.end_price');
             const trading_id =document.querySelector('.trading_id');
 
             if(resp.data.bankname==null ||resp.data.bankname=='undefined'){
@@ -19,6 +20,7 @@ remittanceBtn.forEach(btn=>{
             }else{
                 bankname.innerHTML=resp.data.bankname;
                 account.innerHTML=resp.data.account;
+                endPrice.innerHTML=resp.data.price+" 원";
                 trading_id.innerHTML=tradingid;
                 userAccountBtn.click();
             }

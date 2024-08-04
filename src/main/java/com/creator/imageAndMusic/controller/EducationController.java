@@ -54,6 +54,12 @@ public class EducationController {
         List<Education> list =  educationServiceImpl.getEducations("lecture");
         model.addAttribute("list" , list);
     }
+    @GetMapping("/langChain")
+    public void LangChain(Model model){
+        log.info("/edu/langChain");
+        List<Education> list =  educationServiceImpl.getEducations("LangChain");
+        model.addAttribute("list" , list);
+    }
 
 
 

@@ -193,7 +193,9 @@ myinfoblock>*{
 .info_body .profile .change-btn{
     text-align:center;
 }
-
+.table th{
+    text-align:center;
+}
 .table td{
     position:relative;
 

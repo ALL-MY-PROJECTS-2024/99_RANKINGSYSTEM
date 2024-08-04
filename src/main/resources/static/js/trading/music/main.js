@@ -19,6 +19,7 @@ remittanceBtn.forEach(btn=>{
             }else{
                 bankname.innerHTML=resp.data.bankname;
                 account.innerHTML=resp.data.account;
+                endPrice.innerHTML=resp.data.price+" 원";
                 trading_id.innerHTML=tradingid;
                 userAccountBtn.click();
             }

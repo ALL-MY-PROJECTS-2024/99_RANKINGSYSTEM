@@ -160,6 +160,7 @@ public class PaymentImageServiceImpl {
         TradingImage tradingImage = tradingImageOptional.get();
         result.put("bankname",tradingImage.getSeller().getBankname());
         result.put("account",tradingImage.getSeller().getAccount());
+        result.put("price",tradingImage.getPrice());
         return result;
     }
 

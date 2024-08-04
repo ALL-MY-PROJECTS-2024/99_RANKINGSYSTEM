@@ -108,9 +108,9 @@
                     <td th:if="${dto.status=='낙찰완료'}">
                       <button th:onclick='requestImagePay( [[${dto.price}]] , [[${dto.fileid.images.title}]],[[${dto.tradingid}]] )' class="btn btn-secondary" style="font-size :.7rem;">결제</button>
                     </td>
-                    <td th:if="${dto.status=='결제완료'}">
-                      <a class="download-btn"  href="javascript:void(0)" th:data-path="${dto.fileid.dir}+'/'+${dto.fileid.filename}">
-                        <span class="material-symbols-outlined">download</span>
+                    <td th:if="${dto.status=='결제완료'}" style="">
+                      <a class="download-btn" style="color:lightgray;position:relative;"  href="javascript:void(0)" th:data-path="${dto.fileid.dir}+'/'+${dto.fileid.filename}">
+                        <span class="material-symbols-outlined" style="position:relative;top:8px;">download</span>
                       </a>
                     </td>
                   </th:block>
@@ -170,9 +170,8 @@
                       <button th:onclick='requestMusicPay( [[${dto.price}]] , [[${dto.fileid.music.title}]],[[${dto.tradingid}]] )' class="btn btn-secondary" style="font-size :.7rem;">결제</button>
                     </td>
                     <td th:if="${dto.status=='결제완료'}">
-
-                      <a class="download-btn" style="display:flex;justify-content:center;align-items:center;" href="javascript:void(0)" th:data-path="${dto.fileid.dir}+'/'+${dto.fileid.filename}">
-                        <span class="material-symbols-outlined">download</span>
+                      <a class="download-btn" style="display:flex;justify-content:center;align-items:center;color:lightgray;" href="javascript:void(0)" th:data-path="${dto.fileid.dir}+'/'+${dto.fileid.filename}">
+                        <span class="material-symbols-outlined" style="position:relative;top:8px;">download</span>
                       </a>
                     </td>
                   </th:block>

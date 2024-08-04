@@ -54,7 +54,7 @@
                             <td th:text="${dto.tradingid}"></td>
                             <td>
                                 <a href="javascript:void(0)">
-                                    <img  style="width:100px;height:50px;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
+                                    <img  style="width:100px;height:50px;object-fit:contain;" th:src="@{${dto.fileid.dir}+'\s_'+${dto.fileid.filename}}"  alt="" />
                                 </a>
                             </td>
                             <td th:text="${dto.auctionStartTime}"></td>

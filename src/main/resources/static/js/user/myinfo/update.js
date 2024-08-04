@@ -14,6 +14,10 @@ confirmpasswordbtn.addEventListener('click', function(){
         document.querySelector('.pwmsg').innerHTML="패스워드 확인 완료";
         document.mypageform.password.readOnly=false;
         document.mypageform.repassword.readOnly=false;
+        const password = document.mypageform.password;
+        const repassword = document.mypageform.repassword;
+        password.value = oldpassword;
+        repassword.value = oldpassword;
 
      })
     .catch(err=>{
@@ -21,6 +25,10 @@ confirmpasswordbtn.addEventListener('click', function(){
         document.querySelector('.pwmsg').style.color="red";
         document.querySelector('.pwmsg').innerHTML="패스워드를 다시 입력하세요";
 
+        const password = document.mypageform.password;
+        const repassword = document.mypageform.repassword;
+        password.value = null;
+        repassword.value = null;
         document.mypageform.password.readOnly=true;
         document.mypageform.repassword.readOnly=true;
 

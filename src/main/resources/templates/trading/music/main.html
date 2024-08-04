@@ -117,7 +117,6 @@
                                             <th:block th:if="${dto.status=='경매중'}">
                                                 <a th:href="@{/trading/music/chat/enter(roomId=${dto.roomId})}" class="btn btn-secondary" style="font-size :.7rem;">입장</a>
                                             </th:block>
-
                                     </th:block>
                                 </td>
 
@@ -221,24 +220,27 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="exampleModalLabel">판매자 계정 확인</h6>
+                <h6 class="modal-title  text-dark" id="exampleModalLabel">판매자 계정 확인</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <table class="table w-100" >
                     <tr>
                         <td class="bg-dark text-light" style="font-size:.8rem;" >경매번호</td>
-                        <td class="trading_id" style="font-size:.8rem;"></td>
+                        <td class="trading_id  text-dark" style="font-size:.8rem;"></td>
                     </tr>
                     <tr>
                         <td class="bg-dark text-light" style="font-size:.8rem;">은행명</td>
-                        <td class="bankname"  style="font-size:.8rem;"></td>
+                        <td class="bankname  text-dark"  style="font-size:.8rem;"></td>
                     </tr>
                     <tr>
                         <td class="bg-dark text-light"  style="font-size:.8rem;">계좌번호</td>
-                        <td  class="account"  style="font-size:.8rem;"></td>
+                        <td  class="account  text-dark"  style="font-size:.8rem;"></td>
                     </tr>
-
+                    <tr>
+                        <td class="bg-dark text-light"  style="font-size:.8rem;">낙찰가격</td>
+                        <td  class="end_price  text-dark"  style="font-size:.8rem;"></td>
+                    </tr>
                 </table>
             </div>
             <div class="modal-footer">
