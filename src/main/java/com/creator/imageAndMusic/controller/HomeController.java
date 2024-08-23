@@ -13,6 +13,9 @@ import com.creator.imageAndMusic.domain.service.MusicRankingServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
 import com.creator.imageAndMusic.properties.UPLOADPATH;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +33,7 @@ import java.util.Map;
 
 @Controller
 @Slf4j
+@Tag(name = "기본화면", description = "메인페이지 / 로그인 페이지")
 public class HomeController {
 
 
@@ -44,6 +48,17 @@ public class HomeController {
     @Autowired
     private MusicRankingServiceImpl musicRankingServiceImpl;
 
+
+    @Operation(
+            summary = "홈",
+            description = "메인 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/")
     public String home(Model model){
         log.info("GET / ...");
@@ -145,7 +160,16 @@ public class HomeController {
 
 
 
-
+    @Operation(
+            summary = "홈>로그인",
+            description = "로그인 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/login")
     public void login(){
         log.info("GET /login...");

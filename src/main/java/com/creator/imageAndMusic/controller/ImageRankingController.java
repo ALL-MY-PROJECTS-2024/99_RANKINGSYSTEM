@@ -11,6 +11,9 @@ import com.creator.imageAndMusic.domain.service.BookmarkServiceImpl;
 import com.creator.imageAndMusic.domain.service.FavoriteImageServiceImpl;
 
 import com.creator.imageAndMusic.domain.service.ImageRankingServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +34,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Controller
 @RequestMapping("/imageRanking")
+@Tag(name = "이미지 랭킹", description = "이미지랭킹에 추가,랭킹 목록,랭킹 조회")
 public class ImageRankingController {
 
 
@@ -47,6 +51,17 @@ public class ImageRankingController {
     @Autowired
     private BookmarkServiceImpl bookmarkService;
 
+
+    @Operation(
+            summary = "홈>내 이미지>갤러리",
+            description = "갤러리의 이미지를 랭킹에 추가하는 기능",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/add")
     public @ResponseBody ResponseEntity<String> addRanking(@RequestParam("fileid") Long fileid,Model model) throws Exception {
         log.info("imageRanking/add..fileid : " + fileid);
@@ -59,6 +74,16 @@ public class ImageRankingController {
     }
 
 
+    @Operation(
+            summary = "홈>이달의콘텐츠RANKING>전체 이미지 랭킹",
+            description = "전체 이미지 랭킹 목록 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/list")
     public String list(@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
                        @RequestParam(name="mode",defaultValue="1") Integer mode,
@@ -118,6 +143,16 @@ public class ImageRankingController {
 
     }
 
+    @Operation(
+            summary = "홈>이달의콘텐츠RANKING>전체 이미지 랭킹>읽기",
+            description = "전체 이미지 랭킹 읽기 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/read")
     public void readRanking(@RequestParam(name = "rankingId",defaultValue = "1") Long rankingId,Model model){
         log.info("GET /imageRanking/read..");
@@ -137,6 +172,16 @@ public class ImageRankingController {
         imageRankingService.count(rankingId);
     }
 
+    @Operation(
+            summary = "홈>이달의콘텐츠RANKING>지역별 랭킹",
+            description = "지역별 이미지 랭킹 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/local")
     public String local(Model model){
         log.info("GET /around/local");
@@ -149,7 +194,16 @@ public class ImageRankingController {
         return "imageRanking/local";
     }
 
-
+    @Operation(
+            summary = "홈>이달의콘텐츠RANKING>분야별 랭킹",
+            description = "분야별 이미지 랭킹 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/cat")
     public void cat(
             @RequestParam(value = "subCategory",defaultValue = "Character") String subCategory,
@@ -174,6 +228,17 @@ public class ImageRankingController {
         model.addAttribute("amount",amount);
 
     }
+
+    @Operation(
+            summary = "홈>이달의콘텐츠RANKING>분야별 랭킹",
+            description = "분야별 이미지 랭킹 페이징 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/cat/next")
     public @ResponseBody Map<String,Object> getNext(
             @RequestParam(value = "subCategory",defaultValue = "Character") String subCategory,
@@ -200,6 +265,18 @@ public class ImageRankingController {
     }
 
 
+
+
+    @Operation(
+            summary = "홈>이달의콘텐츠RANKING>전체이미지랭킹>읽기",
+            description = "이미지 댓글 추가",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/reply/add")
     public @ResponseBody ResponseEntity<ImageReply> replyAdd(
             @RequestParam("context") String context,
@@ -221,7 +298,16 @@ public class ImageRankingController {
 
     }
 
-
+    @Operation(
+            summary = "홈>이달의콘텐츠RANKING>전체이미지랭킹>읽기",
+            description = "이미지 댓글 삭제",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @DeleteMapping("/reply/delete")
     public @ResponseBody ResponseEntity<String> delete(
             @RequestParam("id") Long id,

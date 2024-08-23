@@ -8,6 +8,9 @@ import com.creator.imageAndMusic.domain.dto.PageDto;
 import com.creator.imageAndMusic.domain.entity.Board;
 import com.creator.imageAndMusic.domain.entity.Reply;
 import com.creator.imageAndMusic.domain.service.BoardServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,6 +34,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/board")
 @Slf4j
+@Tag(name = "자유게시판", description = "리스트,글쓰기,글읽기,글삭제,댓글추가,댓글삭제")
 public class BoardController {
 
 //    @Autowired
@@ -49,6 +53,16 @@ public class BoardController {
 
     //-------------------
     //-------------------
+    @Operation(
+            summary = "홈>자유게시판>리스트",
+            description = "글목록을 10개씩 표시합니다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/list")
     public String list(
             @RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
@@ -109,11 +123,31 @@ public class BoardController {
     //-------------------
     // POST
     //-------------------
+    @Operation(
+            summary = "홈>자유게시판>리스트>글쓰기",
+            description = "글등록을 위한 페이지를 표시합니다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/post")
     public void get_addBoard(){
         log.info("GET /board/post");
     }
 
+    @Operation(
+            summary = "홈>자유게시판>리스트>글쓰기",
+            description = "글등록 처리를 요청합니다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/post")
     public String post_addBoard(@Valid BoardDto dto, BindingResult bindingResult, Model model) throws IOException {
         log.info("POST /board/post " + dto + " " + dto);
@@ -143,7 +177,16 @@ public class BoardController {
     //-------------------
     // READ
     //-------------------
-
+    @Operation(
+            summary = "홈>자유게시판>리스트>읽기",
+            description = "게시판 글읽기 페이지로 이동합니다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/read")
     public String read(@RequestParam(name = "no",defaultValue = "1") Long no,
                        @RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo, Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -196,7 +239,16 @@ public class BoardController {
         return "board/read";
 
     }
-
+    @Operation(
+            summary = "홈>자유게시판>리스트>읽기>수정",
+            description = "게시판 글내용 수정 페이지로 이동합니다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/update")
     public String update(@RequestParam(name = "no") Long no, @RequestParam(name = "pageNo") Integer pageNo,@AuthenticationPrincipal PrincipalDetails principalDetails, Model model){
         log.info("GET /board/update no " + no);
@@ -223,6 +275,16 @@ public class BoardController {
         return "board/update";
     }
 
+    @Operation(
+            summary = "홈>자유게시판>리스트>읽기>수정",
+            description = "게시판 글내용 수정 처리를 요청합니다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/update")
     public String Post_update(@Valid BoardDto dto, BindingResult bindingResult, Model model) throws IOException {
         log.info("POST /board/update dto " + dto);
@@ -246,7 +308,16 @@ public class BoardController {
     }
 
 
-
+    @Operation(
+            summary = "홈>자유게시판>리스트>읽기>댓글추가",
+            description = "게시판 글읽기페이지 내에서 댓글 추가 요청 처리입니다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/reply/add")
     public @ResponseBody ResponseEntity<String> reply_add(@RequestParam("bno")Long bno ,@RequestParam("content") String content, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
@@ -289,20 +360,17 @@ public class BoardController {
 
 
 
-    @ExceptionHandler(Exception.class)
-    public String error1(Exception ex,Model model) {
-        System.out.println("BoardExcptionHandler FileNotFoundException... ex " + ex);
-        //System.out.println("GlobalExceptionHandler FileNotFoundException... ex ");
-        model.addAttribute("ex",ex);
-        return "board/error";
-    }
 
-    @GetMapping("/error")
-    public void error_page(){
-
-    }
-
-
+    @Operation(
+            summary = "홈>자유게시판>리스트>읽기>댓글삭제",
+            description = "등록된 댓글 삭제 처리입니다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @DeleteMapping("/reply/delete")
     public @ResponseBody ResponseEntity<String> delete(
             @RequestParam("bno") Long bno,
