@@ -29,7 +29,7 @@ import java.util.*;
 @Controller
 @Slf4j
 @RequestMapping("/trading")
-@Tag(name = "경매", description = "경매 처리관련 기능")
+@Tag(name = "이미지 경매", description = "이미지 경매 처리관련 기능")
 public class TradingImageController {
    
     /*
@@ -43,7 +43,7 @@ public class TradingImageController {
 
     @Operation(
             summary = "홈>매매",
-            description = "경매요청 처리 기능",
+            description = "이미지 경매요청 처리 기능",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -68,6 +68,7 @@ public class TradingImageController {
             return new ResponseEntity(message, HttpStatus.BAD_GATEWAY);
         }    return new ResponseEntity(message, HttpStatus.OK);
     }
+
 
 
 
@@ -104,7 +105,7 @@ public class TradingImageController {
 
     @Operation(
             summary = "홈>매매>이벤트달력",
-            description = "이벤트 달력 조회",
+            description = "이벤트 달력 조회(이미지 이벤트내역)",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -173,7 +174,7 @@ public class TradingImageController {
 
     @Operation(
             summary = "홈>매매>이벤트달력",
-            description = "이벤트 달력 추가",
+            description = "이벤트 달력 추가(이미지)",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -188,7 +189,7 @@ public class TradingImageController {
 
     @Operation(
             summary = "홈>매매>이벤트달력",
-            description = "이벤트 달력 삭제",
+            description = "이벤트 달력 삭제(이미지)",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -203,7 +204,7 @@ public class TradingImageController {
 
     @Operation(
             summary = "홈>매매>이벤트달력",
-            description = "이벤트 달력 수정",
+            description = "이벤트 달력 수정(이미지)",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -377,7 +378,7 @@ public class TradingImageController {
 
     @Operation(
             summary = "홈>매매>이미지",
-            description = "경매 채팅방 생성",
+            description = "이미지 경매 채팅방 생성",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -396,7 +397,7 @@ public class TradingImageController {
     //채팅 관련
     @Operation(
             summary = "홈>매매>이미지",
-            description = "경매 채팅 리스트 조회",
+            description = "이미지 경매 채팅 리스트 조회",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -416,7 +417,7 @@ public class TradingImageController {
     private static Map<String,Object> joinMemberSession = new HashMap<String,Object>();
     @Operation(
             summary = "홈>매매>이미지",
-            description = "경매 채팅방 진입",
+            description = "음악경매 채팅방 진입",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -451,7 +452,7 @@ public class TradingImageController {
 
     @Operation(
             summary = "홈>매매>이미지",
-            description = "경매 채팅방 참여 요청",
+            description = "이미지 경매 채팅방 참여 요청",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -470,7 +471,7 @@ public class TradingImageController {
 
     @Operation(
             summary = "홈>매매>이미지",
-            description = "경매 채팅방 삭제",
+            description = "이미지 경매 채팅방 삭제",
             responses = {
                     @ApiResponse(
                             responseCode = "200",

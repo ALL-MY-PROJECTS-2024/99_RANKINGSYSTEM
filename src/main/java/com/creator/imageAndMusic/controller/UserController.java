@@ -18,6 +18,9 @@ import com.creator.imageAndMusic.properties.ADMINPROPERTIES;
 import com.creator.imageAndMusic.properties.AUTH;
 import com.creator.imageAndMusic.properties.UPLOADPATH;
 import io.jsonwebtoken.Claims;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -55,6 +58,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/user")
 @Slf4j
+@Tag(name = "사용자", description = "사용자 관련 기능")
 public class UserController {
 
 
@@ -78,6 +82,9 @@ public class UserController {
 
     @Autowired
     private TradingMusicServiceImpl tradingMusicService;
+
+
+
     @GetMapping("/join")
     public void join(){
         log.info("GET /user/join...");
@@ -91,12 +98,33 @@ public class UserController {
 
 
     //ID찾기
+    @Operation(
+            summary = "홈",
+            description = "ID찾기 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/confirmId")
     public void confirmId(){
         log.info("GET /user/confirmId..");
     }
 
 
+    //ID찾기
+    @Operation(
+            summary = "홈",
+            description = "ID찾기 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/confirmId")
     public @ResponseBody ResponseEntity<String> confirmId_post(@RequestBody UserDto userDto){
         log.info("POST /user/confirmId.." + userDto);
@@ -117,6 +145,16 @@ public class UserController {
     }
 
     //https://hyphen.im/product-api/view?seq=31
+    @Operation(
+            summary = "홈",
+            description = "은행계좌확인",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/comfirm/account")
     public @ResponseBody ResponseEntity<Map<String,Object>> confirm_account(
             @RequestParam("bankCode") String bankCode,
@@ -152,6 +190,16 @@ public class UserController {
 
 
     //PW찾기
+    @Operation(
+            summary = "홈",
+            description = "패스워드 찾기 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/confirmPw")
     public void confirmPw(){
 
@@ -160,6 +208,17 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Operation(
+            summary = "홈",
+            description = "패스워드 찾기 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/confirmPw")
     public @ResponseBody ResponseEntity<String> confirmPw_post(@RequestBody UserDto userDto){
         log.info("POST /user/confirmPw.." + userDto);
@@ -209,7 +268,16 @@ public class UserController {
 
 
 
-
+    @Operation(
+            summary = "홈",
+            description = "회원가입 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/join")
     public  @ResponseBody  ResponseEntity<JSONObject> join_post(@Valid UserDto dto, BindingResult bindingResult, Model model, HttpServletRequest request,HttpServletResponse response,RedirectAttributes redirectAttributes) throws Exception {
         UserController.log.info("POST /join...dto " + dto);
@@ -264,7 +332,16 @@ public class UserController {
 
     }
 
-
+    @Operation(
+            summary = "홈",
+            description = "이메일 인증코드 발송 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/sendMail/{email}")
     @ResponseBody
     public ResponseEntity<JSONObject> sendmailFunc(@PathVariable("email") String email, HttpServletResponse response){
@@ -328,6 +405,16 @@ public class UserController {
 
     }
 
+    @Operation(
+            summary = "홈",
+            description = "이메일 인증코드 확인 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/emailConfirm")
     public @ResponseBody JSONObject emailConfirmFunc(@RequestParam(value = "emailCode" ,defaultValue = "0") String emailCode,HttpServletRequest request , HttpServletResponse response){
         UserController.log.info("GET /user/emailConfirm... code : " + emailCode);
@@ -409,7 +496,16 @@ public class UserController {
 
 
 
-
+    @Operation(
+            summary = "홈>내 이미지>갤러리",
+            description = "내이미지/음악 정보 확인",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/album/main")
     public void func2(Model model) throws Exception {
 
@@ -427,7 +523,16 @@ public class UserController {
 
 
 
-
+    @Operation(
+            summary = "홈>내 이미지>앨범>앨범추가",
+            description = "내이미지 앨범 추가 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/album/add")
     public void func3(){
         log.info("GET /album/add");
@@ -437,6 +542,17 @@ public class UserController {
     @Autowired
     private ImagesRepository imagesRepository;
 
+
+    @Operation(
+            summary = "홈>내 이미지>앨범>앨범추가",
+            description = "내이미지 앨범 추가 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/album/add")
     public  @ResponseBody ResponseEntity<Map<String,Object>> add_image(AlbumDto dto) throws IOException {
         log.info("POST /album/add : " + dto+" file count : " + dto.getFiles().length);
@@ -469,6 +585,17 @@ public class UserController {
     @Autowired
     private MusicRepository musicRepository;
 
+
+    @Operation(
+            summary = "홈>내 이미지>앨범>앨범추가",
+            description = "내음악 앨범 추가 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/music/add")
     public @ResponseBody ResponseEntity<Map<String,Object>>  add_music(AlbumDto dto) throws IOException {
         System.out.println("POST /music/add : " + dto+" file count : " + dto.getFiles().length);
@@ -500,6 +627,16 @@ public class UserController {
 
     }
 
+    @Operation(
+            summary = "홈>내 이미지>갤러리>읽기",
+            description = "내 갤러리 내 이미지 읽기",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/album/read")
     public void read_album(@RequestParam(name = "iamgeid") Long iamgeid,Model model) throws Exception {
 
@@ -511,6 +648,17 @@ public class UserController {
         model.addAttribute("filelist",filelist);
         model.addAttribute("images",images);
     }
+
+    @Operation(
+            summary = "홈>내 이미지>갤러리>읽기",
+            description = "내 갤러리 내 음악 읽기",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/album/readmusic")
     public void read_album_music(@RequestParam(name = "musicid") Long musicid,Model model) throws Exception {
 
@@ -524,6 +672,16 @@ public class UserController {
     }
 
 
+    @Operation(
+            summary = "홈>내 이미지>갤러리>삭제",
+            description = "내 갤러리 내 이미지 삭제",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @DeleteMapping("/album/delete")
     public @ResponseBody ResponseEntity<String> delete_album(@RequestParam(name = "fileid") Long fileid){
         log.info("GET /user/album/delete...fileid " + fileid);
@@ -537,6 +695,16 @@ public class UserController {
     }
 
 
+    @Operation(
+            summary = "홈>내 이미지>갤러리>삭제",
+            description = "내 갤러리 내 음악 삭제",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @DeleteMapping("/album/musicdelete")
     public @ResponseBody ResponseEntity<String> delete_albu_music(@RequestParam(name = "fileid") Long fileid){
         log.info("GET /user/album/musicdelete...fileid " + fileid);
@@ -556,6 +724,17 @@ public class UserController {
 
     private boolean isconfirmed = false;
     private boolean ispasswordOk = false;
+
+    @Operation(
+            summary = "홈>내 이미지>내정보",
+            description = "나의정보 조회 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/myinfo/read")
     public String func1(@AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
 
@@ -570,6 +749,16 @@ public class UserController {
 
     }
 
+    @Operation(
+            summary = "홈>내 이미지>내정보",
+            description = "나의정보 수정 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/myinfo/update")
     public String update(@AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
         if(!isconfirmed)
@@ -582,6 +771,17 @@ public class UserController {
         return "user/myinfo/update";
 
     }
+
+    @Operation(
+            summary = "홈>내 이미지>내정보",
+            description = "나의정보 수정 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/myinfo/update")
     public String update_post(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult, Authentication authentication,HttpServletResponse response, Model model){
         log.info("POST /user/myinfo/update..userDto" + userDto);
@@ -635,6 +835,17 @@ public class UserController {
         return "redirect:/user/myinfo/read";
 
     }
+
+    @Operation(
+            summary = "홈>내 이미지>내정보>나의정보 수정",
+            description = "패스워드 확인 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/myinfo/confirmPw")
     public @ResponseBody ResponseEntity<String> confirm_pw(@RequestParam("password") String password,@AuthenticationPrincipal PrincipalDetails principalDetails){
         log.info("POST /user/myinfo/confirmPw..password : " + password);
@@ -649,11 +860,32 @@ public class UserController {
 
     }
     //계정삭제
+    @Operation(
+            summary = "홈>내 이미지>내정보>회원 탈퇴",
+            description = "회원탈퇴 페이지",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/myinfo/delete")
     public void delete(){
         log.info("GET /user/myinfo/delete..");
     }
 
+
+    @Operation(
+            summary = "홈>내 이미지>내정보>회원 탈퇴",
+            description = "회원탈퇴 처리",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @DeleteMapping("/myinfo/delete")
     public @ResponseBody ResponseEntity<String> delete_del(@RequestParam("password") String password, @AuthenticationPrincipal PrincipalDetails principalDetails){
         log.info("DELETE /user/myinfo/delete..");
@@ -674,10 +906,14 @@ public class UserController {
     }
 
 
+
+
     @GetMapping("/myinfo/confirm")
     public void myinfoConfirm(){
         log.info("GET /user/myinfo/confirm");
     }
+
+
     @PostMapping("/myinfo/confirm")
     public String myinfoConfirm_post(@RequestParam("password") String password , @AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
         log.info("GET /user/myinfo/confirm");

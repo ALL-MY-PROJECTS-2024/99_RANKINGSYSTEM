@@ -11,6 +11,9 @@ import com.creator.imageAndMusic.domain.entity.TradingMusic;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
 import com.creator.imageAndMusic.properties.SOCKET;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +30,7 @@ import java.util.*;
 @Controller
 @Slf4j
 @RequestMapping("/trading")
+@Tag(name = "음악 경매", description = "음악 경매 처리관련 기능")
 public class TradingMusicController {
    
     /*
@@ -36,6 +40,16 @@ public class TradingMusicController {
     TradingMusicServiceImpl tradingMusicService;
 
 
+    @Operation(
+            summary = "홈>매매",
+            description = "음악 경매요청 처리 기능",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/req")
     public @ResponseBody ResponseEntity<String> req(@RequestParam("fildid") Long fileId, @RequestParam("startPrice") String startPrice,@AuthenticationPrincipal PrincipalDetails principalDetails){
 
@@ -53,6 +67,9 @@ public class TradingMusicController {
             return new ResponseEntity(message, HttpStatus.BAD_GATEWAY);
         }    return new ResponseEntity(message, HttpStatus.OK);
     }
+
+
+
     @PostMapping("/music/my")
     public void my(){
         log.info("GET /trading/music/my");
@@ -81,6 +98,16 @@ public class TradingMusicController {
     /*
         calendar
     */
+    @Operation(
+            summary = "홈>매매>이벤트달력",
+            description = "이벤트 달력 조회(음악 이벤트내역)",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/calendar/main")
     public void trading_calendar(Model model){
 
@@ -115,20 +142,62 @@ public class TradingMusicController {
 
     }
 
+    @Operation(
+            summary = "홈>매매>이벤트달력",
+            description = "이벤트 달력 추가(음악)",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/calendar/add")
     public void trading_calendar_add(){
         log.info("GET /trading/calendar/add");
     }
+    @Operation(
+            summary = "홈>매매>이벤트달력",
+            description = "이벤트 달력 삭제(음악)",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/calendar/del")
     public void trading_calendar_del(){
         log.info("GET /trading/calendar/del");
     }
+    @Operation(
+            summary = "홈>매매>이벤트달력",
+            description = "이벤트 달력 수정(음악)",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/calendar/update")
     public void trading_calendar_update(){
         log.info("GET /trading/calendar/update");
     }
 
 
+
+
+    @Operation(
+            summary = "홈>매매>음악",
+            description = "음악 매매 내역 조회",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/main")
     public void image_main(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model){
         log.info("GET /trading/music/main..");
@@ -213,6 +282,16 @@ public class TradingMusicController {
 
     }
     //낙찰됨
+    @Operation(
+            summary = "홈>매매>음악",
+            description = "-",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/music/commit")
     public @ResponseBody ResponseEntity<String> commit(@ModelAttribute TradingMusicDto tradingMusicDto){
         log.info("GET /trading/image/commmit..." +tradingMusicDto);
@@ -225,6 +304,17 @@ public class TradingMusicController {
 
     }
 
+    //낙찰됨
+    @Operation(
+            summary = "홈>매매>음악",
+            description = "음악 경매 정보 삭제",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/del")
     public String del(@RequestParam("tradingid") Long tradingid, RedirectAttributes attrs)
     {
@@ -234,6 +324,16 @@ public class TradingMusicController {
     }
 
 
+    @Operation(
+            summary = "홈>매매>음악",
+            description = "음악 경매 승인",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/accept")
     public String trading_accept(TradingMusicDto dto){
       log.info("GET /trading/image/accept..." + dto.getTradingid());
@@ -243,6 +343,17 @@ public class TradingMusicController {
       return "redirect:/trading/music/main";
     }
 
+
+    @Operation(
+            summary = "홈>매매>음악",
+            description = "음악 경매 채팅방 생성",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/chat/create")        //방을 만들었으면 해당 방으로 가야지.
     public String createRoom(@RequestParam("tradingid") Long tradingid, Model model) {
         log.info("POST /trading/music/chat/create... name : " + tradingid  );
@@ -252,6 +363,17 @@ public class TradingMusicController {
     }
     
     //채팅 관련
+
+    @Operation(
+            summary = "홈>매매>음악",
+            description = "음악 경매 채팅 리스트 조회",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/chat/list")
     public String chatList(Model model){
         List<ChatRoomMusic> roomList = tradingMusicService.findAllRoom();
@@ -259,7 +381,19 @@ public class TradingMusicController {
         return "trading/music/chat/list";
     }
 
+
+
     private static Map<String,Object> joinMemberSession = new HashMap<String,Object>();
+    @Operation(
+            summary = "홈>매매>음악",
+            description = "음악 경매 채팅방 진입",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/chat/enter")
     public String chat_room( @RequestParam("roomId") String roomId, @AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
         ChatRoomMusic room = tradingMusicService.findRoomById(roomId);
@@ -284,6 +418,18 @@ public class TradingMusicController {
 
         return "trading/chat/roomMusic";
     }
+
+
+    @Operation(
+            summary = "홈>매매>음악",
+            description = "음악 경매 채팅방 참여 요청",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/chat/req")
     public String chat_req(@RequestParam("tradingid") Long tradingid,@AuthenticationPrincipal PrincipalDetails principalDetails)
     {
@@ -292,6 +438,17 @@ public class TradingMusicController {
 
         return "redirect:/trading/music/main";
     }
+
+    @Operation(
+            summary = "홈>매매>음악",
+            description = "음악 경매 채팅방 삭제",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/music/chat/del")
     public String chat_del(@RequestParam("tradingid") Long tradingid)
     {
