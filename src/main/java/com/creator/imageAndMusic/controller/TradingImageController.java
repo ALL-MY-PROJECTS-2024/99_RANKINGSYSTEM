@@ -10,6 +10,9 @@ import com.creator.imageAndMusic.domain.entity.TradingMusic;
 import com.creator.imageAndMusic.domain.service.TradingImageServiceImpl;
 import com.creator.imageAndMusic.domain.service.TradingMusicServiceImpl;
 import com.creator.imageAndMusic.properties.SOCKET;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +29,7 @@ import java.util.*;
 @Controller
 @Slf4j
 @RequestMapping("/trading")
+@Tag(name = "경매", description = "경매 처리관련 기능")
 public class TradingImageController {
    
     /*
@@ -36,6 +40,17 @@ public class TradingImageController {
     @Autowired
     TradingMusicServiceImpl tradingMusicService;
 
+
+    @Operation(
+            summary = "홈>매매",
+            description = "경매요청 처리 기능",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/req")
     public @ResponseBody ResponseEntity<String> req(@RequestParam("fildid") Long fileId, @RequestParam("startPrice") String startPrice,@AuthenticationPrincipal PrincipalDetails principalDetails){
 
@@ -53,6 +68,9 @@ public class TradingImageController {
             return new ResponseEntity(message, HttpStatus.BAD_GATEWAY);
         }    return new ResponseEntity(message, HttpStatus.OK);
     }
+
+
+
     @PostMapping("/my")
     public void my(){
         log.info("GET /trading/my");
@@ -61,6 +79,8 @@ public class TradingImageController {
     /*
     auction
     */
+
+
     @GetMapping("/auction/chat")
     public void auction_chat(){
         log.info("GET /trading/auction/chat");
@@ -81,6 +101,17 @@ public class TradingImageController {
     /*
         calendar
     */
+
+    @Operation(
+            summary = "홈>매매>이벤트달력",
+            description = "이벤트 달력 조회",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/calendar/main")
     public void trading_calendar(Model model){
 
@@ -140,20 +171,63 @@ public class TradingImageController {
 
     }
 
+    @Operation(
+            summary = "홈>매매>이벤트달력",
+            description = "이벤트 달력 추가",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/calendar/add")
     public void trading_calendar_add(){
         log.info("GET /trading/calendar/add");
     }
+
+    @Operation(
+            summary = "홈>매매>이벤트달력",
+            description = "이벤트 달력 삭제",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/calendar/del")
     public void trading_calendar_del(){
         log.info("GET /trading/calendar/del");
     }
+
+    @Operation(
+            summary = "홈>매매>이벤트달력",
+            description = "이벤트 달력 수정",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/calendar/update")
     public void trading_calendar_update(){
         log.info("GET /trading/calendar/update");
     }
 
 
+
+    @Operation(
+            summary = "홈>매매>이미지",
+            description = "이미지 매매 내역 조회",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/image/main")
     public void image_main(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model){
         log.info("GET /trading/image/main..");
@@ -237,7 +311,19 @@ public class TradingImageController {
         ;
 
     }
+
+
     //낙찰됨
+    @Operation(
+            summary = "홈>매매>이미지",
+            description = "-",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @PostMapping("/image/commit")
     public @ResponseBody ResponseEntity<String> commit(@ModelAttribute TradingImageDto tradingImageDto){
         log.info("GET /trading/image/commmit..." +tradingImageDto);
@@ -250,6 +336,16 @@ public class TradingImageController {
 
     }
 
+    @Operation(
+            summary = "홈>매매>이미지",
+            description = "이미지 경매 정보 삭제",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/image/del")
     public String del(@RequestParam("tradingid") Long tradingid, RedirectAttributes attrs)
     {
@@ -259,6 +355,16 @@ public class TradingImageController {
     }
 
 
+    @Operation(
+            summary = "홈>매매>이미지",
+            description = "이미지 경매 승인",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/image/accept")
     public String trading_accept(TradingImageDto dto){
       log.info("GET /trading/image/accept..." + dto.getTradingid());
@@ -268,6 +374,17 @@ public class TradingImageController {
       return "redirect:/trading/image/main";
     }
 
+
+    @Operation(
+            summary = "홈>매매>이미지",
+            description = "경매 채팅방 생성",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/chat/create")        //방을 만들었으면 해당 방으로 가야지.
     public String createRoom(@RequestParam("tradingid") Long tradingid, Model model) {
         log.info("POST /trading/chat/create... name : " + tradingid  );
@@ -277,6 +394,16 @@ public class TradingImageController {
     }
     
     //채팅 관련
+    @Operation(
+            summary = "홈>매매>이미지",
+            description = "경매 채팅 리스트 조회",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/chat/list")
     public String chatList(Model model){
         List<ChatRoom> roomList = tradingImageService.findAllRoom();
@@ -284,7 +411,19 @@ public class TradingImageController {
         return "trading/chat/list";
     }
 
+
+
     private static Map<String,Object> joinMemberSession = new HashMap<String,Object>();
+    @Operation(
+            summary = "홈>매매>이미지",
+            description = "경매 채팅방 진입",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/chat/enter")
     public String chat_room( @RequestParam("roomId") String roomId, @AuthenticationPrincipal PrincipalDetails principalDetails,Model model){
         ChatRoom room = tradingImageService.findRoomById(roomId);
@@ -309,6 +448,17 @@ public class TradingImageController {
 
         return "trading/chat/room";
     }
+
+    @Operation(
+            summary = "홈>매매>이미지",
+            description = "경매 채팅방 참여 요청",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/chat/req")
     public String chat_req(@RequestParam("tradingid") Long tradingid,@AuthenticationPrincipal PrincipalDetails principalDetails)
     {
@@ -317,6 +467,17 @@ public class TradingImageController {
 
         return "redirect:/trading/image/main";
     }
+
+    @Operation(
+            summary = "홈>매매>이미지",
+            description = "경매 채팅방 삭제",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "없음"
+                    )
+            }
+    )
     @GetMapping("/chat/del")
     public String chat_del(@RequestParam("tradingid") Long tradingid)
     {
